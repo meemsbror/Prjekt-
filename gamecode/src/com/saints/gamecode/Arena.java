@@ -2,8 +2,8 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.dependencies.DependenciesHelper;
 import com.saints.gamecode.dependencies.KeyInput;
-
 import java.awt.event.KeyListener;
+
 
 public class Arena {
 
