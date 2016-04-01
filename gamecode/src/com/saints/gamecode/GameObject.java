@@ -1,3 +1,5 @@
+package com.saints.gamecode;
+
 public abstract class GameObject {
 
     //The position of the object counted from bottom left of the window
@@ -7,6 +9,10 @@ public abstract class GameObject {
     //The direction of the object
     boolean facingRight;
 
+    public GameObject(int x, int y){
+        this.x=x;
+        this.y=y;
+    }
     //Returns the x-coordinate
     public int getX(){
         return x;
