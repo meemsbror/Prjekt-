@@ -1,4 +1,4 @@
-package com.saints.gamecode.dependencies;
+package com.saints.gamecode;
 
 import com.saints.gamecode.*;
 
@@ -11,8 +11,5 @@ public interface Graphics {
 
     public void moveObject(GameObject gameObject);
 
-    void setArena();
-
-    void setMap();
 }
 

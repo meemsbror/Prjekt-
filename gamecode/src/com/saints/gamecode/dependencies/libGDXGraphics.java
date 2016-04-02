@@ -1,7 +1,8 @@
 package com.saints.gamecode.dependencies;
 
 import com.saints.gamecode.GameObject;
-import com.mygdx.game.desktop.DesktopLauncher;
+import com.saints.gamecode.Graphics;
+
 
 public class libGDXGraphics implements Graphics {
 
@@ -17,4 +18,5 @@ public class libGDXGraphics implements Graphics {
 
 
     }
+
 }
