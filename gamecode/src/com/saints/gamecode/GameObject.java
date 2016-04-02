@@ -3,29 +3,26 @@ package com.saints.gamecode;
 public abstract class GameObject {
 
     //The position of the object counted from bottom left of the window
-    int x;
-    int y;
-
+    Position pos;
     //The direction of the object
     boolean facingRight;
 
-    public GameObject(int x, int y){
-        this.x=x;
-        this.y=y;
+    //the width and height of the object
+    int width,height;
+
+
+    public GameObject(int x, int y, int width, int height){
+        pos = new Position(x,y);
+        this.width = width;
+        this.height = height;
     }
     //Returns the x-coordinate
-    public int getX(){
-        return x;
-    }
-
-    //Returns the y-coordinate
-    public int getY(){
-        return y;
+    public Position getPosition(){
+        return pos;
     }
 
     //Moves the object a set amount both along the y and x-axis
     public void move(int dx, int dy){
-        x += dx;
-        y += dy;
+        pos.move(dx,dy);
     }
 }
