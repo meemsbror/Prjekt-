@@ -1,7 +1,8 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.dependencies.DependenciesHelper;
-import com.saints.gamecode.dependencies.KeyInput;
+import com.mygdx.game.desktop.DesktopLauncher;
+import com.saints.gamecode.characters.Character;
+
 import java.awt.event.KeyListener;
 
 
@@ -31,6 +32,10 @@ public class Arena {
     public void keyReleased(int key){
 
         characterController.keyReleased(key);
+    }
+
+    public void main (String args []){
+        DesktopLauncher.main(args);
     }
 
 }
