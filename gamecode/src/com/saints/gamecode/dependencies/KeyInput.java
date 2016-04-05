@@ -16,13 +16,11 @@ public class KeyInput extends KeyAdapter {
         this.arena = arena;
     }
 
-    @Override
-    public void keyPressed(KeyEvent event){
 
-
+    private Direction getDirection(int key){
 
         // Player 1 Movement
-        switch(event.getKeyCode()){
+        switch(key){
 
             case KeyEvent.VK_A:
                 direction = Direction.P1LEFT;
@@ -37,7 +35,7 @@ public class KeyInput extends KeyAdapter {
                 direction = Direction.P1DIVE;
                 break;
 
-        //Player 2 Movement
+            //Player 2 Movement
             case KeyEvent.VK_LEFT:
                 direction = Direction.P2LEFT;
                 break;
@@ -53,6 +51,13 @@ public class KeyInput extends KeyAdapter {
 
 
         }
+        return direction;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event){
+
+        getDirection(event.getKeyCode());
         arena.keyPressed(direction);
 
     }
@@ -60,6 +65,8 @@ public class KeyInput extends KeyAdapter {
 
     @Override
     public void keyReleased(KeyEvent event){
+
+        getDirection(event.getKeyCode());
         arena.keyPressed(direction);
     }
 }
