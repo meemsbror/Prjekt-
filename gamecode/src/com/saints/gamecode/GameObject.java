@@ -1,14 +1,17 @@
 package com.saints.gamecode;
 
+
+import com.badlogic.gdx.graphics.Texture;
+
 public abstract class GameObject {
 
     //The position of the object counted from bottom left of the window
-    Position pos;
+    private Position pos;
     //The direction of the object
-    boolean facingRight;
+    private boolean facingRight;
 
     //the width and height of the object
-    int width,height;
+    private int width,height;
 
     //Image
     String imgPath;

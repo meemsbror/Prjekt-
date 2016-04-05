@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.saints.gamecode.GameObject;
+import com.saints.gamecode.characters.SmurfCharacter;
 
 import java.util.List;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+    Texture smurf;
 
     List<GameObject> gameObjects;
 	
@@ -19,8 +21,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("assets/pictures/smurf1.png");
+        batch = new SpriteBatch();
+        smurf = new Texture("assets/pictures/smurf1.png");
+    }
 
-	}
 
     public void renderGameObjects(List<GameObject> gameObjects){
         this.gameObjects = gameObjects;
@@ -33,8 +37,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(GameObject go:gameObjects){
-            batch.draw(new Texture(go.getImgPath()),go.getPos().getX(),go.getPos().getY());
+            batch.draw(smurf,go.getPos().getX(),go.getPos().getY());
         }
 		batch.end();
 	}
+
+    @Override
+    public void dispose(){
+        batch.dispose();
+    }
 }
