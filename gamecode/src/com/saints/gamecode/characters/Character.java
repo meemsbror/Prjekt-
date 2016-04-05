@@ -1,6 +1,8 @@
-package com.saints.gamecode;
+package com.saints.gamecode.characters;
 
-public abstract class Character extends GameObject{
+import com.saints.gamecode.GameObject;
+
+public abstract class Character extends GameObject {
 
     //arbitrary 100
     private int hitPoints = 100;
