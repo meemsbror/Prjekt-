@@ -1,9 +1,16 @@
 package com.saints.gamecode;
 
-import com.mygdx.game.desktop.DesktopLauncher;
+import com.badlogic.gdx.Game;
+import com.saints.gamecode.dependencies.LibGDXGraphics;
+
 import com.saints.gamecode.characters.Character;
 import com.saints.gamecode.characters.SmurfCharacter;
 import com.saints.gamecode.dependencies.LibGDXGraphics;
+import com.saints.gamecode.dependencies.KeyInput;
+import com.sun.javafx.scene.traversal.*;
+
+import java.awt.event.KeyListener;
+
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -18,7 +25,7 @@ public class Arena {
 
     private final boolean running = true;
 
-    List<GameObject> gameObjects = new ArrayList<>();
+    List<GameObject> gameObjects = new ArrayList<GameObject>();
 
     public Arena (Character player1, Character player2){
         this.characterController = new CharacterController(player1,player2);
@@ -37,9 +44,9 @@ public class Arena {
     }
 
     //Gets notified if a key has been pressed and performs appropriate action
-    public void keyPressed(int key){
+    public void keyPressed(Direction direction){
 
-        characterController.keyPressed(key);
+        characterController.keyPressed(direction);
 
     }
 
