@@ -11,6 +11,10 @@ public abstract class GameObject {
     int width,height;
 
 
+    public GameObject(int width, int height){
+        this(0,0,width,height);
+    }
+
     public GameObject(int x, int y, int width, int height){
         pos = new Position(x,y);
         this.width = width;

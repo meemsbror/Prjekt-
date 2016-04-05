@@ -1,5 +1,7 @@
 package com.saints.gamecode;
 
+import com.saints.gamecode.characters.Character;
+
 import java.awt.event.KeyEvent;
 
 public class CharacterController {
