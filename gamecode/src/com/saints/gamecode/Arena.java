@@ -2,6 +2,8 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.dependencies.DependenciesHelper;
 import com.saints.gamecode.dependencies.KeyInput;
+import com.sun.javafx.scene.traversal.*;
+
 import java.awt.event.KeyListener;
 
 
@@ -21,9 +23,9 @@ public class Arena {
     }
 
     //Gets notified if a key has been pressed and performs appropriate action
-    public void keyPressed(int key){
+    public void keyPressed(Direction direction){
 
-        characterController.keyPressed(key);
+        characterController.keyPressed(direction);
 
     }
 
