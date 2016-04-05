@@ -5,7 +5,7 @@ import com.saints.gamecode.characters.SmurfCharacter;
 
 public class CharacterFactory {
 
-    public Character createCharacter(){
-        return new SmurfCharacter(10,10);
+    public static Character createCharacter(){
+        return new SmurfCharacter(10,10,5,5);
     }
 }

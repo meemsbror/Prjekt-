@@ -10,10 +10,12 @@ public class Arena {
 
     private final CharacterController characterController;
     private final KeyListener keyListener;
+    private final DesktopLauncher desktopLauncher = new DesktopLauncher();
 
     public Arena (Character player1, Character player2){
         this.characterController = new CharacterController(player1,player2);
         this.keyListener = DependenciesHelper.getKeyListener(this);
+        desktopLauncher.launch();
     }
 
     //Starts a match between two players
@@ -33,9 +35,4 @@ public class Arena {
 
         characterController.keyReleased(key);
     }
-
-    public void main (String args []){
-        DesktopLauncher.main(args);
-    }
-
 }
