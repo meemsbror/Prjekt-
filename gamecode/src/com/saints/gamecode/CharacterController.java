@@ -8,6 +8,7 @@ public class CharacterController {
 
     private final Character player1;
     private final Character player2;
+    private Direction direction;
 
     public CharacterController(Character player1, Character player2){
         this.player1 = player1;
@@ -15,22 +16,36 @@ public class CharacterController {
     }
 
 
-    public void keyPressed(int key){
+    public void keyPressed(Direction direction){
         //TODO: Change the key to a ENUM so we don't have to use KeyEvent.
-        switch(key){
-            case KeyEvent.VK_LEFT :
+        switch(direction){
+            case P1LEFT:
                 player1.move(-1,0);
                 break;
-            case KeyEvent.VK_RIGHT :
+            case P1RIGHT :
                 player1.move(1,0);
                 break;
-            case KeyEvent.VK_UP :
+            case P1JUMP:
                 player1.move(0,1);
                 break;
-            case KeyEvent.VK_DOWN :
+            case P1DIVE:
                 player1.move(0,-1);
+                break;
 
-                //TODO: player2 movement
+
+        //TODO: player2 movement
+            case P2LEFT:
+                player2.move(-1,0);
+                break;
+            case P2RIGHT:
+                player2.move(1,0);
+                break;
+            case P2JUMP:
+                player2.move(0,1);
+                break;
+            case P2DIVE:
+                player2.move(0,-1);
+
        }
     }
 

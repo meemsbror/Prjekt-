@@ -5,6 +5,10 @@ sourceCompatibility = 1.6
 
 sourceSets.main.java.srcDirs = [ "src/" ]
 
+dependencies{
+    compile project(':gamecode')
+}
+
 
 eclipse.project {
     name = appName + "-core"
