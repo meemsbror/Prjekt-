@@ -1,15 +1,10 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.*;
+import java.util.List;
 
 public interface Graphics {
 
-    public void render();
-
-
-    public void createObject(GameObject gameObject);
-
-    public void moveObject(GameObject gameObject);
+    public void render(List<GameObject> gameObjects);
 
 }
 

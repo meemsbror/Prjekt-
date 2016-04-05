@@ -5,8 +5,10 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.MyGdxGame;
 
 public class DesktopLauncher {
-	public  void launch () {
+	public MyGdxGame launch () {
+		MyGdxGame myGdxGame = new MyGdxGame();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new MyGdxGame(), config);
+		new LwjglApplication(myGdxGame, config);
+		return myGdxGame;
 	}
 }
