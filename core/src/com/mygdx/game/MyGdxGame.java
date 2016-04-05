@@ -13,7 +13,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("/Users/admin/Documents/Prjekt-/assets/pictures/smurf1.png");
+		img = new Texture("assets/pictures/smurf1.png");
 
 	}
 
