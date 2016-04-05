@@ -1,25 +1,27 @@
 package com.saints.gamecode.dependencies;
 
+import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.desktop.DesktopLauncher;
 import com.saints.gamecode.GameObject;
 import com.saints.gamecode.Graphics;
 
+import java.util.List;
 
 
-public class libGDXGraphics implements Graphics {
+public class LibGDXGraphics implements Graphics {
 
+    private final MyGdxGame myGdxGame;
 
-
-    public void render(){
-
+    public LibGDXGraphics (){
+        myGdxGame = new DesktopLauncher().launch();
     }
 
-    public void moveObject(GameObject object){
-
+    public void create(){
+        myGdxGame.create();
     }
 
-    public void createObject(GameObject object){
-
-
+    public void render(List<GameObject> gameObjects){
+        myGdxGame.renderGameObjects(gameObjects);
     }
 
 }

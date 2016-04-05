@@ -38,4 +38,9 @@ public abstract class GameObject {
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }
+
+
+    public Position getPos() {
+        return pos;
+    }
 }
