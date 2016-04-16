@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.interfaces.IKeyInput;

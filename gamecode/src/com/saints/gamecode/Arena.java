@@ -1,17 +1,8 @@
 package com.saints.gamecode;
 
-import com.badlogic.gdx.Game;
 import com.saints.gamecode.dependencies.LibGDXGraphics;
-
 import com.saints.gamecode.characters.Character;
 import com.saints.gamecode.characters.SmurfCharacter;
-import com.saints.gamecode.dependencies.LibGDXGraphics;
-import com.saints.gamecode.dependencies.KeyInput;
-import com.sun.javafx.scene.traversal.*;
-
-import java.awt.event.KeyListener;
-
-
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
