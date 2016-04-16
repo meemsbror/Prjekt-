@@ -1,4 +1,6 @@
-package com.saints.gamecode;
+package com.saints.gamecode.interfaces;
+
+import com.saints.gamecode.GameObject;
 
 import java.awt.event.KeyListener;
 import java.util.List;
