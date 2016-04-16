@@ -21,6 +21,7 @@ public class LibGDXInput implements IKeyInput {
 
     public boolean isKeyPressed(Direction direction){
         return input.isKeyPressed(translateKey(direction));
+
     }
 
 
@@ -36,5 +37,11 @@ public class LibGDXInput implements IKeyInput {
         map.put(Direction.P1RIGHT,Input.Keys.RIGHT);
         map.put(Direction.P1DIVE,Input.Keys.DOWN);
         map.put(Direction.P1JUMP,Input.Keys.UP);
+        map.put(Direction.P2LEFT,Input.Keys.A);
+        map.put(Direction.P2RIGHT,Input.Keys.D);
+        map.put(Direction.P2DIVE,Input.Keys.S);
+        map.put(Direction.P2JUMP,Input.Keys.W);
+        map.put(Direction.P1STOP,Input.Keys.G);
+        map.put(Direction.P2STOP,Input.Keys.G);
     }
 }
