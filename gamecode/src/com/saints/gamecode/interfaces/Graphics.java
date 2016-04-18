@@ -1,9 +1,8 @@
-package com.saints.gamecode;
-
-import com.saints.gamecode.gameobjects.GameObject;
+package com.saints.gamecode.interfaces;
 
 import java.awt.event.KeyListener;
 import java.util.List;
+import com.saints.gamecode.gameobjects.GameObject;
 
 public interface Graphics {
 
