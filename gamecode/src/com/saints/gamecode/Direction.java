@@ -8,6 +8,7 @@ public enum Direction {
     P1JUMP,
     P1DIVE,
     P1STOP,
+    P1ATTACK,
 
     //Player 2 Directions
     P2LEFT,

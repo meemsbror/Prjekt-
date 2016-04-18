@@ -2,8 +2,8 @@ package com.saints.gamecode.dependencies;
 
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.desktop.DesktopLauncher;
-import com.saints.gamecode.GameObject;
 import com.saints.gamecode.Graphics;
+import com.saints.gamecode.gameobjects.GameObject;
 
 import java.util.List;
 

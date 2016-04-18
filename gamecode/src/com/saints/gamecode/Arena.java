@@ -1,9 +1,9 @@
 package com.saints.gamecode;
 
-import com.badlogic.gdx.Game;
-import com.saints.gamecode.characters.Character;
-import com.saints.gamecode.characters.SmurfCharacter;
 import com.saints.gamecode.dependencies.LibGDXGraphics;
+import com.saints.gamecode.gameobjects.GameObject;
+import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
+import com.saints.gamecode.gameobjects.characters.Character;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -31,8 +31,9 @@ public class Arena {
     public void startMatch(){
         gameObjects.add(new SmurfCharacter(0,0,10,10));
         gameObjects.add(new SmurfCharacter(100,100,10,10));
+        libGDXGraphics.render(gameObjects);
         while(running){
-            libGDXGraphics.render(gameObjects);
+
         }
     }
 

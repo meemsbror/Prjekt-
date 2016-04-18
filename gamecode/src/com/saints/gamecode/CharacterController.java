@@ -1,8 +1,7 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.characters.Character;
+import com.saints.gamecode.gameobjects.characters.Character;
 
-import java.awt.event.KeyEvent;
 
 public class CharacterController {
 
@@ -30,6 +29,11 @@ public class CharacterController {
                 break;
             case P1DIVE:
                 player1.move(0,-1);
+                break;
+            case P1ATTACK:
+                if(player1.attack(player2)){
+                    //player2.takeDamage();
+                };
                 break;
 
 

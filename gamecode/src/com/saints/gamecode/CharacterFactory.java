@@ -1,7 +1,7 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.characters.Character;
-import com.saints.gamecode.characters.SmurfCharacter;
+import com.saints.gamecode.gameobjects.characters.*;
+import com.saints.gamecode.gameobjects.characters.Character;
 
 public class CharacterFactory {
 
