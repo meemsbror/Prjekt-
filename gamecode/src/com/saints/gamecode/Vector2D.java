@@ -44,6 +44,7 @@ public class Vector2D implements Cloneable {
     public float getMagnitude(){
         return (float)(Math.sqrt(x*x+y*y));
     }
+
     @Override
     public Object clone(){
         return new Vector2D(x,y);
