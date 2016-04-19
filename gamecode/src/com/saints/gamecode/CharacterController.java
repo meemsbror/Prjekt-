@@ -5,10 +5,8 @@ import com.saints.gamecode.interfaces.IKeyInput;
 
 public class CharacterController {
 
-    private final Character player1;
-    private final Character player2;
+    private final Character player1, player2;
     private final IKeyInput input;
-    private Direction direction;
 
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
@@ -55,7 +53,7 @@ public class CharacterController {
             case P1ATTACK:
                 if(player1.attack(player2)){
                     //player2.takeDamage();
-                };
+                }
                 break;
 
 

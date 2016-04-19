@@ -40,12 +40,10 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         Position p1Pos = arena.getP1Position();
+        Position p2Pos = arena.getP2Position();
         batch.draw(smurf,p1Pos.getX(),p1Pos.getY());
-        //for(GameObject go:gameObjects){
-        //    batch.draw(smurf,go.getPos().getX(),go.getPos().getY());
-        //}
+        batch.draw(smurf,p2Pos.getX(),p2Pos.getY());
 		batch.end();
-
         arena.update();
 	}
 
