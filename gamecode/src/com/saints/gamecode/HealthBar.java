@@ -12,19 +12,12 @@ public final class HealthBar {
     We use the singleton design pattern in order to make sure that we can
     only have a single Health-Bar at any time
      */
-    private static volatile HealthBar instance;
-    private HealthBar() { }
+    private static final HealthBar INSTANCE = new HealthBar();
+
+    private Singleton() {}
 
     public static HealthBar getInstance() {
-        if (instance == null ) {
-            synchronized (HealthBar.class) {
-                if (instance == null) {
-                    instance = new HealthBar();
-                }
-            }
-        }
-
-        return instance;
+        return INSTANCE;
     }
 
 
