@@ -69,7 +69,11 @@ public class CharacterController {
                 break;
             case P2DIVE:
                 player2.move(0,-1);
-
+            case P2ATTACK:
+                if(player2.attack(player1)) {
+                    //player1.takeDamage();
+                }
+            break;
        }
     }
 
