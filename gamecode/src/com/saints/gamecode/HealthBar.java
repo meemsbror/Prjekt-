@@ -1,37 +1,43 @@
 package com.saints.gamecode;
 
-/**
- * Created by Axel on 16/04/19.
- */
+
+//A HealthBar for representing the current state for BOTH players
 public final class HealthBar {
 
-    private int currentMax;
-    private int divider;
 
-    /*
-    We use the singleton design pattern in order to make sure that we can
-    only have a single Health-Bar at any time
-     */
     private static final HealthBar INSTANCE = new HealthBar();
 
-    private Singleton() {}
+    private HealthBar() {}
 
     public static HealthBar getInstance() {
         return INSTANCE;
     }
 
 
+    // TODO: set current max to player 1 + player 2
+    private int currentMax = 100;
+    // TODO: set divider to currentMax - Player1's HP
+    private int divider;
+
 
     // Method for setting the current HP bar's max
-    public void setMax(int x){
+    public void setMaxHealth(int x){
         this.currentMax += x;
     }
 
-    // returns
-    public int getMax(){
+    // returns current game's Healthbar
+    public int getMaxHealth(){
         return currentMax;
     }
 
-
+    /*
+    // TODO find p1 & p2
+    // boolean check for if either player has run out of HP
+    public boolean isOver(){
+        if (Player1 || Player2){
+            return true;
+        }
+    }
+    */
 
 }
