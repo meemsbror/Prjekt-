@@ -11,15 +11,17 @@ public final class HealthBar {
 
     public static HealthBar getInstance() {
         return INSTANCE;
+
     }
 
 
-    // TODO: set current max to player 1 + player 2
+    // TODO: set current max to player 1 + player 2 or just have it decreased until some player dies
     private int currentMax = 100;
     // TODO: set divider to currentMax - Player1's HP
     private int divider;
 
 
+    // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     public void setMaxHealth(int x){
         this.currentMax += x;
@@ -30,14 +32,23 @@ public final class HealthBar {
         return currentMax;
     }
 
-    /*
-    // TODO find p1 & p2
+    //Getters & setters for divider variable
+    public void setDivider(){
+        this.divider = currentMax - Player1.getHP();
+    }
+    public int getDivider(){
+        return divider;
+    }
+
+    // TODO: check for individual Character health
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (Player1 || Player2){
+        if (divider <= 0 || divider > currentMax){
             return true;
+        }else {
+            return false;
         }
     }
-    */
+
 
 }
