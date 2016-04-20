@@ -15,6 +15,14 @@ public abstract class Character extends GameObject {
     }
 
     public abstract boolean attack(GameObject gameObject);
+    public abstract int getDamage();
+
+    public void takeDamage(int damage){
+        hitPoints = hitPoints - damage;
+        if(hitPoints < 0){
+            //wincondition!
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -26,7 +34,6 @@ public abstract class Character extends GameObject {
 
         if (facingRight != character.facingRight) return false;
         return hitPoints == character.hitPoints;
-
     }
 
     @Override

@@ -8,6 +8,7 @@ public class SmurfCharacter extends Character {
     //Straight attack is the attack going straight to either side of the character.
     StraightAttack straightRightAttack;
     StraightAttack straightLeftAttack;
+    int damage = 10;
 
     public SmurfCharacter(int x, int y, int width, int height){
         super(x,y,width,height);
@@ -22,6 +23,12 @@ public class SmurfCharacter extends Character {
         }
         return false;
     }
+
+    @Override
+    public int getDamage() {
+        return damage;
+    }
+
     @Override
     public void move(int dx, int dy){
         super.move(dx, dy);

@@ -9,6 +9,7 @@ public class CharacterController {
     private final Character player2;
     private final IKeyInput input;
     private Direction direction;
+    private float deltaTime, p1AttackTimer, p2AttackTimer;
 
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
@@ -24,7 +25,10 @@ public class CharacterController {
         return player2.getPosition();
     }
 
-    public void update(){
+    public void update(float deltaTime){
+        p1AttackTimer = p1AttackTimer + deltaTime;
+        p2AttackTimer = p2AttackTimer + deltaTime;
+
         movePlayers();
     }
 
@@ -53,9 +57,14 @@ public class CharacterController {
                 player1.move(0,-5);
                 break;
             case P1ATTACK:
-                if(player1.attack(player2)){
-                    //player2.takeDamage();
-                };
+                //One second cooldown on the attack
+                if(p1AttackTimer < 1){
+                    //checks if player 2 is within player1s attack hitbox
+                    if(player1.attack(player2)){
+                        player2.takeDamage(player1.getDamage());
+                    };
+                    p1AttackTimer = 0;
+                }
                 break;
 
 

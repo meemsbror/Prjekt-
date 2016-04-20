@@ -46,7 +46,7 @@ public class MyGdxGame extends ApplicationAdapter {
         //}
 		batch.end();
 
-        arena.update();
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     @Override
