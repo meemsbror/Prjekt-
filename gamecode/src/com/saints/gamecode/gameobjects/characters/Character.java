@@ -7,8 +7,8 @@ public abstract class Character extends GameObject {
     //The direction of the object
     boolean facingRight;
 
-    //arbitrary 100
-    private int hitPoints = 100;
+    // HP set to 50 at start to represent the 'health-divder'
+    private int hitPoints = 50;
 
     public Character(int x,int y, int width, int height){
         super(x,y,width,height);

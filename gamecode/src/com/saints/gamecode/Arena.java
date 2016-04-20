@@ -53,7 +53,6 @@ public class Arena {
     //Gets called from the game loop when the arena should update
     public void update(float deltaTime){
         characterController.update(deltaTime);
-
     }
 
     public Position getP1Position(){

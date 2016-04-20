@@ -5,8 +5,7 @@ import com.saints.gamecode.interfaces.IKeyInput;
 
 public class CharacterController {
 
-    private final Character player1;
-    private final Character player2;
+    private final Character player1, player2;
     private final IKeyInput input;
     private Direction direction;
     private float deltaTime, p1AttackTimer, p2AttackTimer;
@@ -80,7 +79,11 @@ public class CharacterController {
                 break;
             case P2DIVE:
                 player2.move(0,-1);
-
+            case P2ATTACK:
+                if(player2.attack(player1)) {
+                    //player1.takeDamage();
+                }
+            break;
        }
     }
 
