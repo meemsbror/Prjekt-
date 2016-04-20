@@ -16,7 +16,7 @@ public final class HealthBar {
 
 
     // TODO: set current max to player 1 + player 2 or just have it decreased until some player dies
-    // arbitrary 100% for now. May come to change
+    // arbitrary 100% for now. May come to change, also maybe not
     private int currentMax = 100;
     // TODO: set divider to currentMax - Player1's HP
     // HP-bar divider variable
