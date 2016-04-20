@@ -57,5 +57,21 @@ public final class HealthBar {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        HealthBar HPBar = (HealthBar)o;
+        if ();
+
+        if (currentMax != HPBar.currentMax){
+            return false;
+        }
+        if (divider != HPBar.divider){
+            return false;
+        }
+    }
+
 
 }
