@@ -15,8 +15,9 @@ public final class HealthBar {
     }
 
 
+
     // TODO: set current max to player 1 + player 2, this allows for characters to have different starting HP
-    // arbitrary 100% for now.
+    // arbitrary 100% for now. These values are set in CharacterController
     private int currentMax = 100;
     // TODO: set divider to currentMax - Player1's HP
     //
@@ -39,8 +40,8 @@ public final class HealthBar {
 
     //Getters & setters for divider variable
     //TODO: set the divider to the difference between currentMax & p1 or p2 & currentMax
-    public void setDivider(){
-        this.divider = currentMax - 50; // - Player1.getHP();
+    public void setDivider(int x){
+        this.divider = x;
     }
     public int getDivider(){
         return divider;
@@ -63,7 +64,9 @@ public final class HealthBar {
             return false;
         }
         HealthBar HPBar = (HealthBar)o;
-        if ();
+        if (this == o){
+            return true;
+        }
 
         if (currentMax != HPBar.currentMax){
             return false;
@@ -71,6 +74,7 @@ public final class HealthBar {
         if (divider != HPBar.divider){
             return false;
         }
+        return (currentMax == getInstance().getMaxHealth() && divider == getInstance().getDivider());
     }
 
 
