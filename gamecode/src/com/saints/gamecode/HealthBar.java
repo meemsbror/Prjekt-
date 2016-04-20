@@ -58,6 +58,10 @@ public final class HealthBar {
         }
     }
 
+    public void updateDivider(int dmg){
+        this.divider += dmg;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()){
