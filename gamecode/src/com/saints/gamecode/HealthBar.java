@@ -15,16 +15,19 @@ public final class HealthBar {
     }
 
 
-    // TODO: set current max to player 1 + player 2 or just have it decreased until some player dies
-    // arbitrary 100% for now. May come to change, also maybe not
+    // TODO: set current max to player 1 + player 2, this allows for characters to have different starting HP
+    // arbitrary 100% for now.
     private int currentMax = 100;
     // TODO: set divider to currentMax - Player1's HP
+    //
     // HP-bar divider variable
-    private int divider;
+    // 40 is a dummy value for now so we can test if setter work
+    private int divider = 40;
 
 
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
+    // to be called when we
     public void setMaxHealth(int x){
         this.currentMax += x;
     }
