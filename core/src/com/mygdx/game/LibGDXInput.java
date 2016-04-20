@@ -25,7 +25,6 @@ public class LibGDXInput implements IKeyInput {
 
 
     private int translateKey(Direction direction){
-        System.out.println(direction.toString());
         return map.get(direction);
     }
 

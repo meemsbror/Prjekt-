@@ -51,8 +51,8 @@ public class Arena {
         characterController.keyReleased(key);
     }
     //Gets called from the game loop when the arena should update
-    public void update(float deltaTime){
-        characterController.update(deltaTime);
+    public void update(){
+        characterController.update();
     }
 
     public Position getP1Position(){

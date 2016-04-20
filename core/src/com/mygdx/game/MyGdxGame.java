@@ -45,7 +45,7 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.draw(smurf,p2Pos.getX(),p2Pos.getY());
 		batch.end();
 
-        arena.update(Gdx.graphics.getDeltaTime());
+        arena.update();
 	}
 
     @Override
