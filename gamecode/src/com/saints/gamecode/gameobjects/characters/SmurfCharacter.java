@@ -5,6 +5,9 @@ import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 
 public class SmurfCharacter extends Character {
 
+
+    // Unique HP for every Character
+    private int hitPoints = 50;
     //Straight attack is the attack going straight to either side of the character.
     StraightAttack straightRightAttack;
     StraightAttack straightLeftAttack;
@@ -22,9 +25,16 @@ public class SmurfCharacter extends Character {
         }
         return false;
     }
+
+    @Override
+    public int getHitPoints() {
+        return hitPoints;
+    }
+
     @Override
     public void move(int dx, int dy){
         super.move(dx, dy);
         straightRightAttack.move(dx, dy);
     }
+
 }
