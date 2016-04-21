@@ -11,5 +11,5 @@ public class Physics {
         deltaGravity.multiplyVector(delta);
         vector.addVector(deltaGravity);
     }
-    
+
 }
