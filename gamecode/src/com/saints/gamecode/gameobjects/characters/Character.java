@@ -18,7 +18,7 @@ public abstract class Character extends GameObject {
     public abstract boolean attack(GameObject gameObject);
     public abstract int getDamage();
 
-    // TODO: Hitpoints moved to subtypes of characters
+    // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
     /*
     public void takeDamage(int damage){
         hitPoints = hitPoints - damage;
@@ -44,7 +44,7 @@ public abstract class Character extends GameObject {
         //TODO: remove hitPoints? and fix dummy return state just below this line;
         return true;
        // return hitPoints == character.hitPoints;
-        
+
     }
 
     public abstract int getHitPoints();
