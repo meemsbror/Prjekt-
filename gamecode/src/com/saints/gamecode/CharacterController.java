@@ -7,6 +7,8 @@ public class CharacterController {
 
     private final Character player1, player2;
     private final IKeyInput input;
+    private Direction direction;
+    private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
 
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
@@ -23,6 +25,8 @@ public class CharacterController {
     }
 
     public void update(){
+        time = System.currentTimeMillis();
+
         movePlayers();
     }
 
@@ -51,9 +55,17 @@ public class CharacterController {
                 player1.move(0,-5);
                 break;
             case P1ATTACK:
-                if(player1.attack(player2)){
-                    //player2.takeDamage();
+                //One second cooldown on the attack
+                System.out.println(p1AttackTimer);
+                if(p1AttackTimer + 1000 < time){
+                    //checks if player 2 is within player1s attack hitbox
+                    System.out.println("Attacks!");
+                    if(player1.attack(player2)){
+                        player2.takeDamage(player1.getDamage());
+                    };
+                    p1AttackTimer = time;
                 }
+                System.out.println("Didnt attack :/");
                 break;
 
 

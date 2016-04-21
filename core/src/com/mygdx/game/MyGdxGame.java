@@ -44,6 +44,7 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.draw(smurf,p1Pos.getX(),p1Pos.getY());
         batch.draw(smurf,p2Pos.getX(),p2Pos.getY());
 		batch.end();
+
         arena.update();
 	}
 
