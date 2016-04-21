@@ -15,14 +15,9 @@ public final class HealthBar {
     }
 
 
-
-    // TODO: set current max to player 1 + player 2, this allows for characters to have different starting HP
     // arbitrary 100% for now. These values are set in CharacterController
     private int currentMax = 100;
-    // TODO: set divider to currentMax - Player1's HP
-    //
-    // HP-bar divider variable
-    // 40 is a dummy value for now so we can test if setter work
+    // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
 
 
@@ -30,7 +25,7 @@ public final class HealthBar {
     // Method for setting the current HP bar's max
     // to be called when we
     public void setMaxHealth(int x){
-        this.currentMax += x;
+        this.currentMax = x;
     }
 
     // returns current game's Healthbar
@@ -39,7 +34,6 @@ public final class HealthBar {
     }
 
     //Getters & setters for divider variable
-    //TODO: set the divider to the difference between currentMax & p1 or p2 & currentMax
     public void setDivider(int x){
         this.divider = x;
     }
@@ -47,7 +41,7 @@ public final class HealthBar {
         return divider;
     }
 
-    // TODO: check for individual Character health,
+
     // TODO: make connection for whenever a Character is hit, this check will be carried out
     // boolean check for if either player has run out of HP
     public boolean isOver(){
@@ -58,10 +52,28 @@ public final class HealthBar {
         }
     }
 
-    // @param: The contract of this update is that we send in positive damage
-    public int updateDivider(int dmg){
-        this.divider += dmg;
-        return getDivider();
+    // method for HP-bar decay or pro-longing, depending on what happens in game
+    // if we want to strip 1 hp from both, send in 1.
+    // only to be called if we require equal change: no change on divider.
+    public void changeGameLength(int hpChange){
+        setMaxHealth(getMaxHealth() + (2 * hpChange));
+    }
+
+    // TODO: Take a look at the sudden death... We need to talk about how large he decrements are...
+    // method called for if player 1 has less than x HP
+    public void p1SuddenDeath(int hpChange){
+        setDivider(1);
+        changeGameLength(hpChange);
+    }
+    // method called for if player 2 has less than x HP
+    public void p2SuddenDeath(int hpChange){
+        setDivider(currentMax-(1+2*hpChange));
+        changeGameLength(hpChange);
+    }
+
+    // @param: The contract of this update is that we send in positive or negative damage
+    public void updateDivider(int dmg){
+        setDivider(getDivider() + dmg);
     }
 
     @Override
