@@ -22,7 +22,6 @@ public class SmurfCharacter extends Character {
     @Override
     public boolean attack(GameObject gameObject){
         if(straightRightAttack.collide(gameObject)) {
-            setImgPath("assets/pictures/smurfAttack.png");
             return true;
         }
         return false;
@@ -39,11 +38,6 @@ public class SmurfCharacter extends Character {
 
     @Override
     public void move(int dx, int dy){
-        if(dx < 0){
-            setImgPath("assets/pictures/smurfLeft.png");
-        }else{
-            setImgPath("assets/pictures/smurf1.png");
-        }
         super.move(dx, dy);
         straightRightAttack.move(dx, dy);
     }

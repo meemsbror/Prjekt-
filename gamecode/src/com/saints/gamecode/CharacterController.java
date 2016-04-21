@@ -50,9 +50,11 @@ public class CharacterController {
         //TODO: Change the key to a ENUM so we don't have to use KeyEvent.
         switch(direction){
             case P1LEFT:
+                player1.setImgPath("assets/pictures/smurfLeft.png");
                 player1.move(-5,0);
                 break;
             case P1RIGHT :
+                player1.setImgPath("assets/pictures/smurf1.png");
                 player1.move(5,0);
                 break;
             case P1JUMP:
@@ -63,16 +65,14 @@ public class CharacterController {
                 break;
             case P1ATTACK:
                 //One second cooldown on the attack
-                System.out.println(p1AttackTimer);
                 if(p1AttackTimer + 1000 < time){
+                player1.setImgPath("assets/pictures/smurfAttack.png");
                     //checks if player 2 is within player1s attack hitbox
-                    System.out.println("Attacks!");
-                    if(player1.attack(player2)){
+                    if(player1.attack(player2)) {
                         HPBar.updateDivider(player1.getDamage());
                     }
                     p1AttackTimer = time;
                 }
-                System.out.println("Didnt attack :/");
                 break;
 
 
