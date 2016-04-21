@@ -7,8 +7,9 @@ public abstract class Character extends GameObject {
     //The direction of the object
     boolean facingRight;
 
-    // HP set to 50 at start to represent the 'health-divder'
-    private int hitPoints = 50;
+
+    // TODO: Remove?
+//    private int hitPoints = 50;
 
     public Character(int x,int y, int width, int height){
         super(x,y,width,height);
@@ -17,12 +18,15 @@ public abstract class Character extends GameObject {
     public abstract boolean attack(GameObject gameObject);
     public abstract int getDamage();
 
+    // TODO: Hitpoints moved to subtypes of characters
+    /*
     public void takeDamage(int damage){
         hitPoints = hitPoints - damage;
         if(hitPoints < 0){
             //wincondition!
         }
     }
+    */
 
     @Override
     public boolean equals(Object o) {
@@ -32,15 +36,25 @@ public abstract class Character extends GameObject {
 
         Character character = (Character) o;
 
+
         if (facingRight != character.facingRight) return false;
-        return hitPoints == character.hitPoints;
+
+      //  return hitPoints == character.hitPoints;
+
+        //TODO: remove hitPoints? and fix dummy return state just below this line;
+        return true;
+       // return hitPoints == character.hitPoints;
+        
     }
+
+    public abstract int getHitPoints();
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (facingRight ? 1 : 0);
-        result = 31 * result + hitPoints;
+        // TODO: remove?
+        //result = 31 * result + hitPoints;
         return result;
     }
 }

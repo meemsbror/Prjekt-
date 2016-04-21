@@ -5,15 +5,22 @@ import com.saints.gamecode.interfaces.IKeyInput;
 
 public class CharacterController {
 
+    private final HealthBar HPBar = HealthBar.getInstance();
     private final Character player1, player2;
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
 
+
+
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
         this.player2 = player2;
         this.input = input;
+
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setMaxHealth(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
     }
 
     public Position getP1Position(){
