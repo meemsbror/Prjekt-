@@ -51,7 +51,7 @@ public final class HealthBar {
     // TODO: make connection for whenever a Character is hit, this check will be carried out
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (divider <= 0 || divider > currentMax){
+        if (divider <= 0 || divider >= currentMax){
             return true;
         }else {
             return false;

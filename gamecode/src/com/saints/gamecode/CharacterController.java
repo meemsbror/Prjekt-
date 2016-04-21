@@ -68,8 +68,8 @@ public class CharacterController {
                     //checks if player 2 is within player1s attack hitbox
                     System.out.println("Attacks!");
                     if(player1.attack(player2)){
-                        player2.takeDamage(player1.getDamage());
-                    };
+                        HPBar.updateDivider(player1.getDamage());
+                    }
                     p1AttackTimer = time;
                 }
                 System.out.println("Didnt attack :/");
@@ -89,9 +89,17 @@ public class CharacterController {
             case P2DIVE:
                 player2.move(0,-1);
             case P2ATTACK:
-                if(player2.attack(player1)) {
-                    //player1.takeDamage();
+                //One second cooldown on the attack
+                System.out.println(p2AttackTimer);
+                if(p2AttackTimer + 1000 < time){
+                    //checks if player 2 is within player1s attack hitbox
+                    System.out.println("Attacks!");
+                    if(player2.attack(player1)){
+                        HPBar.updateDivider(-player2.getDamage());
+                    }
+                    p1AttackTimer = time;
                 }
+                System.out.println("Didnt attack :/");
             break;
        }
     }
