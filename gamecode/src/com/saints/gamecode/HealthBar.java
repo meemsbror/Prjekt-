@@ -58,8 +58,10 @@ public final class HealthBar {
         }
     }
 
-    public void updateDivider(int dmg){
+    // @param: The contract of this update is that we send in positive damage
+    public int updateDivider(int dmg){
         this.divider += dmg;
+        return getDivider();
     }
 
     @Override
