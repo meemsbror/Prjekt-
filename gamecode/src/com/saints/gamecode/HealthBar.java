@@ -11,16 +11,24 @@ public final class HealthBar {
 
     public static HealthBar getInstance() {
         return INSTANCE;
+
     }
 
 
-    // TODO: set current max to player 1 + player 2
+
+    // TODO: set current max to player 1 + player 2, this allows for characters to have different starting HP
+    // arbitrary 100% for now. These values are set in CharacterController
     private int currentMax = 100;
     // TODO: set divider to currentMax - Player1's HP
-    private int divider;
+    //
+    // HP-bar divider variable
+    // 40 is a dummy value for now so we can test if setter work
+    private int divider = 40;
 
 
+    // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
+    // to be called when we
     public void setMaxHealth(int x){
         this.currentMax += x;
     }
@@ -30,14 +38,48 @@ public final class HealthBar {
         return currentMax;
     }
 
-    /*
-    // TODO find p1 & p2
+    //Getters & setters for divider variable
+    //TODO: set the divider to the difference between currentMax & p1 or p2 & currentMax
+    public void setDivider(int x){
+        this.divider = x;
+    }
+    public int getDivider(){
+        return divider;
+    }
+
+    // TODO: check for individual Character health,
+    // TODO: make connection for whenever a Character is hit, this check will be carried out
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (Player1 || Player2){
+        if (divider <= 0 || divider >= currentMax){
             return true;
+        }else {
+            return false;
         }
     }
-    */
+
+    public void updateDivider(int dmg){
+        this.divider += dmg;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
+        HealthBar HPBar = (HealthBar)o;
+        if (this == o){
+            return true;
+        }
+
+        if (currentMax != HPBar.currentMax){
+            return false;
+        }
+        if (divider != HPBar.divider){
+            return false;
+        }
+        return (currentMax == getInstance().getMaxHealth() && divider == getInstance().getDivider());
+    }
+
 
 }
