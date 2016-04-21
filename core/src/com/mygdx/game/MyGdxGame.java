@@ -11,38 +11,44 @@ import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.Position;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
-    Texture smurf;
     private Arena arena;
 
-    List<GameObject> gameObjects;
-	
+    List<Texture>  textures = new ArrayList<>();
+
 	@Override
 	public void create () {
         batch = new SpriteBatch();
-        smurf = new Texture("assets/pictures/smurf1.png");
         LibGDXInput input = new LibGDXInput(Gdx.input);
         this.arena = new Arena(CharacterFactory.createCharacter(),CharacterFactory.createCharacter(), input);
+        for(int i = 0; i < arena.getGameObjects().size(); i++){
+            textures.add(new Texture(arena.getGameObjects().get(i).getImgPath()));
+        }
     }
 
-    public void renderGameObjects(List<GameObject> gameObjects){
-        this.gameObjects = gameObjects;
+    public void renderGameObjects(){
         render();
     }
 
 	@Override
 	public void render () {
+        if(textures.size() < arena.getGameObjects().size()){
+            textures.add(new Texture(arena.getGameObjects().get(arena.getGameObjects().size()).getImgPath()));
+        }
+        for(int i = 0; i < arena.getGameObjects().size(); i++){
+            textures.get(i).dispose();
+            textures.set(i, new Texture(arena.getGameObjects().get(i).getImgPath()));
+        }
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        Position p1Pos = arena.getP1Position();
-        Position p2Pos = arena.getP2Position();
-        batch.draw(smurf,p1Pos.getX(),p1Pos.getY());
-        batch.draw(smurf,p2Pos.getX(),p2Pos.getY());
+        for(int i = 0; i < arena.getGameObjects().size(); i++){
+            batch.draw(textures.get(i), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+        }
 		batch.end();
 
         arena.update();

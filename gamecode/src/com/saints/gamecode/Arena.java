@@ -23,19 +23,20 @@ public class Arena {
     List<GameObject> gameObjects = new ArrayList<GameObject>();
 
     public Arena (Character player1, Character player2, IKeyInput input){
+        gameObjects.add(player1);
+        gameObjects.add(player2);
         this.input = input;
-        this.characterController = new CharacterController(player1,player2,input);
+        this.characterController = new CharacterController(player1, player2,input);
         libGDXGraphics = new LibGDXGraphics();
-        startMatch();
+    }
+
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
     }
 
     //Starts a match between two players
     public void startMatch(){
-        gameObjects.add(new SmurfCharacter(0,0,10,10));
-        gameObjects.add(new SmurfCharacter(100,100,10,10));
-        //while(running){
-         //   libGDXGraphics.render(gameObjects);
-        //}
+
     }
 
     //Gets notified if a key has been pressed and performs appropriate action
@@ -49,17 +50,10 @@ public class Arena {
     public void keyReleased(int key){
 
         characterController.keyReleased(key);
+
     }
     //Gets called from the game loop when the arena should update
     public void update(){
         characterController.update();
-    }
-
-    public Position getP1Position(){
-        return characterController.getP1Position();
-    }
-
-    public Position getP2Position(){
-        return characterController.getP2Position();
     }
 }
