@@ -97,7 +97,7 @@ public class CharacterController {
                     if(player2.attack(player1)){
                         HPBar.updateDivider(-player2.getDamage());
                     }
-                    p1AttackTimer = time;
+                    p2AttackTimer = time;
                 }
                 System.out.println("Didnt attack :/");
             break;
