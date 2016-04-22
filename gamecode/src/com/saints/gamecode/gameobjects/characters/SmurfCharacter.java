@@ -1,5 +1,6 @@
 package com.saints.gamecode.gameobjects.characters;
 
+import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 
@@ -8,16 +9,21 @@ public class SmurfCharacter extends Character {
 
     // Unique HP for every Character
     private int hitPoints = 50;
+
     //Straight attack is the attack going straight to either side of the character.
     StraightAttack straightRightAttack;
     StraightAttack straightLeftAttack;
+
     int damage = 10;
 
-    public SmurfCharacter(int x, int y, int width, int height){
-        super(x,y,width,height);
+    public SmurfCharacter(int x, int y){
+        //SmurfCharacter is always 128x128!
+        //TODO Anpassa höjden och bredden till spriten.
+        super(x,y,128,128);
+
         straightRightAttack = new StraightAttack(x,y,50,50);
         straightLeftAttack = new StraightAttack(x,y,-50,50);
-        setImgPath("assets/pictures/smurf1.png");
+        setImage(State.STALL);
     }
     @Override
     public boolean attack(GameObject gameObject){
@@ -30,6 +36,11 @@ public class SmurfCharacter extends Character {
     @Override
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public String getSpriteSheetPath() {
+        return "pictures/smurf1.png";
     }
 
     public int getHitPoints() {
