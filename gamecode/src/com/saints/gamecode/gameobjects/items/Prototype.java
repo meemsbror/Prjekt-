@@ -6,6 +6,5 @@ package com.saints.gamecode.gameobjects.items;
 public class Prototype extends Item {
     public Prototype (int x, int y, int width, int height){
         super(x,y,width,height);
-        setImgPath("assets/pictures/item_prototype.png");
     }
 }

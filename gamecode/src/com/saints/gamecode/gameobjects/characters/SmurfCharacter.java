@@ -23,7 +23,7 @@ public class SmurfCharacter extends Character {
 
         straightRightAttack = new StraightAttack(x,y,50,50);
         straightLeftAttack = new StraightAttack(x,y,-50,50);
-        setImage(State.STALL);
+        setState(State.STALL);
     }
     @Override
     public boolean attack(GameObject gameObject){
@@ -40,7 +40,7 @@ public class SmurfCharacter extends Character {
 
     @Override
     public String getSpriteSheetPath() {
-        return "pictures/smurf1.png";
+        return "pictures/testGrid.png";
     }
 
     public int getHitPoints() {
