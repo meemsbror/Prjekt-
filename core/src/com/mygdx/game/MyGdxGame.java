@@ -59,11 +59,14 @@ public class MyGdxGame extends ApplicationAdapter {
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
         TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
 
-        animationFrames = new TextureRegion[6][4];
+
+        System.out.println(tmpFrames.length + " " + tmpFrames[0].length);
+
+        animationFrames = new TextureRegion[4][6];
         int index = 0;
 
-        for(int i = 0; i < 4; i++){
-            for(int j = 0; j < 6; j++){
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 4; j++){
                 animationFrames[index++][i] = tmpFrames[j][i];
             }
         animations[i] = new Animation(1f/12f, animationFrames[i]);
@@ -96,10 +99,10 @@ public class MyGdxGame extends ApplicationAdapter {
     private void initiateState(){
         map = new HashMap<State,Integer>();
 
-        map.put(State.STALL,0);
-        map.put(State.WALK,1);
-        map.put(State.JUMP,2);
-        map.put(State.PUNCH,3);
+        map.put(State.STALL, 0);
+        map.put(State.WALK, 1);
+        map.put(State.JUMP, 2);
+        map.put(State.PUNCH, 3);
 
     }
 
