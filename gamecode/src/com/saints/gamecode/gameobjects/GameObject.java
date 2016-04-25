@@ -29,7 +29,7 @@ public abstract class GameObject {
     }
 
     public Position getPos() {
-        return pos;
+        return (Position)pos.clone();
     }
 
 
@@ -49,5 +49,12 @@ public abstract class GameObject {
         }else{
             return true;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "GameObject{" +
+                "pos=" + pos.toString() +
+                '}';
     }
 }
