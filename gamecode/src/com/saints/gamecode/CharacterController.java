@@ -48,6 +48,7 @@ public class CharacterController {
 
     public void keyPressed(Direction direction){
         //TODO: Change the key to a ENUM so we don't have to use KeyEvent.
+        System.out.println("updates!");
         switch(direction){
             case P1LEFT:
                 player1.setState(State.WALK);
@@ -74,6 +75,7 @@ public class CharacterController {
                     }
                     p1AttackTimer = time;
                 }
+                break;
             default:
                 System.out.println("Works?");
                 player1.setState(State.STALL);
