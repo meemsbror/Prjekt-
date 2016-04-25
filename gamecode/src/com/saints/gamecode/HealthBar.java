@@ -78,6 +78,15 @@ public final class HealthBar {
     }
 
     @Override
+    public String toString(){
+        return getClass().getName() +
+                " class, current info:\nDivider at:" + getDivider() +
+                "\nCurrent Maximum: " + getMaxHealth() +
+                "\nPlayer 1 status: " + getDivider() +
+                "\nPlayer 2 status: " + (getMaxHealth()-getDivider());
+
+    }
+    @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()){
             return false;
