@@ -101,9 +101,10 @@ public class CharacterController {
                     //checks if player 2 is within player1s attack hitbox
                     System.out.println("Attacks!");
                     if(player2.attack(player1)){
+                        // negative damage to represent the divider movement
                         HPBar.updateDivider(-player2.getDamage());
                     }
-                    p1AttackTimer = time;
+                    p2AttackTimer = time;
                 }
                 System.out.println("Didnt attack :/");
             break;
