@@ -74,6 +74,9 @@ public class CharacterController {
                     }
                     p1AttackTimer = time;
                 }
+            default:
+                System.out.println("Works?");
+                player1.setState(State.STALL);
                 break;
 
 

@@ -12,7 +12,7 @@ import com.saints.gamecode.Arena;
 import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.gameobjects.characters.Character;
 
-
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,12 +26,12 @@ public class MyGdxGame extends ApplicationAdapter {
 
     //Animation stuff
     private Texture img;
-    private TextureRegion [][] animationFrames;
     private Animation [] p1Animations, p2Animations;
 
     //Elapsed time since start of game
-    //TODO if pause button is intruduced pause this timer!
-    float elapsedTime;
+    //TODO if pause button is implemented pause this timer!
+    long startTime = System.currentTimeMillis();
+    long elapsedTime;
 
 
 	@Override
@@ -57,19 +57,14 @@ public class MyGdxGame extends ApplicationAdapter {
 
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img,128,128);
 
 
-        System.out.println(tmpFrames.length + " " + tmpFrames[0].length);
+        System.out.println(Arrays.deepToString(tmpFrames));
 
-        animationFrames = new TextureRegion[4][6];
-        int index = 0;
 
-        for(int i = 0; i < 6; i++){
-            for(int j = 0; j < 4; j++){
-                animationFrames[index++][i] = tmpFrames[j][i];
-            }
-        animations[i] = new Animation(1f/12f, animationFrames[i]);
+        for(int i = 0; i < 4; i++){
+            animations[i] = new Animation(1f/6f,tmpFrames[i]);
         }
         return  animations;
     }
@@ -83,13 +78,13 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void render () {
         renderGameObjects();
-        elapsedTime += Gdx.graphics.getDeltaTime();
+        elapsedTime = (System.currentTimeMillis() - startTime);
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i < arena.getGameObjects().size(); i++){
-            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame(elapsedTime), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+             batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
 		batch.end();
 
