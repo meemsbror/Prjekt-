@@ -5,15 +5,22 @@ import com.saints.gamecode.interfaces.IKeyInput;
 
 public class CharacterController {
 
+    private final HealthBar HPBar = HealthBar.getInstance();
     private final Character player1, player2;
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
 
+
+
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
         this.player2 = player2;
         this.input = input;
+
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setMaxHealth(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
     }
 
     public Position getP1Position(){
@@ -43,9 +50,11 @@ public class CharacterController {
         //TODO: Change the key to a ENUM so we don't have to use KeyEvent.
         switch(direction){
             case P1LEFT:
+                player1.setImgPath("assets/pictures/smurfLeft.png");
                 player1.move(-5,0);
                 break;
             case P1RIGHT :
+                player1.setImgPath("assets/pictures/smurf1.png");
                 player1.move(5,0);
                 break;
             case P1JUMP:
@@ -56,16 +65,14 @@ public class CharacterController {
                 break;
             case P1ATTACK:
                 //One second cooldown on the attack
-                System.out.println(p1AttackTimer);
                 if(p1AttackTimer + 1000 < time){
+                player1.setImgPath("assets/pictures/smurfAttack.png");
                     //checks if player 2 is within player1s attack hitbox
-                    System.out.println("Attacks!");
-                    if(player1.attack(player2)){
-                        player2.takeDamage(player1.getDamage());
-                    };
+                    if(player1.attack(player2)) {
+                        HPBar.updateDivider(player1.getDamage());
+                    }
                     p1AttackTimer = time;
                 }
-                System.out.println("Didnt attack :/");
                 break;
 
 
@@ -82,9 +89,18 @@ public class CharacterController {
             case P2DIVE:
                 player2.move(0,-1);
             case P2ATTACK:
-                if(player2.attack(player1)) {
-                    //player1.takeDamage();
+                //One second cooldown on the attack
+                System.out.println(p2AttackTimer);
+                if(p2AttackTimer + 1000 < time){
+                    //checks if player 2 is within player1s attack hitbox
+                    System.out.println("Attacks!");
+                    if(player2.attack(player1)){
+                        // negative damage to represent the divider movement
+                        HPBar.updateDivider(-player2.getDamage());
+                    }
+                    p2AttackTimer = time;
                 }
+                System.out.println("Didnt attack :/");
             break;
        }
     }

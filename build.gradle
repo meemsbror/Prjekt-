@@ -58,13 +58,13 @@ project(":core") {
         compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
+        testCompile "junit:junit:4.12"
     }
 }
 
 project(":gamecode") {
     apply plugin: "java"
     dependencies {
-        testCompile "junit:junit:4.12:gamecode"
     }
 
 }

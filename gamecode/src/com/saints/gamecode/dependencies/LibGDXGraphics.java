@@ -23,8 +23,8 @@ public class LibGDXGraphics implements Graphics {
         myGdxGame.create();
     }
 
-    public void render(List<GameObject> gameObjects){
-        myGdxGame.renderGameObjects(gameObjects);
+    public void render(){
+        myGdxGame.renderGameObjects();
     }
 
     public void addKeyListener(KeyListener keyListener){
