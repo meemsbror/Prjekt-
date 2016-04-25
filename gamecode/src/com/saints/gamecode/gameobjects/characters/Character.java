@@ -1,11 +1,12 @@
 package com.saints.gamecode.gameobjects.characters;
 
+import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
 
 public abstract class Character extends GameObject {
 
     //The direction of the object
-    boolean facingRight;
+    private boolean facingRight;
 
 
     // TODO: Remove?
@@ -14,8 +15,9 @@ public abstract class Character extends GameObject {
     public Character(int x,int y, int width, int height){
         super(x,y,width,height);
     }
-
+    /*
     public abstract boolean attack(GameObject gameObject);
+    */
     public abstract int getDamage();
 
     // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
@@ -46,6 +48,9 @@ public abstract class Character extends GameObject {
        // return hitPoints == character.hitPoints;
 
     }
+
+    //Returns the initial jumpSpeed
+    public abstract Vector2D getJumpSpeed();
 
     public abstract int getHitPoints();
 

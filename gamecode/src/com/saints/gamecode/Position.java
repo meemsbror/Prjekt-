@@ -2,7 +2,7 @@ package com.saints.gamecode;
 
 public class Position implements Cloneable {
 
-    private int x, y;
+    private float x, y;
 
     @Override
     public boolean equals(Object o) {
@@ -18,34 +18,36 @@ public class Position implements Cloneable {
 
     @Override
     public int hashCode() {
-        int result = getX();
-        result = 31 * result + getY();
+        int result = (getX() != +0.0f ? Float.floatToIntBits(getX()) : 0);
+        result = 31 * result + (getY() != +0.0f ? Float.floatToIntBits(getY()) : 0);
         return result;
     }
 
-    public Position(int x, int y){
+
+
+    public Position(float x, float y){
         this.x = x;
         this.y = y;
     }
 
-    public int getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(float y) {
         this.y = y;
     }
 
-    public int getX() {
+    public float getX() {
 
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(float x) {
         this.x = x;
     }
 
-    public void move(int dx, int dy){
+    public void move(float dx, float dy){
         this.x += dx;
         this.y += dy;
     }

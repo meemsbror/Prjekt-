@@ -53,7 +53,7 @@ public class Arena {
 
     }
     //Gets called from the game loop when the arena should update
-    public void update(){
-        characterController.update();
+    public void update(float delta){
+        characterController.update(delta);
     }
 }

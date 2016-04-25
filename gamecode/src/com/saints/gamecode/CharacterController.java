@@ -10,6 +10,7 @@ public class CharacterController {
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
+    private Physics physics = new Physics();
 
 
 
@@ -31,18 +32,30 @@ public class CharacterController {
         return player2.getPosition();
     }
 
-    public void update(){
+    public void update(float delta){
         time = System.currentTimeMillis();
+        movePlayers(delta);
 
-        movePlayers();
     }
 
-    public void movePlayers(){
+    public void movePlayers(float delta){
         for(Direction dir: Direction.values()){
             if(input.isKeyPressed(dir)){
                 keyPressed(dir);
             }
         }
+
+        Vector2D deltaGravity = physics.getGravity(delta);
+        if(player1.isAirborne()){
+            player1.changeDirection(deltaGravity);
+        }
+
+        player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
+    }
+
+    public void jump(Character character){
+        character.setAirborne(true);
+        character.changeDirection(character.getJumpSpeed());
     }
 
 
@@ -58,7 +71,7 @@ public class CharacterController {
                 player1.move(5,0);
                 break;
             case P1JUMP:
-                player1.move(0,5);
+                jump(player2);
                 break;
             case P1DIVE:
                 player1.move(0,-5);
@@ -68,9 +81,9 @@ public class CharacterController {
                 if(p1AttackTimer + 1000 < time){
                 player1.setImgPath("assets/pictures/smurfAttack.png");
                     //checks if player 2 is within player1s attack hitbox
-                    if(player1.attack(player2)) {
-                        HPBar.updateDivider(player1.getDamage());
-                    }
+                    //if(player1.attack(player2)) {
+                     //   HPBar.updateDivider(player1.getDamage());
+                    //}
                     p1AttackTimer = time;
                 }
                 break;
@@ -84,7 +97,7 @@ public class CharacterController {
                 player2.move(1,0);
                 break;
             case P2JUMP:
-                player2.move(0,1);
+                jump(player2);
                 break;
             case P2DIVE:
                 player2.move(0,-1);
@@ -94,11 +107,11 @@ public class CharacterController {
                 if(p2AttackTimer + 1000 < time){
                     //checks if player 2 is within player1s attack hitbox
                     System.out.println("Attacks!");
-                    if(player2.attack(player1)){
+                    //if(player2.attack(player1)){
                         // negative damage to represent the divider movement
-                        HPBar.updateDivider(-player2.getDamage());
-                    }
-                    p2AttackTimer = time;
+                     //   HPBar.updateDivider(-player2.getDamage());
+                    //}
+                    //p2AttackTimer = time;
                 }
                 System.out.println("Didnt attack :/");
             break;

@@ -18,7 +18,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
     private Arena arena;
 
-    List<Texture>  textures = new ArrayList<>();
+    List<Texture>  textures = new ArrayList<Texture>();
 
 	@Override
 	public void create () {
@@ -51,7 +51,9 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        arena.update();
+        System.out.println(Gdx.graphics.getDeltaTime());
+
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     @Override
