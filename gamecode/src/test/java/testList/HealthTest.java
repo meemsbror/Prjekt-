@@ -65,4 +65,28 @@ public class HealthTest {
         healthBar.updateDivider(-10);
         assertTrue(currentDivider - 10 == healthBar.getDivider());
     }
+
+    @Test
+    public void changeGameLengthTest(){
+        HealthBar healthBar = HealthBar.getInstance();
+        int currentMaxHealth = healthBar.getMaxHealth(); //100
+
+        // reduce both sides max health by 1
+        healthBar.changeGameLength(-1); // should become 98
+        assertTrue(currentMaxHealth - 2 == healthBar.getMaxHealth());
+
+        // increase both sides max health by 5
+        healthBar.changeGameLength(5); // should become 108
+        assetTrue(currentMaxHealth + 10 == healthBar.getMaxHealth());
+    }
+
+    // TODO: incomplete
+    @Test
+    public void suddenDeathTest(){
+        HealthBar healthBar = HealthBar.getInstance();
+        int currentDivider = healthBar.getDivider(); //40
+        int currentMax = healthBar.getMaxHealth(); //100
+        healthBar.p1SuddenDeath(1);
+
+    }
 }
