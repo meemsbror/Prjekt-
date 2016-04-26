@@ -17,5 +17,9 @@ public class HealthTest {
         currentDivider = healthBar.getDivider();
         healthBar.updateDivider(5);
         assertTrue(currentDivider +5 == healthBar.getDivider());
+
+        // player 2 deal dmg
+        healthBar.updateDivider(-10);
+        assertTrue(currentDivider - 10 == healthBar.getDivider());
     }
 }
