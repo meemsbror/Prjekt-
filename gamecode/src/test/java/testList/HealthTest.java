@@ -33,11 +33,23 @@ public class HealthTest {
         healthBar.setDivider(80);
         int currentDivider = healthBar.getDivider();
         assertTrue(currentDivider == 80);
+        healthBar.setDivider(30);
+        currentDivider = healthBar.getDivider();
+        assertTrue(currentDivider == 30);
+        healthBar.setDivider(45);
+        currentDivider = healthBar.getDivider();
+        assertTrue(currentDivider == 45);
 
         //test for setting max health
         healthBar.setMaxHealth(35);
         int maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 35);
+        healthBar.setMaxHealth(70);
+        maxHealth = healthBar.getMaxHealth();
+        assertTrue(maxHealth == 70);
+        healthBar.setMaxHealth(50);
+        maxHealth = healthBar.getMaxHealth();
+        assertTrue(maxHealth == 50);
     }
 
     @Test
