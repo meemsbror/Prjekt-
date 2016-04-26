@@ -11,10 +11,11 @@ import static junit.framework.TestCase.assertTrue;
 public class HealthTest {
     @Test
     public void takeDamageTest(){
+        // player 1 deal dmg
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider;
         currentDivider = healthBar.getDivider();
         healthBar.updateDivider(5);
-        assertTrue(currentDivider == healthBar.getDivider()+5);
+        assertTrue(currentDivider +5 == healthBar.getDivider());
     }
 }
