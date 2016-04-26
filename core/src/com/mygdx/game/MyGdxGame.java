@@ -64,7 +64,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 
         for(int i = 0; i < 4; i++){
-            animations[i] = new Animation(1f/30f,tmpFrames[i]);
+            animations[i] = new Animation(1f/6f,tmpFrames[i]);
         }
         return  animations;
     }

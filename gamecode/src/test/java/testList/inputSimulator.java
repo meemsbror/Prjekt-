@@ -6,7 +6,7 @@ import com.saints.gamecode.interfaces.IKeyInput;
 /**
  * Created by admin on 2016-04-25.
  */
-public class InputSimulator implements IKeyInput {
+class InputSimulator implements IKeyInput {
     Direction currentKey = Direction.P1LEFT;
 
     @Override
