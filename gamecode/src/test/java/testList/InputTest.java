@@ -11,7 +11,7 @@ import org.junit.Test;
  * Created by admin on 2016-04-19.
  */
 public class InputTest {
-    
+
     @Test
     public void testMove(){
         Character char1 = CharacterFactory.createCharacter();
@@ -34,6 +34,6 @@ public class InputTest {
         startPos = char1.getPos();
         inputSimulator.setCurrentKey(Direction.P1JUMP);
         characterController.movePlayers();
-        assertTrue(startPos.getY() < char1.getPos().getY() && char1.getState() == State.JUMP);
+        assertTrue(startPos.getY() < char1.getPos().getY() && char1.getState() != State.JUMP);
     }
 }
