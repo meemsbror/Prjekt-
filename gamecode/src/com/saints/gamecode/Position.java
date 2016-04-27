@@ -5,6 +5,14 @@ public class Position implements Cloneable {
     private int x, y;
 
     @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Position)) return false;
@@ -50,12 +58,13 @@ public class Position implements Cloneable {
         this.y += dy;
     }
 
-    public Object clone(){
-        try{
+    @Override
+    public Object clone()  {
+        try {
             return super.clone();
-        }catch(CloneNotSupportedException e1){
-            //never invoked since this implements cloneable
-            return null;
+        } catch (CloneNotSupportedException e) {
+            //Never invoked
         }
+        return null;
     }
 }
