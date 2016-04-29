@@ -54,7 +54,7 @@ public final class HealthBar {
     }
 
     // method for HP-bar decay or pro-longing, depending on what happens in game
-    // if we want to strip 1 hp from both, send in 1.
+    // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
         setMaxHealth(getMaxHealth() + (2 * hpChange));

@@ -86,7 +86,15 @@ public class HealthTest {
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider = healthBar.getDivider(); //40
         int currentMax = healthBar.getMaxHealth(); //100
-        healthBar.p1SuddenDeath(1);
+
+        // check for player 1 sudden death
+        healthBar.p1SuddenDeath(-1); // set player 1 hp to 1 & reduce maxHP by 1 for each player
+        assertTrue(currentDivider == 1 && currentMax == 98);
+
+        // check for player 2 sudden death
+        // note: current maxHP = 98
+        healthBar.p2SuddenDeath(-1); // set player 2 hp to max -1 + (2*time change)
+        assertTrue(currentDivider == 95 && currentMax == 96);
 
     }
 }
