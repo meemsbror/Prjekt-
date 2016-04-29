@@ -97,4 +97,28 @@ public class HealthTest {
         assertTrue(currentDivider == 95 && currentMax == 96);
 
     }
+
+    // TODO: some more tests
+    @Test
+    public void isOverTest(){
+        HealthBar healthBar = HealthBar.getInstance();
+        int currentDivider = healthBar.getDivider(); // 40
+        int currentMax = healthBar.getMaxHealth(); // 100
+
+        // game shouldn't be over yet.
+        assertTrue(!healthBar.isOver());
+
+        // should end game, return true.
+        healthBar.setDivider(0);
+        assertTrue(healthBar.isOver());
+
+        // should return false
+        healthBar.setDivider(98);
+        assertTrue(!healthBar.isOver());
+
+        // setting healthBar past divider (should never happen in game)
+        healthBar.setMaxHealth(-10); // current divider = 98 and maxhealth  80 should return true
+        assertTrue(healthBar.isOver());
+
+    }
 }
