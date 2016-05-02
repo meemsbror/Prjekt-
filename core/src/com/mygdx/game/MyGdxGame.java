@@ -51,6 +51,7 @@ public class MyGdxGame extends ApplicationAdapter {
         //Initiate what animations to be loaded (gameObjects 0 and 1 is always the players)
         p1Animations = createPlayerAnimation(char1);
         p2Animations = createPlayerAnimation(char2);
+        System.out.println("hi");
     }
 
     private Animation[] createPlayerAnimation(Character character) {
@@ -83,8 +84,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i < arena.getGameObjects().size(); i++){
-             batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
-            batch.draw(textures.get(i), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
 		batch.end();
 

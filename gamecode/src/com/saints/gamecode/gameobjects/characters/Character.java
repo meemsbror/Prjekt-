@@ -22,8 +22,7 @@ public abstract class Character extends GameObject {
     /*
     public abstract boolean attack(GameObject gameObject);
     */
-    public abstract int getDamage();
-    public abstract String getSpriteSheetPath();
+
     //Sets image
     public State getState() {
         return state;
@@ -73,10 +72,16 @@ public abstract class Character extends GameObject {
         return result;
     }
 
+    //Abstract methods
+
     //Returns the initial jumpSpeed
     public abstract Vector2D getJumpSpeed();
 
     public abstract int getHitPoints();
 
     public abstract boolean attack (GameObject object);
+
+    public abstract int getDamage();
+
+    public abstract String getSpriteSheetPath();
 }

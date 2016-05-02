@@ -15,7 +15,6 @@ import java.util.List;
 public class Arena {
 
     private final CharacterController characterController;
-    private final LibGDXGraphics libGDXGraphics;
     private final IKeyInput input;
 
     private final boolean running = true;
@@ -27,7 +26,6 @@ public class Arena {
         gameObjects.add(player2);
         this.input = input;
         this.characterController = new CharacterController(player1, player2,input);
-        libGDXGraphics = new LibGDXGraphics();
     }
 
     public List<GameObject> getGameObjects() {
