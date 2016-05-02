@@ -6,7 +6,16 @@ public class Physics {
 
     private final Vector2D GRAVITY = new Vector2D(0,0.92f);
     private Vector2D deltaGravity;
-    private float delta;
+    private static final Physics instance = new Physics();
+
+
+    private Physics (){
+
+    }
+
+    public static Physics getInstance(){
+        return instance;
+    }
 
     public Vector2D getGravity(float delta){
         deltaGravity = (Vector2D)GRAVITY.clone();

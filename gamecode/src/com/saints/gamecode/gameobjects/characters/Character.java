@@ -35,6 +35,8 @@ public abstract class Character extends GameObject {
 
     // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
 
+    // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
+
     public void takeDamage(int damage){
         hitPoints = hitPoints - damage;
         if(hitPoints < 0){
@@ -62,8 +64,19 @@ public abstract class Character extends GameObject {
 
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (facingRight ? 1 : 0);
+        // TODO: remove?
+      //  result = 31 * result + hitPoints;
+        return result;
+    }
+
     //Returns the initial jumpSpeed
     public abstract Vector2D getJumpSpeed();
 
     public abstract int getHitPoints();
+
+    public abstract boolean attack (GameObject object);
 }

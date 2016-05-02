@@ -24,7 +24,7 @@ public final class HealthBar {
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     // TODO: make private and access only through change methods?
-    public void setMaxHealth(int x){
+   public void setMaxHealth(int x){
         this.currentMax = x;
     }
 
@@ -35,7 +35,7 @@ public final class HealthBar {
 
     //Getters & setters for divider variable
     //TODO: make private and access only through change methods?
-    public void setDivider(int x){
+   public void setDivider(int x){
         this.divider = x;
     }
     public int getDivider(){
@@ -62,12 +62,12 @@ public final class HealthBar {
 
     // TODO: Take a look at the sudden death... We need to talk about how large he decrements are...
     // method called for if player 1 has less than x (timeChange) HP
-    public void p1SuddenDeath(int hpChange){
+   public void p1SuddenDeath(int hpChange){
         setDivider(1);
         changeGameLength(hpChange);
     }
     // method called for if player 2 has less than x (timeChange) HP
-    public void p2SuddenDeath(int hpChange){
+   public void p2SuddenDeath(int hpChange){
         setDivider(currentMax-(1+2*hpChange));
         changeGameLength(hpChange);
     }

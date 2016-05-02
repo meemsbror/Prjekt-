@@ -1,11 +1,15 @@
 package com.saints.gamecode.gameobjects.characters;
 
+import com.saints.gamecode.Physics;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
+import com.saints.gamecode.gameobjects.GameObject;
+
 
 public class SmurfCharacter extends Character {
 
+    private final Physics physics;
 
     //the initial speed that a character jumps with
     private Vector2D jumpSpeed;
@@ -23,10 +27,19 @@ public class SmurfCharacter extends Character {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
         super(x, y, 128, 128);
-        jumpSpeed = new Vector2D(0,15);
-        straightRightAttack = new StraightAttack(x,y,50,50);
-        straightLeftAttack = new StraightAttack(x,y,-50,50);
+        jumpSpeed = new Vector2D(0, 15);
+        straightRightAttack = new StraightAttack(x, y, 50, 50);
+        straightLeftAttack = new StraightAttack(x, y, -50, 50);
         setState(State.STALL);
+        physics = Physics.getInstance();
+    }
+
+    @Override
+    public boolean attack(GameObject gameObject){
+        if(physics.hasColided(this,gameObject)) {
+            return true;
+        }
+        return false;
     }
 
     /*
@@ -64,5 +77,4 @@ public class SmurfCharacter extends Character {
     public Vector2D getJumpSpeed(){
         return jumpSpeed;
     }
-
 }

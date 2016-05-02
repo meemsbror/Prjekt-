@@ -10,7 +10,9 @@ public class CharacterController {
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
-    private Physics physics = new Physics();
+    private Physics physics = Physics.getInstance();
+
+
 
 
 
@@ -68,7 +70,7 @@ public class CharacterController {
                 break;
             case P1RIGHT :
                 player1.setState(State.WALK);
-                player1.move(5,0);
+                player1.move(-5,0);
                 break;
             case P1JUMP:
                 player1.setState(State.JUMP);
@@ -90,7 +92,7 @@ public class CharacterController {
                 break;
             default:
                 player1.setState(State.STALL);
-                break;
+               break;
 
 
         //TODO: player2 movement
@@ -111,11 +113,11 @@ public class CharacterController {
                 if(p2AttackTimer + 1000 < time){
                     //checks if player 2 is within player1s attack hitbox
                     System.out.println("Attacks!");
-                    //if(player2.attack(player1)){
+                   if(player2.attack(player1)){
                         // negative damage to represent the divider movement
-                     //   HPBar.updateDivider(-player2.getDamage());
-                    //}
-                    //p2AttackTimer = time;
+                        HPBar.updateDivider(-player2.getDamage());
+                    }
+                    p2AttackTimer = time;
                 }
                 System.out.println("Didnt attack :/");
             break;

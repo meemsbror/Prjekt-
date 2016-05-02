@@ -13,7 +13,6 @@ import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.gameobjects.characters.Character;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,6 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
     long elapsedTime;
 
     List<Texture>  textures = new ArrayList<Texture>();
+
 
 	@Override
 	public void create () {
@@ -72,22 +72,19 @@ public class MyGdxGame extends ApplicationAdapter {
         return  animations;
     }
 
-    public void renderGameObjects(){
-       /* if(sprites.size() < arena.getGameObjects().size()){
-            sprites.add(new Sprite(new Texture(arena.getGameObjects().get(arena.getGameObjects().size()).getImgPath())));
-        }*/
-    }
+
+
 
 	@Override
 	public void render () {
-        renderGameObjects();
         elapsedTime = (System.currentTimeMillis() - startTime);
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        fGdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i < arena.getGameObjects().size(); i++){
              batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+            batch.draw(textures.get(i), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
 		batch.end();
 
