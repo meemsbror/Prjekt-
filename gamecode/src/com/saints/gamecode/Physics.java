@@ -23,4 +23,9 @@ public class Physics {
             return true;
         }
     }
+    public void applyGravity(float delta, Vector2D vector){
+        deltaGravity = (Vector2D)GRAVITY.clone();
+        deltaGravity.multiplyVector(delta);
+        vector.addVector(deltaGravity);
+    }
 }

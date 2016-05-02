@@ -1,6 +1,9 @@
 package com.saints.gamecode.gameobjects.characters;
 
+<<<<<<< HEAD
 import com.saints.gamecode.State;
+=======
+>>>>>>> 6f6a1aef60329138f18e199af53a6b793b4e38b8
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
 
@@ -64,6 +67,11 @@ public abstract class Character extends GameObject {
 
     //Returns the initial jumpSpeed
     public abstract Vector2D getJumpSpeed();
+<<<<<<< HEAD
+=======
+
+    public abstract int getHitPoints();
+>>>>>>> 6f6a1aef60329138f18e199af53a6b793b4e38b8
 
     public abstract int getHitPoints();
 }
