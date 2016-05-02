@@ -11,6 +11,8 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.Arena;
 import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.gameobjects.characters.Character;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -33,6 +35,7 @@ public class MyGdxGame extends ApplicationAdapter {
     long startTime = System.currentTimeMillis();
     long elapsedTime;
 
+    List<Texture>  textures = new ArrayList<Texture>();
 
 	@Override
 	public void create () {
@@ -88,7 +91,9 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        arena.update();
+        System.out.println(Gdx.graphics.getDeltaTime());
+
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     private void initiateState(){

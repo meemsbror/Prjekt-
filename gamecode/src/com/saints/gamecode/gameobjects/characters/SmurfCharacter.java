@@ -1,11 +1,15 @@
 package com.saints.gamecode.gameobjects.characters;
 
 import com.saints.gamecode.State;
+import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 
 public class SmurfCharacter extends Character {
 
+
+    //the initial speed that a character jumps with
+    private Vector2D jumpSpeed;
 
     // Unique HP for every Character
     private int hitPoints = 50;
@@ -16,22 +20,25 @@ public class SmurfCharacter extends Character {
 
     int damage = 10;
 
-    public SmurfCharacter(int x, int y){
+    public SmurfCharacter(int x, int y) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(x,y,128,128);
+        super(x, y, 128, 128);
+    }
 
+    public SmurfCharacter(int x, int y, int width, int height){
+        super(x,y,width,height);
+        jumpSpeed = new Vector2D(0,15);
         straightRightAttack = new StraightAttack(x,y,50,50);
         straightLeftAttack = new StraightAttack(x,y,-50,50);
         setState(State.STALL);
     }
-    @Override
-    public boolean attack(GameObject gameObject){
-        if(straightRightAttack.collide(gameObject)) {
-            return true;
-        }
-        return false;
-    }
+
+    /*
+    public lvoid attack(GameObject gameObject){
+        //TODO: move logic to controller
+    }*/
+
 
     @Override
     public int getDamage() {
@@ -48,9 +55,13 @@ public class SmurfCharacter extends Character {
     }
 
     @Override
-    public void move(int dx, int dy){
+    public void move(float dx, float dy){
         super.move(dx, dy);
         straightRightAttack.move(dx, dy);
+    }
+
+    public Vector2D getJumpSpeed(){
+        return jumpSpeed;
     }
 
 }

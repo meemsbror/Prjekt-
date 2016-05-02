@@ -1,12 +1,13 @@
 package com.saints.gamecode.gameobjects.characters;
 
 import com.saints.gamecode.State;
+import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
 
 public abstract class Character extends GameObject {
 
     //The direction of the object
-    boolean facingRight;
+    private boolean facingRight;
 
     //State
     private State state;
@@ -18,8 +19,9 @@ public abstract class Character extends GameObject {
         super(x,y,width,height);
         state = State.STALL;
     }
-
+    /*
     public abstract boolean attack(GameObject gameObject);
+    */
     public abstract int getDamage();
     public abstract String getSpriteSheetPath();
     //Sets image
@@ -39,5 +41,29 @@ public abstract class Character extends GameObject {
             //wincondition!
         }
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Character character = (Character) o;
+
+
+        if (facingRight != character.facingRight) return false;
+
+      //  return hitPoints == character.hitPoints;
+
+        //TODO: remove hitPoints? and fix dummy return state just below this line;
+        return true;
+       // return hitPoints == character.hitPoints;
+
+    }
+
+    //Returns the initial jumpSpeed
+    public abstract Vector2D getJumpSpeed();
+
     public abstract int getHitPoints();
 }
