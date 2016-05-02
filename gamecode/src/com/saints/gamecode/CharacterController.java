@@ -56,8 +56,9 @@ public class CharacterController {
     }
 
     public void jump(Character character){
-        character.setAirborne(true);
-        character.jump();
+        if(!character.isAirborne()){
+            character.jump();
+        }
     }
 
 
@@ -82,10 +83,7 @@ public class CharacterController {
                 //One second cooldown on the attack
                 if(p1AttackTimer + 1000 < time){
                 player1.setState(State.PUNCH);
-                    //checks if player 2 is within player1s attack hitbox
-                    //if(player1.attack(player2)) {
                      //   HPBar.updateDivider(player1.getDamage());
-                    //}
                     p1AttackTimer = time;
                 }
                 break;

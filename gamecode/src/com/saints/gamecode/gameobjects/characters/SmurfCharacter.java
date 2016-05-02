@@ -79,6 +79,8 @@ public class SmurfCharacter extends Character {
     }
 
     public void jump(){
+
         changeDirection(jumpSpeed);
+        setAirborne(true);
     }
 }
