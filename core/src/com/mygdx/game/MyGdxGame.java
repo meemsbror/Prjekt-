@@ -73,7 +73,12 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-        elapsedTime = (System.currentTimeMillis() - startTime);
+        //checks how long its been since last frame
+        long currentTime = System.currentTimeMillis();
+        elapsedTime = currentTime - startTime;
+        startTime = currentTime;
+        System.out.println(elapsedTime);
+
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
