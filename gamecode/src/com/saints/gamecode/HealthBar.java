@@ -17,6 +17,8 @@ public final class HealthBar {
 
     // arbitrary 100% for now. These values are set in CharacterController
     private int currentMax = 100;
+    // player 1's minimum HP
+    private int currentMin = 0;
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
 
@@ -24,15 +26,28 @@ public final class HealthBar {
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     // TODO: make private and access only through change methods?
-   public void setMaxHealth(int x){
+   public void setMaxHealth(int x) {
+        this.currentMax = x;
+   }
+    public void setMax(int x){
         this.currentMax = x;
     }
 
-    // returns current game's Healthbar
+    // returns maximum state of healthbar
     public int getMaxHealth(){
         return currentMax;
     }
 
+    // Getters and Setters for currentMin variable
+    // Method for setting currentMin state of healthbar
+    public void setMin(int x){
+        this.currentMin = x;
+    }
+
+    // returns player 1's minimum state
+    public int getMinHealth(){
+        return currentMin;
+    }
     //Getters & setters for divider variable
     //TODO: make private and access only through change methods?
    public void setDivider(int x){
@@ -54,10 +69,10 @@ public final class HealthBar {
     }
 
     // method for HP-bar decay or pro-longing, depending on what happens in game
-    // if we want to strip 1 hp from both, send in 1.
+    // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
-        setMaxHealth(getMaxHealth() + (2 * hpChange));
+        setMax(getMaxHealth() + (2 * hpChange));
     }
 
     // TODO: Take a look at the sudden death... We need to talk about how large he decrements are...
