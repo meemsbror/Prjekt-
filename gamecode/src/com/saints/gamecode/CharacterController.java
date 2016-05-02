@@ -70,7 +70,7 @@ public class CharacterController {
                 break;
             case P1RIGHT :
                 player1.setState(State.WALK);
-                player1.move(-5,0);
+                player1.move(5,0);
                 break;
             case P1JUMP:
                 player1.setState(State.JUMP);
