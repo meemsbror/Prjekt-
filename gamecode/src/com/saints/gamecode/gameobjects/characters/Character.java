@@ -84,4 +84,6 @@ public abstract class Character extends GameObject {
     public abstract int getDamage();
 
     public abstract String getSpriteSheetPath();
+
+    public abstract void jump();
 }

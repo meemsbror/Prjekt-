@@ -77,4 +77,8 @@ public class SmurfCharacter extends Character {
     public Vector2D getJumpSpeed(){
         return jumpSpeed;
     }
+
+    public void jump(){
+        changeDirection(jumpSpeed);
+    }
 }

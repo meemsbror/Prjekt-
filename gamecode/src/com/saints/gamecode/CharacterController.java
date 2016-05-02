@@ -57,12 +57,11 @@ public class CharacterController {
 
     public void jump(Character character){
         character.setAirborne(true);
-        character.changeDirection(character.getJumpSpeed());
+        character.jump();
     }
 
 
     public void keyPressed(Direction direction){
-        //TODO: Change the key to a ENUM so we don't have to use KeyEvent.
         switch(direction){
             case P1LEFT:
                 player1.setState(State.WALK);
