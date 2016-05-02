@@ -76,7 +76,7 @@ public class CharacterController {
                 break;
             case P1JUMP:
                 player1.setState(State.JUMP);
-                jump(player2);
+                jump(player1);
                 break;
             case P1DIVE:
                 player1.move(0,-5);
