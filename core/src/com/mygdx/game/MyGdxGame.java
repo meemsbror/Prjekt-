@@ -77,7 +77,6 @@ public class MyGdxGame extends ApplicationAdapter {
         long currentTime = System.currentTimeMillis();
         elapsedTime = currentTime - startTime;
         startTime = currentTime;
-        System.out.println(elapsedTime);
 
 
         Gdx.gl.glClearColor(1, 0, 0, 1);

@@ -34,13 +34,13 @@ public class CharacterController {
         return player2.getPosition();
     }
 
-    public void update(float delta){
+    public void update(long delta){
         time = System.currentTimeMillis();
         movePlayers(delta);
 
     }
 
-    public void movePlayers(float delta){
+    public void movePlayers(long delta){
         for(Direction dir: Direction.values()){
             if(input.isKeyPressed(dir)){
                 keyPressed(dir);
@@ -48,9 +48,11 @@ public class CharacterController {
         }
 
         Vector2D deltaGravity = physics.getGravity(delta);
+        /*
         if(player1.isAirborne()){
             player1.changeDirection(deltaGravity);
         }
+        */
 
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
     }
