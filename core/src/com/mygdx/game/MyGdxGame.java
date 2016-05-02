@@ -51,7 +51,6 @@ public class MyGdxGame extends ApplicationAdapter {
         //Initiate what animations to be loaded (gameObjects 0 and 1 is always the players)
         p1Animations = createPlayerAnimation(char1);
         p2Animations = createPlayerAnimation(char2);
-        System.out.println("hi");
     }
 
     private Animation[] createPlayerAnimation(Character character) {
@@ -62,10 +61,6 @@ public class MyGdxGame extends ApplicationAdapter {
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
         TextureRegion[][] tmpFrames = TextureRegion.split(img,128,128);
-
-
-        System.out.println(Arrays.deepToString(tmpFrames));
-
 
         for(int i = 0; i < 4; i++){
             animations[i] = new Animation(1f/6f,tmpFrames[i]);
@@ -104,5 +99,8 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void dispose(){
         batch.dispose();
+        for(Texture tmp : textures){
+            tmp.dispose();
+        }
     }
 }
