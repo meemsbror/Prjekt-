@@ -91,9 +91,7 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        System.out.println(Gdx.graphics.getDeltaTime());
-
-        arena.update(Gdx.graphics.getDeltaTime());
+        arena.update(elapsedTime);
 	}
 
     private void initiateState(){

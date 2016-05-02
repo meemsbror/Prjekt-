@@ -24,10 +24,6 @@ public class SmurfCharacter extends Character {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
         super(x, y, 128, 128);
-    }
-
-    public SmurfCharacter(int x, int y, int width, int height){
-        super(x,y,width,height);
         jumpSpeed = new Vector2D(0,15);
         straightRightAttack = new StraightAttack(x,y,50,50);
         straightLeftAttack = new StraightAttack(x,y,-50,50);
