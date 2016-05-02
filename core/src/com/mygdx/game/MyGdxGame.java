@@ -79,7 +79,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void render () {
         elapsedTime = (System.currentTimeMillis() - startTime);
 
-        fGdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i < arena.getGameObjects().size(); i++){
