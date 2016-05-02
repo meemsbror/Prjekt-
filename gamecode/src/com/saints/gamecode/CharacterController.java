@@ -104,7 +104,7 @@ public class CharacterController {
                 jump(player2);
                 break;
             case P2DIVE:
-                player2.move(0,-1);
+                player2.move(0f,-1f);
             case P2ATTACK:
                 //One second cooldown on the attack
                 System.out.println(p2AttackTimer);
