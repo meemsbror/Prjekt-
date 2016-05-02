@@ -41,13 +41,13 @@ public class HealthTest {
         assertTrue(currentDivider == 45);
 
         //test for setting max health
-        healthBar.setMaxHealth(35);
+        healthBar.setMax(35);
         int maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 35);
-        healthBar.setMaxHealth(70);
+        healthBar.setMax(70);
         maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 70);
-        healthBar.setMaxHealth(50);
+        healthBar.setMax(50);
         maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 50);
     }
@@ -117,7 +117,7 @@ public class HealthTest {
         assertTrue(!healthBar.isOver());
 
         // setting healthBar past divider (should never happen in game)
-        healthBar.setMaxHealth(-10); // current divider = 98 and maxhealth  80 should return true
+        healthBar.setMax(-10); // current divider = 98 and maxhealth  80 should return true
         assertTrue(healthBar.isOver());
 
     }
