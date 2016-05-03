@@ -18,8 +18,8 @@ public class SmurfCharacter extends Character {
     private int hitPoints = 50;
 
     //Straight attack is the attack going straight to either side of the character.
-    StraightAttack straightRightAttack;
-    StraightAttack straightLeftAttack;
+    private StraightAttack straightRightAttack;
+    private StraightAttack straightLeftAttack;
 
     int damage = 10;
 
