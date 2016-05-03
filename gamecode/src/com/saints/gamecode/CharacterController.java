@@ -3,6 +3,7 @@ package com.saints.gamecode;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.interfaces.IPhysics;
 
 //Controller class that controls both players
 public class CharacterController {
@@ -12,7 +13,7 @@ public class CharacterController {
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
-    private Physics physics = Physics.getInstance();
+    private IPhysics physics = Physics.getInstance();
 
 
 
