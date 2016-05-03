@@ -83,8 +83,11 @@ public class CharacterController {
     }
 
 
+    //
     public void keyPressed(Direction direction){
         switch(direction){
+
+            //Player 1 movement
             case P1LEFT:
                 player1.setState(State.WALK);
                 player1.move(-5,0);
@@ -113,7 +116,7 @@ public class CharacterController {
                break;
 
 
-        //TODO: player2 movement
+            //Player 2 movement
             case P2LEFT:
                 player2.move(-1,0);
                 break;
@@ -142,6 +145,7 @@ public class CharacterController {
        }
     }
 
+    //Not sure if necessary
     public void keyReleased(int key){
         //TODO
     }
