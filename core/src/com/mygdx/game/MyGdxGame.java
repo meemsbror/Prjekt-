@@ -77,6 +77,7 @@ public class MyGdxGame extends ApplicationAdapter {
         long currentTime = System.currentTimeMillis();
         elapsedTime = currentTime - startTime;
         startTime = currentTime;
+        long delta = elapsedTime/100;
 
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -87,7 +88,7 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        arena.update(elapsedTime);
+        arena.update(delta);
 	}
 
     private void initiateState(){
