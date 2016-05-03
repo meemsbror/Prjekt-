@@ -41,8 +41,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
         batch = new SpriteBatch();
         LibGDXInput input = new LibGDXInput(Gdx.input);
-        char1 = CharacterFactory.createCharacter();
-        char2 = CharacterFactory.createCharacter();
+        char1 = CharacterFactory.createCharacter("Smurf");
+        char2 = CharacterFactory.createCharacter("Smurf");
         this.arena = new Arena(char1,char2, input);
 
         //Initiate the different states
