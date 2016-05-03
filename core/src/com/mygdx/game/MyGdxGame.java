@@ -73,12 +73,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-        //checks how long its been since last frame
-        long currentTime = System.currentTimeMillis();
-        elapsedTime = currentTime - startTime;
-        startTime = currentTime;
-        long delta = elapsedTime/100;
-
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -88,7 +82,8 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        arena.update(delta);
+        //Updates the game and sends the time between last frame
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     private void initiateState(){

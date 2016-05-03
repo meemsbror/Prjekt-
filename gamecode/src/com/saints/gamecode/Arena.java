@@ -51,7 +51,7 @@ public class Arena {
 
     }
     //Gets called from the game loop when the arena should update
-    public void update(long delta){
+    public void update(float delta){
         characterController.update(delta);
     }
 }

@@ -34,7 +34,7 @@ public class CharacterController {
         return player2.getPosition();
     }
 
-    public void update(long delta){
+    public void update(float delta){
         time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
@@ -42,7 +42,7 @@ public class CharacterController {
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
-    private void updateCharacterDirection(long delta){
+    private void updateCharacterDirection(float delta){
 
         //Iterates all directions and checks if the corresponding key is pressed
         for(Direction dir: Direction.values()){
@@ -61,7 +61,7 @@ public class CharacterController {
     }
 
     //Moves the Characters in their direction.
-    public void moveCharacters(long delta){
+    public void moveCharacters(float delta){
 
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
     }
