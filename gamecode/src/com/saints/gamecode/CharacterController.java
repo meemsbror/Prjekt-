@@ -36,27 +36,38 @@ public class CharacterController {
 
     public void update(long delta){
         time = System.currentTimeMillis();
-        movePlayers(delta);
+        updateCharacterDirection(delta);
+        moveCharacters(delta);
 
     }
 
-    public void movePlayers(long delta){
+    //Checks if the keys for player movement are pressed and updates their direction
+    private void updateCharacterDirection(long delta){
+
+        //Iterates all directions and checks if the corresponding key is pressed
         for(Direction dir: Direction.values()){
-            if(input.isKeyPressed(dir)){
+            if(input.isKeyPressed(dir)) {
                 keyPressed(dir);
             }
         }
 
-        Vector2D deltaGravity = physics.getGravity(delta);
-        /*
+
+        //If the player is in the air add gravity so that it falls
         if(player1.isAirborne()){
+            Vector2D deltaGravity = physics.getGravity(delta);
             player1.changeDirection(deltaGravity);
         }
-        */
+
+    }
+
+    //Moves the Characters in their direction.
+    public void moveCharacters(long delta){
 
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
     }
 
+
+    //Asks the character to jump
     public void jump(Character character){
         if(!character.isAirborne()){
             character.jump();
