@@ -1,5 +1,6 @@
 package com.saints.gamecode;
 
+import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
 
@@ -53,11 +54,18 @@ public class CharacterController {
 
 
         //If the player is in the air add gravity so that it falls
-        if(player1.isAirborne()){
+
+        applyGravity(player1,delta);
+        applyGravity(player2,delta);
+
+    }
+
+    private void applyGravity(GameObject gameObject, float delta){
+
+        if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
             player1.changeDirection(deltaGravity);
         }
-
     }
 
     //Moves the Characters in their direction.

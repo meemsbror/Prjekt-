@@ -4,7 +4,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 
 public class Physics {
 
-    private final Vector2D GRAVITY = new Vector2D(0,0.92f);
+    private final Vector2D GRAVITY = new Vector2D(0,-98.2f);
     private Vector2D deltaGravity;
     private static final Physics instance = new Physics();
 
