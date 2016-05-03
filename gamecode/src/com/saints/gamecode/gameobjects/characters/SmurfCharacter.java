@@ -35,10 +35,13 @@ public class SmurfCharacter extends Character {
 
     @Override
     public boolean attack(GameObject gameObject){
-        if(physics.hasColided(this,gameObject)) {
+
+        if(physics.hasCollided(this,gameObject)) {
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     /*

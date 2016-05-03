@@ -1,13 +1,8 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.dependencies.LibGDXGraphics;
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
-
-
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 

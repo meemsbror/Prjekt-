@@ -4,6 +4,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
 
+//Controller class that controls both players
 public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
