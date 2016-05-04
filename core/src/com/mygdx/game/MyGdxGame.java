@@ -60,7 +60,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,128,128);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
 
         for(int i = 0; i < 4; i++){
             animations[i] = new Animation(1f/6f,tmpFrames[i]);
