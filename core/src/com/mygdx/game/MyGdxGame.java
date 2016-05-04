@@ -44,11 +44,14 @@ public class MyGdxGame extends ApplicationAdapter {
         LibGDXInput input = new LibGDXInput(Gdx.input);
         char1 = CharacterFactory.createCharacter("Smurf");
         char2 = CharacterFactory.createCharacter("Smurf");
-        this.arena = new Arena(char1,char2, input);
+
+
         this.assetsmanager = new LibGDXAssetsmanager();
+        LibGDXGraphics graphics = new LibGDXGraphics(batch, assetsmanager);
+        this.arena = new Arena(char1,char2, input, graphics, assetsmanager);
+
 
         //Initiate the different states
-        initiateState();
 
         assetsmanager.addAnimation(char1.getSpriteSheetPath());
         assetsmanager.addAnimation(char2.getSpriteSheetPath());
@@ -97,6 +100,7 @@ public class MyGdxGame extends ApplicationAdapter {
         arena.update(Gdx.graphics.getDeltaTime());
 	}
 
+    /*
     private void initiateState(){
         map = new HashMap<State,Integer>();
 
@@ -104,8 +108,8 @@ public class MyGdxGame extends ApplicationAdapter {
         map.put(State.WALK, 1);
         map.put(State.JUMP, 2);
         map.put(State.PUNCH, 3);
-
     }
+    */
 
     @Override
     public void dispose(){

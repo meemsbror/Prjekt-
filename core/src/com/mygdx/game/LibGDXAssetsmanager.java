@@ -7,10 +7,14 @@ import java.util.Map;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+//Handels all assets
 public class LibGDXAssetsmanager {
 
 
+    //Map that contains all animations
     private final Map<String, Animation []> animations;
+
+    //LibGDX AssetManager that handels assets
     private final AssetManager assets = new AssetManager();
 
     public LibGDXAssetsmanager(){
@@ -18,6 +22,7 @@ public class LibGDXAssetsmanager {
     }
 
 
+    //Adds a new animation and saves them as an array. each array contains a different set of animation
     public void addAnimation(String filename){
         Animation animation[] = new Animation[4];
         Texture img = new Texture(filename);
@@ -45,5 +50,4 @@ public class LibGDXAssetsmanager {
     public Animation [] getAnimation(String filename){
         return this.animations.get(filename);
     }
-
 }

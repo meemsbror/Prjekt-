@@ -16,7 +16,7 @@ public class Arena {
 
     List<GameObject> gameObjects = new ArrayList<GameObject>();
 
-    public Arena (Character player1, Character player2, IKeyInput input){
+    public Arena (Character player1, Character player2, IKeyInput input ){
         gameObjects.add(player1);
         gameObjects.add(player2);
         this.input = input;
