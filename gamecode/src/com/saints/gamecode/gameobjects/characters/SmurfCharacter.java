@@ -26,7 +26,7 @@ public class SmurfCharacter extends Character {
     public SmurfCharacter(int x, int y) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(x, y, 128, 128);
+        super(x, y, 227, 386);
         jumpSpeed = new Vector2D(0, 15);
         straightRightAttack = new StraightAttack(x, y, 50, 50);
         straightLeftAttack = new StraightAttack(x, y, -50, 50);
@@ -61,7 +61,7 @@ public class SmurfCharacter extends Character {
 
     @Override
     public String getSpriteSheetPath() {
-        return "assets/pictures/testGrid.png";
+        return "assets/pictures/testSpriteSheetv2.png";
     }
 
     public int getHitPoints() {
