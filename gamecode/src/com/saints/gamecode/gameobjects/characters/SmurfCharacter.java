@@ -12,14 +12,14 @@ public class SmurfCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private Vector2D jumpSpeed;
+    private Vector2D jumpSpeed = new Vector2D(0, 100);
 
     // Unique HP for every Character
     private int hitPoints = 50;
 
     //Straight attack is the attack going straight to either side of the character.
-    StraightAttack straightRightAttack;
-    StraightAttack straightLeftAttack;
+    private StraightAttack straightRightAttack;
+    private StraightAttack straightLeftAttack;
 
     int damage = 10;
 
@@ -36,10 +36,13 @@ public class SmurfCharacter extends Character {
 
     @Override
     public boolean attack(GameObject gameObject){
-        if(physics.hasColided(this,gameObject)) {
+
+        if(physics.hasCollided(this,gameObject)) {
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     /*

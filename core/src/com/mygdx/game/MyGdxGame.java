@@ -41,8 +41,8 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
         batch = new SpriteBatch();
         LibGDXInput input = new LibGDXInput(Gdx.input);
-        char1 = CharacterFactory.createCharacter();
-        char2 = CharacterFactory.createCharacter();
+        char1 = CharacterFactory.createCharacter("Smurf");
+        char2 = CharacterFactory.createCharacter("Smurf");
         this.arena = new Arena(char1,char2, input);
 
         //Initiate the different states
@@ -73,10 +73,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-        //checks how long its been since last frame
-        long currentTime = System.currentTimeMillis();
-        elapsedTime = currentTime - startTime;
-
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -86,7 +82,8 @@ public class MyGdxGame extends ApplicationAdapter {
         }
 		batch.end();
 
-        arena.update(elapsedTime);
+        //Updates the game and sends the time between last frame
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     private void initiateState(){

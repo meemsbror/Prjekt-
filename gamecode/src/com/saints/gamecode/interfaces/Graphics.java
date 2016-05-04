@@ -6,7 +6,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 
 public interface Graphics {
 
-    public void render(List<GameObject> gameObjects);
+    public void render();
 
     public void addKeyListener(KeyListener keyListener);
 

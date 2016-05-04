@@ -1,8 +1,11 @@
 package com.saints.gamecode;
 
+import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.interfaces.IPhysics;
 
+//Controller class that controls both players
 public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
@@ -10,7 +13,7 @@ public class CharacterController {
     private final IKeyInput input;
     private Direction direction;
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
-    private Physics physics = Physics.getInstance();
+    private IPhysics physics = Physics.getInstance();
 
 
 
@@ -34,29 +37,47 @@ public class CharacterController {
         return player2.getPosition();
     }
 
-    public void update(long delta){
+    public void update(float delta){
         time = System.currentTimeMillis();
-        movePlayers(delta);
+        updateCharacterDirection(delta);
+        moveCharacters(delta);
 
     }
 
-    public void movePlayers(long delta){
+    //Checks if the keys for player movement are pressed and updates their direction
+    private void updateCharacterDirection(float delta){
+
+        //Iterates all directions and checks if the corresponding key is pressed
         for(Direction dir: Direction.values()){
-            if(input.isKeyPressed(dir)){
+            if(input.isKeyPressed(dir)) {
                 keyPressed(dir);
             }
         }
 
-        Vector2D deltaGravity = physics.getGravity(delta);
-        /*
-        if(player1.isAirborne()){
+
+        //If the player is in the air add gravity so that it falls
+
+        applyGravity(player1,delta);
+        applyGravity(player2,delta);
+
+    }
+
+    private void applyGravity(GameObject gameObject, float delta){
+
+        if(gameObject.isAirborne()){
+            Vector2D deltaGravity = physics.getGravity(delta);
             player1.changeDirection(deltaGravity);
         }
-        */
+    }
+
+    //Moves the Characters in their direction.
+    public void moveCharacters(float delta){
 
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
     }
 
+
+    //Asks the character to jump
     public void jump(Character character){
         if(!character.isAirborne()){
             character.jump();
@@ -64,8 +85,11 @@ public class CharacterController {
     }
 
 
+    //
     public void keyPressed(Direction direction){
         switch(direction){
+
+            //Player 1 movement
             case P1LEFT:
                 player1.setState(State.WALK);
                 player1.move(-5,0);
@@ -94,7 +118,7 @@ public class CharacterController {
                break;
 
 
-        //TODO: player2 movement
+            //Player 2 movement
             case P2LEFT:
                 player2.move(-1,0);
                 break;
@@ -123,6 +147,7 @@ public class CharacterController {
        }
     }
 
+    //Not sure if necessary
     public void keyReleased(int key){
         //TODO
     }

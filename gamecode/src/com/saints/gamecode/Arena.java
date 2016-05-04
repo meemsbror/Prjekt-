@@ -1,13 +1,8 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.dependencies.LibGDXGraphics;
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
-
-
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +46,7 @@ public class Arena {
 
     }
     //Gets called from the game loop when the arena should update
-    public void update(long delta){
+    public void update(float delta){
         characterController.update(delta);
     }
 }
