@@ -12,7 +12,7 @@ public class SmurfCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private Vector2D jumpSpeed = new Vector2D(0, 100);
+    private final Vector2D jumpSpeed = new Vector2D(0, 100);
 
     // Unique HP for every Character
     private int hitPoints = 50;
@@ -27,7 +27,6 @@ public class SmurfCharacter extends Character {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
         super(x, y, 227, 386);
-        jumpSpeed = new Vector2D(0, 15);
         straightRightAttack = new StraightAttack(x, y, 50, 50);
         straightLeftAttack = new StraightAttack(x, y, -50, 50);
         setState(State.STALL);
