@@ -23,6 +23,7 @@ public class MyGdxGame extends ApplicationAdapter {
     private Map<State,Integer> map;
 
     private Arena arena;
+    private LibGDXAssetsmanager assetsmanager;
     Character char1, char2;
 
     //Animation stuff
@@ -44,15 +45,22 @@ public class MyGdxGame extends ApplicationAdapter {
         char1 = CharacterFactory.createCharacter("Smurf");
         char2 = CharacterFactory.createCharacter("Smurf");
         this.arena = new Arena(char1,char2, input);
+        this.assetsmanager = new LibGDXAssetsmanager();
 
         //Initiate the different states
         initiateState();
 
+        assetsmanager.addAnimation(char1.getSpriteSheetPath());
+        assetsmanager.addAnimation(char2.getSpriteSheetPath());
+
+        /*
         //Initiate what animations to be loaded (gameObjects 0 and 1 is always the players)
         p1Animations = createPlayerAnimation(char1);
         p2Animations = createPlayerAnimation(char2);
+        */
     }
 
+    /*
     private Animation[] createPlayerAnimation(Character character) {
 
         Animation animations[] = new Animation[4];
@@ -67,9 +75,7 @@ public class MyGdxGame extends ApplicationAdapter {
         }
         return  animations;
     }
-
-
-
+    */
 
 	@Override
 	public void render () {
@@ -77,9 +83,14 @@ public class MyGdxGame extends ApplicationAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+        for(int i = 0; i<arena.getGameObjects().size(); i++){
+            batch.draw(assetsmanager.getAnimation(char1.getSpriteSheetPath())[map.get(char1.getState())].getKeyFrame((float)(float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+        }
+        /*
         for(int i = 0; i < arena.getGameObjects().size(); i++){
             batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
+        */
 		batch.end();
 
         //Updates the game and sends the time between last frame
