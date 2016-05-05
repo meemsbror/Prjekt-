@@ -32,8 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
     //Elapsed time since start of game
     //TODO if pause button is implemented pause this timer!
-    long startTime = System.currentTimeMillis();
-    long elapsedTime;
+    float elapsedTime;
 
     List<Texture>  textures = new ArrayList<Texture>();
 
@@ -82,7 +81,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-
+        elapsedTime = elapsedTime + Gdx.graphics.getDeltaTime();
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -91,7 +90,7 @@ public class MyGdxGame extends ApplicationAdapter {
         }
         /*
         for(int i = 0; i < arena.getGameObjects().size(); i++){
-            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame(elapsedTime, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
         */
 		batch.end();
