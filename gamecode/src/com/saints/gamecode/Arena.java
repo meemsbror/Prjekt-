@@ -1,13 +1,8 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.dependencies.LibGDXGraphics;
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
-
-
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +10,6 @@ import java.util.List;
 public class Arena {
 
     private final CharacterController characterController;
-    private final LibGDXGraphics libGDXGraphics;
     private final IKeyInput input;
 
     private final boolean running = true;
@@ -27,7 +21,6 @@ public class Arena {
         gameObjects.add(player2);
         this.input = input;
         this.characterController = new CharacterController(player1, player2,input);
-        libGDXGraphics = new LibGDXGraphics();
     }
 
     public List<GameObject> getGameObjects() {
@@ -53,7 +46,7 @@ public class Arena {
 
     }
     //Gets called from the game loop when the arena should update
-    public void update(){
-        characterController.update();
+    public void update(float delta){
+        characterController.update(delta);
     }
 }

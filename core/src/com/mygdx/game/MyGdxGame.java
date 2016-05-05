@@ -11,7 +11,8 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.Arena;
 import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.gameobjects.characters.Character;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,16 +31,17 @@ public class MyGdxGame extends ApplicationAdapter {
 
     //Elapsed time since start of game
     //TODO if pause button is implemented pause this timer!
-    long startTime = System.currentTimeMillis();
-    long elapsedTime;
+    float elapsedTime;
+
+    List<Texture>  textures = new ArrayList<Texture>();
 
 
 	@Override
 	public void create () {
         batch = new SpriteBatch();
         LibGDXInput input = new LibGDXInput(Gdx.input);
-        char1 = CharacterFactory.createCharacter();
-        char2 = CharacterFactory.createCharacter();
+        char1 = CharacterFactory.createCharacter("Smurf");
+        char2 = CharacterFactory.createCharacter("Smurf");
         this.arena = new Arena(char1,char2, input);
 
         //Initiate the different states
@@ -57,11 +59,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,128,128);
-
-
-        System.out.println(Arrays.deepToString(tmpFrames));
-
+        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
 
         for(int i = 0; i < 4; i++){
             animations[i] = new Animation(1f/6f,tmpFrames[i]);
@@ -69,26 +67,22 @@ public class MyGdxGame extends ApplicationAdapter {
         return  animations;
     }
 
-    public void renderGameObjects(){
-       /* if(sprites.size() < arena.getGameObjects().size()){
-            sprites.add(new Sprite(new Texture(arena.getGameObjects().get(arena.getGameObjects().size()).getImgPath())));
-        }*/
-    }
+
+
 
 	@Override
 	public void render () {
-        renderGameObjects();
-        elapsedTime = (System.currentTimeMillis() - startTime);
-
+        elapsedTime = elapsedTime + Gdx.graphics.getDeltaTime();
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i < arena.getGameObjects().size(); i++){
-             batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame((float)elapsedTime/1000, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
+            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame(elapsedTime, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
         }
 		batch.end();
 
-        arena.update();
+        //Updates the game and sends the time between last frame
+        arena.update(Gdx.graphics.getDeltaTime());
 	}
 
     private void initiateState(){
@@ -104,5 +98,8 @@ public class MyGdxGame extends ApplicationAdapter {
     @Override
     public void dispose(){
         batch.dispose();
+        for(Texture tmp : textures){
+            tmp.dispose();
+        }
     }
 }
