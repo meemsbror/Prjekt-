@@ -6,9 +6,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import java.util.Map;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.saints.gamecode.interfaces.IAssetsManager;
 
 //Handels all assets
-public class LibGDXAssetsmanager {
+public class LibGDXAssetsManager implements IAssetsManager{
 
 
     //Map that contains all animations
@@ -17,7 +18,7 @@ public class LibGDXAssetsmanager {
     //LibGDX AssetManager that handels assets
     private final AssetManager assets = new AssetManager();
 
-    public LibGDXAssetsmanager(){
+    public LibGDXAssetsManager(){
         animations = new HashMap<String, Animation[]>();
     }
 
