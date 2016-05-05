@@ -62,7 +62,7 @@ public class MyGdxGame extends ApplicationAdapter {
         TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
 
         for(int i = 0; i < 4; i++){
-            animations[i] = new Animation(1f/6f,tmpFrames[i]);
+            animations[i] = new Animation(1f/12f,tmpFrames[i]);
         }
         return  animations;
     }
