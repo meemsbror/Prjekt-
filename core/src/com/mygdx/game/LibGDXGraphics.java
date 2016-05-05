@@ -6,19 +6,21 @@ import com.badlogic.gdx.graphics.GL20;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.interfaces.IGraphics;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import java.util.List;
 
-public class LibGDXGraphics {
+public class LibGDXGraphics implements IGraphics{
 
     private final SpriteBatch batch;
-    private final LibGDXAssetsmanager assetsmanager;
+    private final LibGDXAssetsManager assetsmanager;
     private Map<State, Integer> map;
 
 
-    public LibGDXGraphics(SpriteBatch batch, LibGDXAssetsmanager assetsmanager){
+    public LibGDXGraphics(SpriteBatch batch, LibGDXAssetsManager assetsmanager){
 
         this.batch = batch;
         this.assetsmanager = assetsmanager;
@@ -37,6 +39,15 @@ public class LibGDXGraphics {
 
             }
         }
+        batch.end();
+    }
+
+    public void addAnimation(String filename){
+        assetsmanager.addAnimation(filename);
+    }
+
+    public void addTexture(String filename){
+        assetsmanager.addTexture(filename);
     }
 
     private void initiateState(){
