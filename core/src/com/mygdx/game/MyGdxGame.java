@@ -6,15 +6,12 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Arena;
 import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.gameobjects.characters.Character;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 public class MyGdxGame extends ApplicationAdapter {
@@ -23,11 +20,9 @@ public class MyGdxGame extends ApplicationAdapter {
     private Map<State,Integer> map;
 
     private Arena arena;
+    private LibGDXAssetsManager assetsmanager;
     Character char1, char2;
 
-    //Animation stuff
-    private Texture img;
-    private Animation [] p1Animations, p2Animations;
 
     //Elapsed time since start of game
     //TODO if pause button is implemented pause this timer!
@@ -42,58 +37,20 @@ public class MyGdxGame extends ApplicationAdapter {
         LibGDXInput input = new LibGDXInput(Gdx.input);
         char1 = CharacterFactory.createCharacter("Smurf");
         char2 = CharacterFactory.createCharacter("Smurf");
-        this.arena = new Arena(char1,char2, input);
-
-        //Initiate the different states
-        initiateState();
-
-        //Initiate what animations to be loaded (gameObjects 0 and 1 is always the players)
-        p1Animations = createPlayerAnimation(char1);
-        p2Animations = createPlayerAnimation(char2);
-    }
-
-    private Animation[] createPlayerAnimation(Character character) {
-
-        Animation animations[] = new Animation[4];
-        img = new Texture(char1.getSpriteSheetPath());
-
-        //calculate the size of the images
-        //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
-
-        for(int i = 0; i < 4; i++){
-            animations[i] = new Animation(1f/12f,tmpFrames[i]);
-        }
-        return  animations;
-    }
 
 
-
+        this.assetsmanager = new LibGDXAssetsManager();
+        LibGDXGraphics graphics = new LibGDXGraphics(batch, assetsmanager);
+        this.arena = new Arena(char1,char2, input, graphics);
+   }
 
 	@Override
 	public void render () {
         elapsedTime = elapsedTime + Gdx.graphics.getDeltaTime();
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-        for(int i = 0; i < arena.getGameObjects().size(); i++){
-            batch.draw(p1Animations[map.get(char1.getState())].getKeyFrame(elapsedTime, true), arena.getGameObjects().get(i).getPos().getX(), arena.getGameObjects().get(i).getPos().getY());
-        }
-		batch.end();
 
         //Updates the game and sends the time between last frame
         arena.update(Gdx.graphics.getDeltaTime());
 	}
-
-    private void initiateState(){
-        map = new HashMap<State,Integer>();
-
-        map.put(State.STALL, 0);
-        map.put(State.WALK, 1);
-        map.put(State.JUMP, 2);
-        map.put(State.PUNCH, 3);
-
-    }
 
     @Override
     public void dispose(){
