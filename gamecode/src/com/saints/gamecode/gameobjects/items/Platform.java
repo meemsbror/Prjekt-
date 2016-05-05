@@ -1,4 +1,6 @@
-package com.saints.gamecode.gameobjects;
+package com.saints.gamecode.gameobjects.items;
+
+//import com.saints.gamecode.gameobjects.GameObject;
 
 /**
  * Created by ludvig on 2016-05-02.
