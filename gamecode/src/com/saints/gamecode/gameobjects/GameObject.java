@@ -78,6 +78,10 @@ public abstract class GameObject {
         return movement.getX();
     }
 
+    public String getImgPath(){
+        return imgPath;
+    }
+
  /*   public boolean collideGround(Platform platform){
         if( pos.getY()<platform.getPos().getY() ){
             return false;

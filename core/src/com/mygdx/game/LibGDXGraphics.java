@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
+import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
@@ -35,8 +37,13 @@ public class LibGDXGraphics implements IGraphics{
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Character){
                  Character character = (Character)gameObjects.get(i);
-                 batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame((float)(float)delta, true), character.getPos().getX(), character.getPos().getY());
+                 batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(delta, true), character.getPos().getX(), character.getPos().getY());
 
+            }
+            else{
+                GameObject gameObject = gameObjects.get(i);
+                Position pos = gameObject.getPos();
+                batch.draw(assetsmanager.getTexture(gameObject.getImgPath()),pos.getX(),pos.getY());
             }
         }
         batch.end();
