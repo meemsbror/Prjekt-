@@ -3,6 +3,7 @@ package com.saints.gamecode.gameobjects;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
+import com.saints.gamecode.gameobjects.items.Platform;
 
 public abstract class GameObject {
 
@@ -53,6 +54,14 @@ public abstract class GameObject {
         return width;
     }
 
+    public boolean collide(GameObject object) {
+        if (pos.getX() + width < object.getPos().getX() || object.getPos().getX() + object.getWidth() < pos.getX()
+                || pos.getY() + height < object.getPos().getY() || object.getPos().getY() + object.getHeight() < pos.getY()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
     //Adds a vector to the movement vector to change the direction of the object.
     public void changeDirection(Vector2D vector){
         movement.addVector(vector);
@@ -82,13 +91,17 @@ public abstract class GameObject {
         return imgPath;
     }
 
- /*   public boolean collideGround(Platform platform){
-        if( pos.getY()<platform.getPos().getY() ){
-            return false;
+
+ public boolean onPlatform(Platform platform){
+     //if ( ("X for any part of object"=="X for any part of platform")
+     // AND ("Y for bottom of object"=="Y for top of platform") ) {return true}
+     if ( (!(pos.getX()-getWidth()<platform.getX())||(platform.getX()+getWidth()<pos.getX())) &&
+             (pos.getY()<platform.getY()) && (pos.getY()>platform.getY()-50)) { //marginal is 50
+                return true;
         }else{
-            return true;
+            return false;
         }
-    }*/
+    }
 
 
 
