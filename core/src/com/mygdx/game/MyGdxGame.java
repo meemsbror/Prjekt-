@@ -38,13 +38,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	public void create () {
         batch = new SpriteBatch();
         LibGDXInput input = new LibGDXInput(Gdx.input);
-        char1 = CharacterFactory.createCharacter("Smurf");
-        char2 = CharacterFactory.createCharacter("Smurf");
-
-
         this.assetsmanager = new LibGDXAssetsManager();
         LibGDXGraphics graphics = new LibGDXGraphics(batch, assetsmanager);
-        this.arena = new Arena(char1,char2, input, graphics);
+        this.arena = new Arena(CharacterFactory.createCharacter("Smurf"),CharacterFactory.createCharacter("Smurf"), input, graphics);
    }
 
 	@Override

@@ -39,6 +39,11 @@ public abstract class GameObject {
         pos.move(dx, dy);
     }
 
+    public void setPosition(float x, float y){
+        pos.setX(x);
+        pos.setY(y);
+    }
+
     public Position getPos() {
         return (Position)pos.clone();
     }

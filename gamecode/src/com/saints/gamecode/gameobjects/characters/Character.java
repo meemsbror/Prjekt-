@@ -9,6 +9,8 @@ public abstract class Character extends GameObject {
     //The direction of the object
     private boolean facingRight;
 
+    private float moveSpeed = 100;
+
     //State
     private State state;
 
@@ -26,6 +28,10 @@ public abstract class Character extends GameObject {
     //Sets image
     public State getState() {
         return state;
+    }
+
+    public float getMoveSpeed(){
+        return moveSpeed;
     }
 
     public void setState(State image) {

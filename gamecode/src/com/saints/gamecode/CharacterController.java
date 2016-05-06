@@ -27,6 +27,15 @@ public class CharacterController {
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
         this.HPBar.setMaxHealth(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        setStartPositions();
+    }
+
+    //Sets the starting position of both players
+    public void setStartPositions(){
+        //TODO: start pos should vary with map
+        player1.setPosition(0,0);
+        player2.setPosition(300,0);
+
     }
 
     public Position getP1Position(){
@@ -41,7 +50,6 @@ public class CharacterController {
         time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
-
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -92,11 +100,11 @@ public class CharacterController {
             //Player 1 movement
             case P1LEFT:
                 player1.setState(State.WALK);
-                player1.move(-5,0);
+                player1.changeDirection(new Vector2D(-100,0));
                 break;
             case P1RIGHT :
                 player1.setState(State.WALK);
-                player1.move(5,0);
+                moveRight(player1);
                 break;
             case P1JUMP:
                 player1.setState(State.JUMP);
@@ -145,6 +153,12 @@ public class CharacterController {
                 System.out.println("Didnt attack :/");
             break;
        }
+    }
+
+    private void moveRight(Character character){
+        if(character.getHorizontalSpeed()<100){
+            character.changeDirection(new Vector2D(character.getMoveSpeed()-character.getHorizontalSpeed(),0));
+        }
     }
 
     //Not sure if necessary
