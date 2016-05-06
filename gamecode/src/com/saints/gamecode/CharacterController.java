@@ -72,7 +72,6 @@ public class CharacterController {
             player1.resetHorizontalSpeed();
             player2.resetHorizontalSpeed();
         }
-
     }
 
     private void applyGravity(GameObject gameObject, float delta){
@@ -89,14 +88,12 @@ public class CharacterController {
         player2.move(player2.getHorizontalSpeed()*delta,player2.getVerticalSpeed()*delta);
     }
 
-
     //Asks the character to jump
     public void jump(Character character){
         if(!character.isAirborne()){
             character.jump();
         }
     }
-
 
     //
     public void keyPressed(Direction direction){
