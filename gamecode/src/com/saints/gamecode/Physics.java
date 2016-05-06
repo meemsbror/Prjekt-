@@ -30,12 +30,12 @@ public class Physics implements IPhysics {
 
     //Checks if two objects have collided
     public boolean hasCollided(GameObject object1, GameObject object2){
+        Position pos1 = object1.getPos();
+        Position pos2 = object2.getPos();
 
-        if(object1.getPos().getX()+object1.getPos().getX()<object2.getPos().getX() ||object2.getPos().getX()+object2.getWidth()<object1.getPos().getX()
-                ||object1.getPos().getY()+object1.getHeight()<object2.getPos().getY() ||object2.getPos().getY()+object2.getHeight()<object1.getPos().getY()){
-            return false;
-        }else{
-            return true;
-        }
+        return(!(pos1.getX()+object1.getWidth()<pos2.getX()
+                || pos1.getY()>pos2.getY()+object2.getHeight()
+                || pos1.getY() + object1.getHeight()<pos2.getY()
+                || pos1.getX()>pos2.getX()+object2.getWidth()));
     }
 }

@@ -80,6 +80,14 @@ public abstract class GameObject {
         movement.setY(y);
     }
 
+    public void resetHorizontalSpeed(){
+        movement.resetX();
+    }
+
+    public void resetVerticalSpeed(){
+        movement.resetY();
+    }
+
     //Set if the object is on solid ground or not
     public void setAirborne(boolean isAirborne){
         this.isAirborne = isAirborne;

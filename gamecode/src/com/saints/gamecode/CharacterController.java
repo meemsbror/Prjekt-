@@ -68,6 +68,11 @@ public class CharacterController {
         applyGravity(player1,delta);
         applyGravity(player2,delta);
 
+        if(physics.hasCollided(player1,player2)){
+            player1.resetHorizontalSpeed();
+            player2.resetHorizontalSpeed();
+        }
+
     }
 
     private void applyGravity(GameObject gameObject, float delta){
