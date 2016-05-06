@@ -74,14 +74,14 @@ public class CharacterController {
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
-            player1.changeDirection(deltaGravity);
+            gameObject.changeDirection(deltaGravity);
         }
     }
 
     //Moves the Characters in their direction.
     public void moveCharacters(float delta){
-
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
+        player2.move(player2.getHorizontalSpeed()*delta,player2.getVerticalSpeed()*delta);
     }
 
 
@@ -100,7 +100,7 @@ public class CharacterController {
             //Player 1 movement
             case P1LEFT:
                 player1.setState(State.WALK);
-                player1.changeDirection(new Vector2D(-100,0));
+                moveLeft(player1);
                 break;
             case P1RIGHT :
                 player1.setState(State.WALK);
@@ -128,10 +128,10 @@ public class CharacterController {
 
             //Player 2 movement
             case P2LEFT:
-                player2.move(-1,0);
+                moveLeft(player2);
                 break;
             case P2RIGHT:
-                player2.move(1,0);
+                moveRight(player2);
                 break;
             case P2JUMP:
                 jump(player2);
@@ -156,9 +156,11 @@ public class CharacterController {
     }
 
     private void moveRight(Character character){
-        if(character.getHorizontalSpeed()<100){
-            character.changeDirection(new Vector2D(character.getMoveSpeed()-character.getHorizontalSpeed(),0));
-        }
+        character.moveRight();
+    }
+
+    private void moveLeft(Character character){
+        character.moveLeft();
     }
 
     //Not sure if necessary

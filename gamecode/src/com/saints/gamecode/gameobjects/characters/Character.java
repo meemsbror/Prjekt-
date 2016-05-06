@@ -93,4 +93,8 @@ public abstract class Character extends GameObject {
 
     public abstract void jump();
 
+    public abstract void moveRight();
+
+    public abstract void moveLeft();
+
 }

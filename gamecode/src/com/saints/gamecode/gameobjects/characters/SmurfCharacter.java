@@ -86,4 +86,12 @@ public class SmurfCharacter extends Character {
         setAirborne(true);
     }
 
+    public void moveRight(){
+        setHorizontalSpeed(getMoveSpeed());
+    }
+
+    public void moveLeft(){
+        setHorizontalSpeed(-getMoveSpeed());
+    }
+
 }

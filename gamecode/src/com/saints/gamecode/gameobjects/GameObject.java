@@ -72,6 +72,14 @@ public abstract class GameObject {
         movement.addVector(vector);
     }
 
+    public void setHorizontalSpeed(float x){
+        movement.setX(x);
+    }
+
+    public void setVerticalSpeed(float y){
+        movement.setY(y);
+    }
+
     //Set if the object is on solid ground or not
     public void setAirborne(boolean isAirborne){
         this.isAirborne = isAirborne;
