@@ -3,6 +3,7 @@ package com.saints.gamecode;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
+//import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Arena {
     public Arena (Character player1, Character player2, IKeyInput input, IGraphics graphics){
         gameObjects.add(player1);
         gameObjects.add(player2);
+        //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
         this.characterController = new CharacterController(player1, player2,input);

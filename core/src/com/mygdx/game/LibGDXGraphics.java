@@ -19,6 +19,7 @@ public class LibGDXGraphics implements IGraphics{
     private final SpriteBatch batch;
     private final LibGDXAssetsManager assetsmanager;
     private Map<State, Integer> map;
+    private float elapsedTime = 0;
 
 
     public LibGDXGraphics(SpriteBatch batch, LibGDXAssetsManager assetsmanager){
@@ -30,13 +31,16 @@ public class LibGDXGraphics implements IGraphics{
 
     public void update(float delta, List<GameObject> gameObjects){
 
+        elapsedTime = elapsedTime + delta;
+
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Character){
                  Character character = (Character)gameObjects.get(i);
-                 batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(delta, true), character.getPos().getX(), character.getPos().getY());
+                System.out.println(delta);
+                 batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true), character.getPos().getX(), character.getPos().getY());
 
             }
             else{

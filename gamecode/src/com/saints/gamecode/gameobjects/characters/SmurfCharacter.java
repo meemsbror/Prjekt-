@@ -63,7 +63,7 @@ public class SmurfCharacter extends Character {
 
     @Override
     public String getSpriteSheetPath() {
-        return "assets/pictures/testGrid.png";
+        return "assets/pictures/testSpriteSheetv2.png";
     }
 
     public int getHitPoints() {

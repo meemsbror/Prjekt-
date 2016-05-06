@@ -23,9 +23,6 @@ public class MyGdxGame extends ApplicationAdapter {
     private LibGDXAssetsManager assetsmanager;
     Character char1, char2;
 
-    //Animation stuff
-    private Texture img;
-    private Animation [] p1Animations, p2Animations;
 
     //Elapsed time since start of game
     //TODO if pause button is implemented pause this timer!
@@ -46,8 +43,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void render () {
         elapsedTime = elapsedTime + Gdx.graphics.getDeltaTime();
-        Gdx.gl.glClearColor(1, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         //Updates the game and sends the time between last frame
         arena.update(Gdx.graphics.getDeltaTime());
 	}
