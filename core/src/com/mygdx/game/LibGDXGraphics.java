@@ -39,7 +39,6 @@ public class LibGDXGraphics implements IGraphics{
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Character){
                  Character character = (Character)gameObjects.get(i);
-                System.out.println(delta);
                  batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true), character.getPos().getX(), character.getPos().getY());
 
             }
