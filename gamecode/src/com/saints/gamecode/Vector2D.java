@@ -39,6 +39,14 @@ public class Vector2D implements Cloneable {
         return y;
     }
 
+    public void setX(float x){
+        this.x = x;
+    }
+
+    public void setY(float y){
+        this.y = y;
+    }
+
     //Sets the X value to zero
     public void resetX(){
         this.x = 0;

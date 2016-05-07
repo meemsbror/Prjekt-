@@ -40,6 +40,11 @@ public abstract class GameObject {
         pos.move(dx, dy);
     }
 
+    public void setPosition(float x, float y){
+        pos.setX(x);
+        pos.setY(y);
+    }
+
     public Position getPos() {
         return (Position)pos.clone();
     }
@@ -65,6 +70,22 @@ public abstract class GameObject {
     //Adds a vector to the movement vector to change the direction of the object.
     public void changeDirection(Vector2D vector){
         movement.addVector(vector);
+    }
+
+    public void setHorizontalSpeed(float x){
+        movement.setX(x);
+    }
+
+    public void setVerticalSpeed(float y){
+        movement.setY(y);
+    }
+
+    public void resetHorizontalSpeed(){
+        movement.resetX();
+    }
+
+    public void resetVerticalSpeed(){
+        movement.resetY();
     }
 
     //Set if the object is on solid ground or not

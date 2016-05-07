@@ -27,6 +27,15 @@ public class CharacterController {
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
         this.HPBar.setMaxHealth(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        setStartPositions();
+    }
+
+    //Sets the starting position of both players
+    public void setStartPositions(){
+        //TODO: start pos should vary with map
+        player1.setPosition(0,0);
+        player2.setPosition(300,0);
+
     }
 
     public Position getP1Position(){
@@ -41,7 +50,6 @@ public class CharacterController {
         time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
-
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -60,20 +68,25 @@ public class CharacterController {
         applyGravity(player1,delta);
         applyGravity(player2,delta);
 
+        if(physics.hasCollided(player1,player2)){
+            player1.resetHorizontalSpeed();
+            player2.resetHorizontalSpeed();
+        }
+
     }
 
     private void applyGravity(GameObject gameObject, float delta){
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
-            player1.changeDirection(deltaGravity);
+            gameObject.changeDirection(deltaGravity);
         }
     }
 
     //Moves the Characters in their direction.
     public void moveCharacters(float delta){
-
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
+        player2.move(player2.getHorizontalSpeed()*delta,player2.getVerticalSpeed()*delta);
     }
 
 
@@ -92,11 +105,11 @@ public class CharacterController {
             //Player 1 movement
             case P1LEFT:
                 player1.setState(State.WALK);
-                player1.move(-5,0);
+                moveLeft(player1);
                 break;
             case P1RIGHT :
                 player1.setState(State.WALK);
-                player1.move(5,0);
+                moveRight(player1);
                 break;
             case P1JUMP:
                 player1.setState(State.JUMP);
@@ -120,10 +133,10 @@ public class CharacterController {
 
             //Player 2 movement
             case P2LEFT:
-                player2.move(-1,0);
+                moveLeft(player2);
                 break;
             case P2RIGHT:
-                player2.move(1,0);
+                moveRight(player2);
                 break;
             case P2JUMP:
                 jump(player2);
@@ -145,6 +158,14 @@ public class CharacterController {
                 System.out.println("Didnt attack :/");
             break;
        }
+    }
+
+    private void moveRight(Character character){
+        character.moveRight();
+    }
+
+    private void moveLeft(Character character){
+        character.moveLeft();
     }
 
     //Not sure if necessary
