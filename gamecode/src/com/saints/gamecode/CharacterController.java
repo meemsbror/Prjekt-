@@ -75,7 +75,6 @@ public class CharacterController {
         Position oldPos2 = player2.getOldPos();
 
         if(physics.hasCollided(player1,player2)){
-            System.out.println("yolo");
             if(oldPos1.getY()>oldPos2.getY()+player2.getHeight()){
                 player1.setPosition(pos1.getX(),pos2.getY()+player2.getHeight()+1);
                 player1.setAirborne(false);
@@ -85,7 +84,6 @@ public class CharacterController {
                 player2.setAirborne(false);
             }
             else{
-                System.out.println("hi");
                 player1.revertPosition();
                 player2.revertPosition();
             }

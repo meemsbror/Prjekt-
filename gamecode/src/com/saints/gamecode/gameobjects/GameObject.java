@@ -49,9 +49,7 @@ public abstract class GameObject {
     }
 
     public void revertPosition(){
-        System.out.println("Fel:" + pos.getX());
         pos = (Position)oldPos.clone();
-        System.out.println("right?" + pos.getX());
     }
 
     private void saveOldPos(){
