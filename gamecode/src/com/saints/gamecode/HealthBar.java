@@ -61,7 +61,7 @@ public final class HealthBar {
     // TODO: make connection for whenever a Character is hit, this check will be carried out
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (divider <= 0 || divider >= currentMax){
+        if (divider <= currentMin || divider >= currentMax){
             return true;
         }else {
             return false;
@@ -72,18 +72,20 @@ public final class HealthBar {
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
-        setMax(getMaxHealth() + (2 * hpChange));
+        setMax(getMaxHealth() + hpChange);
+        setMin(getMinHealth() - hpChange);
     }
 
     // TODO: Take a look at the sudden death... We need to talk about how large he decrements are...
     // method called for if player 1 has less than x (timeChange) HP
+	// this check is performed when called
    public void p1SuddenDeath(int hpChange){
-        setDivider(1);
+        setDivider(currentMin+(hpChange+1));
         changeGameLength(hpChange);
     }
     // method called for if player 2 has less than x (timeChange) HP
    public void p2SuddenDeath(int hpChange){
-        setDivider(currentMax-(1+2*hpChange));
+        setDivider(currentMax - (hpChange+1));
         changeGameLength(hpChange);
     }
 
@@ -97,8 +99,8 @@ public final class HealthBar {
         return getClass().getName() +
                 " class, current info:\nDivider at:" + getDivider() +
                 "\nCurrent Maximum: " + getMaxHealth() +
-                "\nPlayer 1 status: " + getDivider() +
-                "\nPlayer 2 status: " + (getMaxHealth()-getDivider());
+                "\nPlayer 1 status: " + (getDivider() - getMinHealth()) +
+                "\nPlayer 2 status: " + (getMaxHealth()- getDivider());
 
     }
     @Override
@@ -115,6 +117,9 @@ public final class HealthBar {
             return false;
         }
         if (divider != HPBar.divider){
+            return false;
+        }
+        if (currentMin != HPBar.currentMin){
             return false;
         }
         return (currentMax == getInstance().getMaxHealth() && divider == getInstance().getDivider());
