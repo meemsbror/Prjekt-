@@ -8,7 +8,7 @@ import com.saints.gamecode.gameobjects.items.Platform;
 public abstract class GameObject {
 
     //The position of the object counted from bottom left of the window
-    private Position pos;
+    private Position pos,oldPos;
 
     //Set to true if there is no solid ground under the object
     private boolean isAirborne;
@@ -24,6 +24,7 @@ public abstract class GameObject {
 
     public GameObject(int x, int y, int width, int height){
         pos = new Position(x,y);
+        oldPos = new Position(0,0);
         this.width = width;
         this.height = height;
         movement = new Vector2D();
@@ -37,18 +38,34 @@ public abstract class GameObject {
 
     //Moves the object a set amount both along the y and x-axis
     public void move(float dx, float dy){
+        saveOldPos();
         pos.move(dx, dy);
     }
 
     public void setPosition(float x, float y){
+        saveOldPos();
         pos.setX(x);
         pos.setY(y);
+    }
+
+    public void revertPosition(){
+        System.out.println("Fel:" + pos.getX());
+        pos = (Position)oldPos.clone();
+        System.out.println("right?" + pos.getX());
+    }
+
+    private void saveOldPos(){
+        oldPos.setX(pos.getX());
+        oldPos.setY(pos.getY());
     }
 
     public Position getPos() {
         return (Position)pos.clone();
     }
 
+    public Position getOldPos(){
+        return (Position)oldPos.clone();
+    }
 
     public int getHeight() {
         return height;
@@ -59,14 +76,6 @@ public abstract class GameObject {
         return width;
     }
 
-    public boolean collide(GameObject object) {
-        if (pos.getX() + width < object.getPos().getX() || object.getPos().getX() + object.getWidth() < pos.getX()
-                || pos.getY() + height < object.getPos().getY() || object.getPos().getY() + object.getHeight() < pos.getY()) {
-            return false;
-        } else {
-            return true;
-        }
-    }
     //Adds a vector to the movement vector to change the direction of the object.
     public void changeDirection(Vector2D vector){
         movement.addVector(vector);

@@ -50,6 +50,7 @@ public class CharacterController {
         time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
+        checkCollision(delta);
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -62,17 +63,33 @@ public class CharacterController {
             }
         }
 
-
         //If the player is in the air add gravity so that it falls
-
         applyGravity(player1,delta);
         applyGravity(player2,delta);
+    }
+
+    public void checkCollision(float delta){
+        Position pos1 = player1.getPos();
+        Position pos2 = player2.getPos();
+        Position oldPos1 = player1.getOldPos();
+        Position oldPos2 = player2.getOldPos();
 
         if(physics.hasCollided(player1,player2)){
-            player1.resetHorizontalSpeed();
-            player2.resetHorizontalSpeed();
+            System.out.println("yolo");
+            if(oldPos1.getY()>oldPos2.getY()+player2.getHeight()){
+                player1.setPosition(pos1.getX(),pos2.getY()+player2.getHeight()+1);
+                player1.setAirborne(false);
+            }
+            else if(oldPos2.getY()>oldPos1.getY()+player1.getHeight()){
+                player2.setPosition(pos2.getX(),pos2.getY()+player2.getHeight()+1);
+                player2.setAirborne(false);
+            }
+            else{
+                System.out.println("hi");
+                player1.revertPosition();
+                player2.revertPosition();
+            }
         }
-
     }
 
     private void applyGravity(GameObject gameObject, float delta){
