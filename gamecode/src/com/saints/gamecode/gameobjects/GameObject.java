@@ -48,8 +48,12 @@ public abstract class GameObject {
         pos.setY(y);
     }
 
-    public void revertPosition(){
-        pos = (Position)oldPos.clone();
+    public void revertHorizontalPosition(){
+        pos.setX(oldPos.getX());
+    }
+
+    public void revertVerticalPosition(){
+        pos.setY(oldPos.getY());
     }
 
     private void saveOldPos(){

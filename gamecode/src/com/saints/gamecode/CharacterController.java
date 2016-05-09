@@ -47,7 +47,6 @@ public class CharacterController {
     }
 
     public void update(float delta){
-        time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
         checkCollision(delta);
@@ -56,11 +55,21 @@ public class CharacterController {
     //Checks if the keys for player movement are pressed and updates their direction
     private void updateCharacterDirection(float delta){
 
+        player1.setMoving(false);
+        player2.setMoving(false);
         //Iterates all directions and checks if the corresponding key is pressed
         for(Direction dir: Direction.values()){
             if(input.isKeyPressed(dir)) {
                 keyPressed(dir);
             }
+        }
+
+        if(!player1.isMoving()){
+            player1.resetHorizontalSpeed();
+        }
+
+        if(!player2.isMoving()){
+            player2.resetHorizontalSpeed();
         }
 
         //If the player is in the air add gravity so that it falls
@@ -74,18 +83,19 @@ public class CharacterController {
         Position oldPos1 = player1.getOldPos();
         Position oldPos2 = player2.getOldPos();
 
+        //Checks if a collision has happend and moves the players accordingly
         if(physics.hasCollided(player1,player2)){
             if(oldPos1.getY()>oldPos2.getY()+player2.getHeight()){
                 player1.setPosition(pos1.getX(),pos2.getY()+player2.getHeight()+1);
                 player1.setAirborne(false);
             }
             else if(oldPos2.getY()>oldPos1.getY()+player1.getHeight()){
-                player2.setPosition(pos2.getX(),pos2.getY()+player2.getHeight()+1);
+                player2.setPosition(pos2.getX(),pos1.getY()+player1.getHeight()+1);
                 player2.setAirborne(false);
             }
             else{
-                player1.revertPosition();
-                player2.revertPosition();
+                player1.revertHorizontalPosition();
+                player2.revertHorizontalPosition();
             }
         }
     }
@@ -144,7 +154,6 @@ public class CharacterController {
             default:
                 player1.setState(State.STALL);
                break;
-
 
             //Player 2 movement
             case P2LEFT:
