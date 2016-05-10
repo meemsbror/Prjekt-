@@ -66,10 +66,32 @@ public class CharacterController {
 
         if(!player1.isMoving()){
             player1.resetHorizontalSpeed();
+            if(player1.isAirborne()){
+                player1.setState(State.JUMP);
+            }else{
+                player1.setState(State.STALL);
+            }
+        }else{
+            if(player1.isAirborne()){
+                player1.setState(State.JUMP);
+            }else{
+                player1.setState(State.WALK);
+            }
         }
 
         if(!player2.isMoving()){
             player2.resetHorizontalSpeed();
+            if (player2.isAirborne()) {
+                player2.setState(State.JUMP);
+            } else {
+                player2.setState(State.STALL);
+            }
+        } else {
+            if (player2.isAirborne()) {
+                player2.setState(State.JUMP);
+            } else {
+                player2.setState(State.WALK);
+            }
         }
 
         //If the player is in the air add gravity so that it falls
@@ -151,9 +173,6 @@ public class CharacterController {
                     p1AttackTimer = time;
                 }
                 break;
-            default:
-                player1.setState(State.STALL);
-               break;
 
             //Player 2 movement
             case P2LEFT:

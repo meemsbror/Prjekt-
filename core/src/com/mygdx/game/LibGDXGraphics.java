@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
@@ -20,6 +21,7 @@ public class LibGDXGraphics implements IGraphics{
     private final LibGDXAssetsManager assetsmanager;
     private Map<State, Integer> map;
     private float elapsedTime = 0;
+    private TextureRegion tmpRegion;
 
 
     public LibGDXGraphics(SpriteBatch batch, LibGDXAssetsManager assetsmanager){
@@ -38,9 +40,23 @@ public class LibGDXGraphics implements IGraphics{
 		batch.begin();
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Character){
-                 Character character = (Character)gameObjects.get(i);
-                 batch.draw(assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true), character.getPos().getX(), character.getPos().getY());
+                Character character = (Character)gameObjects.get(i);
+                //The current animation frame of the character
+                tmpRegion = assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
 
+                //See if it is flipped, if it is flip it.
+                if(!tmpRegion.isFlipX())
+                    tmpRegion.flip(true, false);
+
+                //if character is facing right, draw the character as it is.
+                if(!character.isFacingRight()){
+                    batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+
+                //If character is facing left, flip the immage to the right direction again.
+                }else{
+                    tmpRegion.flip(true, false);
+                    batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+                }
             }
             else{
                 GameObject gameObject = gameObjects.get(i);
