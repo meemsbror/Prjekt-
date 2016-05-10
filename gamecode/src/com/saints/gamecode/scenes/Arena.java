@@ -1,15 +1,19 @@
-package com.saints.gamecode;
+package com.saints.gamecode.scenes;
 
+import com.saints.gamecode.CharacterController;
+import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 //import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.interfaces.IScene;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena {
+public class Arena implements IScene{
 
     private final CharacterController characterController;
     private final IKeyInput input;

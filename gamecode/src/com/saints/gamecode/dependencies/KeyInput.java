@@ -1,6 +1,6 @@
 package com.saints.gamecode.dependencies;
 
-import com.saints.gamecode.Arena;
+import com.saints.gamecode.scenes.Arena;
 import com.saints.gamecode.Direction;
 
 import java.awt.event.KeyAdapter;
