@@ -87,14 +87,6 @@ public abstract class Character extends GameObject {
 
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (facingRight ? 1 : 0);
-        // TODO: remove?
-      //  result = 31 * result + hitPoints;
-        return result;
-    }
 
     //Abstract methods
 
