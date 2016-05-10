@@ -39,6 +39,9 @@ public abstract class Character extends GameObject {
     public boolean isMoving(){
         return isMoving;
     }
+    public boolean isFacingRight() {
+        return facingRight;
+    }
 
     public void setMoving(Boolean isMoving){
         this.isMoving = isMoving;
@@ -46,10 +49,12 @@ public abstract class Character extends GameObject {
 
     public void moveRight(){
         isMoving = true;
+        facingRight = true;
     }
 
     public void moveLeft(){
         isMoving = true;
+        facingRight = false;
     }
 
     public void setState(State image) {
