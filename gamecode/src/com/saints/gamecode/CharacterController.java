@@ -47,14 +47,16 @@ public class CharacterController {
     }
 
     public void update(float delta){
-        time = System.currentTimeMillis();
         updateCharacterDirection(delta);
         moveCharacters(delta);
+        checkCollision(delta);
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
     private void updateCharacterDirection(float delta){
 
+        player1.setMoving(false);
+        player2.setMoving(false);
         //Iterates all directions and checks if the corresponding key is pressed
         for(Direction dir: Direction.values()){
             if(input.isKeyPressed(dir)) {
@@ -62,17 +64,40 @@ public class CharacterController {
             }
         }
 
-
-        //If the player is in the air add gravity so that it falls
-
-        applyGravity(player1,delta);
-        applyGravity(player2,delta);
-
-        if(physics.hasCollided(player1,player2)){
+        if(!player1.isMoving()){
             player1.resetHorizontalSpeed();
+        }
+
+        if(!player2.isMoving()){
             player2.resetHorizontalSpeed();
         }
 
+        //If the player is in the air add gravity so that it falls
+        applyGravity(player1,delta);
+        applyGravity(player2,delta);
+    }
+
+    public void checkCollision(float delta){
+        Position pos1 = player1.getPos();
+        Position pos2 = player2.getPos();
+        Position oldPos1 = player1.getOldPos();
+        Position oldPos2 = player2.getOldPos();
+
+        //Checks if a collision has happend and moves the players accordingly
+        if(physics.hasCollided(player1,player2)){
+            if(oldPos1.getY()>oldPos2.getY()+player2.getHeight()){
+                player1.setPosition(pos1.getX(),pos2.getY()+player2.getHeight()+1);
+                player1.setAirborne(false);
+            }
+            else if(oldPos2.getY()>oldPos1.getY()+player1.getHeight()){
+                player2.setPosition(pos2.getX(),pos1.getY()+player1.getHeight()+1);
+                player2.setAirborne(false);
+            }
+            else{
+                player1.revertHorizontalPosition();
+                player2.revertHorizontalPosition();
+            }
+        }
     }
 
     private void applyGravity(GameObject gameObject, float delta){
@@ -129,7 +154,6 @@ public class CharacterController {
             default:
                 player1.setState(State.STALL);
                break;
-
 
             //Player 2 movement
             case P2LEFT:
