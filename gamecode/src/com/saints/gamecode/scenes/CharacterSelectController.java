@@ -4,9 +4,8 @@ import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import com.saints.gamecode.interfaces.IScene;
 
-public class CharacterSelectController implements IScene{
+public class CharacterSelectController extends Scene{
 
     private final IKeyInput input;
     private final IGraphics graphics;

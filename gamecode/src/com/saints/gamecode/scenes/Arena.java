@@ -5,25 +5,28 @@ import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
-//import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena implements IScene{
+public class Arena extends Scene{
 
     private final CharacterController characterController;
     private final IKeyInput input;
     private final IGraphics graphics;
+    private PropertyChangeSupport pcs;
 
     private final boolean running = true;
 
     List<GameObject> gameObjects = new ArrayList<GameObject>();
 
     public Arena (Character player1, Character player2, IKeyInput input, IGraphics graphics){
+        pcs = new PropertyChangeSupport(this);
         gameObjects.add(player1);
         gameObjects.add(player2);
         //Platform.setPlatform(50,50,1000,50);
@@ -50,7 +53,6 @@ public class Arena implements IScene{
 
     //Gets notified if a key has been released and performs appropriate action
     public void keyReleased(int key){
-
         characterController.keyReleased(key);
     }
 
