@@ -45,7 +45,6 @@ public class Arena implements IScene{
 
     //Gets notified if a key has been pressed and performs appropriate action
     public void keyPressed(Direction direction){
-
         characterController.keyPressed(direction);
     }
 
