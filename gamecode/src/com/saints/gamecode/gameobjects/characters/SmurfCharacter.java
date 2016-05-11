@@ -21,7 +21,10 @@ public class SmurfCharacter extends Character {
     private StraightAttack straightRightAttack;
     private StraightAttack straightLeftAttack;
 
-    int damage = 10;
+
+    //The ammount of damage this character has and the increasage in damage while powered up
+    int DAMAGE = 10;
+
 
     public SmurfCharacter(int x, int y) {
         //SmurfCharacter is always 128x128!
@@ -58,7 +61,7 @@ public class SmurfCharacter extends Character {
 
     @Override
     public int getDamage() {
-        return damage;
+        return (isPowered) ? DAMAGE : DAMAGE*2;
     }
 
     @Override
@@ -86,6 +89,7 @@ public class SmurfCharacter extends Character {
         setAirborne(true);
     }
 
+
     @Override
     public void moveRight(){
         super.moveRight();
@@ -96,5 +100,10 @@ public class SmurfCharacter extends Character {
     public void moveLeft(){
         super.moveLeft();
         setHorizontalSpeed(-getMoveSpeed());
+    }
+    //Power up functions
+    @Override
+    public void powerUp(boolean poweredUp) {
+        isPowered = poweredUp;
     }
 }

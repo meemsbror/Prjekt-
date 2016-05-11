@@ -16,5 +16,8 @@ public enum Direction {
     P2JUMP,
     P2DIVE,
     P2STOP,
-    P2ATTACK
+    P2ATTACK,
+
+    //Shared
+    PAUSE;
 }
