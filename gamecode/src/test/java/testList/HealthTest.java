@@ -115,12 +115,12 @@ public class HealthTest {
 
         // check for player 1 sudden death
         healthBar.p1SuddenDeath(-1); // set player 1 hp to 1 & reduce maxHP by 1 for each player
-        assertTrue(currentDivider == 1 && currentMax == 98);
+        assertTrue(currentDivider == 1 && currentMax == 99);
 
         // check for player 2 sudden death
         // note: current maxHP = 98
         healthBar.p2SuddenDeath(-1); // set player 2 hp to max -1 + (2*time change)
-        assertTrue(currentDivider == 95 && currentMax == 96);
+        assertTrue(currentDivider == 97 && currentMax == 98);
 
     }
 
@@ -143,7 +143,9 @@ public class HealthTest {
         healthBar.setDivider(98);
         assertTrue(!healthBar.isOver());
 
-        // setting healthBar past divider (should never happen in game)
+        // setting healthBar past divider (should never happen in game, this check must be done in the model
+	    // and is not performed in Healthbar class - the healthbar does not know keep track of the characters.
+	    // this test is merely a demonstration that the methods work as intended)
         healthBar.setMax(-10); // current divider = 98 and maxhealth  80 should return true
         assertTrue(healthBar.isOver());
 
