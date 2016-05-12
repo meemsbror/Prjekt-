@@ -13,15 +13,19 @@ public class HealthTest {
         // basic values set in Healthbar class, divider to 40 and maxHealth to 100 for testing.
         HealthBar healthBar = HealthBar.getInstance();
 
-        // test for divider
+        // test for divider, should be 40
         int currentDivider;
         currentDivider = healthBar.getDivider();
         assertTrue(currentDivider == 40);
 
-        // test for max health
+        // test for max health, should be 100
         int maxHealth;
         maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 100);
+
+        // test for min health, should be 0
+        minHealth = healthBar.getMinHealth();
+        assertTrue(minHealth == 0);
     }
 
     @Test
@@ -41,15 +45,31 @@ public class HealthTest {
         assertTrue(currentDivider == 45);
 
         //test for setting max health
-        healthBar.setMax(35);
+        healthBar.setMax(35); // will likely never be this value, but characters with different hp may be a thing
         int maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 35);
+
         healthBar.setMax(70);
         maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 70);
+
         healthBar.setMax(50);
         maxHealth = healthBar.getMaxHealth();
         assertTrue(maxHealth == 50);
+
+        // test for setting min health
+        healthBar.setMin(20);
+        int minHealth = healthBar.getMinHealth();
+        assertTrue(minHealth == 20);
+
+        healthBar.setMin(40);
+        minHealth = healthBar.getMinHealth();
+        assertTrue(minHealth == 40);
+
+	    healthBar.setMin(35);
+	    minHealth = healthBar.getMinHealth();
+	    assertTrue(minHealth == 35);
+
     }
 
     @Test
@@ -69,15 +89,21 @@ public class HealthTest {
     @Test
     public void changeGameLengthTest(){
         HealthBar healthBar = HealthBar.getInstance();
-        int currentMaxHealth = healthBar.getMaxHealth(); //100
+	    int currentMinHealth = healthBar.getMinHealth(); //0
+	    int currentMaxHealth = healthBar.getMaxHealth(); //100
 
         // reduce both sides max health by 1
-        healthBar.changeGameLength(-1); // should become 98
-        assertTrue(currentMaxHealth - 2 == healthBar.getMaxHealth());
+        healthBar.changeGameLength(-1); // should become 1 && 99
+	    // player 1 limit
+	    assertTrue((currentMinHealth + 1) == healthBar.getMinHealth());
+	    // player 2 limit
+	    assertTrue((currentMaxHealth - 1)  == healthBar.getMaxHealth());
 
+
+	    // TODO MAKE SURE THAT -4 && 104 isn't possible?
         // increase both sides max health by 5
-        healthBar.changeGameLength(5); // should become 108
-        assetTrue(currentMaxHealth + 10 == healthBar.getMaxHealth());
+        healthBar.changeGameLength(5); // should become -4 && 104 (negative numbers should never happen tho??)
+        assetTrue((currentMaxHealth + 5) == healthBar.getMaxHealth());
     }
 
     // TODO: incomplete
@@ -104,6 +130,7 @@ public class HealthTest {
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider = healthBar.getDivider(); // 40
         int currentMax = healthBar.getMaxHealth(); // 100
+        int currentMin = healthBar.getMinHealth(); // 0
 
         // game shouldn't be over yet.
         assertTrue(!healthBar.isOver());
