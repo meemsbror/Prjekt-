@@ -32,7 +32,7 @@ public class Arena extends Scene{
         //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
-        this.characterController = new CharacterController(player1, player2,input);
+        this.characterController = new CharacterController(player1, player2, gameObjects, input);
         addCharacterAnimation(player1);
         addCharacterAnimation(player2);
     }
@@ -52,8 +52,11 @@ public class Arena extends Scene{
     }
 
     //Gets called from the game loop when the arena should update
-    public void update(float delta){
-        characterController.update(delta);
-        graphics.update(delta,getGameObjects());
+    public void update(float delta) {
+        //TODO Check input for pause :)
+            characterController.update(delta);
+        if (!characterController.isPaused()) {
+            graphics.update(delta, getGameObjects());
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -8,6 +9,7 @@ import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.interfaces.IGraphics;
 
 import java.util.HashMap;
@@ -43,25 +45,38 @@ public class LibGDXGraphics implements IGraphics{
                 Character character = (Character)gameObjects.get(i);
                 //The current animation frame of the character
                 tmpRegion = assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
+                GameObject attack = character.getStraightAttack();
 
                 //See if it is flipped, if it is flip it.
-                if(!tmpRegion.isFlipX())
+                if(!tmpRegion.isFlipX()){
                     tmpRegion.flip(true, false);
+                }
 
                 //if character is facing right, draw the character as it is.
                 if(!character.isFacingRight()){
                     batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
 
+                   ///If the character is punching draw the punch aswell.
+                    if(character.getState() == State.PUNCH){
+                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
+                    }
+
                 //If character is facing left, flip the immage to the right direction again.
                 }else{
                     tmpRegion.flip(true, false);
                     batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+
+                    ///If the character is punching draw the punch aswell.
+                    if(character.getState() == State.PUNCH){
+                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
+                    }
                 }
             }
             else{
                 GameObject gameObject = gameObjects.get(i);
                 Position pos = gameObject.getPos();
                 batch.draw(assetsmanager.getTexture(gameObject.getImgPath()),pos.getX(),pos.getY());
+
             }
         }
         batch.end();

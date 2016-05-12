@@ -44,5 +44,6 @@ public class LibGDXInput implements IKeyInput {
         map.put(Direction.P2ATTACK, Input.Keys.Z);
         map.put(Direction.P1STOP,Input.Keys.F);
         map.put(Direction.P2STOP,Input.Keys.G);
+        map.put(Direction.PAUSE,Input.Keys.ESCAPE);
     }
 }

@@ -24,5 +24,8 @@ public enum Direction {
     JUMP,
     DIVE,
     STOP,
-    ATTACK;
+    ATTACK,
+
+    //Shared
+    PAUSE;
 }

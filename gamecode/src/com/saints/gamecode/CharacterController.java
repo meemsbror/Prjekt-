@@ -2,28 +2,39 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.items.AttackPower;
+import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 //Controller class that controls both players
 public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
     private final Character player1, player2;
+
+    //All items in a list
+    private final ArrayList<GameObject> gameObjects;
+
     private final IKeyInput input;
-    private Direction direction;
-    private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
+    private float time, p1AttackPowerUp;
     private IPhysics physics = Physics.getInstance();
+    private boolean paused;
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(Character player1, Character player2, IKeyInput input){
+    public CharacterController(Character player1, Character player2, List<GameObject> gameObjects, IKeyInput input){
         this.player1 = player1;
         this.player2 = player2;
+        this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
+
+        this.paused = false;
 
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
         this.HPBar.setMaxHealth(HPBarHelper);
@@ -49,9 +60,21 @@ public class CharacterController {
     }
 
     public void update(float delta){
-        updateCharacterDirection(delta);
-        moveCharacters(delta);
-        checkCollision(delta);
+        if(!paused) {
+            time += delta;
+            updateCharacterDirection(delta);
+            moveCharacters(delta);
+            checkCollision(delta);
+            checkPowerUp(delta);
+        }
+    }
+
+    private void checkPowerUp(float delta) {
+        if(player1.isPowered()){
+            if(p1AttackPowerUp < time){
+                player1.powerUp(false);
+            }
+        }
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -64,35 +87,8 @@ public class CharacterController {
         iteratePlayerDirections(P1_DIRECTIONS, player1);
         iteratePlayerDirections(P2_DIRECTIONS, player2);
 
-        if(!player1.isMoving()){
-            player1.resetHorizontalSpeed();
-            if(player1.isAirborne()){
-                player1.setState(State.JUMP);
-            }else{
-                player1.setState(State.STALL);
-            }
-        }else{
-            if(player1.isAirborne()){
-                player1.setState(State.JUMP);
-            }else{
-                player1.setState(State.WALK);
-            }
-        }
-
-        if(!player2.isMoving()){
-            player2.resetHorizontalSpeed();
-            if (player2.isAirborne()) {
-                player2.setState(State.JUMP);
-            } else {
-                player2.setState(State.STALL);
-            }
-        } else {
-            if (player2.isAirborne()) {
-                player2.setState(State.JUMP);
-            } else {
-                player2.setState(State.WALK);
-            }
-        }
+        updateState(player1);
+        updateState(player2);
 
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
@@ -151,6 +147,20 @@ public class CharacterController {
             character.jump();
         }
     }
+    public void updateState(Character player){
+        if(!player.isMoving()) {
+            player.resetHorizontalSpeed();
+            player.setState(State.STALL);
+        }else{
+            player.setState(State.WALK);
+        }
+        if(player.isAirborne()){
+            player.setState(State.JUMP);
+        }
+        if(player.getAttackCD() > time){
+            player.setState(State.PUNCH);
+        }
+    }
 
 
     //
@@ -172,16 +182,27 @@ public class CharacterController {
                 break;
             case ATTACK:
                 //One second cooldown on the attack
-                if(p1AttackTimer + 1000 < time){
-                player1.setState(State.PUNCH);
-                     //   HPBar.updateDivider(player1.getDamage());
-                    p1AttackTimer = time;
+                if(!(player1.getState() == State.PUNCH)){
+                    if(player1.attack(player2)){
+                        //   HPBar.updateDivider(player1.getDamage());
+                    }
+                    for(GameObject gameObject: gameObjects){
+                        if(gameObject instanceof Item) {
+                            Item item = (Item)gameObject;
+                            if(player1.attack(item)){
+                                p1AttackPowerUp = time + item.getDuration();
+                                player1.powerUp(true);
+                                gameObjects.remove(item);
+                            }
+                        }
+                    }
+                    player1.setAttackCD(time);
                 }
                 break;
        }
     }
 
-    public void initiatePlayerDirections(){
+    public void initiatePlayerDirections() {
         P1_DIRECTIONS = new HashMap<Direction, Direction>();
         P2_DIRECTIONS = new HashMap<Direction, Direction>();
 
@@ -192,12 +213,17 @@ public class CharacterController {
         P1_DIRECTIONS.put(Direction.P1ATTACK, Direction.ATTACK);
         P1_DIRECTIONS.put(Direction.P1STOP, Direction.STOP);
 
-        P2_DIRECTIONS.put(Direction.P2RIGHT,Direction.RIGHT);
+        P2_DIRECTIONS.put(Direction.P2RIGHT, Direction.RIGHT);
         P2_DIRECTIONS.put(Direction.P2LEFT, Direction.LEFT);
         P2_DIRECTIONS.put(Direction.P2JUMP, Direction.JUMP);
         P2_DIRECTIONS.put(Direction.P2DIVE, Direction.JUMP);
         P2_DIRECTIONS.put(Direction.P2ATTACK, Direction.ATTACK);
         P2_DIRECTIONS.put(Direction.P2STOP, Direction.STOP);
+    }
+
+
+    public boolean isPaused(){
+        return paused;
     }
 
     private void moveRight(Character character){
