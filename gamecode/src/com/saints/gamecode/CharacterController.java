@@ -103,7 +103,7 @@ public class CharacterController {
         }
     }
 
-    public void checkCollision(float delta){
+    private void checkCollision(float delta){
         Position pos1 = player1.getPos();
         Position pos2 = player2.getPos();
         Position oldPos1 = player1.getOldPos();
