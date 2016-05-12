@@ -59,6 +59,7 @@ public class CharacterController {
         return player2.getPosition();
     }
 
+    //Updates the model
     public void update(float delta){
         if(!paused) {
             time += delta;
@@ -103,6 +104,7 @@ public class CharacterController {
         }
     }
 
+    //Checks if the Characters have collided and reverts the player position to the last frame
     private void checkCollision(float delta){
         Position pos1 = player1.getPos();
         Position pos2 = player2.getPos();
@@ -126,6 +128,7 @@ public class CharacterController {
         }
     }
 
+    //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
 
         if(gameObject.isAirborne()){
@@ -141,12 +144,8 @@ public class CharacterController {
     }
 
 
-    //Asks the character to jump
-    public void jump(Character character){
-        if(!character.isAirborne()){
-            character.jump();
-        }
-    }
+
+    //Checks what state a character should be in and updates it correspond to it
     public void updateState(Character player){
         if(!player.isMoving()) {
             player.resetHorizontalSpeed();
@@ -163,7 +162,7 @@ public class CharacterController {
     }
 
 
-    //
+    //Takes a direction and a player and updates the model depending on the input (direction)
     public void keyPressed(Direction direction, Character character){
         switch(direction){
 
@@ -202,6 +201,7 @@ public class CharacterController {
        }
     }
 
+    //Puts the different playerDirections and maps them to the general direction
     public void initiatePlayerDirections() {
         P1_DIRECTIONS = new HashMap<Direction, Direction>();
         P2_DIRECTIONS = new HashMap<Direction, Direction>();
@@ -226,10 +226,19 @@ public class CharacterController {
         return paused;
     }
 
+    //Asks the character to jump
+    public void jump(Character character){
+        if(!character.isAirborne()){
+            character.jump();
+        }
+    }
+
+    //Asks a character to move right
     private void moveRight(Character character){
         character.moveRight();
     }
 
+    //Asks a character to move left
     private void moveLeft(Character character){
         character.moveLeft();
     }

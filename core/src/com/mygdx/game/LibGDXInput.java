@@ -18,17 +18,20 @@ public class LibGDXInput implements IKeyInput {
         initiateDirection();
     }
 
-
+    //checks if the key the direction refers to i pressed
+    @Override
     public boolean isKeyPressed(Direction direction){
         return input.isKeyPressed(translateKey(direction));
     }
 
 
+    //Returns the actual key that the direction refers to
     private int translateKey(Direction direction){
         return map.get(direction);
     }
 
 
+    //Maps all direction with their corresponding key
     private void initiateDirection(){
         map = new HashMap<Direction,Integer>();
 

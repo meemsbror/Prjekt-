@@ -27,14 +27,13 @@ public class Arena extends Scene{
 
     public Arena (Character player1, Character player2, IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
-        gameObjects.add(player1);
-        gameObjects.add(player2);
         //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
         this.characterController = new CharacterController(player1, player2, gameObjects, input);
         addCharacterAnimation(player1);
-        addCharacterAnimation(player2);
+        gameObjects.add(player1);
+        gameObjects.add(player2);addCharacterAnimation(player2);
     }
 
     public List<GameObject> getGameObjects() {
@@ -47,7 +46,6 @@ public class Arena extends Scene{
     }
 
     private void addCharacterAnimation(Character player){
-
         graphics.addAnimation(player.getSpriteSheetPath());
     }
 

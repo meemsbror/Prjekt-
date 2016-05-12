@@ -4,6 +4,8 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
 import com.saints.gamecode.scenes.Arena;
+import com.saints.gamecode.scenes.CharacterSelectController;
+import com.saints.gamecode.scenes.MapSelectController;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -20,6 +22,8 @@ public class Game implements PropertyChangeListener{
 
     //The arena scene
     private Arena arena;
+    private CharacterSelectController csc;
+    private MapSelectController msc;
 
     public Game(IKeyInput input, IGraphics graphics){
         this.graphics = graphics;
