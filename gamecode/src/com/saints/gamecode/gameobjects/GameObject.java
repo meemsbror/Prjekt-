@@ -4,6 +4,7 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.items.Platform;
+import javafx.geometry.Pos;
 
 public abstract class GameObject {
 
@@ -46,6 +47,9 @@ public abstract class GameObject {
         saveOldPos();
         pos.setX(x);
         pos.setY(y);
+    }
+    public void setPosition(Position pos){
+        this.setPosition(pos.getX(), pos.getY());
     }
 
     public void revertHorizontalPosition(){

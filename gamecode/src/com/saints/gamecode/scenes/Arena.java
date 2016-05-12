@@ -29,7 +29,7 @@ public class Arena implements IScene{
         //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
-        this.characterController = new CharacterController(player1, player2,gameObjects, input);
+        this.characterController = new CharacterController(player1, player2, gameObjects, input);
         addCharacterAnimation(player1);
         addCharacterAnimation(player2);
     }
@@ -62,6 +62,7 @@ public class Arena implements IScene{
 
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
+        //TODO Check input for pause :)
             characterController.update(delta);
         if (!characterController.isPaused()) {
             graphics.update(delta, getGameObjects());

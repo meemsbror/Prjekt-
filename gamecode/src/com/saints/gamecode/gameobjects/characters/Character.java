@@ -17,6 +17,7 @@ public abstract class Character extends GameObject {
     //Movementspeed
     private float moveSpeed = 100;
 
+
     //Boolean if the character is powered up
     boolean isPowered = false;
 
@@ -112,6 +113,11 @@ public abstract class Character extends GameObject {
     public abstract String getSpriteSheetPath();
 
     public abstract void jump();
+
+    public abstract GameObject getStraightAttack();
+
+    public abstract float getAttackCD();
+    public abstract void setAttackCD(float time);
 
     //Powerup functions (increase damage, speed or whatever we come up with :)
     public abstract void powerUp(boolean poweredUp);

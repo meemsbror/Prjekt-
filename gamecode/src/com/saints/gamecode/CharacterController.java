@@ -3,10 +3,12 @@ package com.saints.gamecode;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
+import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 //Controller class that controls both players
 public class CharacterController {
@@ -18,8 +20,7 @@ public class CharacterController {
     private final ArrayList<GameObject> gameObjects;
 
     private final IKeyInput input;
-    private Direction direction;
-    private float p1AttackTimer, p2AttackTimer, time, p1AttackPowerUp;
+    private float time, p1AttackPowerUp;
     private IPhysics physics = Physics.getInstance();
     private boolean paused;
 
@@ -27,10 +28,10 @@ public class CharacterController {
 
 
 
-    public CharacterController(Character player1, Character player2, ArrayList<GameObject> gameObjects, IKeyInput input){
+    public CharacterController(Character player1, Character player2, List<GameObject> gameObjects, IKeyInput input){
         this.player1 = player1;
         this.player2 = player2;
-        this.gameObjects = gameObjects;
+        this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
 
         this.paused = false;
@@ -69,7 +70,7 @@ public class CharacterController {
 
     private void checkPowerUp(float delta) {
         if(player1.isPowered()){
-            if(p1AttackPowerUp < time + AttackPower.getDuration()){
+            if(p1AttackPowerUp < time){
                 player1.powerUp(false);
             }
         }
@@ -139,22 +140,19 @@ public class CharacterController {
             character.jump();
         }
     }
-    public void updateState(Character player1){
-        if(!player1.isMoving()){
-            player1.resetHorizontalSpeed();
-            if(player1.isAirborne()){
-                player1.setState(State.JUMP);
-            }else{
-                player1.setState(State.STALL);
-            }
+    public void updateState(Character player){
+        if(!player.isMoving()) {
+            player.resetHorizontalSpeed();
+            player.setState(State.STALL);
         }else{
-            if(player1.isAirborne()){
-                player1.setState(State.JUMP);
-            }else{
-                player1.setState(State.WALK);
-            }
+            player.setState(State.WALK);
         }
-
+        if(player.isAirborne()){
+            player.setState(State.JUMP);
+        }
+        if(player.getAttackCD() > time){
+            player.setState(State.PUNCH);
+        }
     }
 
 
@@ -164,15 +162,12 @@ public class CharacterController {
 
             //Player 1 movement
             case P1LEFT:
-                player1.setState(State.WALK);
                 moveLeft(player1);
                 break;
             case P1RIGHT :
-                player1.setState(State.WALK);
                 moveRight(player1);
                 break;
             case P1JUMP:
-                player1.setState(State.JUMP);
                 jump(player1);
                 break;
             case P1DIVE:
@@ -180,19 +175,21 @@ public class CharacterController {
                 break;
             case P1ATTACK:
                 //One second cooldown on the attack
-                if(p1AttackTimer + 1 < time){
-                player1.setState(State.PUNCH);
+                if(!(player1.getState() == State.PUNCH)){
                     if(player1.attack(player2)){
                         //   HPBar.updateDivider(player1.getDamage());
                     }
                     for(GameObject gameObject: gameObjects){
-                        if(player1.attack(gameObject)){
-                            p1AttackPowerUp = time;
-                            player1.powerUp(true);
-                            gameObjects.remove(gameObject);
+                        if(gameObject instanceof Item) {
+                            Item item = (Item)gameObject;
+                            if(player1.attack(item)){
+                                p1AttackPowerUp = time + item.getDuration();
+                                player1.powerUp(true);
+                                gameObjects.remove(item);
+                            }
                         }
                     }
-                    p1AttackTimer = time;
+                    player1.setAttackCD(time);
                 }
                 break;
 
@@ -210,7 +207,8 @@ public class CharacterController {
                 player2.move(0f,-1f);
                 break;
             case P2ATTACK:
-                //One second cooldown on the attack
+                //TODO Fix player 1 attack first.
+               /* //One second cooldown on the attack
                 System.out.println(p2AttackTimer);
                 if(p2AttackTimer + 1000 < time){
                     //checks if player 2 is within player1s attack hitbox
@@ -221,7 +219,7 @@ public class CharacterController {
                     }
                     p2AttackTimer = time;
                 }
-                System.out.println("Didnt attack :/");
+                System.out.println("Didnt attack :/");*/
                 break;
             case PAUSE:
                 if(paused){
