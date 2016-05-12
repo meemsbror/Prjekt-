@@ -91,12 +91,12 @@ public final class HealthBar {
     // method called for if player 1 has less than x (timeChange) HP
 	// this check is performed when called
    public void p1SuddenDeath(int hpChange){
-        setDivider(currentMin+(hpChange+1));
+        setDivider(currentMin-((hpChange-1)));
         changeGameLength(hpChange);
     }
     // method called for if player 2 has less than x (timeChange) HP
    public void p2SuddenDeath(int hpChange){
-        setDivider(currentMax - (hpChange+1));
+        setDivider(currentMax + (hpChange-1));
         changeGameLength(hpChange);
     }
 
@@ -108,7 +108,8 @@ public final class HealthBar {
     @Override
     public String toString(){
         return getClass().getName() +
-                " class, current info:\nDivider at:" + getDivider() +
+                " class, current info:" +
+                "\nDivider at:" + getDivider() +
                 "\nCurrent Maximum: " + getMaxHealth() +
                 "\nPlayer 1 status: " + (getDivider() - getMinHealth()) +
                 "\nPlayer 2 status: " + (getMaxHealth()- getDivider());
