@@ -1,5 +1,6 @@
 package com.saints.gamecode.scenes;
 
+import com.saints.gamecode.CharacterFactory;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -20,6 +21,9 @@ public class CharacterSelectController extends Scene{
 
     public void update(float delta) {
         checkInput();
+        char1 = "Smurf";
+        char2 = "Smurf";
+        firePropertyChange("characters",null,null);
     }
 
     private void checkInput(){
@@ -53,6 +57,14 @@ public class CharacterSelectController extends Scene{
             default:
                 break;
         }
+    }
+
+    public Character getPlayer1(){
+        return CharacterFactory.createCharacter(char1);
+    }
+
+    public Character getPlayer2(){
+        return CharacterFactory.createCharacter(char2);
     }
 
     private void initiateInputArray(){

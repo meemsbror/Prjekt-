@@ -25,15 +25,13 @@ public class Arena extends Scene{
 
     List<GameObject> gameObjects = new ArrayList<GameObject>();
 
-    public Arena (Character player1, Character player2, IKeyInput input, IGraphics graphics){
+    public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
         //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
-        this.characterController = new CharacterController(player1, player2, gameObjects, input);
-        addCharacterAnimation(player1);
-        gameObjects.add(player1);
-        gameObjects.add(player2);addCharacterAnimation(player2);
+        this.characterController = new CharacterController(gameObjects, input);
+
     }
 
     public List<GameObject> getGameObjects() {
@@ -56,5 +54,13 @@ public class Arena extends Scene{
         if (!characterController.isPaused()) {
             graphics.update(delta, getGameObjects());
         }
+    }
+
+    public void setCharacters(Character player1, Character player2){
+        gameObjects.add(player1);
+        gameObjects.add(player2);
+        addCharacterAnimation(player1);
+        addCharacterAnimation(player2);
+        characterController.setCharacters(player1, player2);
     }
 }
