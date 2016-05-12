@@ -4,7 +4,7 @@ import java.beans.PropertyChangeListener;
 
 public interface IScene {
 
-    public void update(float delta);
+    void update(float delta);
 
     void addPropertyChangeListener(PropertyChangeListener listener);
 
