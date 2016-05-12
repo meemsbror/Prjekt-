@@ -16,7 +16,7 @@ import java.util.List;
 public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
-    private final Character player1, player2;
+    private Character player1, player2;
 
     //All items in a list
     private final ArrayList<GameObject> gameObjects;
@@ -28,12 +28,9 @@ public class CharacterController {
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(Character player1, Character player2, List<GameObject> gameObjects, IKeyInput input){
-        this.player1 = player1;
-        this.player2 = player2;
+    public CharacterController(List<GameObject> gameObjects, IKeyInput input){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
-
         this.paused = false;
 
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
@@ -248,5 +245,15 @@ public class CharacterController {
     //Not sure if necessary
     public void keyReleased(int key){
         //TODO
+    }
+
+    public void setCharacters(Character player1, Character player2){
+        this.player1 = player1;
+        this.player2 = player2;
+
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setMaxHealth(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        setStartPositions();
     }
 }
