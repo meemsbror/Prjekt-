@@ -5,6 +5,9 @@ import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
+import java.util.HashMap;
+import java.util.Map;
+
 //Controller class that controls both players
 public class CharacterController {
 
@@ -15,9 +18,7 @@ public class CharacterController {
     private long p1AttackTimer, p2AttackTimer, time = System.currentTimeMillis();
     private IPhysics physics = Physics.getInstance();
 
-
-
-
+    private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
     public CharacterController(Character player1, Character player2, IKeyInput input){
         this.player1 = player1;
@@ -28,6 +29,7 @@ public class CharacterController {
         this.HPBar.setMaxHealth(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
         setStartPositions();
+        initiatePlayerDirections();
     }
 
     //Sets the starting position of both players
@@ -58,11 +60,9 @@ public class CharacterController {
         player1.setMoving(false);
         player2.setMoving(false);
         //Iterates all directions and checks if the corresponding key is pressed
-        for(Direction dir: Direction.values()){
-            if(input.isKeyPressed(dir)) {
-                keyPressed(dir);
-            }
-        }
+
+        iteratePlayerDirections(P1_DIRECTIONS, player1);
+        iteratePlayerDirections(P2_DIRECTIONS, player2);
 
         if(!player1.isMoving()){
             player1.resetHorizontalSpeed();
@@ -97,6 +97,14 @@ public class CharacterController {
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
         applyGravity(player2,delta);
+    }
+
+    private void iteratePlayerDirections(Map<Direction, Direction> map, Character character){
+        for(Direction dir: map.keySet()){
+            if(input.isKeyPressed(dir)){
+                keyPressed(map.get(dir), character);
+            }
+        }
     }
 
     public void checkCollision(float delta){
@@ -146,26 +154,23 @@ public class CharacterController {
 
 
     //
-    public void keyPressed(Direction direction){
+    public void keyPressed(Direction direction, Character character){
         switch(direction){
 
-            //Player 1 movement
-            case P1LEFT:
-                player1.setState(State.WALK);
-                moveLeft(player1);
+            //Player movement
+            case LEFT:
+                moveLeft(character);
                 break;
-            case P1RIGHT :
-                player1.setState(State.WALK);
-                moveRight(player1);
+            case RIGHT :
+                moveRight(character);
                 break;
-            case P1JUMP:
-                player1.setState(State.JUMP);
-                jump(player1);
+            case JUMP:
+                jump(character);
                 break;
-            case P1DIVE:
-                player1.move(0,-5);
+            case DIVE:
+                character.move(0,-5);
                 break;
-            case P1ATTACK:
+            case ATTACK:
                 //One second cooldown on the attack
                 if(p1AttackTimer + 1000 < time){
                 player1.setState(State.PUNCH);
@@ -173,34 +178,26 @@ public class CharacterController {
                     p1AttackTimer = time;
                 }
                 break;
-
-            //Player 2 movement
-            case P2LEFT:
-                moveLeft(player2);
-                break;
-            case P2RIGHT:
-                moveRight(player2);
-                break;
-            case P2JUMP:
-                jump(player2);
-                break;
-            case P2DIVE:
-                player2.move(0f,-1f);
-            case P2ATTACK:
-                //One second cooldown on the attack
-                System.out.println(p2AttackTimer);
-                if(p2AttackTimer + 1000 < time){
-                    //checks if player 2 is within player1s attack hitbox
-                    System.out.println("Attacks!");
-                   if(player2.attack(player1)){
-                        // negative damage to represent the divider movement
-                        HPBar.updateDivider(-player2.getDamage());
-                    }
-                    p2AttackTimer = time;
-                }
-                System.out.println("Didnt attack :/");
-            break;
        }
+    }
+
+    public void initiatePlayerDirections(){
+        P1_DIRECTIONS = new HashMap<Direction, Direction>();
+        P2_DIRECTIONS = new HashMap<Direction, Direction>();
+
+        P1_DIRECTIONS.put(Direction.P1RIGHT, Direction.RIGHT);
+        P1_DIRECTIONS.put(Direction.P1LEFT, Direction.LEFT);
+        P1_DIRECTIONS.put(Direction.P1JUMP, Direction.JUMP);
+        P1_DIRECTIONS.put(Direction.P1DIVE, Direction.JUMP);
+        P1_DIRECTIONS.put(Direction.P1ATTACK, Direction.ATTACK);
+        P1_DIRECTIONS.put(Direction.P1STOP, Direction.STOP);
+
+        P2_DIRECTIONS.put(Direction.P2RIGHT,Direction.RIGHT);
+        P2_DIRECTIONS.put(Direction.P2LEFT, Direction.LEFT);
+        P2_DIRECTIONS.put(Direction.P2JUMP, Direction.JUMP);
+        P2_DIRECTIONS.put(Direction.P2DIVE, Direction.JUMP);
+        P2_DIRECTIONS.put(Direction.P2ATTACK, Direction.ATTACK);
+        P2_DIRECTIONS.put(Direction.P2STOP, Direction.STOP);
     }
 
     private void moveRight(Character character){

@@ -46,16 +46,6 @@ public class Arena extends Scene{
 
     }
 
-    //Gets notified if a key has been pressed and performs appropriate action
-    public void keyPressed(Direction direction){
-        characterController.keyPressed(direction);
-    }
-
-    //Gets notified if a key has been released and performs appropriate action
-    public void keyReleased(int key){
-        characterController.keyReleased(key);
-    }
-
     private void addCharacterAnimation(Character player){
 
         graphics.addAnimation(player.getSpriteSheetPath());

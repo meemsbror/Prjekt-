@@ -5,7 +5,7 @@ import com.saints.gamecode.gameobjects.characters.Character;
 
 public class CharacterFactory {
 
-    public static Character createCharcter(String name){
+    public static Character createCharacter(String name){
        /*switch (name){
             case "Smurf" :
                 return new SmurfCharacter(0,0);
