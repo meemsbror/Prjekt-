@@ -5,7 +5,11 @@ import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
 import com.saints.gamecode.scenes.Arena;
 
-public class Game {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+
+public class Game implements PropertyChangeListener{
 
     //Saves the graphics and input so that it can create new scenes
     final private IGraphics graphics;
@@ -26,5 +30,9 @@ public class Game {
 
     public void update(float delta){
         currentScene.update(delta);
+    }
+
+    public void propertyChange(PropertyChangeEvent event){
+
     }
 }

@@ -1,15 +1,16 @@
 package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.Direction;
+import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import com.saints.gamecode.interfaces.IScene;
 
-public class CharacterSelectController implements IScene{
+public class CharacterSelectController extends Scene{
 
     private final IKeyInput input;
     private final IGraphics graphics;
     private Direction [] directions;
+    private String char1, char2;
 
     public CharacterSelectController(IKeyInput input, IGraphics graphics){
         this.input = input;
@@ -27,7 +28,6 @@ public class CharacterSelectController implements IScene{
                 keyPressed(dir);
             }
         }
-
     }
 
     private void keyPressed(Direction dir){
