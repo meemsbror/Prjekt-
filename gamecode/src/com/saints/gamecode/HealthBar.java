@@ -68,10 +68,21 @@ public final class HealthBar {
         }
     }
 
+	// TODO: make sure <0 && > startMax isn't possible?
     // method for HP-bar decay or pro-longing, depending on what happens in game
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
+	    // do nothing if point of conversion is met or passed
+	    if (getMinHealth() - hpChange >= getMaxHealth()){
+		    return;
+	    }
+
+        // do nothing for case when max health exceeds starting amount
+        if(getMinHealth() + hpChange <= 0){
+
+            return;
+        }
         setMax(getMaxHealth() + hpChange);
         setMin(getMinHealth() - hpChange);
     }
@@ -122,7 +133,10 @@ public final class HealthBar {
         if (currentMin != HPBar.currentMin){
             return false;
         }
-        return (currentMax == getInstance().getMaxHealth() && divider == getInstance().getDivider());
+
+        return (currentMax == getInstance().getMaxHealth() &&
+                currentMin == getInstance().getMinHealth() &&
+                divider == getInstance().getDivider());
     }
 
 
