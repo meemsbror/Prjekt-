@@ -12,34 +12,43 @@ public class SmurfCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private Vector2D jumpSpeed;
+    private final Vector2D jumpSpeed = new Vector2D(0, 100);
+
+    //The time until next attack
+    private float attackCD = 0;
+
+    //Static value of how fast this character attacks
+    private final float ATTACKSPEED = 1;
 
     // Unique HP for every Character
     private int hitPoints = 50;
 
     //Straight attack is the attack going straight to either side of the character.
-    StraightAttack straightRightAttack;
-    StraightAttack straightLeftAttack;
+    private StraightAttack straightAttack;
 
-    int damage = 10;
+
+    //The ammount of damage this character has and the increasage in damage while powered up
+    int DAMAGE = 10;
+
 
     public SmurfCharacter(int x, int y) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(x, y, 128, 128);
-        jumpSpeed = new Vector2D(0, 15);
-        straightRightAttack = new StraightAttack(x, y, 50, 50);
-        straightLeftAttack = new StraightAttack(x, y, -50, 50);
+        super(x, y, 227, 386);
+        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 50, 50);
         setState(State.STALL);
         physics = Physics.getInstance();
     }
 
     @Override
     public boolean attack(GameObject gameObject){
-        if(physics.hasColided(this,gameObject)) {
+
+        if(physics.hasCollided(this,gameObject)) {
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
     }
 
     /*
@@ -56,12 +65,12 @@ public class SmurfCharacter extends Character {
 
     @Override
     public int getDamage() {
-        return damage;
+        return (isPowered) ? DAMAGE : DAMAGE*2;
     }
 
     @Override
     public String getSpriteSheetPath() {
-        return "assets/pictures/testGrid.png";
+        return "assets/pictures/testSpriteSheetv2.png";
     }
 
     public int getHitPoints() {
@@ -71,7 +80,7 @@ public class SmurfCharacter extends Character {
     @Override
     public void move(float dx, float dy){
         super.move(dx, dy);
-        straightRightAttack.move(dx, dy);
+        straightAttack.setPosition(getPos().getX() + getWidth()/2,getPos().getY() + getHeight()/2 );
     }
 
     public Vector2D getJumpSpeed(){
@@ -83,4 +92,38 @@ public class SmurfCharacter extends Character {
         changeDirection(jumpSpeed);
         setAirborne(true);
     }
+
+    @Override
+    public GameObject getStraightAttack() {
+        return straightAttack;
+    }
+
+    @Override
+    public float getAttackCD() {
+        return attackCD;
+    }
+
+    @Override
+    public void setAttackCD(float time) {
+        this.attackCD = time + ATTACKSPEED;
+    }
+
+
+    @Override
+    public void moveRight(){
+        super.moveRight();
+        setHorizontalSpeed(getMoveSpeed());
+    }
+
+    @Override
+    public void moveLeft(){
+        super.moveLeft();
+        setHorizontalSpeed(-getMoveSpeed());
+    }
+    //Power up functions
+    @Override
+    public void powerUp(boolean poweredUp) {
+        isPowered = poweredUp;
+    }
+
 }

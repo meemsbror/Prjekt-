@@ -3,17 +3,27 @@ package com.saints.gamecode.gameobjects.characters;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
+import com.saints.gamecode.gameobjects.items.AttackPower;
+import com.saints.gamecode.gameobjects.items.Item;
 
 public abstract class Character extends GameObject {
 
     //The direction of the object
     private boolean facingRight;
 
+    //If the player is moving
+    private boolean isMoving;
+
+    //Movementspeed
+    private float moveSpeed = 100;
+
+
+    //Boolean if the character is powered up
+    boolean isPowered = false;
+
     //State
     private State state;
 
-    // TODO: Remove?
-    private int hitPoints = 50;
 
     public Character(int x,int y, int width, int height){
         super(x,y,width,height);
@@ -28,19 +38,44 @@ public abstract class Character extends GameObject {
         return state;
     }
 
+    public float getMoveSpeed(){
+        return moveSpeed;
+    }
+
+    public boolean isMoving(){
+        return isMoving;
+    }
+    public boolean isFacingRight() {
+        return facingRight;
+    }
+
+    public void setMoving(Boolean isMoving){
+        this.isMoving = isMoving;
+    }
+
+    public void moveRight(){
+        isMoving = true;
+        facingRight = true;
+    }
+
+    public void moveLeft(){
+        isMoving = true;
+        facingRight = false;
+    }
+
     public void setState(State image) {
         this.state = image;
     }
 
-    // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
-
-    // TODO: Hitpoints moved to subtypes of characters, make abstract or let HealthBar carry this check out?
-
-    public void takeDamage(int damage){
-        hitPoints = hitPoints - damage;
-        if(hitPoints < 0){
-            //wincondition!
+    //Called if an item is picked up
+    public void takeItem(Item item){
+        if(item instanceof AttackPower){
+            this.powerUp(true);
         }
+    }
+
+    public boolean isPowered() {
+        return isPowered;
     }
 
 
@@ -63,14 +98,6 @@ public abstract class Character extends GameObject {
 
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (facingRight ? 1 : 0);
-        // TODO: remove?
-      //  result = 31 * result + hitPoints;
-        return result;
-    }
 
     //Abstract methods
 
@@ -86,4 +113,14 @@ public abstract class Character extends GameObject {
     public abstract String getSpriteSheetPath();
 
     public abstract void jump();
+
+    public abstract GameObject getStraightAttack();
+
+    public abstract float getAttackCD();
+    public abstract void setAttackCD(float time);
+
+    //Powerup functions (increase damage, speed or whatever we come up with :)
+    public abstract void powerUp(boolean poweredUp);
+
+
 }

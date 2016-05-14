@@ -1,8 +1,38 @@
 package com.saints.gamecode;
 
+//Class that has the position of an object
 public class Position implements Cloneable {
 
     private float x, y;
+
+    //Creates a position at the specified x and y values
+    public Position(float x, float y){
+        this.x = x;
+        this.y = y;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
+    }
+
+    public float getX() {
+
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    //Moves the position x and y steps
+    public void move(float dx, float dy){
+        this.x += dx;
+        this.y += dy;
+    }
 
     @Override
     public String toString() {
@@ -29,35 +59,6 @@ public class Position implements Cloneable {
         int result = (getX() != +0.0f ? Float.floatToIntBits(getX()) : 0);
         result = 31 * result + (getY() != +0.0f ? Float.floatToIntBits(getY()) : 0);
         return result;
-    }
-
-
-
-    public Position(float x, float y){
-        this.x = x;
-        this.y = y;
-    }
-
-    public float getY() {
-        return y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
-
-    public float getX() {
-
-        return x;
-    }
-
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public void move(float dx, float dy){
-        this.x += dx;
-        this.y += dy;
     }
 
     @Override

@@ -1,14 +1,17 @@
 package com.saints.gamecode;
 
+//2DVector for handling directions of gameobjects
 public class Vector2D implements Cloneable {
 
+    //the directions, x is horizontal and y is vertical
     private float x,y;
 
+    //Creates an empty vector
     public Vector2D(){
-        this.x = 0;
-        this.y = 0;
+        this(0,0);
    }
 
+    //Creates a vector with specified start values
     public Vector2D(float x, float y){
         this.x = x;
         this.y = y;
@@ -20,6 +23,7 @@ public class Vector2D implements Cloneable {
         this.y += other.y;
     }
 
+    //Multiply this vector with a scalar
     public void multiplyVector(float multiplication){
         this.x *= multiplication;
         this.y *= multiplication;
@@ -33,6 +37,14 @@ public class Vector2D implements Cloneable {
     //Getter for y
     public float getY() {
         return y;
+    }
+
+    public void setX(float x){
+        this.x = x;
+    }
+
+    public void setY(float y){
+        this.y = y;
     }
 
     //Sets the X value to zero

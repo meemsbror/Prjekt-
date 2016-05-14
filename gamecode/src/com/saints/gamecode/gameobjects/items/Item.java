@@ -11,4 +11,5 @@ public abstract class Item extends GameObject{
         super(x,y,width,height);
     }
 
+    public abstract float getDuration();
 }
