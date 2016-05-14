@@ -15,6 +15,12 @@ public final class HealthBar {
     }
 
 
+    // starting max (game length should not exceed this)
+    private int startingMax;
+
+    // starting min, should always be 0
+    private int startingMin = 0;
+
     // arbitrary 100% for now. These values are set in CharacterController
     private int currentMax = 100;
     // player 1's minimum HP
@@ -26,9 +32,6 @@ public final class HealthBar {
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     // TODO: make private and access only through change methods?
-   public void setMaxHealth(int x) {
-        this.currentMax = x;
-   }
     public void setMax(int x){
         this.currentMax = x;
     }
@@ -49,14 +52,24 @@ public final class HealthBar {
         return currentMin;
     }
     //Getters & setters for divider variable
-    //TODO: make private and access only through change methods?
    public void setDivider(int x){
         this.divider = x;
-    }
+   }
     public int getDivider(){
         return divider;
     }
 
+    // Getter & setters for starting max && min (no setter for min, should always be 0)
+    public void setStartingMax(int startingMax){
+        this.startingMax = startingMax;
+    }
+
+    public int getStartingMax() {
+        return startingMax;
+    }
+    public int getStartingMin(){
+        return startingMin;
+    }
 
     // TODO: make connection for whenever a Character is hit, this check will be carried out
     // boolean check for if either player has run out of HP
@@ -74,20 +87,20 @@ public final class HealthBar {
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
 	    // do nothing if point of conversion is met or passed
-	    if (getMinHealth() - hpChange >= getMaxHealth()){
+	    if ((getMinHealth() - hpChange >= getMaxHealth())
+                || getMaxHealth() + hpChange <= getMinHealth()){
 		    return;
 	    }
 
-        // do nothing for case when max health exceeds starting amount
-        if(getMinHealth() + hpChange <= 0){
-
+        // do nothing for case when max health exceeds starting amounts
+        if((getMinHealth() + hpChange <= getStartingMin())
+                || (getMaxHealth() - hpChange >= getStartingMax())){
             return;
         }
         setMax(getMaxHealth() + hpChange);
         setMin(getMinHealth() - hpChange);
     }
 
-    // TODO: Take a look at the sudden death... We need to talk about how large he decrements are...
     // method called for if player 1 has less than x (timeChange) HP
 	// this check is performed when called
    public void p1SuddenDeath(int hpChange){
@@ -98,9 +111,10 @@ public final class HealthBar {
    public void p2SuddenDeath(int hpChange){
         setDivider(currentMax + (hpChange-1));
         changeGameLength(hpChange);
-    }
+   }
 
     // @param: The contract of this update is that we send in positive or negative damage
+    // Player 1 deals -dmg and Player 2 +dmg.
     public void updateDivider(int dmg){
         setDivider(getDivider() + dmg);
     }
