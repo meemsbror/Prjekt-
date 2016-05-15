@@ -37,7 +37,7 @@ public class CharacterController {
         this.paused = false;
 
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMaxHealth(HPBarHelper);
+        this.HPBar.setMax(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
         setStartPositions();
         initiatePlayerDirections();
