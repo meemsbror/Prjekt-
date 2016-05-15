@@ -2,7 +2,6 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
@@ -32,8 +31,10 @@ public class CharacterController {
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
         this.paused = false;
-
-        initiatePlayerDirections();
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setMax(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        setStartPositions();
     }
 
     //Sets the starting position of both players
