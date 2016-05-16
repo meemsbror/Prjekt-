@@ -21,6 +21,18 @@ public abstract class Character extends GameObject {
     //Boolean if the character is powered up
     boolean isPowered = false;
 
+    public void setAttackPowerUpTime(float attackPowerUpTime) {
+        this.attackPowerUpTime = attackPowerUpTime;
+    }
+
+    public float getAttackPowerUpTime() {
+
+        return attackPowerUpTime;
+    }
+
+    //The time of when the attack power up ends
+    private float attackPowerUpTime;
+
     //State
     private State state;
 
@@ -65,13 +77,6 @@ public abstract class Character extends GameObject {
 
     public void setState(State image) {
         this.state = image;
-    }
-
-    //Called if an item is picked up
-    public void takeItem(Item item){
-        if(item instanceof AttackPower){
-            this.powerUp(true);
-        }
     }
 
     public boolean isPowered() {

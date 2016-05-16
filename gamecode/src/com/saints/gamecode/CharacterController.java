@@ -22,7 +22,7 @@ public class CharacterController {
     private final ArrayList<GameObject> gameObjects;
 
     private final IKeyInput input;
-    private float time, p1AttackPowerUp;
+    private float time;
     private IPhysics physics = Physics.getInstance();
     private boolean paused;
 
@@ -71,11 +71,9 @@ public class CharacterController {
     }
 
     private void checkPowerUp(float delta) {
-        if(player1.isPowered()){
-            if(p1AttackPowerUp < time){
+            if(player1.getAttackPowerUpTime() < time){
                 player1.powerUp(false);
             }
-        }
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -85,8 +83,8 @@ public class CharacterController {
         player2.setMoving(false);
         //Iterates all directions and checks if the corresponding key is pressed
 
-        iteratePlayerDirections(P1_DIRECTIONS, player1);
-        iteratePlayerDirections(P2_DIRECTIONS, player2);
+        iteratePlayerDirections(P1_DIRECTIONS, player1, player2);
+        iteratePlayerDirections(P2_DIRECTIONS, player2, player1);
 
         updateState(player1);
         updateState(player2);
@@ -96,10 +94,10 @@ public class CharacterController {
         applyGravity(player2,delta);
     }
 
-    private void iteratePlayerDirections(Map<Direction, Direction> map, Character character){
+    private void iteratePlayerDirections(Map<Direction, Direction> map, Character character, Character opositeCharacter){
         for(Direction dir: map.keySet()){
             if(input.isKeyPressed(dir)){
-                keyPressed(map.get(dir), character);
+                keyPressed(map.get(dir), character, opositeCharacter);
             }
         }
     }
@@ -153,7 +151,7 @@ public class CharacterController {
         }else{
             player.setState(State.WALK);
         }
-        if(player.isAirborne()){
+        if(player.isAirborne()) {
             player.setState(State.JUMP);
         }
         if(player.getAttackCD() > time){
@@ -162,8 +160,8 @@ public class CharacterController {
     }
 
 
-    //Takes a direction and a player and updates the model depending on the input (direction)
-    public void keyPressed(Direction direction, Character character){
+   //Takes a direction and a player and updates the model depending on the input (direction)
+    public void keyPressed(Direction direction, Character character, Character opositeCharacter){
         switch(direction){
 
             //Player movement
@@ -180,25 +178,29 @@ public class CharacterController {
                 character.move(0,-5);
                 break;
             case ATTACK:
+                attack(character, opositeCharacter);
                 //One second cooldown on the attack
-                if(!(player1.getState() == State.PUNCH)){
-                    if(player1.attack(player2)){
-                        //   HPBar.updateDivider(player1.getDamage());
-                    }
-                    for(GameObject gameObject: gameObjects){
-                        if(gameObject instanceof Item) {
-                            Item item = (Item)gameObject;
-                            if(player1.attack(item)){
-                                p1AttackPowerUp = time + item.getDuration();
-                                player1.powerUp(true);
-                                gameObjects.remove(item);
-                            }
-                        }
-                    }
-                    player1.setAttackCD(time);
-                }
                 break;
        }
+    }
+    public void attack(Character character, Character opositeCharacter){
+        if(!(character.getState() == State.PUNCH)){
+            if(character.attack(opositeCharacter)){
+                //HPBar.updateDivider(player1.getDamage());
+            }
+            for(GameObject gameObject: gameObjects){
+                if(gameObject instanceof Item) {
+                    Item item = (Item)gameObject;
+                    if(character.attack(item)){
+                        character.setAttackPowerUpTime(time + item.getDuration());
+                        character.powerUp(true);
+                        gameObjects.remove(item);
+                    }
+                }
+            }
+            //Sets the cooldown for next attack, dependant on current time and what sort of character that is attacking.
+            character.setAttackCD(time);
+        }
     }
 
     //Puts the different playerDirections and maps them to the general direction
