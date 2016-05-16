@@ -33,10 +33,6 @@ public class CharacterController {
         this.input = input;
         this.paused = false;
 
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMax(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
-        setStartPositions();
         initiatePlayerDirections();
     }
 
@@ -250,10 +246,15 @@ public class CharacterController {
     public void setCharacters(Character player1, Character player2){
         this.player1 = player1;
         this.player2 = player2;
-
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMaxHealth(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
         setStartPositions();
+        initiateHealthbar();
+        setStartPositions();
+    }
+
+    //
+    private void initiateHealthbar(){
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setMax(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
     }
 }

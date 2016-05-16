@@ -27,7 +27,10 @@ public class CharacterSelectController extends Scene{
 
     public void update(float delta) {
         checkInput();
+        /*
+        Need characterPanels first!
         updateActivePanels();
+        */
         char1 = "Smurf";
         char2 = "Smurf";
         firePropertyChange("characters",null,null);
