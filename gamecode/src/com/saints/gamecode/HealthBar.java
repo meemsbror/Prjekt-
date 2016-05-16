@@ -27,11 +27,12 @@ public final class HealthBar {
     private int currentMin = 0;
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
+    // Is game still on?
+    private boolean gameOver = false;
 
 
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
-    // TODO: make private and access only through change methods?
     public void setP2Max(int maxLimit){
         this.currentMax = maxLimit;
     }
@@ -54,6 +55,7 @@ public final class HealthBar {
     //Getters & setters for divider variable
    public void setDivider(int x){
         this.divider = x;
+       //
    }
     public int getDivider(){
         return divider;
@@ -71,13 +73,16 @@ public final class HealthBar {
         return startingMin;
     }
 
-    // TODO: make connection for whenever a Character is hit, this check will be carried out
+    public void setGameOver(boolean isOver){
+        this.gameOver = isOver;
+    }
+    // TODO: Find out who won.
     // boolean check for if either player has run out of HP
-    public boolean isOver(){
+    public void isOver(){
         if (divider <= currentMin || divider >= currentMax){
-            return true;
+            setGameOver(true);
         }else {
-            return false;
+            setGameOver(false);
         }
     }
 
