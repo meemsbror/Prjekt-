@@ -20,8 +20,6 @@ public abstract class GameObject {
     //the width and height of the object
     private int width,height;
 
-    //Image
-    private String imgPath;
 
     public GameObject(int x, int y, int width, int height){
         pos = new Position(x,y);
@@ -123,9 +121,7 @@ public abstract class GameObject {
         return movement.getX();
     }
 
-    public String getImgPath(){
-        return imgPath;
-    }
+    public abstract String getSpriteSheet();
 
 
  public boolean onPlatform(Platform platform){
@@ -146,26 +142,5 @@ public abstract class GameObject {
         return "GameObject{" +
                 "pos=" + pos.toString() +
                 '}';
-    }
-
-    public int hashCode() {
-        int result = pos != null ? pos.hashCode() : 0;
-        result = 31 * result + width;
-        result = 31 * result + height;
-        result = 31 * result + (imgPath != null ? imgPath.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GameObject that = (GameObject) o;
-
-        if (width != that.width) return false;
-        if (height != that.height) return false;
-        if (pos != null ? !pos.equals(that.pos) : that.pos != null) return false;
-        return !(imgPath != null ? !imgPath.equals(that.imgPath) : that.imgPath != null);
     }
 }

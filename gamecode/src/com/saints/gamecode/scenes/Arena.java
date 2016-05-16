@@ -30,8 +30,12 @@ public class Arena implements IScene{
         this.input = input;
         this.graphics = graphics;
         this.characterController = new CharacterController(player1, player2, gameObjects, input);
-        addCharacterAnimation(player1);
-        addCharacterAnimation(player2);
+
+        //Add animations
+        addObjectAnimation(player1, 4, 6);
+        addObjectAnimation(player2, 4, 6);
+
+        addObjectAnimation(player1.getStraightAttack().);
     }
 
     public List<GameObject> getGameObjects() {
@@ -55,9 +59,9 @@ public class Arena implements IScene{
         characterController.keyReleased(key);
     }
 
-    private void addCharacterAnimation(Character player){
+    private void addObjectAnimation(GameObject player, int animationFrames, int numberOfAnimations){
 
-        graphics.addAnimation(player.getSpriteSheetPath());
+        graphics.addAnimation(player.getSpriteSheetPath(), animationFrames, numberOfAnimations);
     }
 
     //Gets called from the game loop when the arena should update

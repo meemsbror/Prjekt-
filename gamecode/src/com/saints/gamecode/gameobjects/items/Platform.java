@@ -7,10 +7,12 @@ import com.saints.gamecode.gameobjects.GameObject;
  * Created by ludvig on 2016-05-02.
  */
 public class Platform extends GameObject {
-    private static int x = 50; // Straight line to build platform to stand on.
-    private static int width = 1000;  // Have to be arrayList/polygontåg if we want to make a
-    private static int y = 50;      // platform more complex than a line.
-    private static int height = 50;
+    private int x = 50; // Straight line to build platform to stand on.
+    private int width = 1000;  // Have to be arrayList/polygontåg if we want to make a
+    private int y = 50;      // platform more complex than a line.
+    private int height = 50;
+
+    private String imgPath;
 
     public Platform (int x, int y, int width, int height){
         super(x,y,width,height);
@@ -23,6 +25,11 @@ public class Platform extends GameObject {
         this.y = y;
         this.height = height;*/
 
+    }
+
+    @Override
+    public String getSpriteSheet(){
+        return imgPath;
     }
 
     public int getX() {

@@ -24,15 +24,15 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
 
     //Adds a new animation and saves them as an array. each array contains a different set of animation
-    public void addAnimation(String filename){
-        Animation animation[] = new Animation[4];
+    public void addAnimation(String filename, int animationFrames, int numberOfAnimations){
+        Animation animation[] = new Animation[animationFrames];
         Texture img = new Texture(filename);
 
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/numberOfAnimations,img.getHeight()/animationFrames);
 
-        for(int i = 0; i < 4; i++){
+        for(int i = 0; i < animationFrames; i++){
             animation[i] = new Animation(1f/6f,tmpFrames[i]);
         }
 

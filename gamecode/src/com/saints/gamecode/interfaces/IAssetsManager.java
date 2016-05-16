@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 
 public interface IAssetsManager {
 
-    public void addAnimation(String filename);
+    public void addAnimation(String filename, int animationFrames, int numberOfAnimations);
 
     public void addTexture(String filename);
 

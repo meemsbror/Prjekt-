@@ -9,7 +9,7 @@ public interface IGraphics {
 
     void update (float delta, List<GameObject> gameObjects);
 
-    void addAnimation(String filename);
+    void addAnimation(String filename, int animationFrames, int numberOfAnimations);
 
     void addTexture(String filename);
 }

@@ -82,8 +82,8 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
-    public void addAnimation(String filename){
-        assetsmanager.addAnimation(filename);
+    public void addAnimation(String filename, int animationFrames, int numberOfAnimations){
+        assetsmanager.addAnimation(filename, animationFrames, numberOfAnimations);
     }
 
     public void addTexture(String filename){
