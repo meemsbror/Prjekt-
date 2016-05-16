@@ -2,7 +2,6 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
@@ -36,9 +35,12 @@ public class CharacterController {
 
         this.paused = false;
 
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMax(HPBarHelper);
+        // initiate HPBar
+        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
+        this.HPBar.setStartingMax(HPBarHelper); //starting min already set to 0 in class.
+        this.HPBar.setP2Max(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+
         setStartPositions();
         initiatePlayerDirections();
     }
@@ -184,7 +186,7 @@ public class CharacterController {
                 //One second cooldown on the attack
                 if(!(player1.getState() == State.PUNCH)){
                     if(player1.attack(player2)){
-                        //   HPBar.updateDivider(player1.getDamage());
+                        //   HPBar.damageDealt(player1.getDamage());
                     }
                     for(GameObject gameObject: gameObjects){
                         if(gameObject instanceof Item) {

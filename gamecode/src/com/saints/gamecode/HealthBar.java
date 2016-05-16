@@ -32,8 +32,8 @@ public final class HealthBar {
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     // TODO: make private and access only through change methods?
-    public void setMax(int x){
-        this.currentMax = x;
+    public void setP2Max(int maxLimit){
+        this.currentMax = maxLimit;
     }
 
     // returns maximum state of healthbar
@@ -43,8 +43,8 @@ public final class HealthBar {
 
     // Getters and Setters for currentMin variable
     // Method for setting currentMin state of healthbar
-    public void setMin(int x){
-        this.currentMin = x;
+    public void setP1Min(int minLimit){
+        this.currentMin = minLimit;
     }
 
     // returns player 1's minimum state
@@ -86,19 +86,29 @@ public final class HealthBar {
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
-	    // do nothing if point of conversion is met or passed
-	    if ((getMinHealth() - hpChange >= getMaxHealth())
-                || getMaxHealth() + hpChange <= getMinHealth()){
-		    return;
-	    }
-
-        // do nothing for case when max health exceeds starting amounts
-        if((getMinHealth() + hpChange <= getStartingMin())
-                || (getMaxHealth() - hpChange >= getStartingMax())){
+        // should never happen
+        if (hpChange == 0){
             return;
         }
-        setMax(getMaxHealth() + hpChange);
-        setMin(getMinHealth() - hpChange);
+	    // calls for suddenDeath if P2 is losing
+	    if ((getMinHealth() - hpChange) >= getMaxHealth()){
+            p2SuddenDeath(hpChange);
+        }
+        // calls for suddenDeath if P1 is losing
+        if (getMaxHealth() + hpChange <= getMinHealth()){
+            p2SuddenDeath(hpChange);
+	    }
+
+        // set max time if HP Change exceeds maximum.
+        if((getMinHealth() + hpChange <= getStartingMin())
+                && (getMaxHealth() - hpChange >= getStartingMax())){
+            setP2Max(startingMax);
+            setP1Min(startingMin);
+        }
+        else{
+            setP2Max(getMaxHealth() + hpChange);
+            setP1Min(getMinHealth() - hpChange);
+        }
     }
 
     // method called for if player 1 has less than x (timeChange) HP
@@ -115,7 +125,7 @@ public final class HealthBar {
 
     // @param: The contract of this update is that we send in positive or negative damage
     // Player 1 deals -dmg and Player 2 +dmg.
-    public void updateDivider(int dmg){
+    public void damageDealt(int dmg){
         setDivider(getDivider() + dmg);
     }
 
