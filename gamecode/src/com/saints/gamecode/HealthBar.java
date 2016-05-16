@@ -73,16 +73,20 @@ public final class HealthBar {
         return startingMin;
     }
 
-    public void setGameOver(boolean isOver){
+    public void setIsGameOver(boolean isOver){
         this.gameOver = isOver;
+    }
+    //
+    public boolean getIsGameOver(){
+        return this.gameOver;
     }
     // TODO: Find out who won.
     // boolean check for if either player has run out of HP
     public void isOver(){
         if (divider <= currentMin || divider >= currentMax){
-            setGameOver(true);
+            setIsGameOver(true);
         }else {
-            setGameOver(false);
+            setIsGameOver(false);
         }
     }
 
@@ -154,6 +158,9 @@ public final class HealthBar {
             return true;
         }
 
+        if (gameOver != HPBar.getIsGameOver()){
+            return false;
+        }
         if (currentMax != HPBar.currentMax){
             return false;
         }
