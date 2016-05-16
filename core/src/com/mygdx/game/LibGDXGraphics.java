@@ -44,7 +44,7 @@ public class LibGDXGraphics implements IGraphics{
             if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 //The current animation frame of the character
-                tmpRegion = assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
+                tmpRegion = assetsmanager.getAnimation(character.getSpriteSheet())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
                 GameObject attack = character.getStraightAttack();
 
                 //See if it is flipped, if it is flip it.

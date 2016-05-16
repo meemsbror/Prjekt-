@@ -35,7 +35,7 @@ public class Arena implements IScene{
         addObjectAnimation(player1, 4, 6);
         addObjectAnimation(player2, 4, 6);
 
-        addObjectAnimation(player1.getStraightAttack().);
+        addObjectAnimation(player1.getStraightAttack(), 1, 1);
     }
 
     public List<GameObject> getGameObjects() {
@@ -59,9 +59,9 @@ public class Arena implements IScene{
         characterController.keyReleased(key);
     }
 
-    private void addObjectAnimation(GameObject player, int animationFrames, int numberOfAnimations){
+    private void addObjectAnimation(GameObject object, int animationFrames, int numberOfAnimations){
 
-        graphics.addAnimation(player.getSpriteSheetPath(), animationFrames, numberOfAnimations);
+        graphics.addAnimation(object.getSpriteSheet(), animationFrames, numberOfAnimations);
     }
 
     //Gets called from the game loop when the arena should update
