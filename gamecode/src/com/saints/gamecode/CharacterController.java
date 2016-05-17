@@ -247,12 +247,12 @@ public class CharacterController {
         this.player1 = player1;
         this.player2 = player2;
         setStartPositions();
-        initiateHealthbar();
+        initiateHealthBar();
         setStartPositions();
     }
 
     //
-    private void initiateHealthbar(){
+    private void initiateHealthBar(){
         int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
         this.HPBar.setMax(HPBarHelper);
         this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
