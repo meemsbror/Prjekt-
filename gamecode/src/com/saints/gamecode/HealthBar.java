@@ -105,7 +105,7 @@ public final class HealthBar {
         }
         // calls for suddenDeath if P1 is losing
         if (getMaxHealth() + hpChange <= getMinHealth()){
-            p2SuddenDeath(hpChange);
+            p1SuddenDeath(hpChange);
 	    }
 
         // set max time if HP Change exceeds maximum.
