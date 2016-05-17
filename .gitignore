@@ -130,3 +130,6 @@ fabric.properties
 
 ### Intellij Patch ###
 *.iml
+
+# gitinspector
+*.html

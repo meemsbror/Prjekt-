@@ -35,7 +35,7 @@ public class SmurfCharacter extends Character {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
         super(x, y, 227, 386);
-        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 50, 50);
+        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 200, 70);
         setState(State.STALL);
         physics = Physics.getInstance();
     }
@@ -80,7 +80,7 @@ public class SmurfCharacter extends Character {
     @Override
     public void move(float dx, float dy){
         super.move(dx, dy);
-        straightAttack.setPosition(getPos().getX() + getWidth()/2,getPos().getY() + getHeight()/2 );
+        straightAttack.setPosition(getPos().getX() + getWidth()/2,getPos().getY() + getHeight()/2 - 30);
     }
 
     public Vector2D getJumpSpeed(){

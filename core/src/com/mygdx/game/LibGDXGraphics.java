@@ -58,7 +58,7 @@ public class LibGDXGraphics implements IGraphics{
 
                    ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY()-30, -attack.getWidth()*4, attack.getHeight()+10);
+                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
                     }
 
                 //If character is facing left, flip the immage to the right direction again.
@@ -68,7 +68,7 @@ public class LibGDXGraphics implements IGraphics{
 
                     ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth()*3, attack.getHeight());
+                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
                     }
                 }
             }
