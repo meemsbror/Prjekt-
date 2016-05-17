@@ -250,9 +250,10 @@ public class CharacterController {
 
     //
     private void initiateHealthBar(){
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
         this.HPBar.setStartingMax(HPBarHelper);
         this.HPBar.setP2Max(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        // sets divider correctly for case when Characters have different health-pools
+        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
     }
 }
