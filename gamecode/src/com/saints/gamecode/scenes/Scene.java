@@ -23,9 +23,7 @@ public abstract class Scene implements IScene{
         pcs.removePropertyChangeListener(listener);
     }
 
-
     public void firePropertyChange(String s, Object object1, Object object2){
         pcs.firePropertyChange(s, object1, object2);
     }
-
 }

@@ -15,33 +15,22 @@ import java.util.List;
 public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
-    private final Character player1, player2;
+    private Character player1, player2;
 
     //All items in a list
     private final ArrayList<GameObject> gameObjects;
 
     private final IKeyInput input;
-    private float time, p1AttackPowerUp;
+    private float time;
     private IPhysics physics = Physics.getInstance();
     private boolean paused;
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(Character player1, Character player2, List<GameObject> gameObjects, IKeyInput input){
-        this.player1 = player1;
-        this.player2 = player2;
+    public CharacterController(List<GameObject> gameObjects, IKeyInput input){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
-
         this.paused = false;
-
-        // initiate HPBar
-        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
-        this.HPBar.setStartingMax(HPBarHelper); //starting min already set to 0 in class.
-        this.HPBar.setP2Max(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
-
-        setStartPositions();
         initiatePlayerDirections();
     }
 
@@ -61,6 +50,7 @@ public class CharacterController {
         return player2.getPosition();
     }
 
+    //Updates the model
     public void update(float delta){
         if(!paused) {
             time += delta;
@@ -72,11 +62,9 @@ public class CharacterController {
     }
 
     private void checkPowerUp(float delta) {
-        if(player1.isPowered()){
-            if(p1AttackPowerUp < time){
+            if(player1.getAttackPowerUpTime() < time){
                 player1.powerUp(false);
             }
-        }
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -86,8 +74,8 @@ public class CharacterController {
         player2.setMoving(false);
         //Iterates all directions and checks if the corresponding key is pressed
 
-        iteratePlayerDirections(P1_DIRECTIONS, player1);
-        iteratePlayerDirections(P2_DIRECTIONS, player2);
+        iteratePlayerDirections(P1_DIRECTIONS, player1, player2);
+        iteratePlayerDirections(P2_DIRECTIONS, player2, player1);
 
         updateState(player1);
         updateState(player2);
@@ -97,14 +85,15 @@ public class CharacterController {
         applyGravity(player2,delta);
     }
 
-    private void iteratePlayerDirections(Map<Direction, Direction> map, Character character){
+    private void iteratePlayerDirections(Map<Direction, Direction> map, Character character, Character opositeCharacter){
         for(Direction dir: map.keySet()){
             if(input.isKeyPressed(dir)){
-                keyPressed(map.get(dir), character);
+                keyPressed(map.get(dir), character, opositeCharacter);
             }
         }
     }
 
+    //Checks if the Characters have collided and reverts the player position to the last frame
     private void checkCollision(float delta){
         Position pos1 = player1.getPos();
         Position pos2 = player2.getPos();
@@ -128,6 +117,7 @@ public class CharacterController {
         }
     }
 
+    //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
 
         if(gameObject.isAirborne()){
@@ -143,12 +133,8 @@ public class CharacterController {
     }
 
 
-    //Asks the character to jump
-    public void jump(Character character){
-        if(!character.isAirborne()){
-            character.jump();
-        }
-    }
+
+    //Checks what state a character should be in and updates it correspond to it
     public void updateState(Character player){
         if(!player.isMoving()) {
             player.resetHorizontalSpeed();
@@ -156,7 +142,7 @@ public class CharacterController {
         }else{
             player.setState(State.WALK);
         }
-        if(player.isAirborne()){
+        if(player.isAirborne()) {
             player.setState(State.JUMP);
         }
         if(player.getAttackCD() > time){
@@ -165,8 +151,8 @@ public class CharacterController {
     }
 
 
-    //
-    public void keyPressed(Direction direction, Character character){
+   //Takes a direction and a player and updates the model depending on the input (direction)
+    public void keyPressed(Direction direction, Character character, Character opositeCharacter){
         switch(direction){
 
             //Player movement
@@ -183,27 +169,31 @@ public class CharacterController {
                 character.move(0,-5);
                 break;
             case ATTACK:
-                //One second cooldown on the attack
-                if(!(player1.getState() == State.PUNCH)){
-                    if(player1.attack(player2)){
-                        //   HPBar.damageDealt(player1.getDamage());
-                    }
-                    for(GameObject gameObject: gameObjects){
-                        if(gameObject instanceof Item) {
-                            Item item = (Item)gameObject;
-                            if(player1.attack(item)){
-                                p1AttackPowerUp = time + item.getDuration();
-                                player1.powerUp(true);
-                                gameObjects.remove(item);
-                            }
-                        }
-                    }
-                    player1.setAttackCD(time);
-                }
+                attack(character, opositeCharacter);
                 break;
        }
     }
+    public void attack(Character character, Character opositeCharacter){
+        if(!(character.getState() == State.PUNCH)){
+            if(character.attack(opositeCharacter)){
+                //HPBar.updateDivider(player1.getDamage());
+            }
+            for(GameObject gameObject: gameObjects){
+                if(gameObject instanceof Item) {
+                    Item item = (Item)gameObject;
+                    if(character.attack(item)){
+                        character.setAttackPowerUpTime(time + item.getDuration());
+                        character.powerUp(true);
+                        gameObjects.remove(item);
+                    }
+                }
+            }
+            //Sets the cooldown for next attack, dependant on current time and what sort of character that is attacking.
+            character.setAttackCD(time);
+        }
+    }
 
+    //Puts the different playerDirections and maps them to the general direction
     public void initiatePlayerDirections() {
         P1_DIRECTIONS = new HashMap<Direction, Direction>();
         P2_DIRECTIONS = new HashMap<Direction, Direction>();
@@ -228,10 +218,19 @@ public class CharacterController {
         return paused;
     }
 
+    //Asks the character to jump
+    public void jump(Character character){
+        if(!character.isAirborne()){
+            character.jump();
+        }
+    }
+
+    //Asks a character to move right
     private void moveRight(Character character){
         character.moveRight();
     }
 
+    //Asks a character to move left
     private void moveLeft(Character character){
         character.moveLeft();
     }
@@ -239,5 +238,21 @@ public class CharacterController {
     //Not sure if necessary
     public void keyReleased(int key){
         //TODO
+    }
+
+    public void setCharacters(Character player1, Character player2){
+        this.player1 = player1;
+        this.player2 = player2;
+        setStartPositions();
+        initiateHealthBar();
+        setStartPositions();
+    }
+
+    //
+    private void initiateHealthBar(){
+        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
+        this.HPBar.setStartingMax(HPBarHelper);
+        this.HPBar.setP2Max(HPBarHelper);
+        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
     }
 }
