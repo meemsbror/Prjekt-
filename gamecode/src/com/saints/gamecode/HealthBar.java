@@ -80,7 +80,6 @@ public final class HealthBar {
     public boolean getIsGameOver(){
         return this.gameOver;
     }
-    // TODO: Find out who won. Make String or something??
     // boolean check for if either player has run out of HP
     public boolean isOver(){
         if (divider <= currentMin || divider >= currentMax){
