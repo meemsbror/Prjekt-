@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
@@ -44,7 +45,7 @@ public class LibGDXGraphics implements IGraphics{
             if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 //The current animation frame of the character
-                tmpRegion = assetsmanager.getAnimation(character.getSpriteSheetPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
+                tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
                 GameObject attack = character.getStraightAttack();
 
                 //See if it is flipped, if it is flip it.
@@ -58,7 +59,7 @@ public class LibGDXGraphics implements IGraphics{
 
                    ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
+                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime,true), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
                     }
 
                 //If character is facing left, flip the immage to the right direction again.
@@ -68,22 +69,22 @@ public class LibGDXGraphics implements IGraphics{
 
                     ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(new Texture("assets/pictures/blackBox.png"), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
+                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime,true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
                     }
                 }
             }
             else{
                 GameObject gameObject = gameObjects.get(i);
                 Position pos = gameObject.getPos();
-                batch.draw(assetsmanager.getTexture(gameObject.getImgPath()),pos.getX(),pos.getY());
+                batch.draw(assetsmanager.getTexture(gameObject.getAnimationObject().getPath()),pos.getX(),pos.getY());
 
             }
         }
         batch.end();
     }
 
-    public void addAnimation(String filename){
-        assetsmanager.addAnimation(filename);
+    public void addAnimation(AnimationObject animationObject){
+        assetsmanager.addAnimation(animationObject);
     }
 
     public void addTexture(String filename){

@@ -36,6 +36,7 @@ public class CharacterController {
         this.paused = false;
         this.platform = platform;
 
+
         initiatePlayerDirections();
     }
 

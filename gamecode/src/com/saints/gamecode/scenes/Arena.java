@@ -34,6 +34,7 @@ public class Arena extends Scene{
         Platform platform= new Platform(30,30,700,30); // This is shit right now (Y)
         this.characterController = new CharacterController(gameObjects, input, platform);
 
+
     }
 
     public List<GameObject> getGameObjects() {
@@ -46,7 +47,8 @@ public class Arena extends Scene{
     }
 
     private void addCharacterAnimation(Character player){
-        graphics.addAnimation(player.getSpriteSheetPath());
+        graphics.addAnimation(player.getAnimationObject());
+        graphics.addAnimation(player.getStraightAttack().getAnimationObject());
     }
 
     //Gets called from the game loop when the arena should update
