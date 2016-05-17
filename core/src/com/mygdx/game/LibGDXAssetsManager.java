@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import java.util.Map;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.interfaces.IAssetsManager;
 
 //Handels all assets
@@ -24,19 +25,19 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
 
     //Adds a new animation and saves them as an array. each array contains a different set of animation
-    public void addAnimation(String filename){
-        Animation animation[] = new Animation[4];
-        Texture img = new Texture(filename);
+    public void addAnimation(AnimationObject animationObject){
+        Animation animation[] = new Animation[animationObject.getNumberOfAnimations()];
+        Texture img = new Texture(animationObject.getPath());
 
         //calculate the size of the images
         //4 is the number of animations and 6 is the number of frames in each animation, may vary later.
-        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/6,img.getHeight()/4);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img,img.getWidth()/animationObject.getAnimationFrames(),img.getHeight()/animationObject.getNumberOfAnimations());
 
-        for(int i = 0; i < 4; i++){
-            animation[i] = new Animation(1f/6f,tmpFrames[i]);
+        for(int i = 0; i < animationObject.getNumberOfAnimations(); i++){
+            animation[i] = new Animation(animationObject.getAnimationSpeed(),tmpFrames[i]);
         }
 
-        this.animations.put(filename,animation);
+        this.animations.put(animationObject.getPath(),animation);
 
     }
 

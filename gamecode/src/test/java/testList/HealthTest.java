@@ -24,7 +24,7 @@ public class HealthTest {
         assertTrue(maxHealth == 100);
 
         // test for min health, should be 0
-        minHealth = healthBar.getMinHealth();
+        int minHealth = healthBar.getMinHealth();
         assertTrue(minHealth == 0);
     }
 
@@ -103,7 +103,7 @@ public class HealthTest {
 	    // TODO MAKE SURE THAT -4 && 104 isn't possible?
         // increase both sides max health by 5
         healthBar.changeGameLength(5); // should become -4 && 104 (negative numbers should never happen tho??)
-        assetTrue((currentMaxHealth + 5) == healthBar.getMaxHealth());
+        assertTrue((currentMaxHealth + 5) == healthBar.getMaxHealth());
     }
 
     // TODO: incomplete

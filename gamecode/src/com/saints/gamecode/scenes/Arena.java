@@ -44,7 +44,8 @@ public class Arena extends Scene{
     }
 
     private void addCharacterAnimation(Character player){
-        graphics.addAnimation(player.getSpriteSheetPath());
+        graphics.addAnimation(player.getAnimationObject());
+        graphics.addAnimation(player.getStraightAttack().getAnimationObject());
     }
 
     //Gets called from the game loop when the arena should update

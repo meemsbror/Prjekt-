@@ -1,5 +1,6 @@
 package com.saints.gamecode.gameobjects;
 
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
@@ -21,13 +22,14 @@ public abstract class GameObject {
     private int width,height;
 
     //Image
-    private String imgPath;
+    private AnimationObject animationObject;
 
-    public GameObject(int x, int y, int width, int height){
+    public GameObject(int x, int y, int width, int height, AnimationObject animationObject){
         pos = new Position(x,y);
         oldPos = new Position(0,0);
         this.width = width;
         this.height = height;
+        this.animationObject = animationObject;
         movement = new Vector2D();
     }
 
@@ -123,12 +125,8 @@ public abstract class GameObject {
         return movement.getX();
     }
 
-    public String getImgPath(){
-        return imgPath;
-    }
 
-
- public boolean onPlatform(Platform platform){
+    public boolean onPlatform(Platform platform){
      //if ( ("X for any part of object"=="X for any part of platform")
      // AND ("Y for bottom of object"=="Y for top of platform") ) {return true}
      if ( (!(pos.getX()-getWidth()<platform.getX())||(platform.getX()+getWidth()<pos.getX())) &&
@@ -138,6 +136,9 @@ public abstract class GameObject {
             return false;
         }
     }
+    public AnimationObject getAnimationObject(){
+        return animationObject;
+    }
 
 
 
@@ -146,26 +147,5 @@ public abstract class GameObject {
         return "GameObject{" +
                 "pos=" + pos.toString() +
                 '}';
-    }
-
-    public int hashCode() {
-        int result = pos != null ? pos.hashCode() : 0;
-        result = 31 * result + width;
-        result = 31 * result + height;
-        result = 31 * result + (imgPath != null ? imgPath.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        GameObject that = (GameObject) o;
-
-        if (width != that.width) return false;
-        if (height != that.height) return false;
-        if (pos != null ? !pos.equals(that.pos) : that.pos != null) return false;
-        return !(imgPath != null ? !imgPath.equals(that.imgPath) : that.imgPath != null);
     }
 }

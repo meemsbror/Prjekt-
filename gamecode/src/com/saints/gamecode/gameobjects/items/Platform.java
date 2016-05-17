@@ -1,5 +1,6 @@
 package com.saints.gamecode.gameobjects.items;
 
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.GameObject;
 
@@ -13,7 +14,7 @@ public class Platform extends GameObject {
     private static int height = 50;
 
     public Platform (int x, int y, int width, int height){
-        super(x,y,width,height);
+        super(x,y,width,height, new AnimationObject("hehe", 0,0,0));
     }
 
     public void setPlatform(int x, int y, int width, int height){

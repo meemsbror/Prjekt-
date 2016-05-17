@@ -1,5 +1,6 @@
 package com.saints.gamecode.gameobjects.characters;
 
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.Physics;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
@@ -34,8 +35,8 @@ public class SmurfCharacter extends Character {
     public SmurfCharacter(int x, int y) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(x, y, 227, 386);
-        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 200, 70);
+        super(x, y, 227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f));
+        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 200, 70, new AnimationObject("assets/pictures/blackBox.png", 1, 1, 1));
         setState(State.STALL);
         physics = Physics.getInstance();
     }
@@ -66,11 +67,6 @@ public class SmurfCharacter extends Character {
     @Override
     public int getDamage() {
         return (isPowered) ? DAMAGE : DAMAGE*2;
-    }
-
-    @Override
-    public String getSpriteSheetPath() {
-        return "assets/pictures/testSpriteSheetv2.png";
     }
 
     public int getHitPoints() {
