@@ -1,5 +1,6 @@
 package com.saints.gamecode.gameobjects.characters;
 
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
@@ -37,8 +38,8 @@ public abstract class Character extends GameObject {
     private State state;
 
 
-    public Character(int x,int y, int width, int height){
-        super(x,y,width,height);
+    public Character(int x, int y, int width, int height, AnimationObject animationObject){
+        super(x,y,width,height,animationObject);
         state = State.STALL;
     }
     /*
@@ -109,13 +110,12 @@ public abstract class Character extends GameObject {
     //Returns the initial jumpSpeed
     public abstract Vector2D getJumpSpeed();
 
+    //Returns current hitpoints
     public abstract int getHitPoints();
 
     public abstract boolean attack (GameObject object);
 
     public abstract int getDamage();
-
-    public abstract String getSpriteSheetPath();
 
     public abstract void jump();
 
