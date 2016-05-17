@@ -176,7 +176,11 @@ public class CharacterController {
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
-                //HPBar.updateDivider(player1.getDamage());
+                HPBar.damageDealt(character.getDamage());
+                if (HPBar.getIsGameOver()){
+                    System.out.println(HPBar.getWinner()); //TODO: end game, how?
+                }
+
             }
             for(GameObject gameObject: gameObjects){
                 if(gameObject instanceof Item) {
