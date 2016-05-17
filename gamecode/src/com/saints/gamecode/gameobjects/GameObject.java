@@ -4,7 +4,7 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.items.Platform;
-import javafx.geometry.Pos;
+
 
 public abstract class GameObject {
 

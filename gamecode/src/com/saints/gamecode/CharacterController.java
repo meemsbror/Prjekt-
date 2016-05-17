@@ -4,6 +4,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
+import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
@@ -17,6 +18,7 @@ public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
     private Character player1, player2;
+    private final Platform platform;
 
     //All items in a list
     private final ArrayList<GameObject> gameObjects;
@@ -28,10 +30,11 @@ public class CharacterController {
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(List<GameObject> gameObjects, IKeyInput input){
+    public CharacterController(List<GameObject> gameObjects, IKeyInput input, Platform platform){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
         this.paused = false;
+        this.platform = platform;
 
         initiatePlayerDirections();
     }
@@ -50,6 +53,10 @@ public class CharacterController {
 
     public Position getP2Position(){
         return player2.getPosition();
+    }
+
+    public Position getPlayerPosition(GameObject gameObject){
+        return gameObject.getPosition();
     }
 
     //Updates the model
@@ -85,6 +92,12 @@ public class CharacterController {
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
         applyGravity(player2,delta);
+
+        //If the player is falling below platform, reset y-velocity and put it on platform
+        applyPlatform(player1);
+        applyPlatform(player2);
+
+
     }
 
     private void iteratePlayerDirections(Map<Direction, Direction> map, Character character, Character opositeCharacter){
@@ -116,6 +129,16 @@ public class CharacterController {
                 player1.revertHorizontalPosition();
                 player2.revertHorizontalPosition();
             }
+        }
+    }
+
+
+    private void applyPlatform(GameObject gameObject){
+
+        if(physics.belowPlatform(gameObject, platform)){
+            gameObject.resetVerticalSpeed();// set y-vector to 0
+            gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
+            gameObject.setAirborne(false);
         }
     }
 

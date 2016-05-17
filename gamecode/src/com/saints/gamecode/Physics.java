@@ -1,6 +1,7 @@
 package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
+import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IPhysics;
 
 //Singleton class that does basic Physics calculations
@@ -26,6 +27,21 @@ public class Physics implements IPhysics {
         Vector2D deltaGravity = (Vector2D)GRAVITY.clone();
         deltaGravity.multiplyVector(delta);
         return deltaGravity;
+    }
+
+    public boolean belowPlatform(GameObject object, Platform platform){
+        //if ( ("X for any part of object"=="X for any part of platform")
+        // AND ("Y for bottom of object"=<"Y for top of platform"
+        // AND ("Y for bottom of object"<"Y for bottom of platform") ) {return true}
+
+        if (       //(object.getPos().getX()<platform.getX()-object.getWidth()) //o.X>p.X-o.W
+            //&& (platform.getX()+platform.getWidth()>object.getPos().getX()) // p.X+p.W>o.X
+                (object.getPos().getY()<platform.getY())
+                        && (object.getPos().getY()>platform.getY()-60)) { //marginal is 60
+            return true;
+        }else{
+            return false;
+        }
     }
 
     //Checks if two objects have collided

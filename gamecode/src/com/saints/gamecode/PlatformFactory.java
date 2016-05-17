@@ -1,7 +1,13 @@
 package com.saints.gamecode;
 
-/**
- * Created by ludvig on 2016-05-17.
- */
+import com.saints.gamecode.gameobjects.items.Platform;
+
 public class PlatformFactory {
+
+
+    public static Platform createPlatform(){
+        return new Platform(10,50,1000,50);
+
+
+    }
 }
