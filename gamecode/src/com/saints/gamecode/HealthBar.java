@@ -55,7 +55,6 @@ public final class HealthBar {
     //Getters & setters for divider variable
    public void setDivider(int x){
         this.divider = x;
-       //
    }
     public int getDivider(){
         return divider;
@@ -80,7 +79,7 @@ public final class HealthBar {
     public boolean getIsGameOver(){
         return this.gameOver;
     }
-    // TODO: Find out who won.
+    // TODO: Find out who won. Make String or something??
     // boolean check for if either player has run out of HP
     public void isOver(){
         if (divider <= currentMin || divider >= currentMax){
@@ -173,6 +172,9 @@ public final class HealthBar {
 
         return (currentMax == getInstance().getMaxHealth() &&
                 currentMin == getInstance().getMinHealth() &&
+                gameOver == getInstance().getIsGameOver() &&
+                startingMax == getInstance().getStartingMax() &&
+                startingMin == getInstance().getStartingMin() &&
                 divider == getInstance().getDivider());
     }
 
