@@ -29,6 +29,7 @@ public final class HealthBar {
     private int divider = 40;
     // Is game still on?
     private boolean gameOver = false;
+    private String winner;
 
 
     // Getters and Setters for currentMax variable.
@@ -81,15 +82,16 @@ public final class HealthBar {
     }
     // TODO: Find out who won. Make String or something??
     // boolean check for if either player has run out of HP
-    public void isOver(){
+    public boolean isOver(){
         if (divider <= currentMin || divider >= currentMax){
             setIsGameOver(true);
+            return gameOver;
         }else {
             setIsGameOver(false);
+            return gameOver;
         }
     }
 
-	// TODO: make sure <0 && > startMax isn't possible?
     // method for HP-bar decay or pro-longing, depending on what happens in game
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
@@ -131,10 +133,36 @@ public final class HealthBar {
         changeGameLength(hpChange);
    }
 
+    public void killP1(){
+        setDivider(currentMin);
+        setWinner("Player 2");
+        isOver();
+    }
+    public void killP2(){
+        setDivider(currentMax);
+        setWinner("Player 1");
+        isOver();
+    }
+
+    public void setWinner(String player){
+        this.winner = player;
+    }
+    public String getWinner(){
+        return winner;
+    }
     // @param: The contract of this update is that we send in positive or negative damage
-    // Player 1 deals -dmg and Player 2 +dmg.
+    // Player 1 deals +dmg and Player 2 -dmg.
     public void damageDealt(int dmg){
-        setDivider(getDivider() + dmg);
+        if (getDivider() + dmg <= getMinHealth()){
+            killP1();
+        }
+        if (getDivider() + dmg >= getMaxHealth()){
+            killP2();
+        }
+        else {
+            setDivider(getDivider() + dmg);
+
+        }
     }
 
     @Override
