@@ -11,6 +11,7 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class LibGDXGraphics implements IGraphics{
         initiateState();
     }
 
-    public void update(float delta, List<GameObject> gameObjects){
+    public void update(float delta, List<IEntity> gameObjects){
 
         elapsedTime = elapsedTime + delta;
 

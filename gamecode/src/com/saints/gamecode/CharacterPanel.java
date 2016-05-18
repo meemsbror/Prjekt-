@@ -1,14 +1,19 @@
 package com.saints.gamecode;
 
-public class CharacterPanel {
+import com.saints.gamecode.interfaces.IEntity;
+
+public class CharacterPanel implements IEntity{
 
     private boolean player1Selected, player2Selected;
 
     private final String imgPath, characterName;
 
+    private Position pos;
+
     public CharacterPanel(String imgPath, String characterName){
         this.imgPath = imgPath;
         this.characterName = characterName;
+        pos = new Position(0,0);
     }
 
     public boolean isPlayer1Selected() {
@@ -29,5 +34,14 @@ public class CharacterPanel {
 
     public String getName(){
         return characterName;
+    }
+
+    public void setPosition(int x, int y){
+        pos.setX(x);
+        pos.setY(y);
+    }
+
+    public Position getPosition(){
+        return (Position)pos.clone();
     }
 }
