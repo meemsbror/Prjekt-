@@ -9,7 +9,7 @@ public abstract class Item extends GameObject{
 
 
     public Item (int x, int y, int width, int height, AnimationObject animationObject){
-        super(x,y,width,height, animationObject);
+        super(width,height, animationObject);
     }
 
     public abstract float getDuration();

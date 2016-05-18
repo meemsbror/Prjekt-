@@ -16,6 +16,6 @@ public class StraightAttack extends GameObject {
     }
 
     public StraightAttack(int x, int y, int width, int height, AnimationObject animationObject) {
-        super(x, y, width, height, animationObject);
+        super(width, height, animationObject);
     }
 }

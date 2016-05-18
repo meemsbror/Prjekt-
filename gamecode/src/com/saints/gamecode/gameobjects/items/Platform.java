@@ -13,7 +13,7 @@ public class Platform extends GameObject {
 
     public Platform (int x, int y, int width, int height){
 
-        super(x,y,width,height, new AnimationObject("hehe", 0,0,0));
+        super(width,height, new AnimationObject("hehe", 0,0,0));
         this.x=x;
         this.y=y;
         this.width=width;
