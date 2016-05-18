@@ -2,7 +2,6 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -194,14 +193,17 @@ public class CharacterController {
                 break;
             case ATTACK:
                 attack(character, opositeCharacter);
-                //One second cooldown on the attack
                 break;
        }
     }
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
-                //HPBar.updateDivider(player1.getDamage());
+                HPBar.damageDealt(character.getDamage());
+                if (HPBar.getIsGameOver()){
+                    System.out.println(HPBar.getWinner()); //TODO: end game, how?
+                }
+
             }
             for(GameObject gameObject: gameObjects){
                 if(gameObject instanceof Item) {
@@ -275,8 +277,10 @@ public class CharacterController {
 
     //
     private void initiateHealthBar(){
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMax(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
+        this.HPBar.setStartingMax(HPBarHelper);
+        this.HPBar.setP2Max(HPBarHelper);
+        // sets divider correctly for case when Characters have different health-pools
+        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
     }
 }

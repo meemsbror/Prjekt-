@@ -27,13 +27,15 @@ public final class HealthBar {
     private int currentMin = 0;
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
+    // Is game still on?
+    private boolean gameOver = false;
+    private String winner;
 
 
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
-    // TODO: make private and access only through change methods?
-    public void setMax(int x){
-        this.currentMax = x;
+    public void setP2Max(int maxLimit){
+        this.currentMax = maxLimit;
     }
 
     // returns maximum state of healthbar
@@ -43,8 +45,8 @@ public final class HealthBar {
 
     // Getters and Setters for currentMin variable
     // Method for setting currentMin state of healthbar
-    public void setMin(int x){
-        this.currentMin = x;
+    public void setP1Min(int minLimit){
+        this.currentMin = minLimit;
     }
 
     // returns player 1's minimum state
@@ -71,34 +73,51 @@ public final class HealthBar {
         return startingMin;
     }
 
-    // TODO: make connection for whenever a Character is hit, this check will be carried out
+    public void setIsGameOver(boolean isOver){
+        this.gameOver = isOver;
+    }
+    //
+    public boolean getIsGameOver(){
+        return this.gameOver;
+    }
     // boolean check for if either player has run out of HP
     public boolean isOver(){
         if (divider <= currentMin || divider >= currentMax){
-            return true;
+            setIsGameOver(true);
+            return gameOver;
         }else {
-            return false;
+            setIsGameOver(false);
+            return gameOver;
         }
     }
 
-	// TODO: make sure <0 && > startMax isn't possible?
     // method for HP-bar decay or pro-longing, depending on what happens in game
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int hpChange){
-	    // do nothing if point of conversion is met or passed
-	    if ((getMinHealth() - hpChange >= getMaxHealth())
-                || getMaxHealth() + hpChange <= getMinHealth()){
-		    return;
-	    }
-
-        // do nothing for case when max health exceeds starting amounts
-        if((getMinHealth() + hpChange <= getStartingMin())
-                || (getMaxHealth() - hpChange >= getStartingMax())){
+        // should never happen
+        if (hpChange == 0){
             return;
         }
-        setMax(getMaxHealth() + hpChange);
-        setMin(getMinHealth() - hpChange);
+	    // calls for suddenDeath if P2 is losing
+	    if ((getMinHealth() - hpChange) >= getMaxHealth()){
+            p2SuddenDeath(hpChange);
+        }
+        // calls for suddenDeath if P1 is losing
+        if (getMaxHealth() + hpChange <= getMinHealth()){
+            p1SuddenDeath(hpChange);
+	    }
+
+        // set max time if HP Change exceeds maximum.
+        if((getMinHealth() + hpChange <= getStartingMin())
+                && (getMaxHealth() - hpChange >= getStartingMax())){
+            setP2Max(startingMax);
+            setP1Min(startingMin);
+        }
+        else{
+            setP2Max(getMaxHealth() + hpChange);
+            setP1Min(getMinHealth() - hpChange);
+        }
     }
 
     // method called for if player 1 has less than x (timeChange) HP
@@ -113,10 +132,36 @@ public final class HealthBar {
         changeGameLength(hpChange);
    }
 
+    public void killP1(){
+        setDivider(currentMin);
+        setWinner("Player 2");
+        isOver();
+    }
+    public void killP2(){
+        setDivider(currentMax);
+        setWinner("Player 1");
+        isOver();
+    }
+
+    public void setWinner(String player){
+        this.winner = player;
+    }
+    public String getWinner(){
+        return winner;
+    }
     // @param: The contract of this update is that we send in positive or negative damage
-    // Player 1 deals -dmg and Player 2 +dmg.
-    public void updateDivider(int dmg){
-        setDivider(getDivider() + dmg);
+    // Player 1 deals +dmg and Player 2 -dmg.
+    public void damageDealt(int dmg){
+        if (getDivider() + dmg <= getMinHealth()){
+            killP1();
+        }
+        if (getDivider() + dmg >= getMaxHealth()){
+            killP2();
+        }
+        else {
+            setDivider(getDivider() + dmg);
+
+        }
     }
 
     @Override
@@ -139,6 +184,9 @@ public final class HealthBar {
             return true;
         }
 
+        if (gameOver != HPBar.getIsGameOver()){
+            return false;
+        }
         if (currentMax != HPBar.currentMax){
             return false;
         }
@@ -151,6 +199,9 @@ public final class HealthBar {
 
         return (currentMax == getInstance().getMaxHealth() &&
                 currentMin == getInstance().getMinHealth() &&
+                gameOver == getInstance().getIsGameOver() &&
+                startingMax == getInstance().getStartingMax() &&
+                startingMin == getInstance().getStartingMin() &&
                 divider == getInstance().getDivider());
     }
 
