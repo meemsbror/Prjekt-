@@ -82,12 +82,13 @@ public final class HealthBar {
     }
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (divider <= currentMin || divider >= currentMax){
+        int dividerNow = getDivider();
+        if (dividerNow <= getP1Limit() || dividerNow >= getP2Limit()){
             setIsGameOver(true);
-            return gameOver;
+            return getIsGameOver();
         }else {
             setIsGameOver(false);
-            return gameOver;
+            return getIsGameOver();
         }
     }
 
@@ -100,19 +101,19 @@ public final class HealthBar {
             return;
         }
 	    // calls for suddenDeath if P2 is losing
-	    if ((getP1Limit() - delta) >= getP2Limit()){
+	    if ((getP1Limit() - delta) >= getDivider()){
             p2SuddenDeath(delta);
         }
         // calls for suddenDeath if P1 is losing
-        if (getP2Limit() + delta <= getP1Limit()){
+        if (getP2Limit() + delta <= getDivider()){
             p1SuddenDeath(delta);
 	    }
 
         // set max time if HP Change exceeds maximum.
         if((getP1Limit() + delta <= getStartingMin())
                 && (getP2Limit() - delta >= getStartingMax())){
-            setP2Limit(startingMax);
-            setP1Limit(startingMin);
+            setP2Limit(getStartingMax());
+            setP1Limit(getStartingMin());
         }
         else{
             setP2Limit(getP2Limit() + delta);
@@ -128,7 +129,7 @@ public final class HealthBar {
     }
     // method called for if player 2 has less than x (timeChange) HP
    public void p2SuddenDeath(int hpChange){
-        setDivider(currentMax + (hpChange-1));
+        setDivider(getP2Limit() + (hpChange-1));
         changeGameLength(hpChange);
    }
 
