@@ -36,7 +36,6 @@ public class CharacterController {
         this.paused = false;
         this.platform = platform;
 
-
         initiatePlayerDirections();
     }
 
@@ -45,7 +44,6 @@ public class CharacterController {
         //TODO: start pos should vary with map
         player1.setPosition(0,0);
         player2.setPosition(300,0);
-
     }
 
     public Position getP1Position(){
@@ -72,9 +70,9 @@ public class CharacterController {
     }
 
     private void checkPowerUp(float delta) {
-            if(player1.getAttackPowerUpTime() < time){
-                player1.powerUp(false);
-            }
+        if(player1.getAttackPowerUpTime() < time){
+            player1.powerUp(false);
+        }
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
