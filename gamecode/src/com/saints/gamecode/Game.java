@@ -37,9 +37,9 @@ import com.saints.gamecode.scenes.MapSelectController;
             this.currentScene = this.csc;
         }
 
-        public void update(float delta){
-                                              currentScene.update(delta);
-                                                                         }
+        public void update(float delta) {
+            currentScene.update(delta);
+        }
 
         public void propertyChange(PropertyChangeEvent event){
             //Checks if it the Characters that are selected and switches scene to arena

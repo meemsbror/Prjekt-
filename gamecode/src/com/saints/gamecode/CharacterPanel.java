@@ -26,4 +26,8 @@ public class CharacterPanel {
     public void setPlayer2Selected(boolean player2Selected) {
         this.player2Selected = player2Selected;
     }
+
+    public String getName(){
+        return characterName;
+    }
 }

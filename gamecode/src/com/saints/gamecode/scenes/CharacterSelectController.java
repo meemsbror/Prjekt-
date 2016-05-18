@@ -23,17 +23,12 @@ public class CharacterSelectController extends Scene{
         this.graphics = graphics;
         initiateInputArray();
         initiatePositions();
+        initiatePanels();
     }
 
     public void update(float delta) {
         checkInput();
-        /*
-        Need characterPanels first!
         updateActivePanels();
-        */
-        char1 = "Smurf";
-        char2 = "Smurf";
-        firePropertyChange("characters",null,null);
     }
 
     private void checkInput(){
@@ -85,6 +80,10 @@ public class CharacterSelectController extends Scene{
             case P2DIVE:
                 moveDown(p2Pos);
                 break;
+
+            case SELECT:
+                charactersSelected();
+                break;
         }
     }
 
@@ -115,6 +114,14 @@ public class CharacterSelectController extends Scene{
         }
     }
 
+    private void charactersSelected(){
+        char1 = characterPanels[(int)p1Pos.getY()][(int)p1Pos.getX()].getName();
+        char2 = characterPanels[(int)p2Pos.getY()][(int)p2Pos.getX()].getName();
+
+        firePropertyChange("Characters selected",null,null);
+    }
+
+
     public Character getPlayer1(){
         return CharacterFactory.createCharacter(char1);
     }
@@ -137,6 +144,11 @@ public class CharacterSelectController extends Scene{
                     Direction.P2RIGHT,
                     Direction.P2LEFT,
                     Direction.P2JUMP,
-                    Direction.P2DIVE};
+                    Direction.P2DIVE,
+                    Direction.SELECT};
+    }
+
+    private void initiatePanels(){
+        characterPanels = new CharacterPanel[][] {{new CharacterPanel("assets/pictures/SmurfPanel.png","Smurf"), new CharacterPanel("assets/pictures/LuckyPanel.png", "Lucky")}};
     }
 }
