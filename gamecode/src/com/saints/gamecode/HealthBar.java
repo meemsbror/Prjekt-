@@ -151,7 +151,7 @@ public final class HealthBar {
     }
     // @param: The contract of this update is that we send in positive or negative damage
     // Player 1 deals +dmg and Player 2 -dmg.
-    public void damageDealt(int dmg){
+    public void dealDamage(int dmg){
         if (getDivider() + dmg <= getP1Limit()){
             killP1();
         }

@@ -199,7 +199,7 @@ public class CharacterController {
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
-                HPBar.damageDealt(character.getDamage());
+                HPBar.dealDamage(character.getDamage());
                 if (HPBar.getIsGameOver()){
                     System.out.println(HPBar.getWinner()); //TODO: end game, how?
                 }
