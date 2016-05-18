@@ -94,29 +94,29 @@ public final class HealthBar {
     // method for HP-bar decay or pro-longing, depending on what happens in game
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
-    public void changeGameLength(int hpChange){
+    public void changeGameLength(int delta){
         // should never happen
-        if (hpChange == 0){
+        if (delta == 0){
             return;
         }
 	    // calls for suddenDeath if P2 is losing
-	    if ((getP1Limit() - hpChange) >= getP2Limit()){
-            p2SuddenDeath(hpChange);
+	    if ((getP1Limit() - delta) >= getP2Limit()){
+            p2SuddenDeath(delta);
         }
         // calls for suddenDeath if P1 is losing
-        if (getP2Limit() + hpChange <= getP1Limit()){
-            p1SuddenDeath(hpChange);
+        if (getP2Limit() + delta <= getP1Limit()){
+            p1SuddenDeath(delta);
 	    }
 
         // set max time if HP Change exceeds maximum.
-        if((getP1Limit() + hpChange <= getStartingMin())
-                && (getP2Limit() - hpChange >= getStartingMax())){
+        if((getP1Limit() + delta <= getStartingMin())
+                && (getP2Limit() - delta >= getStartingMax())){
             setP2Limit(startingMax);
             setP1Limit(startingMin);
         }
         else{
-            setP2Limit(getP2Limit() + hpChange);
-            setP1Limit(getP1Limit() - hpChange);
+            setP2Limit(getP2Limit() + delta);
+            setP1Limit(getP1Limit() - delta);
         }
     }
 
