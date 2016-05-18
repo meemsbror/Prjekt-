@@ -1,9 +1,11 @@
 package com.saints.gamecode.scenes;
 
+import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
@@ -31,7 +33,7 @@ public class Arena extends Scene{
         this.input = input;
         this.graphics = graphics;
         this.characterController = new CharacterController(gameObjects, input);
-
+        startMatch();
     }
 
     public List<GameObject> getGameObjects() {
@@ -40,7 +42,8 @@ public class Arena extends Scene{
 
     //Starts a match between two players
     public void startMatch(){
-
+        //Adds all item animations
+        graphics.addAnimation(new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f));
     }
 
     private void addCharacterAnimation(Character player){
@@ -63,5 +66,9 @@ public class Arena extends Scene{
         addCharacterAnimation(player1);
         addCharacterAnimation(player2);
         characterController.setCharacters(player1, player2);
+        addItem();
+    }
+    public void addItem(){
+        gameObjects.add(new AttackPower(100,100,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
     }
 }

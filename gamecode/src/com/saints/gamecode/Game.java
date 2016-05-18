@@ -43,7 +43,6 @@ import com.saints.gamecode.scenes.MapSelectController;
         public void propertyChange(PropertyChangeEvent event){
             //Checks if it the Characters that are selected and switches scene to arena
             if(event.getSource() instanceof CharacterSelectController){
-                Character player1 = csc.getPlayer1();
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
                 this.currentScene = this.arena;
             }

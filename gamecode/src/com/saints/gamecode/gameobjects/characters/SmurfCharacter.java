@@ -1,9 +1,6 @@
 package com.saints.gamecode.gameobjects.characters;
 
-import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.Physics;
-import com.saints.gamecode.State;
-import com.saints.gamecode.Vector2D;
+import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.gameobjects.GameObject;
 
@@ -21,11 +18,11 @@ public class SmurfCharacter extends Character {
     //Static value of how fast this character attacks
     private final float ATTACKSPEED = 1;
 
+    //Straight attack is the attack going straight to either side of the character.
+    public StraightAttack straightAttack;
+
     // Unique HP for every Character
     private int hitPoints = 50;
-
-    //Straight attack is the attack going straight to either side of the character.
-    private StraightAttack straightAttack;
 
 
     //The ammount of damage this character has and the increasage in damage while powered up
@@ -36,7 +33,7 @@ public class SmurfCharacter extends Character {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
         super(x, y, 227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f));
-        straightAttack = new StraightAttack(x + getWidth()/2, y + getHeight()/2, 200, 70, new AnimationObject("assets/pictures/blackBox.png", 1, 1, 1));
+        straightAttack = new StraightAttack(x - 90, y + 100, 194, 117, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
     }
@@ -51,19 +48,6 @@ public class SmurfCharacter extends Character {
             return false;
         }
     }
-
-    /*
-    public lvoid attack(GameObject gameObject){
-        //TODO: move logic to controller
-    }*/
-
-
-    /*
-    public lvoid attack(GameObject gameObject){
-        //TODO: move logic to controller
-    }*/
-
-
     @Override
     public int getDamage() {
         return (isPowered) ? DAMAGE : DAMAGE*2;
@@ -76,7 +60,7 @@ public class SmurfCharacter extends Character {
     @Override
     public void move(float dx, float dy){
         super.move(dx, dy);
-        straightAttack.setPosition(getPos().getX() + getWidth()/2,getPos().getY() + getHeight()/2 - 30);
+        straightAttack.setPosition(getPos().getX() + 110, getPos().getY() + 150);
     }
 
     public Vector2D getJumpSpeed(){
@@ -86,6 +70,7 @@ public class SmurfCharacter extends Character {
     public void jump(){
 
         changeDirection(jumpSpeed);
+        straightAttack.changeDirection(jumpSpeed);
         setAirborne(true);
     }
 

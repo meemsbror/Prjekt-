@@ -2,6 +2,7 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -179,15 +180,15 @@ public class CharacterController {
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
-                //HPBar.updateDivider(player1.getDamage());
+                //HPBar.updateDivider(opositeCharacter.getDamage());
             }
-            for(GameObject gameObject: gameObjects){
-                if(gameObject instanceof Item) {
-                    Item item = (Item)gameObject;
+            for(int i = 0; i < gameObjects.size(); i++){
+                if(gameObjects.get(i) instanceof Item) {
+                    Item item = (Item) gameObjects.get(i);
                     if(character.attack(item)){
                         character.setAttackPowerUpTime(time + item.getDuration());
                         character.powerUp(true);
-                        gameObjects.remove(item);
+                        gameObjects.remove(i);
                     }
                 }
             }

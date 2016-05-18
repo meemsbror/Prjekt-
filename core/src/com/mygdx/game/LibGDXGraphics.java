@@ -23,7 +23,10 @@ public class LibGDXGraphics implements IGraphics{
     private final SpriteBatch batch;
     private final LibGDXAssetsManager assetsmanager;
     private Map<State, Integer> map;
+    //For animations
     private float elapsedTime = 0;
+    //AttackTime
+    private float attackTime = 0;
     private TextureRegion tmpRegion;
 
 
@@ -37,6 +40,7 @@ public class LibGDXGraphics implements IGraphics{
     public void update(float delta, List<GameObject> gameObjects){
 
         elapsedTime = elapsedTime + delta;
+
 
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -59,7 +63,8 @@ public class LibGDXGraphics implements IGraphics{
 
                    ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime,true), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
+                        attackTime += delta;
+                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime,true), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
                     }
 
                 //If character is facing left, flip the immage to the right direction again.
@@ -69,14 +74,16 @@ public class LibGDXGraphics implements IGraphics{
 
                     ///If the character is punching draw the punch aswell.
                     if(character.getState() == State.PUNCH){
-                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime,true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
+                        attackTime += delta;
+                        System.out.println(attack.getPos().toString());
+                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime,true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
                     }
                 }
             }
             else{
                 GameObject gameObject = gameObjects.get(i);
                 Position pos = gameObject.getPos();
-                batch.draw(assetsmanager.getTexture(gameObject.getAnimationObject().getPath()),pos.getX(),pos.getY());
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
 
             }
         }

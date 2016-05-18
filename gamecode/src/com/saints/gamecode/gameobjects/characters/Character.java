@@ -1,9 +1,11 @@
 package com.saints.gamecode.gameobjects.characters;
 
 import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
+import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 
@@ -17,7 +19,6 @@ public abstract class Character extends GameObject {
 
     //Movementspeed
     private float moveSpeed = 100;
-
 
     //Boolean if the character is powered up
     boolean isPowered = false;
@@ -75,6 +76,7 @@ public abstract class Character extends GameObject {
         isMoving = true;
         facingRight = false;
     }
+
 
     public void setState(State image) {
         this.state = image;
