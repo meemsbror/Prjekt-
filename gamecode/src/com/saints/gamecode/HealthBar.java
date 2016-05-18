@@ -16,7 +16,7 @@ public final class HealthBar {
 
 
     // starting max (game length should not exceed this)
-    private int startingMax;
+    private int startingMax = 100;
 
     // starting min, should always be 0
     private int startingMin = 0;
@@ -29,28 +29,28 @@ public final class HealthBar {
     private int divider = 40;
     // Is game still on?
     private boolean gameOver = false;
-    private String winner;
+    private String winner = "none";
 
 
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
-    public void setP2Max(int maxLimit){
+    public void setP2Limit(int maxLimit){
         this.currentMax = maxLimit;
     }
 
     // returns maximum state of healthbar
-    public int getMaxHealth(){
+    public int getP2Limit(){
         return currentMax;
     }
 
     // Getters and Setters for currentMin variable
     // Method for setting currentMin state of healthbar
-    public void setP1Min(int minLimit){
+    public void setP1Limit(int minLimit){
         this.currentMin = minLimit;
     }
 
     // returns player 1's minimum state
-    public int getMinHealth(){
+    public int getP1Limit(){
         return currentMin;
     }
     //Getters & setters for divider variable
@@ -78,7 +78,7 @@ public final class HealthBar {
     }
     //
     public boolean getIsGameOver(){
-        return this.gameOver;
+        return gameOver;
     }
     // boolean check for if either player has run out of HP
     public boolean isOver(){
@@ -100,23 +100,23 @@ public final class HealthBar {
             return;
         }
 	    // calls for suddenDeath if P2 is losing
-	    if ((getMinHealth() - hpChange) >= getMaxHealth()){
+	    if ((getP1Limit() - hpChange) >= getP2Limit()){
             p2SuddenDeath(hpChange);
         }
         // calls for suddenDeath if P1 is losing
-        if (getMaxHealth() + hpChange <= getMinHealth()){
+        if (getP2Limit() + hpChange <= getP1Limit()){
             p1SuddenDeath(hpChange);
 	    }
 
         // set max time if HP Change exceeds maximum.
-        if((getMinHealth() + hpChange <= getStartingMin())
-                && (getMaxHealth() - hpChange >= getStartingMax())){
-            setP2Max(startingMax);
-            setP1Min(startingMin);
+        if((getP1Limit() + hpChange <= getStartingMin())
+                && (getP2Limit() - hpChange >= getStartingMax())){
+            setP2Limit(startingMax);
+            setP1Limit(startingMin);
         }
         else{
-            setP2Max(getMaxHealth() + hpChange);
-            setP1Min(getMinHealth() - hpChange);
+            setP2Limit(getP2Limit() + hpChange);
+            setP1Limit(getP1Limit() - hpChange);
         }
     }
 
@@ -152,10 +152,10 @@ public final class HealthBar {
     // @param: The contract of this update is that we send in positive or negative damage
     // Player 1 deals +dmg and Player 2 -dmg.
     public void damageDealt(int dmg){
-        if (getDivider() + dmg <= getMinHealth()){
+        if (getDivider() + dmg <= getP1Limit()){
             killP1();
         }
-        if (getDivider() + dmg >= getMaxHealth()){
+        if (getDivider() + dmg >= getP2Limit()){
             killP2();
         }
         else {
@@ -169,9 +169,9 @@ public final class HealthBar {
         return getClass().getName() +
                 " class, current info:" +
                 "\nDivider at:" + getDivider() +
-                "\nCurrent Maximum: " + getMaxHealth() +
-                "\nPlayer 1 status: " + (getDivider() - getMinHealth()) +
-                "\nPlayer 2 status: " + (getMaxHealth()- getDivider());
+                "\nCurrent Maximum: " + getP2Limit() +
+                "\nPlayer 1 status: " + (getDivider() - getP1Limit()) +
+                "\nPlayer 2 status: " + (getP2Limit()- getDivider());
 
     }
     @Override
@@ -197,8 +197,8 @@ public final class HealthBar {
             return false;
         }
 
-        return (currentMax == getInstance().getMaxHealth() &&
-                currentMin == getInstance().getMinHealth() &&
+        return (currentMax == getInstance().getP2Limit() &&
+                currentMin == getInstance().getP1Limit() &&
                 gameOver == getInstance().getIsGameOver() &&
                 startingMax == getInstance().getStartingMax() &&
                 startingMin == getInstance().getStartingMin() &&
