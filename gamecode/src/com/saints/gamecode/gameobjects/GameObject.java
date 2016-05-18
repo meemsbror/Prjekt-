@@ -24,8 +24,8 @@ public abstract class GameObject {
     //Image
     private AnimationObject animationObject;
 
-    public GameObject(int x, int y, int width, int height, AnimationObject animationObject){
-        pos = new Position(x,y);
+    public GameObject(int width, int height, AnimationObject animationObject){
+        pos = new Position(0,0);
         oldPos = new Position(0,0);
         this.width = width;
         this.height = height;

@@ -8,9 +8,9 @@ public class CharacterFactory {
     public static Character createCharacter(String name){
        switch (name){
             case "Smurf" :
-                return new SmurfCharacter(200,50);
+                return new SmurfCharacter(true);
             default:
-                return new SmurfCharacter(100,0);
+                return new SmurfCharacter(true);
                 }
     }
 

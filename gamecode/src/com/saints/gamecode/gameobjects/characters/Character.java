@@ -38,8 +38,8 @@ public abstract class Character extends GameObject {
     private State state;
 
 
-    public Character(int x, int y, int width, int height, AnimationObject animationObject){
-        super(x,y,width,height,animationObject);
+    public Character(int width, int height, AnimationObject animationObject){
+        super(width,height,animationObject);
         state = State.STALL;
     }
     /*
