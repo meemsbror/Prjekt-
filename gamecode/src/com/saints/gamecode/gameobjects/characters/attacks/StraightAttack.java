@@ -5,7 +5,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 
 public class StraightAttack extends GameObject {
 
-    public StraightAttack(int x, int y, int width, int height, AnimationObject animationObject) {
-        super(x, y, width, height, animationObject);
+    public StraightAttack(int width, int height, AnimationObject animationObject) {
+        super(width, height, animationObject);
     }
 }

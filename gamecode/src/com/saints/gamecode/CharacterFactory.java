@@ -6,18 +6,16 @@ import com.saints.gamecode.gameobjects.characters.Character;
 public class CharacterFactory {
 
     public static Character createCharacter(String name){
-       /*switch (name){
+       switch (name){
             case "Smurf" :
-                return new SmurfCharacter(0,0);
+                return new SmurfCharacter(true);
             default:
-                return new SmurfCharacter(0,0);
-                */
-        if (name == "Smurf") {return new SmurfCharacter(200,50);}
-        else {return new SmurfCharacter(100,50);}
+                return new SmurfCharacter(true);
+                }
     }
 
     //Returns an array with the name of all available characters
-    public String [] getCharacters(){
+    public static String [] getCharacters(){
         return new String [] {"smurf"};
     }
 }

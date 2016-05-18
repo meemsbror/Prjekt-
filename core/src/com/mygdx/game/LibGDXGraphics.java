@@ -11,6 +11,7 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 
 import java.util.HashMap;
@@ -59,6 +60,7 @@ public class LibGDXGraphics implements IGraphics{
 
                 //if character is facing right, draw the character as it is.
                 if(!character.isFacingRight()){
+                    System.out.println("kommer den in hit? graphics");
                     batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
 
                    ///If the character is punching draw the punch aswell.

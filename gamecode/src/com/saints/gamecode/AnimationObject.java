@@ -1,8 +1,5 @@
 package com.saints.gamecode;
 
-/**
- * Created by admin on 2016-05-17.
- */
 public class AnimationObject {
 
     //AnimationObject contains path to an image and the number of frames/animations it contains. It is simply a bundle
@@ -41,5 +38,4 @@ public class AnimationObject {
     public void setAnimationSpeed(float animationSpeed) {
         this.animationSpeed = animationSpeed;
     }
-
 }

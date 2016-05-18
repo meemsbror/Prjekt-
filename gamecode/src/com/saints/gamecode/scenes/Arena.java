@@ -6,11 +6,10 @@ import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
+import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import com.saints.gamecode.interfaces.IScene;
 
-import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +28,14 @@ public class Arena extends Scene{
 
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
-        //Platform.setPlatform(50,50,1000,50);
         this.input = input;
         this.graphics = graphics;
-        this.characterController = new CharacterController(gameObjects, input);
         startMatch();
+
+        //TODO - Fix Platform with PlatformFactory
+        Platform platform= new Platform(30,30,700,30); // This is shit right now (Y)
+        this.characterController = new CharacterController(gameObjects, input, platform);
+
     }
 
     public List<GameObject> getGameObjects() {
@@ -55,9 +57,10 @@ public class Arena extends Scene{
     public void update(float delta) {
         //TODO Check input for pause :)
             characterController.update(delta);
-        if (!characterController.isPaused()) {
+       // if (!characterController.isPaused()) {
+        System.out.println("kommer den in hit? arena update()");
             graphics.update(delta, getGameObjects());
-        }
+        //}
     }
 
     public void setCharacters(Character player1, Character player2){

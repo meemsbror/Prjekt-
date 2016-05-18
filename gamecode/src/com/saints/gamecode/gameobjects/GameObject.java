@@ -5,9 +5,10 @@ import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.items.Platform;
-import javafx.geometry.Pos;
+import com.saints.gamecode.interfaces.IEntity;
 
-public abstract class GameObject {
+
+public abstract class GameObject implements IEntity {
 
     //The position of the object counted from bottom left of the window
     private Position pos,oldPos;
@@ -24,8 +25,8 @@ public abstract class GameObject {
     //Image
     private AnimationObject animationObject;
 
-    public GameObject(int x, int y, int width, int height, AnimationObject animationObject){
-        pos = new Position(x,y);
+    public GameObject(int width, int height, AnimationObject animationObject){
+        pos = new Position(0,0);
         oldPos = new Position(0,0);
         this.width = width;
         this.height = height;
@@ -80,7 +81,6 @@ public abstract class GameObject {
     }
 
     public int getWidth() {
-
         return width;
     }
 
@@ -123,6 +123,13 @@ public abstract class GameObject {
     //Returns the horizontal speed of the object
     public float getHorizontalSpeed(){
         return movement.getX();
+    }
+
+    //Sets position
+    @Override
+    public void setPosition(int x, int y){
+        pos.setX(x);
+        pos.setY(y);
     }
 
 

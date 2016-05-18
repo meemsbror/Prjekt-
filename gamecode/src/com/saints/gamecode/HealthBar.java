@@ -16,7 +16,7 @@ public final class HealthBar {
 
 
     // starting max (game length should not exceed this)
-    private int startingMax;
+    private int startingMax = 100;
 
     // starting min, should always be 0
     private int startingMin = 0;
@@ -27,28 +27,30 @@ public final class HealthBar {
     private int currentMin = 0;
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
+    // Is game still on?
+    private boolean gameOver = false;
+    private String winner = "none";
 
 
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
-    // TODO: make private and access only through change methods?
-    public void setMax(int x){
-        this.currentMax = x;
+    public void setP2Limit(int maxLimit){
+        this.currentMax = maxLimit;
     }
 
     // returns maximum state of healthbar
-    public int getMaxHealth(){
+    public int getP2Limit(){
         return currentMax;
     }
 
     // Getters and Setters for currentMin variable
     // Method for setting currentMin state of healthbar
-    public void setMin(int x){
-        this.currentMin = x;
+    public void setP1Limit(int minLimit){
+        this.currentMin = minLimit;
     }
 
     // returns player 1's minimum state
-    public int getMinHealth(){
+    public int getP1Limit(){
         return currentMin;
     }
     //Getters & setters for divider variable
@@ -71,34 +73,52 @@ public final class HealthBar {
         return startingMin;
     }
 
-    // TODO: make connection for whenever a Character is hit, this check will be carried out
+    public void setIsGameOver(boolean isOver){
+        this.gameOver = isOver;
+    }
+    //
+    public boolean getIsGameOver(){
+        return gameOver;
+    }
     // boolean check for if either player has run out of HP
     public boolean isOver(){
-        if (divider <= currentMin || divider >= currentMax){
-            return true;
+        int dividerNow = getDivider();
+        if (dividerNow <= getP1Limit() || dividerNow >= getP2Limit()){
+            setIsGameOver(true);
+            return getIsGameOver();
         }else {
-            return false;
+            setIsGameOver(false);
+            return getIsGameOver();
         }
     }
 
-	// TODO: make sure <0 && > startMax isn't possible?
     // method for HP-bar decay or pro-longing, depending on what happens in game
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
-    public void changeGameLength(int hpChange){
-	    // do nothing if point of conversion is met or passed
-	    if ((getMinHealth() - hpChange >= getMaxHealth())
-                || getMaxHealth() + hpChange <= getMinHealth()){
-		    return;
-	    }
-
-        // do nothing for case when max health exceeds starting amounts
-        if((getMinHealth() + hpChange <= getStartingMin())
-                || (getMaxHealth() - hpChange >= getStartingMax())){
+    public void changeGameLength(int delta){
+        // should never happen
+        if (delta == 0){
             return;
         }
-        setMax(getMaxHealth() + hpChange);
-        setMin(getMinHealth() - hpChange);
+	    // calls for suddenDeath if P2 is losing
+	    if ((getP1Limit() - delta) >= getDivider()){
+            p2SuddenDeath(delta);
+        }
+        // calls for suddenDeath if P1 is losing
+        if (getP2Limit() + delta <= getDivider()){
+            p1SuddenDeath(delta);
+	    }
+
+        // set max time if HP Change exceeds maximum.
+        if((getP1Limit() + delta <= getStartingMin())
+                && (getP2Limit() - delta >= getStartingMax())){
+            setP2Limit(getStartingMax());
+            setP1Limit(getStartingMin());
+        }
+        else{
+            setP2Limit(getP2Limit() + delta);
+            setP1Limit(getP1Limit() - delta);
+        }
     }
 
     // method called for if player 1 has less than x (timeChange) HP
@@ -109,14 +129,40 @@ public final class HealthBar {
     }
     // method called for if player 2 has less than x (timeChange) HP
    public void p2SuddenDeath(int hpChange){
-        setDivider(currentMax + (hpChange-1));
+        setDivider(getP2Limit() + (hpChange-1));
         changeGameLength(hpChange);
    }
 
+    public void killP1(){
+        setDivider(currentMin);
+        setWinner("Player 2");
+        isOver();
+    }
+    public void killP2(){
+        setDivider(currentMax);
+        setWinner("Player 1");
+        isOver();
+    }
+
+    public void setWinner(String player){
+        this.winner = player;
+    }
+    public String getWinner(){
+        return winner;
+    }
     // @param: The contract of this update is that we send in positive or negative damage
-    // Player 1 deals -dmg and Player 2 +dmg.
-    public void updateDivider(int dmg){
-        setDivider(getDivider() + dmg);
+    // Player 1 deals +dmg and Player 2 -dmg.
+    public void dealDamage(int dmg){
+        if (getDivider() + dmg <= getP1Limit()){
+            killP1();
+        }
+        if (getDivider() + dmg >= getP2Limit()){
+            killP2();
+        }
+        else {
+            setDivider(getDivider() + dmg);
+
+        }
     }
 
     @Override
@@ -124,9 +170,9 @@ public final class HealthBar {
         return getClass().getName() +
                 " class, current info:" +
                 "\nDivider at:" + getDivider() +
-                "\nCurrent Maximum: " + getMaxHealth() +
-                "\nPlayer 1 status: " + (getDivider() - getMinHealth()) +
-                "\nPlayer 2 status: " + (getMaxHealth()- getDivider());
+                "\nCurrent Maximum: " + getP2Limit() +
+                "\nPlayer 1 status: " + (getDivider() - getP1Limit()) +
+                "\nPlayer 2 status: " + (getP2Limit()- getDivider());
 
     }
     @Override
@@ -139,6 +185,9 @@ public final class HealthBar {
             return true;
         }
 
+        if (gameOver != HPBar.getIsGameOver()){
+            return false;
+        }
         if (currentMax != HPBar.currentMax){
             return false;
         }
@@ -149,8 +198,11 @@ public final class HealthBar {
             return false;
         }
 
-        return (currentMax == getInstance().getMaxHealth() &&
-                currentMin == getInstance().getMinHealth() &&
+        return (currentMax == getInstance().getP2Limit() &&
+                currentMin == getInstance().getP1Limit() &&
+                gameOver == getInstance().getIsGameOver() &&
+                startingMax == getInstance().getStartingMax() &&
+                startingMin == getInstance().getStartingMin() &&
                 divider == getInstance().getDivider());
     }
 

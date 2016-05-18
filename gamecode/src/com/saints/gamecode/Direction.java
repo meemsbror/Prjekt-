@@ -27,5 +27,6 @@ public enum Direction {
     ATTACK,
 
     //Shared
-    PAUSE;
+    PAUSE,
+    SELECT;
 }

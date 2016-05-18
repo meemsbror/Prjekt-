@@ -2,9 +2,9 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
-import com.saints.gamecode.gameobjects.items.AttackPower;
+
 import com.saints.gamecode.gameobjects.items.Item;
+import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
@@ -18,6 +18,7 @@ public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
     private Character player1, player2;
+    private final Platform platform;
 
     //All items in a list
     private final ArrayList<GameObject> gameObjects;
@@ -29,10 +30,11 @@ public class CharacterController {
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(List<GameObject> gameObjects, IKeyInput input){
+    public CharacterController(List<GameObject> gameObjects, IKeyInput input, Platform platform){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
         this.paused = false;
+        this.platform = platform;
 
         initiatePlayerDirections();
     }
@@ -42,7 +44,6 @@ public class CharacterController {
         //TODO: start pos should vary with map
         player1.setPosition(0,0);
         player2.setPosition(300,0);
-
     }
 
     public Position getP1Position(){
@@ -51,6 +52,10 @@ public class CharacterController {
 
     public Position getP2Position(){
         return player2.getPosition();
+    }
+
+    public Position getPlayerPosition(GameObject gameObject){
+        return gameObject.getPosition();
     }
 
     //Updates the model
@@ -65,9 +70,9 @@ public class CharacterController {
     }
 
     private void checkPowerUp(float delta) {
-            if(player1.getAttackPowerUpTime() < time){
-                player1.powerUp(false);
-            }
+        if(player1.getAttackPowerUpTime() < time){
+            player1.powerUp(false);
+        }
     }
 
     //Checks if the keys for player movement are pressed and updates their direction
@@ -86,6 +91,12 @@ public class CharacterController {
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
         applyGravity(player2,delta);
+
+        //If the player is falling below platform, reset y-velocity and put it on platform
+        applyPlatform(player1);
+        applyPlatform(player2);
+
+
     }
 
     private void iteratePlayerDirections(Map<Direction, Direction> map, Character character, Character opositeCharacter){
@@ -117,6 +128,16 @@ public class CharacterController {
                 player1.revertHorizontalPosition();
                 player2.revertHorizontalPosition();
             }
+        }
+    }
+
+
+    private void applyPlatform(GameObject gameObject){
+
+        if(physics.belowPlatform(gameObject, platform)){
+            gameObject.resetVerticalSpeed();// set y-vector to 0
+            gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
+            gameObject.setAirborne(false);
         }
     }
 
@@ -173,14 +194,16 @@ public class CharacterController {
                 break;
             case ATTACK:
                 attack(character, opositeCharacter);
-                //One second cooldown on the attack
                 break;
        }
     }
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
-                //HPBar.updateDivider(opositeCharacter.getDamage());
+                HPBar.dealDamage(character.getDamage());
+                if (HPBar.getIsGameOver()){
+                    System.out.println(HPBar.getWinner()); //TODO: end game, how?
+                }
             }
             for(int i = 0; i < gameObjects.size(); i++){
                 if(gameObjects.get(i) instanceof Item) {
@@ -254,8 +277,10 @@ public class CharacterController {
 
     //
     private void initiateHealthBar(){
-        int HPBarHelper = player1.getHitPoints() + player2.getHitPoints();
-        this.HPBar.setMax(HPBarHelper);
-        this.HPBar.setDivider(HPBarHelper - player1.getHitPoints());
+        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
+        this.HPBar.setStartingMax(HPBarHelper);
+        this.HPBar.setP2Limit(HPBarHelper);
+        // sets divider correctly for case when Characters have different health-pools
+        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
     }
 }

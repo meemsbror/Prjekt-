@@ -29,13 +29,16 @@ public class SmurfCharacter extends Character {
     int DAMAGE = 10;
 
 
-    public SmurfCharacter(int x, int y) {
+    public SmurfCharacter(boolean isPlayer1) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(x, y, 227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f));
-        straightAttack = new StraightAttack(x - 90, y + 100, 194, 117, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
+        super(227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f));
+        straightAttack = new StraightAttack(194, 117, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
+        if (!isPlayer1){
+            DAMAGE = -DAMAGE;
+        }
     }
 
     @Override

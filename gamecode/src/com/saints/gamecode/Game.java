@@ -1,6 +1,7 @@
 package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
@@ -36,9 +37,9 @@ import com.saints.gamecode.scenes.MapSelectController;
             this.currentScene = this.csc;
         }
 
-        public void update(float delta){
-                                              currentScene.update(delta);
-                                                                         }
+        public void update(float delta) {
+            currentScene.update(delta);
+        }
 
         public void propertyChange(PropertyChangeEvent event){
             //Checks if it the Characters that are selected and switches scene to arena
