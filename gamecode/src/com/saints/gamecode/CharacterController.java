@@ -146,7 +146,6 @@ public class CharacterController {
     //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
 
-
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
             gameObject.changeDirection(deltaGravity);

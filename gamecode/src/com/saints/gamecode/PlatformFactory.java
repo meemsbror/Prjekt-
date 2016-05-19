@@ -12,8 +12,19 @@ public class PlatformFactory {
 
 
     public static Platform createPlatform(){
-        return new Platform(10,50,1000,50);
+        return new Platform(50,50,1000,50);
 
 
+    }
+
+    public static Platform createPlatform(String name){
+        switch (name){
+            case "JAPrippsMap" :
+                return new Platform(50,50,1000,50);
+            case "SandboxMap" :
+                return new Platform(50,50,1000,50);
+            default:
+                return new Platform(50,50,1000,50);
+        }
     }
 }
