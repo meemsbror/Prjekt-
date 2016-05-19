@@ -3,7 +3,7 @@ package com.saints.gamecode;
 
 import com.badlogic.gdx.Graphics;
 import com.saints.gamecode.interfaces.IEntity;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 
 //A HealthBar for representing the current state for BOTH players
 public final class HealthBar implements IEntity{
