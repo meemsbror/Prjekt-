@@ -16,9 +16,6 @@ import java.util.Map;
 
 public class MyGdxGame extends ApplicationAdapter {
 	SpriteBatch batch;
-    //Elapsed time since start of game
-    //TODO if pause button is implemented pause this timer!
-    float elapsedTime;
 
     private Game game;
 

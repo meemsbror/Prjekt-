@@ -23,6 +23,9 @@ public abstract class Character extends GameObject {
     //Boolean if the character is powered up
     boolean isPowered = false;
 
+    //player one or 2
+    boolean p1;
+
     public void setAttackPowerUpTime(float attackPowerUpTime) {
         this.attackPowerUpTime = attackPowerUpTime;
     }
@@ -39,8 +42,14 @@ public abstract class Character extends GameObject {
     private State state;
 
 
-    public Character(int width, int height, AnimationObject animationObject){
+    public boolean isP1() {
+        return p1;
+    }
+
+    public Character(int width, int height, AnimationObject animationObject, boolean p1){
         super(width,height,animationObject);
+
+        this.p1 = p1;
         state = State.STALL;
     }
     /*

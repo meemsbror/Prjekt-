@@ -24,21 +24,18 @@ public class CharacterController {
     private final Platform platform;
 
     //All items in a list
-    private final ArrayList<GameObject> gameObjects;
+    private final ArrayList<IEntity> gameObjects;
 
     private final IKeyInput input;
     private float time;
     private IPhysics physics = Physics.getInstance();
-    private boolean paused;
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
-
     private IGraphics graphics;
 
     public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
-        this.paused = false;
         this.platform = platform;
 
         initiatePlayerDirections();
@@ -66,13 +63,11 @@ public class CharacterController {
 
     //Updates the model
     public void update(float delta){
-        if(!paused) {
             time += delta;
             updateCharacterDirection(delta);
             moveCharacters(delta);
             checkCollision(delta);
             checkPowerUp(delta);
-        }
     }
 
     private void checkPowerUp(float delta) {
@@ -248,10 +243,6 @@ public class CharacterController {
         P2_DIRECTIONS.put(Direction.P2STOP, Direction.STOP);
     }
 
-
-    public boolean isPaused(){
-        return paused;
-    }
 
     //Asks the character to jump
     public void jump(Character character){

@@ -8,6 +8,8 @@ public class DesktopLauncher {
 	public MyGdxGame launch () {
 		MyGdxGame myGdxGame = new MyGdxGame();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.height = 720;
+		config.width = 1280;
 		new LwjglApplication(myGdxGame, config);
 		return myGdxGame;
 	}

@@ -32,7 +32,7 @@ public class SmurfCharacter extends Character {
     public SmurfCharacter(boolean isPlayer1) {
         //SmurfCharacter is always 128x128!
         //TODO Anpassa höjden och bredden till spriten.
-        super(227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f));
+        super(227, 386, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f), isPlayer1);
         straightAttack = new StraightAttack(194, 117, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
