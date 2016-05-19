@@ -7,6 +7,7 @@ import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
@@ -24,7 +25,7 @@ public class Arena extends Scene{
 
     private final boolean running = true;
 
-    List<GameObject> gameObjects = new ArrayList<GameObject>();
+    List<IEntity> gameObjects = new ArrayList<GameObject>();
 
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
@@ -34,7 +35,7 @@ public class Arena extends Scene{
 
         //TODO - Fix Platform with PlatformFactory
         Platform platform= new Platform(50,50,500,30); // This is shit right now (Y)
-        this.characterController = new CharacterController(gameObjects, input, platform);
+        this.characterController = new CharacterController(gameObjects, input, platform, graphics);
 
     }
 
