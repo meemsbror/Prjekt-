@@ -124,11 +124,11 @@ public class CharacterSelectController extends Scene{
 
 
     public Character getPlayer1(){
-        return CharacterFactory.createCharacter(char1);
+        return CharacterFactory.createCharacter(char1, true);
     }
 
     public Character getPlayer2(){
-        return CharacterFactory.createCharacter(char2);
+        return CharacterFactory.createCharacter(char2, false);
     }
 
     private void initiatePositions(){

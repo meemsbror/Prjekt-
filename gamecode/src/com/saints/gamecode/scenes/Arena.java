@@ -2,11 +2,11 @@ package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
-import com.saints.gamecode.Direction;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
@@ -22,9 +22,10 @@ public class Arena extends Scene{
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
 
+    private boolean paused;
     private final boolean running = true;
 
-    List<GameObject> gameObjects = new ArrayList<GameObject>();
+    List<IEntity> gameObjects = new ArrayList<IEntity>();
 
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
@@ -38,7 +39,7 @@ public class Arena extends Scene{
 
     }
 
-    public List<GameObject> getGameObjects() {
+    public List<IEntity> getGameObjects() {
         return gameObjects;
     }
 
@@ -56,11 +57,12 @@ public class Arena extends Scene{
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
         //TODO Check input for pause :)
-            characterController.update(delta);
-       // if (!characterController.isPaused()) {
-        System.out.println("kommer den in hit? arena update()");
             graphics.update(delta, getGameObjects());
-        //}
+       if (!paused) {
+            characterController.update(delta);
+        }else{
+
+       }
     }
 
     public void setCharacters(Character player1, Character player2){
