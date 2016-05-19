@@ -12,6 +12,7 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Arena extends Scene{
     private boolean paused = false;
     private final boolean running = true;
 
+
     List<IEntity> gameObjects = new ArrayList<IEntity>();
 
     PauseMenu pauseMenu = new PauseMenu(new AnimationObject("assets/pictures/PauseMenu.png", 1, 3, 1));
@@ -38,7 +40,7 @@ public class Arena extends Scene{
 
         //TODO - Fix Platform with PlatformFactory
         Platform platform= new Platform(50,50,500,30); // This is shit right now (Y)
-        this.characterController = new CharacterController(gameObjects, input, platform);
+        this.characterController = new CharacterController(gameObjects, input, platform, graphics);
 
     }
 

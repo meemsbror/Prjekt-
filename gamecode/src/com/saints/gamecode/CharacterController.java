@@ -6,9 +6,11 @@ import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
+import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -29,13 +31,15 @@ public class CharacterController {
     private IPhysics physics = Physics.getInstance();
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
+    private IGraphics graphics;
 
-    public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform){
+    public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
         this.platform = platform;
 
         initiatePlayerDirections();
+        this.graphics = graphics;
     }
 
     //Sets the starting position of both players
@@ -270,12 +274,14 @@ public class CharacterController {
         setStartPositions();
     }
 
-    //
+
     private void initiateHealthBar(){
         int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
         this.HPBar.setStartingMax(HPBarHelper);
         this.HPBar.setP2Limit(HPBarHelper);
         // sets divider correctly for case when Characters have different health-pools
         this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
+        this.HPBar.setPosition((graphics.getScreenWidth()/2)-(HPBar.getWidth()/2),
+                ((graphics.getScreenHeight()/10)*9));
     }
 }
