@@ -16,6 +16,6 @@ public class CharacterFactory {
 
     //Returns an array with the name of all available characters
     public static String [] getCharacters(){
-        return new String [] {"smurf"};
+        return new String [] {"Smurf"};
     }
 }

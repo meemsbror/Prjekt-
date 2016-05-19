@@ -3,6 +3,10 @@ package com.saints.gamecode.maps;
 public class SandboxMap extends Map {
     @Override
     public String toString() {
-        return "SandboxMap{}";
+        return "SandboxMap";
+    }
+
+    public SandboxMap() {
+        
     }
 }
