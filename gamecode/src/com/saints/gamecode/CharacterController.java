@@ -178,6 +178,50 @@ public class CharacterController {
     }
 
 
+    //Takes a direction and a player and updates the model depending on the input (direction)
+    public void keyPressed(Direction direction, Character character, Character opositeCharacter){
+        switch(direction){
+
+            //Player movement
+            case LEFT:
+                moveLeft(character);
+                break;
+            case RIGHT :
+                moveRight(character);
+                break;
+            case JUMP:
+                jump(character);
+                break;
+            case DIVE:
+                character.move(0,-5);
+                break;
+            case ATTACK:
+                attack(character, opositeCharacter);
+                break;
+        }
+    }
+    public void attack(Character character, Character opositeCharacter){
+        if(!(character.getState() == State.PUNCH)){
+            if(character.attack(opositeCharacter)){
+                HPBar.dealDamage(character.getDamage());
+                if (HPBar.getIsGameOver()){
+                    System.out.println(HPBar.getWinner()); //TODO: end game, how?
+                }
+            }
+            for(int i = 0; i < gameObjects.size(); i++){
+                if(gameObjects.get(i) instanceof Item) {
+                    Item item = (Item) gameObjects.get(i);
+                    if(character.attack(item)){
+                        character.setAttackPowerUpTime(time + item.getDuration());
+                        character.powerUp(true);
+                        gameObjects.remove(i);
+                    }
+                }
+            }
+            //Sets the cooldown for next attack, dependant on current time and what sort of character that is attacking.
+            character.setAttackCD(time);
+        }
+    }
 
 
     //Puts the different playerDirections and maps them to the general direction

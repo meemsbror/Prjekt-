@@ -187,22 +187,6 @@ public class HealthTest {
         int currentMax = healthBar.getMaxHealth(); // 100
         int currentMin = healthBar.getMinHealth(); // 0
 
-        // game shouldn't be over yet.
-        assertTrue(!healthBar.isOver());
 
-        // should end game, return true.
-        healthBar.setDivider(0);
-        assertTrue(healthBar.isOver());
-
-        // should return false
-        healthBar.setDivider(98);
-        assertTrue(!healthBar.isOver());
-
-        // setting healthBar past divider (should never happen in game, this check must be done in the model
-	    // and is not performed in Healthbar class - the healthbar does not know keep track of the characters.
-	    // this test is merely a demonstration that the methods work as intended)
-        healthBar.setMax(-10); // current divider = 98 and maxhealth  80 should return true
-        assertTrue(healthBar.isOver());
-
-    }*/
+    }
 }
