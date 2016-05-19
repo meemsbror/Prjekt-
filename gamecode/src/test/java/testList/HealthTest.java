@@ -147,6 +147,10 @@ public class HealthTest {
         assertTrue((currentMaxHealth = 100) == healthBar.getP2Limit());
         assertTrue((currentMinHealth = 0) == healthBar.getP1Limit());
 
+	    healthBar.changeGameLength(0);
+	    assertTrue(currentMaxHealth == healthBar.getP2Limit());
+	    assertTrue(currentMinHealth == healthBar.getP1Limit());
+
 	    // making sure these stay same.
 	    assertTrue(maxLimit == 100);
 	    assertTrue(minLimit == 0);
@@ -250,5 +254,22 @@ public class HealthTest {
 		boolean gameOver = healthBar.getIsGameOver(); // false;
 
 
+		healthBar.setDivider(15);
+		healthBar.changeGameLength(-20); // this should call for sudden death
+		// divider should be set at 21 and limit at 20
+		currentDivider = healthBar.getDivider();
+		currentMin = healthBar.getP1Limit();
+		currentMax = healthBar.getP2Limit();
+		assertTrue(currentDivider  == 21);
+		assertTrue(currentMin == 20);
+		assertTrue(currentMax == 80);
+
+		healthBar.dealDamage(-10); // damage surpassing limit, invoking conditional
+		currentDivider = healthBar.getDivider();
+		winner = healthBar.getWinner();
+		gameOver = healthBar.getIsGameOver();
+		assertTrue(currentDivider == 20);
+		assertTrue(winner.equals("Player 2"));
+		assertTrue(gameOver);
 	}
 }
