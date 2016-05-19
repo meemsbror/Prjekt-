@@ -5,9 +5,11 @@ import com.saints.gamecode.gameobjects.characters.Character;
 
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -30,13 +32,16 @@ public class CharacterController {
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(List<GameObject> gameObjects, IKeyInput input, Platform platform){
+    private IGraphics graphics;
+
+    public CharacterController(List<GameObject> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
         this.paused = false;
         this.platform = platform;
 
         initiatePlayerDirections();
+        this.graphics = graphics;
     }
 
     //Sets the starting position of both players
@@ -284,5 +289,6 @@ public class CharacterController {
         this.HPBar.setP2Limit(HPBarHelper);
         // sets divider correctly for case when Characters have different health-pools
         this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
+        this.HPBar.setPosition((graphics.getScreenWidth()/2),(graphics.getScreenHeight()/10)*9);
     }
 }
