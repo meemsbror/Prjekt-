@@ -10,6 +10,9 @@ public class CharacterPanel implements IEntity{
 
     private Position pos;
 
+    private int width = 300;
+    private int height = 275;
+
     public CharacterPanel(String imgPath, String characterName){
         this.imgPath = imgPath;
         this.characterName = characterName;
@@ -36,12 +39,24 @@ public class CharacterPanel implements IEntity{
         return characterName;
     }
 
+    @Override
     public void setPosition(int x, int y){
         pos.setX(x);
         pos.setY(y);
     }
 
+    @Override
     public Position getPosition(){
         return (Position)pos.clone();
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 }

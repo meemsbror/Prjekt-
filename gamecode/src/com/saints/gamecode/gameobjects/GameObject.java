@@ -132,23 +132,9 @@ public abstract class GameObject implements IEntity {
         pos.setY(y);
     }
 
-
-    public boolean onPlatform(Platform platform){
-     //if ( ("X for any part of object"=="X for any part of platform")
-     // AND ("Y for bottom of object"=="Y for top of platform") ) {return true}
-     if ( (!(pos.getX()-getWidth()<platform.getX())||(platform.getX()+getWidth()<pos.getX())) &&
-             (pos.getY()<platform.getY()) && (pos.getY()>platform.getY()-50)) { //marginal is 50
-                return true;
-        }else{
-            return false;
-        }
-    }
-    public AnimationObject getAnimationObject(){
+   public AnimationObject getAnimationObject(){
         return animationObject;
     }
-
-
-
     @Override
     public String toString() {
         return "GameObject{" +
