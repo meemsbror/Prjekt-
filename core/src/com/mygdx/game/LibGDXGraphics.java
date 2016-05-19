@@ -60,7 +60,6 @@ public class LibGDXGraphics implements IGraphics{
 
                 //if character is facing right, draw the character as it is.
                 if(!character.isFacingRight()){
-                    System.out.println("kommer den in hit? graphics");
                     batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
 
                    ///If the character is punching draw the punch aswell.
@@ -107,5 +106,15 @@ public class LibGDXGraphics implements IGraphics{
         map.put(State.WALK, 1);
         map.put(State.JUMP, 2);
         map.put(State.PUNCH, 3);
+    }
+
+    @Override
+    public int getScreenHeight() {
+        return Gdx.graphics.getHeight();
+    }
+
+    @Override
+    public int getScreenWidth() {
+        return Gdx.graphics.getWidth();
     }
 }
