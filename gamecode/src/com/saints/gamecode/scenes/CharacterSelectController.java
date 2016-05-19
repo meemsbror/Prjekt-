@@ -119,7 +119,6 @@ public class CharacterSelectController extends Scene{
         char2 = characterPanels[(int)p2Pos.getY()][(int)p2Pos.getX()].getName();
 
         firePropertyChange("Characters selected",null,null);
-        System.out.println("kommer den in hit? charactersSelected - csc");
     }
 
 
