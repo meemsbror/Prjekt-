@@ -8,10 +8,14 @@ import java.util.List;
 
 public interface IGraphics {
 
-    void update (float delta, List<GameObject> gameObjects);
+    void update (float delta, List<IEntity> gameObjects);
 
     void addAnimation(AnimationObject animationObject);
 
     void addTexture(String path);
+
+    int getScreenHeight();
+
+    int getScreenWidth();
 }
 

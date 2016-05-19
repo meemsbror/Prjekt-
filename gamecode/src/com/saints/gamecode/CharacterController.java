@@ -5,6 +5,7 @@ import com.saints.gamecode.gameobjects.characters.Character;
 
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
@@ -21,19 +22,17 @@ public class CharacterController {
     private final Platform platform;
 
     //All items in a list
-    private final ArrayList<GameObject> gameObjects;
+    private final ArrayList<IEntity> gameObjects;
 
     private final IKeyInput input;
     private float time;
     private IPhysics physics = Physics.getInstance();
-    private boolean paused;
 
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
 
-    public CharacterController(List<GameObject> gameObjects, IKeyInput input, Platform platform){
+    public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform){
         this.gameObjects = (ArrayList)gameObjects;
         this.input = input;
-        this.paused = false;
         this.platform = platform;
 
         initiatePlayerDirections();
@@ -60,13 +59,11 @@ public class CharacterController {
 
     //Updates the model
     public void update(float delta){
-        if(!paused) {
             time += delta;
             updateCharacterDirection(delta);
             moveCharacters(delta);
             checkCollision(delta);
             checkPowerUp(delta);
-        }
     }
 
     private void checkPowerUp(float delta) {
@@ -242,10 +239,6 @@ public class CharacterController {
         P2_DIRECTIONS.put(Direction.P2STOP, Direction.STOP);
     }
 
-
-    public boolean isPaused(){
-        return paused;
-    }
 
     //Asks the character to jump
     public void jump(Character character){

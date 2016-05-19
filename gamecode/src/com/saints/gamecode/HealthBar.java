@@ -1,8 +1,12 @@
 package com.saints.gamecode;
 
 
+import com.badlogic.gdx.Graphics;
+import com.saints.gamecode.interfaces.IEntity;
+import javafx.geometry.Pos;
+
 //A HealthBar for representing the current state for BOTH players
-public final class HealthBar {
+public final class HealthBar implements IEntity{
 
 
     private static final HealthBar INSTANCE = new HealthBar();
@@ -14,6 +18,9 @@ public final class HealthBar {
 
     }
 
+
+    // where Healthbar will be drawn
+    private Position position = new Position(50, 50);
 
     // starting max (game length should not exceed this)
     private int startingMax = 100;
@@ -207,4 +214,24 @@ public final class HealthBar {
     }
 
 
+    @Override
+    public void setPosition(int x, int y) {
+        this.position.setX(x);
+        this.position.setY(y);
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
+    }
+
+    @Override
+    public int getWidth() {
+        return 200;
+    }
+
+    @Override
+    public int getHeight() {
+        return 50;
+    }
 }

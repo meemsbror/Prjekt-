@@ -6,11 +6,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
+import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 
@@ -27,7 +29,8 @@ public class LibGDXGraphics implements IGraphics{
     //For animations
     private float elapsedTime = 0;
     //AttackTime
-    private float attackTime = 0;
+    private float p1AttackTime = 0;
+    private float p2AttackTime = 0;
     private TextureRegion tmpRegion;
 
 
@@ -38,7 +41,7 @@ public class LibGDXGraphics implements IGraphics{
         initiateState();
     }
 
-    public void update(float delta, List<GameObject> gameObjects){
+    public void update(float delta, List<IEntity> gameObjects){
 
         elapsedTime = elapsedTime + delta;
 
@@ -49,44 +52,18 @@ public class LibGDXGraphics implements IGraphics{
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
-                //The current animation frame of the character
-                tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
-                GameObject attack = character.getStraightAttack();
+                drawCharacter(character, delta);
 
-                //See if it is flipped, if it is flip it.
-                if(!tmpRegion.isFlipX()){
-                    tmpRegion.flip(true, false);
-                }
-
-                //if character is facing right, draw the character as it is.
-                if(!character.isFacingRight()){
-                    System.out.println("kommer den in hit? graphics");
-                    batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
-
-                   ///If the character is punching draw the punch aswell.
-                    if(character.getState() == State.PUNCH){
-                        attackTime += delta;
-                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime,true), attack.getPos().getX(), attack.getPos().getY(), -attack.getWidth(), attack.getHeight());
-                    }
-
-                //If character is facing left, flip the immage to the right direction again.
-                }else{
-                    tmpRegion.flip(true, false);
-                    batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
-
-                    ///If the character is punching draw the punch aswell.
-                    if(character.getState() == State.PUNCH){
-                        attackTime += delta;
-                        System.out.println(attack.getPos().toString());
-                        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime,true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
-                    }
-                }
             }
-            else{
-                GameObject gameObject = gameObjects.get(i);
+            else if(gameObjects.get(i) instanceof Item){
+                GameObject gameObject = (Item)gameObjects.get(i);
                 Position pos = gameObject.getPos();
                 batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
 
+            }else if(gameObjects.get(i) instanceof PauseMenu) {
+                PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
+                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime);
+                batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
             }
         }
         batch.end();
@@ -108,4 +85,58 @@ public class LibGDXGraphics implements IGraphics{
         map.put(State.JUMP, 2);
         map.put(State.PUNCH, 3);
     }
+    public void drawCharacter(Character character, float delta){
+        //The current animation frame of the character
+        tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
+
+        //See if it is flipped, if it is flip it.
+        if(!tmpRegion.isFlipX()){
+            tmpRegion.flip(true, false);
+        }
+
+        //if character is facing right, draw the character as it is.
+        if(!character.isFacingRight()){
+            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+            if(character.getState() == State.PUNCH) {
+                punch(character, delta, -1);
+            }
+
+
+            //If character is facing left, flip the immage to the right direction again.
+        }else{
+            tmpRegion.flip(true, false);
+            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+
+            ///If the character is punching draw the punch aswell.
+            if(character.getState() == State.PUNCH){
+                punch(character, delta, 1);
+            }
+        }
+    }
+
+
+    public void punch(Character character, float delta, float negative){
+        GameObject attack = character.getStraightAttack();
+        if(character.isP1()) {
+            //If the character is punching draw the punch aswell.
+            p1AttackTime += delta;
+            drawPunch(attack, p1AttackTime, negative);
+        }else{
+            p2AttackTime += delta;
+            drawPunch(attack, p2AttackTime, negative);
+        }
+    }
+    public void drawPunch(GameObject attack,float attackTime, float negative) {
+        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    }
+    @Override
+    public int getScreenHeight() {
+        return Gdx.graphics.getHeight();
+    }
+
+    @Override
+    public int getScreenWidth() {
+        return Gdx.graphics.getWidth();
+    }
 }
+

@@ -2,11 +2,12 @@ package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
-import com.saints.gamecode.Direction;
+import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
@@ -22,9 +23,12 @@ public class Arena extends Scene{
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
 
+    private boolean paused = false;
     private final boolean running = true;
 
-    List<GameObject> gameObjects = new ArrayList<GameObject>();
+    List<IEntity> gameObjects = new ArrayList<IEntity>();
+
+    PauseMenu pauseMenu = new PauseMenu(new AnimationObject("assets/pictures/PauseMenu.png", 1, 3, 1));
 
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
@@ -38,29 +42,43 @@ public class Arena extends Scene{
 
     }
 
-    public List<GameObject> getGameObjects() {
+    public List<IEntity> getGameObjects() {
         return gameObjects;
     }
 
     //Starts a match between two players
     public void startMatch(){
-        //Adds all item animations
-        graphics.addAnimation(new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f));
+        addAnimations();
+        addItem();
     }
 
     private void addCharacterAnimation(Character player){
         graphics.addAnimation(player.getAnimationObject());
         graphics.addAnimation(player.getStraightAttack().getAnimationObject());
     }
+    private void addAnimations(){
+        //Adds all item animations
+        graphics.addAnimation(new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f));
+        //Add menu animation
+        graphics.addAnimation(pauseMenu.getAnimationObject());
+    }
 
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
         //TODO Check input for pause :)
-            characterController.update(delta);
-       // if (!characterController.isPaused()) {
-        System.out.println("kommer den in hit? arena update()");
+        if (!paused) {
+            if(gameObjects.contains(pauseMenu)){
+               gameObjects.remove(pauseMenu);
+            }
             graphics.update(delta, getGameObjects());
-        //}
+            characterController.update(delta);
+        }else{
+            if(!(gameObjects.contains(pauseMenu))){
+                gameObjects.add(pauseMenu);
+            }
+            delta = 0;
+            graphics.update(delta, getGameObjects());
+        }
     }
 
     public void setCharacters(Character player1, Character player2){
@@ -69,7 +87,6 @@ public class Arena extends Scene{
         addCharacterAnimation(player1);
         addCharacterAnimation(player2);
         characterController.setCharacters(player1, player2);
-        addItem();
     }
     public void addItem(){
         gameObjects.add(new AttackPower(100,100,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
