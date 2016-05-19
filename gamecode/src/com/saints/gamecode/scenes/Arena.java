@@ -33,7 +33,7 @@ public class Arena extends Scene{
         startMatch();
 
         //TODO - Fix Platform with PlatformFactory
-        Platform platform= new Platform(30,30,700,30); // This is shit right now (Y)
+        Platform platform= new Platform(50,50,500,30); // This is shit right now (Y)
         this.characterController = new CharacterController(gameObjects, input, platform);
 
     }

@@ -134,11 +134,13 @@ public class CharacterController {
 
     private void applyPlatform(GameObject gameObject){
 
-        if(physics.belowPlatform(gameObject, platform)){
+        if(physics.isBelowPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
             gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
             gameObject.setAirborne(false);
         }
+        //if walking outside platform isAirborne is set to true
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
     }
 
     //Adds a gravity vector the the object if it is in the air
