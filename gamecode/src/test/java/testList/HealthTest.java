@@ -164,7 +164,7 @@ public class HealthTest {
         currentDivider = healthBar.getDivider(); // should be 2
         assertTrue(currentDivider == 2); // divider set to limit +1
         currentMax = healthBar.getP2Limit();
-        assertTrue(currentMax == 99); // rediced by 1
+        assertTrue(currentMax == 99); // reduced by 1
         currentMin = healthBar.getP1Limit();
         assertTrue(currentMin == 1);
 
@@ -180,7 +180,7 @@ public class HealthTest {
     }
 
     // TODO: some more tests
-   /* @Test
+   @Test
     public void isOverTest(){
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider = healthBar.getDivider(); // 40
