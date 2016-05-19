@@ -11,7 +11,7 @@ public class CharacterFactory {
                 return new SmurfCharacter(p1);
             default:
                 return new SmurfCharacter(p1);
-                }
+       }
     }
 
     //Returns an array with the name of all available characters
