@@ -7,4 +7,8 @@ public interface IEntity {
     void setPosition(int x, int y);
 
     Position getPosition();
+
+    int getWidth();
+
+    int getHeight();
 }

@@ -8,6 +8,8 @@ import com.saints.gamecode.interfaces.IEntity;
 public class PauseMenu implements IEntity {
 
     private AnimationObject animationObject;
+    private final int width = 460;
+    private final int height = 1000;
 
     public AnimationObject getAnimationObject() {
         return animationObject;
@@ -29,5 +31,15 @@ public class PauseMenu implements IEntity {
     @Override
     public Position getPosition() {
         return null;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
     }
 }

@@ -53,6 +53,7 @@ public class LibGDXGraphics implements IGraphics{
             if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 drawCharacter(character, delta);
+
             }
             else if(gameObjects.get(i) instanceof Item){
                 GameObject gameObject = (Item)gameObjects.get(i);
@@ -125,8 +126,17 @@ public class LibGDXGraphics implements IGraphics{
             drawPunch(attack, p2AttackTime, negative);
         }
     }
-    public void drawPunch(GameObject attack,float attackTime, float negative){
-        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime,true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    public void drawPunch(GameObject attack,float attackTime, float negative) {
+        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    }
+    @Override
+    public int getScreenHeight() {
+        return Gdx.graphics.getHeight();
+    }
+
+    @Override
+    public int getScreenWidth() {
+        return Gdx.graphics.getWidth();
     }
 }
 

@@ -18,19 +18,8 @@ public class Platform extends GameObject {
         this.y=y;
         this.width=width;
         this.height=height;
-
-
-
     }
 
-    public void setPlatform(int x, int y, int width, int height){
-        //pos = new Position(x,y);
-        /*this.x = x;
-        this.width = width;
-        this.y = y;
-        this.height = height;*/
-
-    }
 
     public int getX() {
         return x;
@@ -47,5 +36,10 @@ public class Platform extends GameObject {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+
     }
 }

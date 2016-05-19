@@ -13,5 +13,9 @@ public interface IGraphics {
     void addAnimation(AnimationObject animationObject);
 
     void addTexture(String path);
+
+    int getScreenHeight();
+
+    int getScreenWidth();
 }
 
