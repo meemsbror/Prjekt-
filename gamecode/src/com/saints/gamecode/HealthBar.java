@@ -182,6 +182,17 @@ public final class HealthBar implements IEntity{
                 "\nPlayer 2 status: " + (getP2Limit()- getDivider());
 
     }
+
+    @Override
+    public Object clone()  {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            //Never invoked
+        }
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()){
