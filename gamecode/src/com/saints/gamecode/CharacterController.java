@@ -276,13 +276,5 @@ public class CharacterController {
     }
 
 
-    private void initiateHealthBar(){
-        int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
-        this.HPBar.setStartingMax(HPBarHelper);
-        this.HPBar.setP2Limit(HPBarHelper);
-        // sets divider correctly for case when Characters have different health-pools
-        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
-        this.HPBar.setPosition((graphics.getScreenWidth()/2)-(HPBar.getWidth()/2),
-                ((graphics.getScreenHeight()/10)*9));
-    }
+    
 }

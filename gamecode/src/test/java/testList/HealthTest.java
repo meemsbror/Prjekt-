@@ -130,6 +130,8 @@ public class HealthTest {
 	    // these initial values translate exactly to the unset limits (default)
         int currentMinHealth = healthBar.getP1Limit(); //should be 0
 	    int currentMaxHealth = healthBar.getP2Limit(); //should be 100
+	    int maxLimit = healthBar.getStartingMax();
+	    int minLimit = healthBar.getStartingMin();
 
 
         // reduce both sides max health by 1
@@ -144,6 +146,10 @@ public class HealthTest {
         healthBar.changeGameLength(5);
         assertTrue((currentMaxHealth = 100) == healthBar.getP2Limit());
         assertTrue((currentMinHealth = 0) == healthBar.getP1Limit());
+
+	    // making sure these stay same.
+	    assertTrue(maxLimit == 100);
+	    assertTrue(minLimit == 0);
     }
 
 
@@ -184,9 +190,65 @@ public class HealthTest {
     public void isOverTest(){
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider = healthBar.getDivider(); // 40
-        int currentMax = healthBar.getMaxHealth(); // 100
-        int currentMin = healthBar.getMinHealth(); // 0
+        int currentMax = healthBar.getP2Limit(); // 100
+        int currentMin = healthBar.getP1Limit(); // 0
+
+	   healthBar.setP1Limit(30);
+	   healthBar.setDivider(30);
+	   currentMin = healthBar.getP1Limit();
+	   currentDivider = healthBar.getDivider();
+	   assertTrue(healthBar.isOver()); // should be true
+	   healthBar.setDivider(60);
+	   healthBar.setP2Limit(60);
+	   assertTrue(healthBar.isOver()); // should be true
+	   healthBar.setDivider(45);
+	   assertTrue(!healthBar.isOver()); // should be false
 
 
     }
+
+    @Test
+    public void suddenDeathTest(){
+        HealthBar healthBar = HealthBar.getInstance();
+        int currentMax = healthBar.getP2Limit(); // 100
+        int currentMin = healthBar.getP1Limit(); // 0
+        int maxLimit = healthBar.getStartingMax(); // 100
+        int minLimit = healthBar.getStartingMin(); // 0
+        int currentDivider = healthBar.getDivider(); // 40
+
+        // First Sudden Death. Limits should  equal +/- 1
+        healthBar.p1SuddenDeath(-1); // divider should be 2 && currentmin 1
+        currentMin = healthBar.getP1Limit();
+        currentDivider = healthBar.getDivider();
+        assertTrue(currentMin == 1);
+        assertTrue(currentDivider == 2);
+
+        // Second SD
+        healthBar.p2SuddenDeath(-1); // divider should be 97 && currentMax 98
+        currentMax = healthBar.getP2Limit();
+        currentDivider = healthBar.getDivider();
+        assertTrue(currentMax == 98);
+        assertTrue(currentDivider == 97);
+
+	    // making sure these stay same.
+	    assertTrue(maxLimit == 100);
+	    assertTrue(minLimit == 0);
+
+    }
+
+	// should be a quite complete test for everything going on.
+	@Test
+	public void conditionalTest(){
+		HealthBar healthBar = HealthBar.getInstance();
+		// initiation of everything, a clean HealthBar
+		int currentMax = healthBar.getP2Limit(); // 100
+		int currentMin = healthBar.getP1Limit(); // 0
+		int maxLimit = healthBar.getStartingMax(); // 100
+		int minLimit = healthBar.getStartingMin(); // 0
+		int currentDivider = healthBar.getDivider(); // 40
+		String winner = healthBar.getWinner(); // "none"
+		boolean gameOver = healthBar.getIsGameOver(); // false;
+
+
+	}
 }
