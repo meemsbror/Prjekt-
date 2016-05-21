@@ -94,7 +94,7 @@ public final class HealthBar implements IEntity{
             setIsGameOver(true);
             return getIsGameOver();
         }else {
-            setIsGameOver(false);
+            setIsGameOver(false); // probably redundant
             return getIsGameOver();
         }
     }
@@ -103,7 +103,7 @@ public final class HealthBar implements IEntity{
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int delta){
-        // should never happen
+        // should never happen in game
         if (delta == 0){
             return;
         }

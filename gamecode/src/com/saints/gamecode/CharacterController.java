@@ -178,7 +178,7 @@ public class CharacterController {
     }
 
 
-   //Takes a direction and a player and updates the model depending on the input (direction)
+    //Takes a direction and a player and updates the model depending on the input (direction)
     public void keyPressed(Direction direction, Character character, Character opositeCharacter){
         switch(direction){
 
@@ -198,7 +198,7 @@ public class CharacterController {
             case ATTACK:
                 attack(character, opositeCharacter);
                 break;
-       }
+        }
     }
     public void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
@@ -222,6 +222,7 @@ public class CharacterController {
             character.setAttackCD(time);
         }
     }
+
 
     //Puts the different playerDirections and maps them to the general direction
     public void initiatePlayerDirections() {
@@ -273,7 +274,6 @@ public class CharacterController {
         initiateHealthBar();
         setStartPositions();
     }
-
 
     private void initiateHealthBar(){
         int HPBarHelper = (player1.getHitPoints() + player2.getHitPoints());
