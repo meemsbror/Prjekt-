@@ -2,6 +2,7 @@ package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
+import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
@@ -52,6 +53,10 @@ public class Arena extends Scene{
     public void startMatch(){
         addAnimations();
         addItem();
+    }
+    public void addHealthBar(){
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject1());
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject2());
     }
 
     private void addCharacterAnimation(Character player){
