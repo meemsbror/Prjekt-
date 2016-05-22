@@ -3,6 +3,7 @@ package com.saints.gamecode.scenes;
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
 import com.saints.gamecode.Direction;
+import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
@@ -13,6 +14,7 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
 import java.beans.PropertyChangeSupport;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,7 @@ public class Arena extends Scene{
     private boolean paused = false;
     private final boolean running = true;
 
+
     List<IEntity> gameObjects = new ArrayList<IEntity>();
 
     PauseMenu pauseMenu = new PauseMenu(new AnimationObject("assets/pictures/PauseMenu.png", 1, 3, 1));
@@ -41,7 +44,7 @@ public class Arena extends Scene{
 
         //TODO - Fix Platform with PlatformFactory
         Platform platform= new Platform(50,50,500,30); // This is shit right now (Y)
-        this.characterController = new CharacterController(gameObjects, input, platform);
+        this.characterController = new CharacterController(gameObjects, input, platform, graphics);
 
     }
 
@@ -53,6 +56,11 @@ public class Arena extends Scene{
     public void startMatch(){
         addAnimations();
         addItem();
+        addHealthBarAnimation();
+    }
+    public void addHealthBarAnimation(){
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject1());
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject2());
     }
 
     private void addCharacterAnimation(Character player){

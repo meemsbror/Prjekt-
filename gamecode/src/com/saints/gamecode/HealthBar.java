@@ -39,6 +39,10 @@ public final class HealthBar implements IEntity{
     private String winner = "none";
 
 
+	private AnimationObject animationObject1 = new AnimationObject("assets/pictures/HPBarBase.png", 1,1,1);
+	private AnimationObject animationObject2 = new AnimationObject("assets/pictures/HPBarTop.png", 1,1,1);
+
+
     // Getters and Setters for currentMax variable.
     // Method for setting the current HP bar's max
     public void setP2Limit(int maxLimit){
@@ -94,7 +98,7 @@ public final class HealthBar implements IEntity{
             setIsGameOver(true);
             return getIsGameOver();
         }else {
-            setIsGameOver(false);
+            setIsGameOver(false); // probably redundant
             return getIsGameOver();
         }
     }
@@ -103,7 +107,7 @@ public final class HealthBar implements IEntity{
     // if we want to strip 1 hp from both, send in -1.
     // only to be called if we require equal change: no change on divider.
     public void changeGameLength(int delta){
-        // should never happen
+        // should never happen in game
         if (delta == 0){
             return;
         }
@@ -182,6 +186,17 @@ public final class HealthBar implements IEntity{
                 "\nPlayer 2 status: " + (getP2Limit()- getDivider());
 
     }
+
+    @Override
+    public Object clone()  {
+        try {
+            return super.clone();
+        } catch (CloneNotSupportedException e) {
+            //Never invoked
+        }
+        return null;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()){
@@ -227,11 +242,17 @@ public final class HealthBar implements IEntity{
 
     @Override
     public int getWidth() {
-        return 200;
+        return 882;
     }
 
     @Override
     public int getHeight() {
-        return 50;
+        return 127;
+    }
+    public AnimationObject getAnimationObject1(){
+        return animationObject1;
+    }
+    public AnimationObject getAnimationObject2(){
+        return animationObject2;
     }
 }
