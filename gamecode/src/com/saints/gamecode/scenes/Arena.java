@@ -2,6 +2,7 @@ package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
+import com.saints.gamecode.Direction;
 import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
@@ -22,6 +23,8 @@ public class Arena extends Scene{
     private final IKeyInput input;
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
+
+    private float pauseTimer = 0;
 
     private boolean paused = false;
     private final boolean running = true;
@@ -65,7 +68,7 @@ public class Arena extends Scene{
 
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
-        //TODO Check input for pause :)
+        paused = updatePaused(delta);
         if (!paused) {
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
@@ -79,6 +82,16 @@ public class Arena extends Scene{
             delta = 0;
             graphics.update(delta, getGameObjects());
         }
+    }
+    public boolean updatePaused(float delta){
+        pauseTimer += delta;
+        if(pauseTimer > 1){
+            if(input.isKeyPressed(Direction.SELECT)) {
+                pauseTimer = 0;
+                return !paused;
+            }
+        }
+        return paused;
     }
 
     public void setCharacters(Character player1, Character player2){
