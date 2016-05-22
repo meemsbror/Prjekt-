@@ -35,6 +35,8 @@ public final class HealthBar implements IEntity{
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
     // Is game still on?
+	private int width;
+
     private boolean gameOver = false;
     private String winner = "none";
 
@@ -174,7 +176,17 @@ public final class HealthBar implements IEntity{
             setDivider(getDivider() + dmg);
 
         }
+	    setWidth(toPercent(getDivider(),getP1Limit(),getP2Limit()));
     }
+
+	// approximates what width the healthbar should have, hence int values
+	public int toPercent(int divider, int minLimit, int maxLimit){
+
+		int rangeTmp = maxLimit - minLimit;
+		int divTmp = (divider - minLimit) * 100;
+		int percent = divTmp/rangeTmp;
+		return percent;
+	}
 
     @Override
     public String toString(){
@@ -240,10 +252,14 @@ public final class HealthBar implements IEntity{
         return position;
     }
 
+
     @Override
     public int getWidth() {
-        return 882;
+        return width;
     }
+	public void setWidth(int width){
+		this.width = width;
+	}
 
     @Override
     public int getHeight() {

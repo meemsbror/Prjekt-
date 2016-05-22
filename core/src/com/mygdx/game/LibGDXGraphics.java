@@ -18,6 +18,8 @@ import java.util.Map;
 
 import java.util.List;
 
+import static com.badlogic.gdx.Gdx.graphics;
+
 public class LibGDXGraphics implements IGraphics{
 
     private final SpriteBatch batch;
@@ -60,14 +62,16 @@ public class LibGDXGraphics implements IGraphics{
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
+                batch.draw(tmpFrame, graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 , graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
 
                 TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame2, gameObject.getPosition().getX(), gameObject.getPosition().getY());
+
+	            // fix a position for bottom rectangle      \this/ == HALF SIZE (should be)
+	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80);
             }
         }
         batch.end();
@@ -135,12 +139,12 @@ public class LibGDXGraphics implements IGraphics{
     }
     @Override
     public int getScreenHeight() {
-        return Gdx.graphics.getHeight();
+        return graphics.getHeight();
     }
 
     @Override
     public int getScreenWidth() {
-        return Gdx.graphics.getWidth();
+        return graphics.getWidth();
     }
 }
 
