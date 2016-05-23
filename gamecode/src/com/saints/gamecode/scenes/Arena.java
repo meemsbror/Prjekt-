@@ -66,7 +66,8 @@ public class Arena extends Scene{
     }
 
     private void addMap() {
-
+        graphics.addTexture("assets/pictures/saints.of.chalmers-sandbox.png");
+        //graphics.addAnimation(new AnimationObject("assets/pictures/saints.of.chalmers-sandbox.png", 1,1,1));
     }
 
     private void addCharacterAnimation(Character player){

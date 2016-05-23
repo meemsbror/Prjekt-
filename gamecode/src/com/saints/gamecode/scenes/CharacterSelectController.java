@@ -7,6 +7,7 @@ import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
+//import javafx.geometry.Pos;
 
 
 public class CharacterSelectController extends Scene{
@@ -17,6 +18,8 @@ public class CharacterSelectController extends Scene{
     private String char1, char2;
     private CharacterPanel characterPanels[][];
     private Position p1Pos, p2Pos;
+    private CharacterPanel p1Panel, p2Panel;
+
 
     public CharacterSelectController(IKeyInput input, IGraphics graphics){
         this.input = input;
@@ -24,13 +27,17 @@ public class CharacterSelectController extends Scene{
         initiateInputArray();
         initiatePositions();
         initiatePanels();
+        graphics.finishLoading();
     }
 
     public void update(float delta) {
         checkInput();
+        setPanelPositions();
         updateActivePanels();
+        graphics.update(delta, characterPanels, p1Panel, p2Panel);
     }
 
+    //Checks all different input keys and if they are pressed
     private void checkInput(){
         for(Direction dir: directions){
             if(input.isKeyPressed(dir)){
@@ -45,8 +52,18 @@ public class CharacterSelectController extends Scene{
             for(int j=0; j<characterPanels[i].length; j++){
                 CharacterPanel characterPanel = characterPanels[i][j];
 
-                characterPanel.setPlayer1Selected(((int)p1Pos.getY() == i && (int)p1Pos.getX() == j));
-                characterPanel.setPlayer2Selected(((int)p2Pos.getY() == i && (int)p2Pos.getX() == j));
+                if(((int)p1Pos.getY() == i && (int)p1Pos.getX() == j)){
+                    characterPanel.setPlayer1Selected(true);
+                    Position pos = characterPanel.getPosition();
+                    p1Panel.setPosition(pos.getX(), pos.getY());
+                }
+                
+                if(((int)p2Pos.getY() == i && (int)p2Pos.getX() == j)){
+                    characterPanel.setPlayer2Selected(true);
+                    Position pos = characterPanel.getPosition();
+                    p2Panel.setPosition(pos.getX(), pos.getY());
+                }
+
             }
         }
     }
@@ -114,10 +131,10 @@ public class CharacterSelectController extends Scene{
         }
     }
 
+    //Sets the characters as selected and tells the listeners that they are ready to be fetched
     private void charactersSelected(){
         char1 = characterPanels[(int)p1Pos.getY()][(int)p1Pos.getX()].getName();
         char2 = characterPanels[(int)p2Pos.getY()][(int)p2Pos.getX()].getName();
-
         firePropertyChange("Characters selected",null,null);
     }
 
@@ -149,6 +166,54 @@ public class CharacterSelectController extends Scene{
     }
 
     private void initiatePanels(){
-        characterPanels = new CharacterPanel[][] {{new CharacterPanel("assets/pictures/SmurfPanel.png","Smurf"), new CharacterPanel("assets/pictures/LuckyPanel.png", "Lucky")}};
+        characterPanels = new CharacterPanel[][] {
+                {new CharacterPanel("assets/pictures/SmurfPanel.png","Smurf"), new CharacterPanel("assets/pictures/LuckyPanel.png", "Lucky")}
+        };
+
+        p1Panel = new CharacterPanel("assets/pictures/P1Panel.png", "P1");
+        p2Panel = new CharacterPanel("assets/pictures/P2Panel.png", "P2");
+
+        setPanelPositions();
+        addTextures();
+    }
+
+    public void addTextures(){
+        graphics.addTexture(p1Panel.getImgPath());
+        graphics.addTexture(p2Panel.getImgPath());
+
+        for(int i = 0; i < characterPanels.length; i++){
+            for (int j = 0; j < characterPanels[i].length; j++){
+                graphics.addTexture(characterPanels[i][j].getImgPath());
+            }
+        }
+
+    }
+
+    private void setPanelPositions(){
+        int screenHeight = graphics.getScreenHeight();
+        int screenWidth = graphics.getScreenWidth();
+        int rows = characterPanels.length;
+        int panelsHeight = 225*rows;
+        int ySpace = (screenHeight-panelsHeight)/(rows + 1);
+
+        for(int i = rows - 1; i >= 0; i--){
+
+            int panelsWidth = 0;
+            for(int j = 0; j < characterPanels[i].length; j++){
+                panelsWidth += characterPanels[i][j].getWidth();
+            }
+            int xSpace = (screenWidth-panelsWidth)/(characterPanels[i].length + 1);
+
+            int xPos = xSpace;
+            int yPos = ySpace*(i + 1) + 225*(i);
+
+            characterPanels[i][0].setPosition(xPos, yPos);
+
+
+            for(int j = 1; j < characterPanels[i].length; j++){
+                xPos += xSpace + characterPanels[i][j - 1].getWidth();
+                characterPanels[i][j].setPosition(xPos, yPos);
+            }
+        }
     }
 }

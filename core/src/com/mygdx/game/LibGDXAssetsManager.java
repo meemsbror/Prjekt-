@@ -41,15 +41,24 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
     }
 
+    @Override
     public void addTexture(String filename){
+        System.out.println(filename);
         assets.load(filename, Texture.class);
     }
 
+    @Override
     public Texture getTexture(String filename){
         return assets.get(filename,Texture.class);
     }
 
+    @Override
     public Animation [] getAnimation(String filename){
         return this.animations.get(filename);
+    }
+
+    @Override
+    public void finishLoading(){
+        assets.finishLoading();
     }
 }

@@ -40,7 +40,7 @@ public class CharacterPanel implements IEntity{
     }
 
     @Override
-    public void setPosition(int x, int y){
+    public void setPosition(float x, float y){
         pos.setX(x);
         pos.setY(y);
     }
@@ -58,5 +58,9 @@ public class CharacterPanel implements IEntity{
     @Override
     public int getHeight() {
         return height;
+    }
+
+    public String getImgPath(){
+        return imgPath;
     }
 }
