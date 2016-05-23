@@ -95,8 +95,8 @@ public class CharacterController {
         applyGravity(player2,delta);
 
         //If the player is falling below platform, reset y-velocity and put it on platform
-        applyPlatform(player1);
-        applyPlatform(player2);
+        applyPlatform(player1, player2);
+        applyPlatform(player2, player1);
 
 	    // If the player falls below posY(-150) kill that player.
 	    applyFallDeath(player1);
@@ -150,7 +150,7 @@ public class CharacterController {
         }
     }
 
-    private void applyPlatform(GameObject gameObject){
+    private void applyPlatform(GameObject gameObject, GameObject gameObject2){
 
         if(physics.isBelowPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
@@ -158,7 +158,7 @@ public class CharacterController {
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform, gameObject2));
     }
 
     //Adds a gravity vector the the object if it is in the air
