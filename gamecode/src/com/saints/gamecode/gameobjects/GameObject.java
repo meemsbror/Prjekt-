@@ -46,11 +46,13 @@ public abstract class GameObject implements IEntity {
         pos.move(dx, dy);
     }
 
+    @Override
     public void setPosition(float x, float y){
         saveOldPos();
         pos.setX(x);
         pos.setY(y);
     }
+
     public void setPosition(Position pos){
         this.setPosition(pos.getX(), pos.getY());
     }
@@ -126,11 +128,6 @@ public abstract class GameObject implements IEntity {
     }
 
     //Sets position
-    @Override
-    public void setPosition(int x, int y){
-        pos.setX(x);
-        pos.setY(y);
-    }
 
    public AnimationObject getAnimationObject(){
         return animationObject;

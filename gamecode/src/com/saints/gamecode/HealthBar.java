@@ -245,7 +245,7 @@ public final class HealthBar implements IEntity{
 
 
     @Override
-    public void setPosition(int x, int y) {
+    public void setPosition(float x, float y) {
         this.position.setX(x);
         this.position.setY(y);
     }

@@ -4,7 +4,7 @@ import com.saints.gamecode.Position;
 
 public interface IEntity {
 
-    void setPosition(int x, int y);
+    void setPosition(float x, float y);
 
     Position getPosition();
 
