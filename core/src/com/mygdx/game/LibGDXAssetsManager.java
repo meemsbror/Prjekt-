@@ -49,14 +49,6 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
     @Override
     public Texture getTexture(String filename){
-        while(!assets.isLoaded(filename, Texture.class)){
-            try{
-                Thread.sleep(50);
-            }catch (InterruptedException ex){
-                //just swallow since i don't quite know how to handle this.
-            }
-        }
-        System.out.println();
         return assets.get(filename,Texture.class);
     }
 

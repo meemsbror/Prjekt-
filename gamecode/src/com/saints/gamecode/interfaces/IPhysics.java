@@ -10,6 +10,6 @@ public interface IPhysics {
 
     boolean hasCollided (GameObject object1, GameObject object2);
     boolean isBelowPlatform (GameObject object, Platform platform);
-    boolean isOutsidePlatform(GameObject gameObject, Platform platform, GameObject gameObject2);
+    boolean isInAir(GameObject gameObject, Platform platform, GameObject gameObject2);
 
 }

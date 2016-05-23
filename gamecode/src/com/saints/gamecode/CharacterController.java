@@ -10,7 +10,6 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -158,7 +157,7 @@ public class CharacterController {
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform, gameObject2));
+        gameObject.setAirborne(physics.isInAir(gameObject, platform, gameObject2));
     }
 
     //Adds a gravity vector the the object if it is in the air

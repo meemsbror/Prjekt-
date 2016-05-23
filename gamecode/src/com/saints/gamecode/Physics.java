@@ -43,7 +43,7 @@ public class Physics implements IPhysics {
         }
     }
 
-    public boolean isOutsidePlatform(GameObject object, Platform platform, GameObject object2){
+    public boolean isInAir(GameObject object, Platform platform, GameObject object2){
         //When walking outside of platform the character should fall down
         if( (object.getPos().getY()>platform.getY() //above platform
                 && (hasCollided(object,object2)))) { return false;}
