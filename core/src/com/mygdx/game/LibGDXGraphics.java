@@ -45,7 +45,7 @@ public class LibGDXGraphics implements IGraphics{
         elapsedTime = elapsedTime + delta;
 
 
-        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         for(int i = 0; i<gameObjects.size(); i++){
@@ -63,6 +63,11 @@ public class LibGDXGraphics implements IGraphics{
                 PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
+
+            }else if (gameObjects.get(i) instanceof HealthBar){
+                HealthBar gameObject = (HealthBar)gameObjects.get(i);
+                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
+                batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
 
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
