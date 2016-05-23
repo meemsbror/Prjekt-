@@ -59,7 +59,7 @@ public class LibGDXGraphics implements IGraphics{
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
-                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime);
+                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);

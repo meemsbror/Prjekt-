@@ -27,8 +27,8 @@ public class Arena extends Scene{
     private PropertyChangeSupport pcs;
 
     private float pauseTimer = 0;
+    private int currentPauseOption = 0;
 
-    private boolean paused = false;
     private final boolean running = true;
 
 
@@ -76,14 +76,15 @@ public class Arena extends Scene{
 
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
-        paused = updatePaused(delta);
-        if (!paused) {
+        if (!pauseMenu.isPaused()) {
+            pauseMenu.setPaused(input.isKeyPressed(Direction.SELECT), delta);
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
             }
             graphics.update(delta, getGameObjects());
             characterController.update(delta);
         }else{
+            pauseMenu.updatePaused(delta, input);
             if(!(gameObjects.contains(pauseMenu))){
                 gameObjects.add(pauseMenu);
             }
@@ -91,15 +92,9 @@ public class Arena extends Scene{
             graphics.update(delta, getGameObjects());
         }
     }
-    public boolean updatePaused(float delta){
-        pauseTimer += delta;
-        if(pauseTimer > 1){
-            if(input.isKeyPressed(Direction.SELECT)) {
-                pauseTimer = 0;
-                return !paused;
-            }
-        }
-        return paused;
+
+    public int getCurrentPauseOption() {
+        return currentPauseOption;
     }
 
     public void setCharacters(Character player1, Character player2){
