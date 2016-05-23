@@ -7,6 +7,7 @@ import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
+import javafx.geometry.Pos;
 
 
 public class CharacterSelectController extends Scene{
@@ -51,8 +52,18 @@ public class CharacterSelectController extends Scene{
             for(int j=0; j<characterPanels[i].length; j++){
                 CharacterPanel characterPanel = characterPanels[i][j];
 
-                characterPanel.setPlayer1Selected(((int)p1Pos.getY() == i && (int)p1Pos.getX() == j));
-                characterPanel.setPlayer2Selected(((int)p2Pos.getY() == i && (int)p2Pos.getX() == j));
+                if(((int)p1Pos.getY() == i && (int)p1Pos.getX() == j)){
+                    characterPanel.setPlayer1Selected(true);
+                    Position pos = characterPanel.getPosition();
+                    p1Panel.setPosition(pos.getX(), pos.getY());
+                }
+                
+                if(((int)p2Pos.getY() == i && (int)p2Pos.getX() == j)){
+                    characterPanel.setPlayer2Selected(true);
+                    Position pos = characterPanel.getPosition();
+                    p2Panel.setPosition(pos.getX(), pos.getY());
+                }
+
             }
         }
     }

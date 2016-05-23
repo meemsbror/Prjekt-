@@ -26,7 +26,7 @@ public class PauseMenu implements IEntity {
     }
 
     @Override
-    public void setPosition(int x, int y) {
+    public void setPosition(float x, float y) {
 
     }
 
