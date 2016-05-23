@@ -10,6 +10,8 @@ public interface IGraphics {
 
     void update (float delta, List<IEntity> gameObjects);
 
+    void update (float delta, IEntity [][] IEntitys);
+
     void addAnimation(AnimationObject animationObject);
 
     void addTexture(String path);
@@ -17,5 +19,7 @@ public interface IGraphics {
     int getScreenHeight();
 
     int getScreenWidth();
+
+    boolean hasLoaded(String path);
 }
 
