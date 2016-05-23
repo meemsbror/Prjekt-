@@ -21,7 +21,7 @@ public final class HealthBar implements IEntity{
 
 
     // where Healthbar will be drawn
-    private Position position = new Position(50, 50);
+    private Position position;
 
     // starting max (game length should not exceed this)
     private int startingMax = 100;
