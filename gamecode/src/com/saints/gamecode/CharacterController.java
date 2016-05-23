@@ -204,6 +204,7 @@ public class CharacterController {
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
                 HPBar.dealDamage(character.getDamage());
+
                 if (HPBar.getIsGameOver()){
                     System.out.println(HPBar.getWinner()); //TODO: end game, how?
                 }
@@ -282,8 +283,7 @@ public class CharacterController {
         // sets divider correctly for case when Characters have different health-pools
         this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
         this.HPBar.setPosition((graphics.getScreenWidth()/2)-(HPBar.getWidth()/2),
-                (graphics.getScreenHeight()-50)); // HPBar appears on top of screen
-
+                (graphics.getScreenHeight()-80)); // HPBar appears on top of screen
         this.gameObjects.add(HPBar);
     }
 }
