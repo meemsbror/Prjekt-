@@ -66,6 +66,7 @@ public class Arena extends Scene{
     }
 
     private void addMap() {
+
     }
 
     private void addCharacterAnimation(Character player){
