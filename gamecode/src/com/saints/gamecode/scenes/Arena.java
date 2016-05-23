@@ -5,6 +5,7 @@ import com.saints.gamecode.CharacterController;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.PauseMenu;
+import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
@@ -54,6 +55,7 @@ public class Arena extends Scene{
 
     //Starts a match between two players
     public void startMatch(){
+        addMap();
         addAnimations();
         addItem();
         addHealthBarAnimation();
@@ -61,6 +63,9 @@ public class Arena extends Scene{
     public void addHealthBarAnimation(){
         graphics.addAnimation(HealthBar.getInstance().getAnimationObject1());
         graphics.addAnimation(HealthBar.getInstance().getAnimationObject2());
+    }
+
+    private void addMap() {
     }
 
     private void addCharacterAnimation(Character player){

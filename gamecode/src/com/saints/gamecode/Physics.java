@@ -44,8 +44,8 @@ public class Physics implements IPhysics {
     }
 
     public boolean isOutsidePlatform(GameObject object, Platform platform){
-        //While walking outside of platform the character should fall down
-        if (        (object.isAirborne())
+        //When walking outside of platform the character should fall down
+        if (        (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform)
                 ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
