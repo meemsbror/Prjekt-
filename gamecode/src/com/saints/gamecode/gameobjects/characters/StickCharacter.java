@@ -10,7 +10,7 @@ public class StickCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private final Vector2D jumpSpeed = new Vector2D(0, 250);
+    private final Vector2D jumpSpeed = new Vector2D(0, 300);
 
     //The time until next attack
     private float attackCD = 0;
@@ -31,7 +31,7 @@ public class StickCharacter extends Character {
 
     public StickCharacter(boolean isPlayer1) {
         //Original width and height 227*386
-        super(169, 286, new AnimationObject("assets/pictures/stickFigureSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
+        super(169, 286, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
         straightAttack = new StraightAttack(133, 87, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
