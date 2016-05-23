@@ -1,5 +1,6 @@
 package com.saints.gamecode.maps;
 
+import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
@@ -11,5 +12,25 @@ public class JAPrippsMap extends Map {
     @Override
     public String toString() {
         return "JAPrippsMap";
+    }
+
+    @Override
+    public void setPosition(int x, int y) {
+
+    }
+
+    @Override
+    public Position getPosition() {
+        return null;
+    }
+
+    @Override
+    public int getWidth() {
+        return 0;
+    }
+
+    @Override
+    public int getHeight() {
+        return 0;
     }
 }
