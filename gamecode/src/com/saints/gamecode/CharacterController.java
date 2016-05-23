@@ -97,6 +97,10 @@ public class CharacterController {
         applyPlatform(player1);
         applyPlatform(player2);
 
+	    // If the player falls below posY(-150) kill that player.
+	    applyFallDeath(player1);
+	    applyFallDeath(player2);
+
 
     }
 
@@ -132,6 +136,19 @@ public class CharacterController {
         }
     }
 
+
+    private void applyFallDeath(Character player){
+        if(player.getPos().getY() < 150) {
+	        if (player.equals(player1)){
+		        HPBar.killP1();
+
+	        }if (player.equals(player2)){
+		        HPBar.killP2();
+
+	        }
+	        return;
+        }
+    }
 
     private void applyPlatform(GameObject gameObject){
 
