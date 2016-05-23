@@ -89,7 +89,7 @@ public class PauseMenu implements IEntity {
 
     public void setPaused(boolean paused, float delta) {
         pauseTimer += delta;
-        if(pauseTimer > 0.3) {
+        if(pauseTimer > 0.3 && paused) {
             this.paused = paused;
             pauseTimer = 0;
         }

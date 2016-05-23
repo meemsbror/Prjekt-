@@ -63,7 +63,7 @@ public class HealthTest {
         assertTrue(currentDivider == 45);
 
         //test for setting P2 max limit
-        //healthBar.setP2limit(35); // will likely never be this value, but characters with different hp may be a thing
+        healthBar.setP2Limit(35); // will likely never be this value, but characters with different hp may be a thing
         int maxHealth = healthBar.getP2Limit();
         assertTrue(maxHealth == 35);
 
@@ -98,10 +98,10 @@ public class HealthTest {
         boolean gameOver = healthBar.getIsGameOver();
         assertTrue(gameOver == true);
 
-        // test for setWinner(String) // should either only be P1 P2 or "none"(standard)
+        //test for setWinner(String) // should either only be P1 P2 or "none"(standard)
         healthBar.setWinner("Player 1");
         String winner = healthBar.getWinner();
-        assertTrue(winner.equals("Player1"));
+        assertTrue(winner.equals("Player 1"));
         healthBar.setWinner("Player 2");
         winner = healthBar.getWinner();
         assertTrue(winner.equals("Player 2"));
@@ -117,11 +117,11 @@ public class HealthTest {
         HealthBar healthBar = HealthBar.getInstance();
         int currentDivider = healthBar.getDivider(); // 40
         healthBar.dealDamage(5); // divider should == 45
-        assertTrue(currentDivider + 5 == healthBar.getDivider());
+        assertTrue((currentDivider + 5) == healthBar.getDivider());
 
         // player 2 deal dmg
         healthBar.dealDamage(-10); // 35
-        assertTrue(currentDivider - 10 == healthBar.getDivider());
+        assertTrue((currentDivider - 5) == healthBar.getDivider());
     }
 
     @Test

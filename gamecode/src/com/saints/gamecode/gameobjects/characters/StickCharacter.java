@@ -30,8 +30,8 @@ public class StickCharacter extends Character {
 
 
     public StickCharacter(boolean isPlayer1) {
-        //Original width and height 227*386
-        super(169, 286, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
+        //Original width and height 100*256
+        super(100, 256, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
         straightAttack = new StraightAttack(133, 87, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
