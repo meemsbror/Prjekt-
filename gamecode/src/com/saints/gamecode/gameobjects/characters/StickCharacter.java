@@ -5,7 +5,7 @@ import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.gameobjects.GameObject;
 
 
-public class SmurfCharacter extends Character {
+public class StickCharacter extends Character {
 
     private final Physics physics;
 
@@ -16,7 +16,7 @@ public class SmurfCharacter extends Character {
     private float attackCD = 0;
 
     //Static value of how fast this character attacks
-    private final float ATTACKSPEED = 1;
+    private final float ATTACKSPEED = 0.5f;
 
     //Straight attack is the attack going straight to either side of the character.
     public StraightAttack straightAttack;
@@ -26,12 +26,12 @@ public class SmurfCharacter extends Character {
 
 
     //The ammount of damage this character has and the increasage in damage while powered up
-    int DAMAGE = 10;
+    int DAMAGE = 5;
 
 
-    public SmurfCharacter(boolean isPlayer1) {
+    public StickCharacter(boolean isPlayer1) {
         //Original width and height 227*386
-        super(169, 286, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f),200, isPlayer1);
+        super(169, 286, new AnimationObject("assets/pictures/stickFigureSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
         straightAttack = new StraightAttack(133, 87, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();

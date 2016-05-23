@@ -2,8 +2,9 @@ package com.saints.gamecode;
 
 
 import com.badlogic.gdx.Graphics;
+import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IEntity;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 
 //A HealthBar for representing the current state for BOTH players
 public final class HealthBar implements IEntity{
@@ -20,7 +21,7 @@ public final class HealthBar implements IEntity{
 
 
     // where Healthbar will be drawn
-    private Position position = new Position(50, 50);
+    private Position position = new Position(50 , 50);
 
     // starting max (game length should not exceed this)
     private int startingMax = 100;
@@ -69,6 +70,8 @@ public final class HealthBar implements IEntity{
     //Getters & setters for divider variable
    public void setDivider(int x){
         this.divider = x;
+	   // whenever the divider is changed, update width of divider. This factorizes a lot of code
+        setWidth(toPercent(getDivider(),getP1Limit(),getP2Limit()));
    }
     public int getDivider(){
         return divider;
@@ -176,7 +179,6 @@ public final class HealthBar implements IEntity{
             setDivider(getDivider() + dmg);
 
         }
-	    setWidth(toPercent(getDivider(),getP1Limit(),getP2Limit()));
     }
 
 	// approximates what width the healthbar should have, hence int values
@@ -195,7 +197,8 @@ public final class HealthBar implements IEntity{
                 "\nDivider at:" + getDivider() +
                 "\nCurrent Maximum: " + getP2Limit() +
                 "\nPlayer 1 status: " + (getDivider() - getP1Limit()) +
-                "\nPlayer 2 status: " + (getP2Limit()- getDivider());
+                "\nPlayer 2 status: " + (getP2Limit()- getDivider()) +
+		        "\nWidth: " + getWidth();
 
     }
 

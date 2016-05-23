@@ -8,7 +8,7 @@ import com.saints.gamecode.interfaces.IPhysics;
 public class Physics implements IPhysics {
 
     //Sets the gravity of the world
-    private final Vector2D GRAVITY = new Vector2D(0,-98.2f);
+    private final Vector2D GRAVITY = new Vector2D(0,-300f);
 
     //The only instance of this class
     private static final Physics instance = new Physics();
@@ -44,9 +44,10 @@ public class Physics implements IPhysics {
     }
 
     public boolean isOutsidePlatform(GameObject object, Platform platform){
-        //While walking outside of platform the character should fall down
-        if (        (object.isAirborne())
-                ||  (object.getPos().getY()==platform.getY())
+        //When walking outside of platform the character should fall down
+        if (        (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform)
+                ||  (object.getPos().getY()>platform.getY())
+                ||(object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
                 ){
