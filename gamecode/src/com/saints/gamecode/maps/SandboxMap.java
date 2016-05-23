@@ -5,6 +5,8 @@ import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
 public class SandboxMap extends Map {
+    private float x;
+    private float y;
     //Should implement sandbox.png and some kind of platform
     public SandboxMap(String background, Platform platform) {
         super(background, platform);
@@ -16,6 +18,8 @@ public class SandboxMap extends Map {
 
     @Override
     public void setPosition(int x, int y) {
+        this.x=x;
+        this.y=y;
 
     }
 
