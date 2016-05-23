@@ -6,7 +6,8 @@ import com.saints.gamecode.interfaces.IEntity;
 
 public abstract class Map {
 
-    public Map(IEntity background, Platform platform){
+    public Map(String background, Platform platform){
+        //addTexture
 
     }
     @Override

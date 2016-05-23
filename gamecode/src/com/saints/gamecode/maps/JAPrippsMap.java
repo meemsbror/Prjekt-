@@ -4,7 +4,7 @@ import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
 public class JAPrippsMap extends Map {
-    public JAPrippsMap(IEntity background, Platform platform) {
+    public JAPrippsMap(String background, Platform platform) {
         super(background, platform);
     }
 

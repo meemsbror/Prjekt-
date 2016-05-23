@@ -3,6 +3,7 @@ package com.saints.gamecode.scenes;
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
 import com.saints.gamecode.PauseMenu;
+import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
@@ -50,8 +51,12 @@ public class Arena extends Scene{
 
     //Starts a match between two players
     public void startMatch(){
+        addMap();
         addAnimations();
         addItem();
+    }
+
+    private void addMap() {
     }
 
     private void addCharacterAnimation(Character player){

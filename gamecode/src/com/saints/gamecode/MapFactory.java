@@ -8,7 +8,7 @@ import com.saints.gamecode.maps.SandboxMap;
 
 public class MapFactory {
 
-    /*public static Map createMap(String map){
+    public static Map createMap(String map){
         switch (map){
             case "JAPrippsMap" :
                 return new JAPrippsMap("assets/pictures/saints.of.chalmers-sandbox.png",
@@ -17,11 +17,11 @@ public class MapFactory {
                 return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
                         PlatformFactory.createPlatform(map));
             default:
-                return new Map("assets/pictures/saints.of.chalmers-sandbox.png",
+                return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
                         PlatformFactory.createPlatform(map));
         }
     }
-    */
+
 
     public static String [] getMaps(){
         return new String [] {"JAPripps", "Sandbox"};
