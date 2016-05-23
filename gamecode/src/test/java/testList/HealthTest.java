@@ -162,33 +162,6 @@ public class HealthTest {
     public void killTest(){
         HealthBar healthbar = HealthBar.getInstance();
     }
-    @Test
-    public void suddenDeathTest(){
-        HealthBar healthBar = HealthBar.getInstance();
-        int currentDivider = healthBar.getDivider(); //40
-        int currentMax = healthBar.getP2Limit(); //100
-        int currentMin = healthBar.getP1Limit();
-
-        // check for player 1 sudden death
-        healthBar.p1SuddenDeath(-1); // set player 1 hp to 1 & reduce maxHP by 1 for each player
-        currentDivider = healthBar.getDivider(); // should be 2
-        assertTrue(currentDivider == 2); // divider set to limit +1
-        currentMax = healthBar.getP2Limit();
-        assertTrue(currentMax == 99); // reduced by 1
-        currentMin = healthBar.getP1Limit();
-        assertTrue(currentMin == 1);
-
-        // check for player 2 sudden death
-        // note: current maxHP = 98 && min = 2
-        currentDivider = healthBar.getDivider();
-        assertTrue(currentDivider == 97);
-        currentMax = healthBar.getP2Limit(); // should be 98
-        assertTrue(currentMax == 98);
-        currentMin = healthBar.getP1Limit(); // should be 2
-        assertTrue(currentMin == 2);
-
-    }
-
     // TODO: some more tests
    @Test
     public void isOverTest(){

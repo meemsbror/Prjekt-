@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.PauseMenu;
-import com.saints.gamecode.Position;
-import com.saints.gamecode.State;
+import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
@@ -20,6 +17,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.util.List;
+
+import static com.badlogic.gdx.Gdx.graphics;
 
 public class LibGDXGraphics implements IGraphics{
 
@@ -62,8 +61,18 @@ public class LibGDXGraphics implements IGraphics{
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
-                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime);
+                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
+
+            }else if (gameObjects.get(i) instanceof HealthBar){
+                HealthBar gameObject = (HealthBar)gameObjects.get(i);
+                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
+                batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
+
+                TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
+
+	            // fix a position for bottom rectangle      \this/ == HALF SIZE (should be)
+	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80);
             }
         }
         batch.end();
@@ -131,12 +140,12 @@ public class LibGDXGraphics implements IGraphics{
     }
     @Override
     public int getScreenHeight() {
-        return Gdx.graphics.getHeight();
+        return graphics.getHeight();
     }
 
     @Override
     public int getScreenWidth() {
-        return Gdx.graphics.getWidth();
+        return graphics.getWidth();
     }
 }
 

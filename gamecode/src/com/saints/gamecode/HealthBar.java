@@ -35,8 +35,14 @@ public final class HealthBar implements IEntity{
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
     // Is game still on?
+	private int width;
+
     private boolean gameOver = false;
     private String winner = "none";
+
+
+	private AnimationObject animationObject1 = new AnimationObject("assets/pictures/HPBarBase.png", 1,1,1);
+	private AnimationObject animationObject2 = new AnimationObject("assets/pictures/HPBarTop.png", 1,1,1);
 
 
     // Getters and Setters for currentMax variable.
@@ -63,6 +69,8 @@ public final class HealthBar implements IEntity{
     //Getters & setters for divider variable
    public void setDivider(int x){
         this.divider = x;
+	   // whenever the divider is changed, update width of divider. This factorizes a lot of code
+        setWidth(toPercent(getDivider(),getP1Limit(),getP2Limit()));
    }
     public int getDivider(){
         return divider;
@@ -172,6 +180,15 @@ public final class HealthBar implements IEntity{
         }
     }
 
+	// approximates what width the healthbar should have, hence int values
+	public int toPercent(int divider, int minLimit, int maxLimit){
+
+		int rangeTmp = maxLimit - minLimit;
+		int divTmp = (divider - minLimit) * 100;
+		int percent = divTmp/rangeTmp;
+		return percent;
+	}
+
     @Override
     public String toString(){
         return getClass().getName() +
@@ -236,13 +253,23 @@ public final class HealthBar implements IEntity{
         return position;
     }
 
+
     @Override
     public int getWidth() {
-        return 200;
+        return width;
     }
+	public void setWidth(int width){
+		this.width = width;
+	}
 
     @Override
     public int getHeight() {
-        return 50;
+        return 127;
+    }
+    public AnimationObject getAnimationObject1(){
+        return animationObject1;
+    }
+    public AnimationObject getAnimationObject2(){
+        return animationObject2;
     }
 }
