@@ -3,9 +3,6 @@ package com.saints.gamecode;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IKeyInput;
 
-/**
- * Created by admin on 2016-05-19.
- */
 public class PauseMenu implements IEntity {
 
     private AnimationObject animationObject;

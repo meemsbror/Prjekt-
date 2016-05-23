@@ -1,14 +1,12 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -40,6 +38,7 @@ public class LibGDXGraphics implements IGraphics{
         initiateState();
     }
 
+    @Override
     public void update(float delta, List<IEntity> gameObjects){
 
         elapsedTime = elapsedTime + delta;
@@ -52,7 +51,6 @@ public class LibGDXGraphics implements IGraphics{
             if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 drawCharacter(character, delta);
-
             }
             else if(gameObjects.get(i) instanceof Item){
                 GameObject gameObject = (Item)gameObjects.get(i);
@@ -60,7 +58,7 @@ public class LibGDXGraphics implements IGraphics{
                 batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
-                PauseMenu gameObject = (PauseMenu)gameObjects.get(i);
+                PauseMenu gameObject = (PauseMenu) gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
 
@@ -75,6 +73,29 @@ public class LibGDXGraphics implements IGraphics{
 	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80);
             }
         }
+        batch.end();
+    }
+
+    @Override
+    public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2){
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+
+        for(int i = 0; i < IEntities.length; i++){
+            for(int j = 0; j < IEntities[i].length; j++){
+                CharacterPanel panel = (CharacterPanel) IEntities[i][j];
+                Position pos = panel.getPosition();
+                batch.draw(assetsmanager.getTexture(panel.getImgPath()), pos.getX(), pos.getY());
+            }
+        }
+
+        Position p1Pos = p1.getPosition();
+        Position p2Pos = p2.getPosition();
+
+        batch.draw(assetsmanager.getTexture(p1.getImgPath()), p1Pos.getX(), p1Pos.getY());
+        batch.draw(assetsmanager.getTexture(p2.getImgPath()), p2Pos.getX(), p2Pos.getY());
+
         batch.end();
     }
 
@@ -138,6 +159,8 @@ public class LibGDXGraphics implements IGraphics{
     public void drawPunch(GameObject attack,float attackTime, float negative) {
         batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
     }
+
+
     @Override
     public int getScreenHeight() {
         return graphics.getHeight();
@@ -146,6 +169,11 @@ public class LibGDXGraphics implements IGraphics{
     @Override
     public int getScreenWidth() {
         return graphics.getWidth();
+    }
+
+    @Override
+    public void finishLoading(){
+        assetsmanager.finishLoading();
     }
 }
 

@@ -59,4 +59,8 @@ public class CharacterPanel implements IEntity{
     public int getHeight() {
         return height;
     }
+
+    public String getImgPath(){
+        return imgPath;
+    }
 }

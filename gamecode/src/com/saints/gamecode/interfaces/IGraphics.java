@@ -2,13 +2,15 @@ package com.saints.gamecode.interfaces;
 
 
 import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.gameobjects.GameObject;
+import com.saints.gamecode.CharacterPanel;
 
 import java.util.List;
 
 public interface IGraphics {
 
     void update (float delta, List<IEntity> gameObjects);
+
+    void update (float delta, IEntity [][] IEntitys, CharacterPanel p1, CharacterPanel p2);
 
     void addAnimation(AnimationObject animationObject);
 
@@ -17,5 +19,7 @@ public interface IGraphics {
     int getScreenHeight();
 
     int getScreenWidth();
+
+    void finishLoading();
 }
 

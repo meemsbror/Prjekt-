@@ -41,15 +41,32 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
     }
 
+    @Override
     public void addTexture(String filename){
+        System.out.println(filename);
         assets.load(filename, Texture.class);
     }
 
+    @Override
     public Texture getTexture(String filename){
+        while(!assets.isLoaded(filename, Texture.class)){
+            try{
+                Thread.sleep(50);
+            }catch (InterruptedException ex){
+                //just swallow since i don't quite know how to handle this.
+            }
+        }
+        System.out.println();
         return assets.get(filename,Texture.class);
     }
 
+    @Override
     public Animation [] getAnimation(String filename){
         return this.animations.get(filename);
+    }
+
+    @Override
+    public void finishLoading(){
+        assets.finishLoading();
     }
 }
