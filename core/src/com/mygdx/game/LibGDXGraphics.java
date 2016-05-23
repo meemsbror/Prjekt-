@@ -105,7 +105,7 @@ public class LibGDXGraphics implements IGraphics{
 
         //if character is facing right, draw the character as it is.
         if(!character.isFacingRight()){
-            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY(), character.getWidth(), character.getHeight());
             if(character.getState() == State.PUNCH) {
                 punch(character, delta, -1);
             }
@@ -114,7 +114,7 @@ public class LibGDXGraphics implements IGraphics{
             //If character is facing left, flip the immage to the right direction again.
         }else{
             tmpRegion.flip(true, false);
-            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY());
+            batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY(), character.getWidth(), character.getHeight());
 
             ///If the character is punching draw the punch aswell.
             if(character.getState() == State.PUNCH){

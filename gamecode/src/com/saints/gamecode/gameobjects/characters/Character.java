@@ -26,6 +26,12 @@ public abstract class Character extends GameObject {
     //player one or 2
     boolean p1;
 
+    //checks if the character has doubble jumped
+    private boolean doubleJumped = true;
+
+    //A timer for how often you can jump, nessesary to have to be able to doubble jump :(
+    private float jumpTimer;
+
     public void setAttackPowerUpTime(float attackPowerUpTime) {
         this.attackPowerUpTime = attackPowerUpTime;
     }
@@ -46,9 +52,10 @@ public abstract class Character extends GameObject {
         return p1;
     }
 
-    public Character(int width, int height, AnimationObject animationObject, boolean p1){
+    public Character(int width, int height, AnimationObject animationObject,float moveSpeed, boolean p1){
         super(width,height,animationObject);
 
+        this.moveSpeed = moveSpeed;
         this.p1 = p1;
         state = State.STALL;
     }
@@ -138,5 +145,19 @@ public abstract class Character extends GameObject {
     //Powerup functions (increase damage, speed or whatever we come up with :)
     public abstract void powerUp(boolean poweredUp);
 
+    public boolean isDoubleJumped() {
+        return doubleJumped;
+    }
 
+    public void setDoubleJumped(boolean doubleJumped) {
+        this.doubleJumped = doubleJumped;
+    }
+
+    public float getJumpTimer() {
+        return jumpTimer;
+    }
+
+    public void setJumpTimer(float jumpTimer) {
+        this.jumpTimer = jumpTimer;
+    }
 }

@@ -8,7 +8,7 @@ import com.saints.gamecode.interfaces.IPhysics;
 public class Physics implements IPhysics {
 
     //Sets the gravity of the world
-    private final Vector2D GRAVITY = new Vector2D(0,-98.2f);
+    private final Vector2D GRAVITY = new Vector2D(0,-300f);
 
     //The only instance of this class
     private static final Physics instance = new Physics();

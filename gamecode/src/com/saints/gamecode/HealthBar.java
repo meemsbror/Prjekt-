@@ -2,6 +2,7 @@ package com.saints.gamecode;
 
 
 import com.badlogic.gdx.Graphics;
+import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IEntity;
 //import javafx.geometry.Pos;
 
@@ -20,7 +21,7 @@ public final class HealthBar implements IEntity{
 
 
     // where Healthbar will be drawn
-    private Position position = new Position(50, 50);
+    private Position position;
 
     // starting max (game length should not exceed this)
     private int startingMax = 100;
@@ -196,7 +197,8 @@ public final class HealthBar implements IEntity{
                 "\nDivider at:" + getDivider() +
                 "\nCurrent Maximum: " + getP2Limit() +
                 "\nPlayer 1 status: " + (getDivider() - getP1Limit()) +
-                "\nPlayer 2 status: " + (getP2Limit()- getDivider());
+                "\nPlayer 2 status: " + (getP2Limit()- getDivider()) +
+		        "\nWidth: " + getWidth();
 
     }
 

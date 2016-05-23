@@ -30,6 +30,7 @@ public class CharacterController {
     private float time;
     private IPhysics physics = Physics.getInstance();
 
+
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
     private IGraphics graphics;
 
@@ -97,6 +98,10 @@ public class CharacterController {
         applyPlatform(player1);
         applyPlatform(player2);
 
+	    // If the player falls below posY(-150) kill that player.
+	    applyFallDeath(player1);
+	    applyFallDeath(player2);
+
 
     }
 
@@ -132,6 +137,18 @@ public class CharacterController {
         }
     }
 
+
+    private void applyFallDeath(Character player){
+        if(player.getPos().getY() < -150) {
+	        if (player.equals(player1)){
+		        HPBar.killP1();
+	        }if (player.equals(player2)){
+		        HPBar.killP2();
+	        }
+	        // do nothing otherwise
+	        return;
+        }
+    }
 
     private void applyPlatform(GameObject gameObject){
 
@@ -193,7 +210,7 @@ public class CharacterController {
                 jump(character);
                 break;
             case DIVE:
-                character.move(0,-5);
+                //Maybe implement crouch
                 break;
             case ATTACK:
                 attack(character, opositeCharacter);
@@ -248,8 +265,11 @@ public class CharacterController {
 
     //Asks the character to jump
     public void jump(Character character){
-        if(!character.isAirborne()){
-            character.jump();
+        if(!character.isAirborne() || !character.isDoubleJumped()){
+            if(character.getJumpTimer() < time) {
+                character.jump();
+                character.setJumpTimer(time + 0.4f);
+            }
         }
     }
 
