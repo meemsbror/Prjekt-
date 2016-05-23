@@ -3,9 +3,6 @@ package com.saints.gamecode;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IKeyInput;
 
-/**
- * Created by admin on 2016-05-19.
- */
 public class PauseMenu implements IEntity {
 
     private AnimationObject animationObject;
@@ -89,7 +86,7 @@ public class PauseMenu implements IEntity {
 
     public void setPaused(boolean paused, float delta) {
         pauseTimer += delta;
-        if(pauseTimer > 0.3) {
+        if(pauseTimer > 0.3 && paused) {
             this.paused = paused;
             pauseTimer = 0;
         }

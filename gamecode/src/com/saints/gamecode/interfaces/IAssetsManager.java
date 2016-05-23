@@ -13,4 +13,7 @@ public interface IAssetsManager {
     public Object getTexture(String filename);
 
     public Object [] getAnimation(String filename);
+
+    void finishLoading();
+
 }
