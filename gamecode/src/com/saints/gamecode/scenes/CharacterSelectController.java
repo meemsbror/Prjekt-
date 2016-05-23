@@ -33,7 +33,7 @@ public class CharacterSelectController extends Scene{
         checkInput();
         setPanelPositions();
         updateActivePanels();
-        graphics.update(delta, characterPanels);
+        graphics.update(delta, characterPanels, p1Panel, p2Panel);
     }
 
     //Checks all different input keys and if they are pressed
@@ -184,9 +184,10 @@ public class CharacterSelectController extends Scene{
         int screenWidth = graphics.getScreenWidth();
         int rows = characterPanels.length;
         int panelsHeight = 225*rows;
-        int ySpace = (screenHeight-panelsHeight)/rows;
+        int ySpace = (screenHeight-panelsHeight)/(rows + 1);
 
-        for(int i = 0; i<rows; i++){
+        for(int i = rows - 1; i >= 0; i--){
+
             int panelsWidth = 0;
             for(int j = 0; j < characterPanels[i].length; j++){
                 panelsWidth += characterPanels[i][j].getWidth();
@@ -196,9 +197,11 @@ public class CharacterSelectController extends Scene{
             int xPos = xSpace;
             int yPos = ySpace*(i + 1) + 225*(i);
 
+            characterPanels[i][0].setPosition(xPos, yPos);
 
-            for(int j = 0; j< characterPanels[i].length; j++){
 
+            for(int j = 1; j < characterPanels[i].length; j++){
+                xPos += xSpace + characterPanels[i][j - 1].getWidth();
                 characterPanels[i][j].setPosition(xPos, yPos);
             }
         }

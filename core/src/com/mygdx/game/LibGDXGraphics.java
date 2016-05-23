@@ -77,7 +77,7 @@ public class LibGDXGraphics implements IGraphics{
     }
 
     @Override
-    public void update(float delta, IEntity [][] IEntities){
+    public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2){
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
@@ -89,6 +89,12 @@ public class LibGDXGraphics implements IGraphics{
                 batch.draw(assetsmanager.getTexture(panel.getImgPath()), pos.getX(), pos.getY());
             }
         }
+
+        Position p1Pos = p1.getPosition();
+        Position p2Pos = p2.getPosition();
+
+        batch.draw(assetsmanager.getTexture(p1.getImgPath()), p1Pos.getX(), p1Pos.getY());
+        batch.draw(assetsmanager.getTexture(p2.getImgPath()), p2Pos.getX(), p2Pos.getY());
 
         batch.end();
     }
