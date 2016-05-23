@@ -119,8 +119,9 @@ public class HealthTest {
         assertTrue((currentDivider + 5) == healthBar.getDivider());
 
         // player 2 deal dmg
-        healthBar.dealDamage(-10); // 35
-        assertTrue((currentDivider - 5) == healthBar.getDivider());
+	    currentDivider = healthBar.getDivider(); // 45
+	    healthBar.dealDamage(-10); // 35
+        assertTrue((currentDivider - 10) == healthBar.getDivider());
     }
 
     @Test
@@ -129,20 +130,24 @@ public class HealthTest {
 	    // these initial values translate exactly to the unset limits (default)
         int currentMinHealth = healthBar.getP1Limit(); //should be 0
 	    int currentMaxHealth = healthBar.getP2Limit(); //should be 100
-	    int maxLimit = healthBar.getStartingMax();
-	    int minLimit = healthBar.getStartingMin();
+	    int maxLimit = healthBar.getStartingMax(); // should be 100
+	    int minLimit = healthBar.getStartingMin(); // should be 0
 
 
         // reduce both sides max health by 1
         healthBar.changeGameLength(-1); // should become 1 && 99
+	    currentMinHealth += 1;
 	    // player 1 limit
-	    assertTrue((currentMinHealth + 1) == healthBar.getP1Limit());
+	    assertTrue((currentMinHealth) == healthBar.getP1Limit()); // should be 1
+	    currentMaxHealth -= 1;
 	    // player 2 limit
-	    assertTrue((currentMaxHealth - 1)  == healthBar.getP2Limit());
+	    assertTrue((currentMaxHealth)  == healthBar.getP2Limit()); // should be 99
 
 
         // increase both sides max health by 5, should surpass set limits and should set to limits
         healthBar.changeGameLength(5);
+	    currentMaxHealth = healthBar.getP2Limit();
+	    currentMinHealth = healthBar.getP1Limit();
         assertTrue((currentMaxHealth = 100) == healthBar.getP2Limit());
         assertTrue((currentMinHealth = 0) == healthBar.getP1Limit());
 
