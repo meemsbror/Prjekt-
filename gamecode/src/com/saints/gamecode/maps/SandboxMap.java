@@ -16,25 +16,5 @@ public class SandboxMap extends Map {
         return "SandboxMap";
     }
 
-    @Override
-    public void setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
 
-    }
-
-    @Override
-    public Position getPosition() {
-        return null;
-    }
-
-    @Override
-    public int getWidth() {
-        return 0;
-    }
-
-    @Override
-    public int getHeight() {
-        return 0;
-    }
 }
