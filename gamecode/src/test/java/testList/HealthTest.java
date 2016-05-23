@@ -110,7 +110,6 @@ public class HealthTest {
     }
 
     // joint tests later after we confirmed that these methods work.
-
     @Test
     public void dealDamageTest(){
         // player 1 deal dmg
@@ -161,6 +160,17 @@ public class HealthTest {
     @Test
     public void killTest(){
         HealthBar healthbar = HealthBar.getInstance();
+	    int currentDivider = healthbar.getDivider(); // 40
+	    int currentP1Limit = healthbar.getP1Limit(); // 0
+	    int currentP2Limit = healthbar.getP2Limit(); // 100
+
+	    healthbar.killP1();
+	    currentDivider = healthbar.getDivider();
+	    assertTrue(currentDivider == currentP1Limit);
+
+	    healthbar.killP2();
+	    currentDivider = healthbar.getDivider();
+	    assertTrue(currentDivider == currentP2Limit);
     }
     // TODO: some more tests
    @Test

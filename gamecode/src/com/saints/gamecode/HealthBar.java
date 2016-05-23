@@ -225,22 +225,26 @@ public final class HealthBar implements IEntity{
         if (gameOver != HPBar.getIsGameOver()){
             return false;
         }
-        if (currentMax != HPBar.currentMax){
+        if (currentMax != HPBar.getP2Limit()){
             return false;
         }
-        if (divider != HPBar.divider){
+        if (divider != HPBar.getDivider()){
             return false;
         }
-        if (currentMin != HPBar.currentMin){
+        if (currentMin != HPBar.getP1Limit()){
             return false;
         }
+	    if (width != HPBar.getWidth()){
+		    return false;
+	    }
 
         return (currentMax == getInstance().getP2Limit() &&
                 currentMin == getInstance().getP1Limit() &&
                 gameOver == getInstance().getIsGameOver() &&
                 startingMax == getInstance().getStartingMax() &&
                 startingMin == getInstance().getStartingMin() &&
-                divider == getInstance().getDivider());
+                divider == getInstance().getDivider()) &&
+		        width == getInstance().getWidth();
     }
 
 
