@@ -8,8 +8,6 @@ import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
-import java.util.ArrayList;
-
 
 public class CharacterSelectController extends Scene{
 
@@ -28,19 +26,17 @@ public class CharacterSelectController extends Scene{
         initiateInputArray();
         initiatePositions();
         initiatePanels();
+        graphics.finishLoading();
     }
 
     public void update(float delta) {
-        while(true){
-            if()
-        }
         checkInput();
         setPanelPositions();
         updateActivePanels();
         graphics.update(delta, characterPanels);
     }
 
-    //Checks all diferent input keys and if they are pressed
+    //Checks all different input keys and if they are pressed
     private void checkInput(){
         for(Direction dir: directions){
             if(input.isKeyPressed(dir)){
@@ -177,7 +173,6 @@ public class CharacterSelectController extends Scene{
 
         for(int i = 0; i < characterPanels.length; i++){
             for (int j = 0; j < characterPanels[i].length; j++){
-                System.out.println(characterPanels[i][j].getImgPath());
                 graphics.addTexture(characterPanels[i][j].getImgPath());
             }
         }

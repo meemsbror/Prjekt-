@@ -14,5 +14,6 @@ public interface IAssetsManager {
 
     public Object [] getAnimation(String filename);
 
-    public boolean isLoaded(String path);
+    void finishLoading();
+
 }

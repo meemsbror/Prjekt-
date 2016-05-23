@@ -20,6 +20,6 @@ public interface IGraphics {
 
     int getScreenWidth();
 
-    boolean hasLoaded(String path);
+    void finishLoading();
 }
 

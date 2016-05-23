@@ -2,6 +2,8 @@ package com.saints.gamecode.scenes;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.CharacterController;
+import com.saints.gamecode.Direction;
+import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.PauseMenu;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
@@ -24,7 +26,9 @@ public class Arena extends Scene{
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
 
-    private boolean paused = false;
+    private float pauseTimer = 0;
+    private int currentPauseOption = 0;
+
     private final boolean running = true;
 
 
@@ -52,6 +56,11 @@ public class Arena extends Scene{
     public void startMatch(){
         addAnimations();
         addItem();
+        addHealthBarAnimation();
+    }
+    public void addHealthBarAnimation(){
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject1());
+        graphics.addAnimation(HealthBar.getInstance().getAnimationObject2());
     }
 
     private void addCharacterAnimation(Character player){
@@ -67,20 +76,25 @@ public class Arena extends Scene{
 
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
-        //TODO Check input for pause :)
-        if (!paused) {
+        if (!pauseMenu.isPaused()) {
+            pauseMenu.setPaused(input.isKeyPressed(Direction.SELECT), delta);
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
             }
             graphics.update(delta, getGameObjects());
             characterController.update(delta);
         }else{
+            pauseMenu.updatePaused(delta, input);
             if(!(gameObjects.contains(pauseMenu))){
                 gameObjects.add(pauseMenu);
             }
             delta = 0;
             graphics.update(delta, getGameObjects());
         }
+    }
+
+    public int getCurrentPauseOption() {
+        return currentPauseOption;
     }
 
     public void setCharacters(Character player1, Character player2){
