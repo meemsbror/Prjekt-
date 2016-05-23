@@ -30,6 +30,7 @@ public class CharacterController {
     private float time;
     private IPhysics physics = Physics.getInstance();
 
+
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
     private IGraphics graphics;
 
@@ -193,7 +194,7 @@ public class CharacterController {
                 jump(character);
                 break;
             case DIVE:
-                character.move(0,-5);
+                //Maybe implement crouch
                 break;
             case ATTACK:
                 attack(character, opositeCharacter);
@@ -248,8 +249,11 @@ public class CharacterController {
 
     //Asks the character to jump
     public void jump(Character character){
-        if(!character.isAirborne()){
-            character.jump();
+        if(!character.isAirborne() || !character.isDoubleJumped()){
+            if(character.getJumpTimer() < time) {
+                character.jump();
+                character.setJumpTimer(time + 0.4f);
+            }
         }
     }
 
