@@ -1,4 +1,4 @@
-package com.saints.test;
+package com.saints.gamecode;
 
 import org.junit.Test;
 

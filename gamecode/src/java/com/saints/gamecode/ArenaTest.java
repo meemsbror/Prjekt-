@@ -1,13 +1,9 @@
-package com.saints.test;
+package com.saints.gamecode;
 
-import com.mygdx.game.LibGDXGraphics;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
-import com.saints.gamecode.interfaces.IKeyInput;
 import org.junit.Test;
 import com.saints.gamecode.scenes.Arena;
-
-import static org.junit.Assert.*;
 
 public class ArenaTest {
 

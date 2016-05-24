@@ -14,6 +14,7 @@ public class Physics implements IPhysics {
     private static final Physics instance = new Physics();
 
 
+    //Private since this is a singleton.
     private Physics (){
     }
 
@@ -46,8 +47,9 @@ public class Physics implements IPhysics {
     public boolean isInAir(GameObject object, Platform platform, GameObject object2){
         //When walking outside of platform the character should fall down
         if( (object.getPos().getY()>platform.getY() //above platform
-                && (hasCollided(object,object2)))) { return false;}
-        else if (        (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
+                && (hasCollided(object,object2)))) {
+            return false;
+        } else if (        (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
                 ||(object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
@@ -63,6 +65,7 @@ public class Physics implements IPhysics {
         Position pos1 = object1.getPos();
         Position pos2 = object2.getPos();
 
+        //Checks if the object is on either side of the other. If it is not, it is inside.
         return(!(pos1.getX()+object1.getWidth()<pos2.getX()
                 || pos1.getY()>pos2.getY()+object2.getHeight()
                 || pos1.getY() + object1.getHeight()<pos2.getY()

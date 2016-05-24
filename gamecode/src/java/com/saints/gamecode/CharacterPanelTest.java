@@ -24,7 +24,6 @@ public class CharacterPanelTest {
         assert characterPanel.isPlayer2Selected();
         characterPanel.setPlayer2Selected(false);
         assert !characterPanel.isPlayer2Selected();
-
     }
 
     @Test
@@ -38,5 +37,4 @@ public class CharacterPanelTest {
         assert x == pos.getX();
         assert y == pos.getY();
     }
-
 }
