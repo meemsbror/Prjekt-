@@ -20,7 +20,7 @@ public final class HealthBar implements IEntity{
     }
 
 
-    // where Healthbar will be drawn
+    // where Healthbar will be drawn, dummy values below
     private Position position = new Position(50 , 50);
 
     // starting max (game length should not exceed this)
@@ -36,7 +36,7 @@ public final class HealthBar implements IEntity{
     // HP-bar divider variable: 40 is a dummy value for now so we can test if setter work
     private int divider = 40;
     // Is game still on?
-	private int width;
+	private int width = 0;
 
     private boolean gameOver = false;
     private String winner = "none";
@@ -44,6 +44,7 @@ public final class HealthBar implements IEntity{
 
 	private AnimationObject animationObject1 = new AnimationObject("assets/pictures/HPBarBase.png", 1,1,1);
 	private AnimationObject animationObject2 = new AnimationObject("assets/pictures/HPBarTop.png", 1,1,1);
+
 
 
     // Getters and Setters for currentMax variable.
@@ -140,7 +141,7 @@ public final class HealthBar implements IEntity{
     // method called for if player 1 has less than x (timeChange) HP
 	// this check is performed when called
    public void p1SuddenDeath(int hpChange){
-        setDivider(currentMin-((hpChange-1)));
+        setDivider(getP1Limit() - ((hpChange-1)));
         changeGameLength(hpChange);
     }
     // method called for if player 2 has less than x (timeChange) HP
@@ -188,6 +189,19 @@ public final class HealthBar implements IEntity{
 		int divTmp = (divider - minLimit) * 100;
 		int percent = divTmp/rangeTmp;
 		return percent;
+	}
+
+	// resets healthbar to pre-initiated state, initiate healthBar should be called after this
+	public void reset(){
+		this.position = new Position(50 , 50);
+		this.startingMax = 100;
+		this.startingMin = 0;
+		this.currentMax = 100;
+		this.currentMin = 0;
+		this.divider = 40;
+		this.width = 0;
+		this.gameOver = false;
+		this.winner = "none";
 	}
 
     @Override
