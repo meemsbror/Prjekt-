@@ -100,12 +100,14 @@ public class SmurfCharacter extends Character {
     @Override
     public void moveRight(){
         super.moveRight();
+        straightAttack.setWidth(Math.abs(straightAttack.getWidth()));
         setHorizontalSpeed(getMoveSpeed());
     }
 
     @Override
     public void moveLeft(){
         super.moveLeft();
+        straightAttack.setWidth(Math.abs(straightAttack.getWidth())*-1);
         setHorizontalSpeed(-getMoveSpeed());
     }
     //Power up functions

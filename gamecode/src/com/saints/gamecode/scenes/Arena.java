@@ -67,7 +67,7 @@ public class Arena extends Scene{
 
     private void addMap() {
         graphics.addTexture("assets/pictures/saints.of.chalmers-sandbox.png");
-        graphics.addAnimation(new AnimationObject("assets/pictures/saints.of.chalmers-sandbox.png", 1,1,1));
+        //graphics.addAnimation(new AnimationObject("assets/pictures/saints.of.chalmers-sandbox.png", 1,1,1));
     }
 
     private void addCharacterAnimation(Character player){
@@ -112,6 +112,7 @@ public class Arena extends Scene{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        gameObjects.add(new AttackPower(600,500,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        for(int i = 0; i < 40; i++)
+        gameObjects.add(new AttackPower(50*i,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
     }
 }

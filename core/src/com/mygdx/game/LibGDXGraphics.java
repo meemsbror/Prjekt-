@@ -123,6 +123,7 @@ public class LibGDXGraphics implements IGraphics{
         //The current animation frame of the character
         tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
 
+
         //See if it is flipped, if it is flip it.
         if(!tmpRegion.isFlipX()){
             tmpRegion.flip(true, false);
@@ -154,15 +155,14 @@ public class LibGDXGraphics implements IGraphics{
         if(character.isP1()) {
             //If the character is punching draw the punch aswell.
             p1AttackTime =+ delta;
-            drawPunch(attack, p1AttackTime, negative);
+            drawPunch(attack, p1AttackTime);
         }else{
             p2AttackTime += delta;
-            drawPunch(attack, p2AttackTime, negative);
+            drawPunch(attack, p2AttackTime);
         }
     }
-    public void drawPunch(GameObject attack,float attackTime, float negative) {
-        attack.setWidth((int)(negative* attack.getWidth()));
-        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    public void drawPunch(GameObject attack,float attackTime) {
+        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
     }
 
 

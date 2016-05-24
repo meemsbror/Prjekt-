@@ -225,7 +225,7 @@ public class CharacterController {
                     System.out.println(HPBar.getWinner()); //TODO: end game, how?
                 }
             }
-            for(int i = 0; i < gameObjects.size(); i++){
+            for(int i = gameObjects.size()-1; i >= 0; i--){
                 if(gameObjects.get(i) instanceof Item) {
                     Item item = (Item) gameObjects.get(i);
                     if(character.attack(item)){
