@@ -47,30 +47,33 @@ public class LibGDXGraphics implements IGraphics{
         Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+        batch.draw(assetsmanager.getTexture("assets/pictures/saints.of.chalmers-sandbox.png"),0,0);
         for(int i = 0; i<gameObjects.size(); i++){
-            if(gameObjects.get(i)instanceof Character){
+            if(gameObjects.get(i)instanceof Map){
+                Map map = (Map)gameObjects.get(i);
+                //batch.draw(assetsmanager.getTexture(map.getMapPath()),0,0);
+            } else if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 drawCharacter(character, delta);
+
             }
             else if(gameObjects.get(i) instanceof Item){
-                GameObject gameObject = (Item)gameObjects.get(i);
-                Position pos = gameObject.getPos();
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
+                Item gameObject = (Item)gameObjects.get(i);
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu) gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
 
-            }else if (gameObjects.get(i) instanceof HealthBar){
-                HealthBar gameObject = (HealthBar)gameObjects.get(i);
-                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
 
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
+
+
 
                 TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
 
@@ -124,6 +127,7 @@ public class LibGDXGraphics implements IGraphics{
         //The current animation frame of the character
         tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
 
+
         //See if it is flipped, if it is flip it.
         if(!tmpRegion.isFlipX()){
             tmpRegion.flip(true, false);
@@ -154,15 +158,15 @@ public class LibGDXGraphics implements IGraphics{
         GameObject attack = character.getStraightAttack();
         if(character.isP1()) {
             //If the character is punching draw the punch aswell.
-            p1AttackTime += delta;
-            drawPunch(attack, p1AttackTime, negative);
+            p1AttackTime =+ delta;
+            drawPunch(attack, p1AttackTime);
         }else{
             p2AttackTime += delta;
-            drawPunch(attack, p2AttackTime, negative);
+            drawPunch(attack, p2AttackTime);
         }
     }
-    public void drawPunch(GameObject attack,float attackTime, float negative) {
-        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    public void drawPunch(GameObject attack,float attackTime) {
+        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
     }
 
 

@@ -12,7 +12,6 @@ import com.saints.gamecode.interfaces.IPhysics;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.List;
 
 //Controller class that controls both players
@@ -45,8 +44,8 @@ public class CharacterController {
     //Sets the starting position of both players
     private void setStartPositions(){
         //TODO: start pos should vary with map
-        player1.setPosition(0,0);
-        player2.setPosition(300,0);
+        player1.setPosition(800,130);
+        player2.setPosition(300,130);
     }
 
     private Position getPlayerPosition(GameObject gameObject){
@@ -84,10 +83,6 @@ public class CharacterController {
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
         applyGravity(player2,delta);
-
-        //If the player is falling below platform, reset y-velocity and put it on platform
-        applyPlatform(player1, player2);
-        applyPlatform(player2, player1);
 
 	    // If the player falls below posY(-150) kill that player.
 	    applyFallDeath(player1);
@@ -140,19 +135,20 @@ public class CharacterController {
         }
     }
 
-    private void applyPlatform(GameObject gameObject, GameObject gameObject2){
+    private void applyPlatform(GameObject gameObject){
 
-        if(physics.isBelowPlatform(gameObject, platform)){
+        if(physics.isStandingOnPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
             gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isInAir(gameObject, platform, gameObject2));
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
     }
 
     //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
+        applyPlatform(gameObject);
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
@@ -216,7 +212,7 @@ public class CharacterController {
                     System.out.println(HPBar.getWinner()); //TODO: end game, how?
                 }
             }
-            for(int i = 0; i < gameObjects.size(); i++){
+            for(int i = gameObjects.size()-1; i >= 0; i--){
                 if(gameObjects.get(i) instanceof Item) {
                     Item item = (Item) gameObjects.get(i);
                     if(character.attack(item)){

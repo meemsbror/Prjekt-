@@ -23,14 +23,4 @@ public class JAPrippsMap extends Map {
     public Position getPosition() {
         return null;
     }
-
-    @Override
-    public int getWidth() {
-        return 0;
-    }
-
-    @Override
-    public int getHeight() {
-        return 0;
-    }
 }

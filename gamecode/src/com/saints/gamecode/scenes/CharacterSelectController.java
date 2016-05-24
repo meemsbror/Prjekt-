@@ -7,7 +7,7 @@ import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 
 
 public class CharacterSelectController extends Scene{
