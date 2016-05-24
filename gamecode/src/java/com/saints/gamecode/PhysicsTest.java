@@ -18,18 +18,18 @@ public class PhysicsTest {
     }
 
     @Test
-    public void isBelowPlatform() throws Exception {
+    public void isStandingOnPlatform() throws Exception {
 
         SmurfCharacter character = new SmurfCharacter(true);
         character.setPosition(-1,-1);
 
         Platform platform = new Platform(0,0,1,1);
 
-        assert physics.isBelowPlatform(character,platform);
+        assert physics.isStandingOnPlatform(character,platform);
 
         character.setPosition(1,1);
 
-        assert !physics.isBelowPlatform(character,platform);
+        assert !physics.isStandingOnPlatform(character,platform);
 
     }
 
