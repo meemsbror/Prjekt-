@@ -47,29 +47,33 @@ public class LibGDXGraphics implements IGraphics{
         Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+        batch.draw(assetsmanager.getTexture("assets/pictures/saints.of.chalmers-sandbox.png"),0,0);
         for(int i = 0; i<gameObjects.size(); i++){
-            if(gameObjects.get(i)instanceof Character){
+            if(gameObjects.get(i)instanceof Map){
+                Map map = (Map)gameObjects.get(i);
+                //batch.draw(assetsmanager.getTexture(map.getMapPath()),0,0);
+            } else if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 drawCharacter(character, delta);
+
             }
             else if(gameObjects.get(i) instanceof Item){
                 Item gameObject = (Item)gameObjects.get(i);
                 batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu) gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[gameObject.getCurrentPauseOption()].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, Gdx.graphics.getWidth()/2-tmpFrame.getRegionWidth()/2 ,Gdx.graphics.getHeight()/2-tmpFrame.getRegionHeight()/2);
 
-            }else if (gameObjects.get(i) instanceof HealthBar){
-                HealthBar gameObject = (HealthBar)gameObjects.get(i);
-                TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
 
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
                 batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
+
+
 
                 TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
 

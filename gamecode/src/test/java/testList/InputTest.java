@@ -6,10 +6,6 @@ import static org.junit.Assert.assertTrue;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import org.junit.Test;
-
-/**
- * Created by admin on 2016-04-19.
- */
 public class InputTest {
 
     @Test

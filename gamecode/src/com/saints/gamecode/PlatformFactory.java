@@ -22,7 +22,7 @@ public class PlatformFactory {
             case "JAPrippsMap" :
                 return new Platform(50,50,1000,50);
             case "SandboxMap" :
-                return new Platform(50,50,1000,50);
+                return new Platform(270,138,680,10);
             default:
                 return new Platform(50,50,1000,50);
         }
