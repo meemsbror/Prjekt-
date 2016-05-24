@@ -122,6 +122,14 @@ public abstract class GameObject implements IEntity {
         return movement.getY();
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     //Returns the horizontal speed of the object
     public float getHorizontalSpeed(){
         return movement.getX();

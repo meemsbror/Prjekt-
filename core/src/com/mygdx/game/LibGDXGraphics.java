@@ -53,9 +53,8 @@ public class LibGDXGraphics implements IGraphics{
                 drawCharacter(character, delta);
             }
             else if(gameObjects.get(i) instanceof Item){
-                GameObject gameObject = (Item)gameObjects.get(i);
-                Position pos = gameObject.getPos();
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
+                Item gameObject = (Item)gameObjects.get(i);
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu) gameObjects.get(i);
@@ -154,7 +153,7 @@ public class LibGDXGraphics implements IGraphics{
         GameObject attack = character.getStraightAttack();
         if(character.isP1()) {
             //If the character is punching draw the punch aswell.
-            p1AttackTime += delta;
+            p1AttackTime =+ delta;
             drawPunch(attack, p1AttackTime, negative);
         }else{
             p2AttackTime += delta;
@@ -162,6 +161,7 @@ public class LibGDXGraphics implements IGraphics{
         }
     }
     public void drawPunch(GameObject attack,float attackTime, float negative) {
+        attack.setWidth((int)(negative* attack.getWidth()));
         batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
     }
 

@@ -43,7 +43,7 @@ public class SmurfCharacter extends Character {
     @Override
     public boolean attack(GameObject gameObject){
 
-        if(physics.hasCollided(this,gameObject)) {
+        if(physics.hasCollided(straightAttack,gameObject)) {
             return true;
         }
         else{
@@ -89,6 +89,11 @@ public class SmurfCharacter extends Character {
     @Override
     public void setAttackCD(float time) {
         this.attackCD = time + ATTACKSPEED;
+    }
+
+    @Override
+    public float getAttackSpeed() {
+        return ATTACKSPEED;
     }
 
 
