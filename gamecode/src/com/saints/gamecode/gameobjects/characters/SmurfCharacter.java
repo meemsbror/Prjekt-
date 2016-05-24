@@ -10,7 +10,7 @@ public class SmurfCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private final Vector2D jumpSpeed = new Vector2D(0, 250);
+    private final Vector2D jumpSpeed = new Vector2D(0, 200);
 
     //The time until next attack
     private float attackCD = 0;
@@ -31,8 +31,8 @@ public class SmurfCharacter extends Character {
 
     public SmurfCharacter(boolean isPlayer1) {
         //Original width and height 227*386
-        super(169, 286, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f),200, isPlayer1);
-        straightAttack = new StraightAttack(133, 87, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
+        super(169/2, 286/2, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f),200/2, isPlayer1);
+        straightAttack = new StraightAttack(133/2, 87/2, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
         if (!isPlayer1){
@@ -62,7 +62,7 @@ public class SmurfCharacter extends Character {
     @Override
     public void move(float dx, float dy){
         super.move(dx, dy);
-        straightAttack.setPosition(getPos().getX() + 82, getPos().getY() + 113);
+        straightAttack.setPosition(getPos().getX() + 82/2, getPos().getY() + 113/2);
     }
 
     public Vector2D getJumpSpeed(){
@@ -70,7 +70,7 @@ public class SmurfCharacter extends Character {
     }
 
     public void jump(){
-        setDoubleJumped((isAirborne()) ? true : false);
+        setDoubleJumped(isAirborne());
         changeDirection(jumpSpeed);
         straightAttack.changeDirection(jumpSpeed);
         setAirborne(true);

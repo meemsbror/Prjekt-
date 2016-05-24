@@ -32,9 +32,9 @@ public class EndGameScene extends Scene {
 	public void update(float delta) {
 		if (startTime + 5000 < System.currentTimeMillis()){
 			firePropertyChange("new game",null,null);
-		}else if (getWinner().equals("player 1")){ // when 5 seconds have pass draw getWinner
+		//}else if (getWinner().equals("player 1")){ // when 5 seconds have pass draw getWinner
 
-		}else if (getWinner().equals("player 2")){ // -''-
+		//}else if (getWinner().equals("player 2")){ // -''-
 
 		}
 	}

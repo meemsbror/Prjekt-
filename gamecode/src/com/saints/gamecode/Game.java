@@ -51,5 +51,8 @@ import com.saints.gamecode.scenes.MapSelectController;
             }else if (event.getSource() instanceof Arena){
                 this.currentScene = this.endGameScene;
             }
+            if(event.getSource() instanceof  Arena){
+                this.currentScene = this.csc;
+            }
         }
     }

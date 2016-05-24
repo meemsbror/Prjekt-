@@ -15,7 +15,6 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ArrayList;
 import java.util.List;
 
 //Controller class that controls both players
@@ -28,7 +27,7 @@ public class CharacterController {
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     //All items in a list
-    private final ArrayList<IEntity> gameObjects;
+    private final List<IEntity> gameObjects;
 
     private final IKeyInput input;
     private float time;
@@ -39,7 +38,7 @@ public class CharacterController {
     private IGraphics graphics;
 
     public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
-        this.gameObjects = (ArrayList)gameObjects;
+        this.gameObjects = gameObjects;
         this.input = input;
         this.platform = platform;
 
@@ -48,21 +47,13 @@ public class CharacterController {
     }
 
     //Sets the starting position of both players
-    public void setStartPositions(){
+    private void setStartPositions(){
         //TODO: start pos should vary with map
-        player1.setPosition(0,0);
-        player2.setPosition(300,0);
+        player1.setPosition(800,130);
+        player2.setPosition(300,130);
     }
 
-    public Position getP1Position(){
-        return player1.getPosition();
-    }
-
-    public Position getP2Position(){
-        return player2.getPosition();
-    }
-
-    public Position getPlayerPosition(GameObject gameObject){
+    private Position getPlayerPosition(GameObject gameObject){
         return gameObject.getPosition();
     }
 
@@ -97,10 +88,6 @@ public class CharacterController {
         //If the player is in the air add gravity so that it falls
         applyGravity(player1,delta);
         applyGravity(player2,delta);
-
-        //If the player is falling below platform, reset y-velocity and put it on platform
-        applyPlatform(player1, player2);
-        applyPlatform(player2, player1);
 
 	    // If the player falls below posY(-150) kill that player.
 	    applyFallDeath(player1);
@@ -150,23 +137,23 @@ public class CharacterController {
 		        HPBar.killP2();
 	        }
 	        // do nothing otherwise
-	        return;
         }
     }
 
-    private void applyPlatform(GameObject gameObject, GameObject gameObject2){
+    private void applyPlatform(GameObject gameObject){
 
-        if(physics.isBelowPlatform(gameObject, platform)){
+        if(physics.isStandingOnPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
             gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isInAir(gameObject, platform, gameObject2));
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
     }
 
     //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
+        applyPlatform(gameObject);
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
@@ -175,7 +162,7 @@ public class CharacterController {
     }
 
     //Moves the Characters in their direction.
-    public void moveCharacters(float delta){
+    private void moveCharacters(float delta){
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
         player2.move(player2.getHorizontalSpeed()*delta,player2.getVerticalSpeed()*delta);
     }
@@ -183,7 +170,7 @@ public class CharacterController {
 
 
     //Checks what state a character should be in and updates it correspond to it
-    public void updateState(Character player){
+    private void updateState(Character player){
         if(!player.isMoving()) {
             player.resetHorizontalSpeed();
             player.setState(State.STALL);
@@ -200,7 +187,7 @@ public class CharacterController {
 
 
     //Takes a direction and a player and updates the model depending on the input (direction)
-    public void keyPressed(Direction direction, Character character, Character opositeCharacter){
+    private void keyPressed(Direction direction, Character character, Character opositeCharacter){
         switch(direction){
 
             //Player movement
@@ -248,7 +235,7 @@ public class CharacterController {
 
 
     //Puts the different playerDirections and maps them to the general direction
-    public void initiatePlayerDirections() {
+    private void initiatePlayerDirections() {
         P1_DIRECTIONS = new HashMap<Direction, Direction>();
         P2_DIRECTIONS = new HashMap<Direction, Direction>();
 
@@ -269,7 +256,7 @@ public class CharacterController {
 
 
     //Asks the character to jump
-    public void jump(Character character){
+    private void jump(Character character){
         if(!character.isAirborne() || !character.isDoubleJumped()){
             if(character.getJumpTimer() < time) {
                 character.jump();
@@ -289,7 +276,7 @@ public class CharacterController {
     }
 
     //Not sure if necessary
-    public void keyReleased(int key){
+    private void keyReleased(int key){
         //TODO
     }
 
