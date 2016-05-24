@@ -49,7 +49,7 @@ public class PauseMenu implements IEntity {
         return currentPauseOption;
     }
 
-    public void updatePaused(float delta, IKeyInput input){
+    public boolean updatePaused(float delta, IKeyInput input){
         pauseTimer += delta;
         if(pauseTimer > 0.3){
             if(input.isKeyPressed(Direction.SELECT)) {
@@ -57,7 +57,7 @@ public class PauseMenu implements IEntity {
                 if(currentPauseOption == 0 || paused == false){
                     paused = !paused;
                 }else if(currentPauseOption == 1){
-                    //Todo byt scene!
+                    return true;
                 }else if(currentPauseOption == 2){
                     System.exit(0);
                 }
@@ -69,6 +69,7 @@ public class PauseMenu implements IEntity {
                 pauseTimer = 0;
             }
         }
+        return false;
     }
     public void increaseCurrentPausePosition(){
         currentPauseOption = (currentPauseOption+1)%3;
@@ -90,6 +91,9 @@ public class PauseMenu implements IEntity {
             this.paused = paused;
             pauseTimer = 0;
         }
+    }
+    public void forcePaused(boolean paused){
+        this.paused = paused;
     }
 
 }

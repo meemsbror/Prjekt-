@@ -47,5 +47,8 @@ import com.saints.gamecode.scenes.MapSelectController;
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
                 this.currentScene = this.arena;
             }
+            if(event.getSource() instanceof  Arena){
+                this.currentScene = this.csc;
+            }
         }
     }

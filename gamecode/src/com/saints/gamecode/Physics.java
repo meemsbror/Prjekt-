@@ -62,10 +62,21 @@ public class Physics implements IPhysics {
     public boolean hasCollided(GameObject object1, GameObject object2){
         Position pos1 = object1.getPos();
         Position pos2 = object2.getPos();
+        int object1Width = object1.getWidth();
+        int object2Width = object2.getWidth();
 
-        return(!(pos1.getX()+object1.getWidth()<pos2.getX()
+        if(object1Width < 0){
+            pos1.setX(pos1.getX()+object1Width);
+            Math.abs(object1Width);
+        }
+        if(object2Width < 0){
+            pos2.setX(pos2.getX()+object2Width);
+            Math.abs(object2Width);
+        }
+
+        return(!(pos1.getX()+object1Width<pos2.getX()
                 || pos1.getY()>pos2.getY()+object2.getHeight()
                 || pos1.getY() + object1.getHeight()<pos2.getY()
-                || pos1.getX()>pos2.getX()+object2.getWidth()));
+                || pos1.getX()>pos2.getX()+object2Width));
     }
 }

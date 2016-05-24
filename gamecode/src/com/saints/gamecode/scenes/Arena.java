@@ -5,8 +5,6 @@ import com.saints.gamecode.CharacterController;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.PauseMenu;
-import com.saints.gamecode.Position;
-import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
@@ -15,7 +13,6 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
 import java.beans.PropertyChangeSupport;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +88,11 @@ public class Arena extends Scene{
             graphics.update(delta, getGameObjects());
             characterController.update(delta);
         }else{
-            pauseMenu.updatePaused(delta, input);
+            if(pauseMenu.updatePaused(delta, input)) {
+                gameObjects.clear();
+                pauseMenu.forcePaused(false);
+                firePropertyChange("", null, null);
+            }
             if(!(gameObjects.contains(pauseMenu))){
                 gameObjects.add(pauseMenu);
             }
@@ -112,7 +113,10 @@ public class Arena extends Scene{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        for(int i = 0; i < 40; i++)
-        gameObjects.add(new AttackPower(50*i,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        gameObjects.add(new AttackPower(50,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+    }
+
+    public PauseMenu getPauseMenu() {
+        return pauseMenu;
     }
 }
