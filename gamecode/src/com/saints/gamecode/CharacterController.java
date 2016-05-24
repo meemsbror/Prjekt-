@@ -1,5 +1,6 @@
 package com.saints.gamecode;
 
+import com.oracle.webservices.internal.api.message.PropertySet;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 
@@ -10,6 +11,8 @@ import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IPhysics;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
@@ -21,6 +24,8 @@ public class CharacterController {
     private final HealthBar HPBar = HealthBar.getInstance();
     private Character player1, player2;
     private final Platform platform;
+
+	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     //All items in a list
     private final ArrayList<IEntity> gameObjects;
@@ -216,13 +221,14 @@ public class CharacterController {
                 break;
         }
     }
-    public void attack(Character character, Character opositeCharacter){
+
+    private void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
                 HPBar.dealDamage(character.getDamage());
 
                 if (HPBar.getIsGameOver()){
-                    System.out.println(HPBar.getWinner()); //TODO: end game, how?
+	                pcs.firePropertyChange(HPBar.getWinner(),null,null);
                 }
             }
             for(int i = gameObjects.size()-1; i >= 0; i--){
@@ -305,4 +311,12 @@ public class CharacterController {
                 (graphics.getScreenHeight()-80)); // HPBar appears on top of screen
         this.gameObjects.add(HPBar);
     }
+
+	public void addPropertyChangeListener(PropertyChangeListener pcl){
+		this.pcs.addPropertyChangeListener(pcl);
+	}
+	public void removePropertyChangeListener(PropertyChangeListener pcl){
+		this.pcs.removePropertyChangeListener(pcl);
+	}
+
 }

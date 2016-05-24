@@ -7,6 +7,7 @@ import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
 import com.saints.gamecode.scenes.Arena;
 import com.saints.gamecode.scenes.CharacterSelectController;
+import com.saints.gamecode.scenes.EndGameScene;
 import com.saints.gamecode.scenes.MapSelectController;
 
     import java.beans.PropertyChangeEvent;
@@ -26,6 +27,7 @@ import com.saints.gamecode.scenes.MapSelectController;
         private Arena arena;
         private CharacterSelectController csc;
         private MapSelectController msc;
+	    private EndGameScene endGameScene;
 
         public Game(IKeyInput input, IGraphics graphics){
             this.graphics = graphics;
@@ -46,6 +48,8 @@ import com.saints.gamecode.scenes.MapSelectController;
             if(event.getSource() instanceof CharacterSelectController){
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
                 this.currentScene = this.arena;
+            }else if (event.getSource() instanceof Arena){
+                this.currentScene = this.endGameScene;
             }
         }
     }
