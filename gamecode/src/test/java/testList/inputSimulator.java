@@ -3,9 +3,6 @@ package test.java.testList;
 import com.saints.gamecode.Direction;
 import com.saints.gamecode.interfaces.IKeyInput;
 
-/**
- * Created by admin on 2016-04-25.
- */
 class InputSimulator implements IKeyInput {
     Direction currentKey = Direction.P1LEFT;
 

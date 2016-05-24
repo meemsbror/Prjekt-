@@ -2,7 +2,6 @@ package test.java.testList;
 
 import com.saints.gamecode.HealthBar;
 import org.junit.Test;
-
 import static junit.framework.TestCase.assertTrue;
 
 // Class for testing HealthBar.java
