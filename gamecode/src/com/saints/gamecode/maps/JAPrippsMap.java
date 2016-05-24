@@ -15,5 +15,4 @@ public class JAPrippsMap extends Map {
     }
 
 
-
 }

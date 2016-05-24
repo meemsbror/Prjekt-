@@ -55,10 +55,12 @@ public class LibGDXGraphics implements IGraphics{
             } else if(gameObjects.get(i)instanceof Character){
                 Character character = (Character)gameObjects.get(i);
                 drawCharacter(character, delta);
-            } else if(gameObjects.get(i) instanceof Item){
-                GameObject gameObject = (Item)gameObjects.get(i);
-                Position pos = gameObject.getPos();
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),pos.getX(),pos.getY());
+
+            }
+            else if(gameObjects.get(i) instanceof Item){
+                Item gameObject = (Item)gameObjects.get(i);
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
                 PauseMenu gameObject = (PauseMenu) gameObjects.get(i);
@@ -125,6 +127,7 @@ public class LibGDXGraphics implements IGraphics{
         //The current animation frame of the character
         tmpRegion = assetsmanager.getAnimation(character.getAnimationObject().getPath())[map.get(character.getState())].getKeyFrame(elapsedTime, true);
 
+
         //See if it is flipped, if it is flip it.
         if(!tmpRegion.isFlipX()){
             tmpRegion.flip(true, false);
@@ -155,15 +158,15 @@ public class LibGDXGraphics implements IGraphics{
         GameObject attack = character.getStraightAttack();
         if(character.isP1()) {
             //If the character is punching draw the punch aswell.
-            p1AttackTime += delta;
-            drawPunch(attack, p1AttackTime, negative);
+            p1AttackTime =+ delta;
+            drawPunch(attack, p1AttackTime);
         }else{
             p2AttackTime += delta;
-            drawPunch(attack, p2AttackTime, negative);
+            drawPunch(attack, p2AttackTime);
         }
     }
-    public void drawPunch(GameObject attack,float attackTime, float negative) {
-        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), negative * attack.getWidth(), attack.getHeight());
+    public void drawPunch(GameObject attack,float attackTime) {
+        batch.draw(assetsmanager.getAnimation(attack.getAnimationObject().getPath())[0].getKeyFrame(attackTime, true), attack.getPos().getX(), attack.getPos().getY(), attack.getWidth(), attack.getHeight());
     }
 
 

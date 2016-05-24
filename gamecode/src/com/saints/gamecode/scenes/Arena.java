@@ -112,6 +112,7 @@ public class Arena extends Scene{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        gameObjects.add(new AttackPower(100,100,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        for(int i = 0; i < 40; i++)
+        gameObjects.add(new AttackPower(50*i,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
     }
 }

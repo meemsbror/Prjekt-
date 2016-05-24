@@ -10,7 +10,7 @@ public class StickCharacter extends Character {
     private final Physics physics;
 
     //the initial speed that a character jumps with
-    private final Vector2D jumpSpeed = new Vector2D(0, 300);
+    private final Vector2D jumpSpeed = new Vector2D(0, 450);
 
     //The time until next attack
     private float attackCD = 0;
@@ -31,8 +31,8 @@ public class StickCharacter extends Character {
 
     public StickCharacter(boolean isPlayer1) {
         //Original width and height 100*256
-        super(100, 256, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/6f),200, isPlayer1);
-        straightAttack = new StraightAttack(133, 87, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
+        super(100, 256, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/12f),200, isPlayer1);
+        straightAttack = new StraightAttack(103, 72, new AnimationObject("assets/pictures/StickManAttack.png",1,1,1f));
         setState(State.STALL);
         physics = Physics.getInstance();
         if (!isPlayer1){
@@ -43,7 +43,7 @@ public class StickCharacter extends Character {
     @Override
     public boolean attack(GameObject gameObject){
 
-        if(physics.hasCollided(this,gameObject)) {
+        if(physics.hasCollided(straightAttack,gameObject)) {
             return true;
         }
         else{
@@ -62,7 +62,7 @@ public class StickCharacter extends Character {
     @Override
     public void move(float dx, float dy){
         super.move(dx, dy);
-        straightAttack.setPosition(getPos().getX() + 82, getPos().getY() + 113);
+        straightAttack.setPosition(getPos().getX() + 50, getPos().getY() + 93);
     }
 
     public Vector2D getJumpSpeed(){
@@ -70,7 +70,7 @@ public class StickCharacter extends Character {
     }
 
     public void jump(){
-        setDoubleJumped((isAirborne()) ? true : false);
+        setDoubleJumped(true);
         changeDirection(jumpSpeed);
         straightAttack.changeDirection(jumpSpeed);
         setAirborne(true);
@@ -91,16 +91,23 @@ public class StickCharacter extends Character {
         this.attackCD = time + ATTACKSPEED;
     }
 
+    @Override
+    public float getAttackSpeed() {
+        return ATTACKSPEED;
+    }
+
 
     @Override
     public void moveRight(){
         super.moveRight();
+        straightAttack.setWidth(Math.abs(straightAttack.getWidth()));
         setHorizontalSpeed(getMoveSpeed());
     }
 
     @Override
     public void moveLeft(){
         super.moveLeft();
+        straightAttack.setWidth(Math.abs(straightAttack.getWidth())*-1);
         setHorizontalSpeed(-getMoveSpeed());
     }
     //Power up functions

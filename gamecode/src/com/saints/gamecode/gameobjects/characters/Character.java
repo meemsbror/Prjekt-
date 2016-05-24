@@ -1,13 +1,9 @@
 package com.saints.gamecode.gameobjects.characters;
 
 import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.Position;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.characters.attacks.StraightAttack;
-import com.saints.gamecode.gameobjects.items.AttackPower;
-import com.saints.gamecode.gameobjects.items.Item;
 
 public abstract class Character extends GameObject {
 
@@ -59,9 +55,6 @@ public abstract class Character extends GameObject {
         this.p1 = p1;
         state = State.STALL;
     }
-    /*
-    public abstract boolean attack(GameObject gameObject);
-    */
 
     //Sets image
     public State getState() {
@@ -103,26 +96,6 @@ public abstract class Character extends GameObject {
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        Character character = (Character) o;
-
-
-        if (facingRight != character.facingRight) return false;
-
-      //  return hitPoints == character.hitPoints;
-
-        //TODO: remove hitPoints? and fix dummy return state just below this line;
-        return true;
-       // return hitPoints == character.hitPoints;
-
-    }
-
-
     //Abstract methods
 
     //Returns the initial jumpSpeed
@@ -141,6 +114,8 @@ public abstract class Character extends GameObject {
 
     public abstract float getAttackCD();
     public abstract void setAttackCD(float time);
+
+    public abstract float getAttackSpeed();
 
     //Powerup functions (increase damage, speed or whatever we come up with :)
     public abstract void powerUp(boolean poweredUp);
