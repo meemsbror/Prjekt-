@@ -23,7 +23,7 @@ public class CharacterController {
     private final Platform platform;
 
     //All items in a list
-    private final ArrayList<IEntity> gameObjects;
+    private final List<IEntity> gameObjects;
 
     private final IKeyInput input;
     private float time;
@@ -34,7 +34,7 @@ public class CharacterController {
     private IGraphics graphics;
 
     public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
-        this.gameObjects = (ArrayList)gameObjects;
+        this.gameObjects = gameObjects;
         this.input = input;
         this.platform = platform;
 
@@ -43,21 +43,13 @@ public class CharacterController {
     }
 
     //Sets the starting position of both players
-    public void setStartPositions(){
+    private void setStartPositions(){
         //TODO: start pos should vary with map
         player1.setPosition(0,0);
         player2.setPosition(300,0);
     }
 
-    public Position getP1Position(){
-        return player1.getPosition();
-    }
-
-    public Position getP2Position(){
-        return player2.getPosition();
-    }
-
-    public Position getPlayerPosition(GameObject gameObject){
+    private Position getPlayerPosition(GameObject gameObject){
         return gameObject.getPosition();
     }
 
@@ -145,7 +137,6 @@ public class CharacterController {
 		        HPBar.killP2();
 	        }
 	        // do nothing otherwise
-	        return;
         }
     }
 
@@ -170,7 +161,7 @@ public class CharacterController {
     }
 
     //Moves the Characters in their direction.
-    public void moveCharacters(float delta){
+    private void moveCharacters(float delta){
         player1.move(player1.getHorizontalSpeed()*delta,player1.getVerticalSpeed()*delta);
         player2.move(player2.getHorizontalSpeed()*delta,player2.getVerticalSpeed()*delta);
     }
@@ -178,7 +169,7 @@ public class CharacterController {
 
 
     //Checks what state a character should be in and updates it correspond to it
-    public void updateState(Character player){
+    private void updateState(Character player){
         if(!player.isMoving()) {
             player.resetHorizontalSpeed();
             player.setState(State.STALL);
@@ -195,7 +186,7 @@ public class CharacterController {
 
 
     //Takes a direction and a player and updates the model depending on the input (direction)
-    public void keyPressed(Direction direction, Character character, Character opositeCharacter){
+    private void keyPressed(Direction direction, Character character, Character opositeCharacter){
         switch(direction){
 
             //Player movement
@@ -216,7 +207,7 @@ public class CharacterController {
                 break;
         }
     }
-    public void attack(Character character, Character opositeCharacter){
+    private void attack(Character character, Character opositeCharacter){
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
                 HPBar.dealDamage(character.getDamage());
@@ -242,7 +233,7 @@ public class CharacterController {
 
 
     //Puts the different playerDirections and maps them to the general direction
-    public void initiatePlayerDirections() {
+    private void initiatePlayerDirections() {
         P1_DIRECTIONS = new HashMap<Direction, Direction>();
         P2_DIRECTIONS = new HashMap<Direction, Direction>();
 
@@ -263,7 +254,7 @@ public class CharacterController {
 
 
     //Asks the character to jump
-    public void jump(Character character){
+    private void jump(Character character){
         if(!character.isAirborne() || !character.isDoubleJumped()){
             if(character.getJumpTimer() < time) {
                 character.jump();
@@ -283,7 +274,7 @@ public class CharacterController {
     }
 
     //Not sure if necessary
-    public void keyReleased(int key){
+    private void keyReleased(int key){
         //TODO
     }
 

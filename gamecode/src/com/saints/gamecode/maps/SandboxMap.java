@@ -15,7 +15,7 @@ public class SandboxMap extends Map {
     }
 
     @Override
-    public void setPosition(int x, int y) {
+    public void setPosition(float x, float y) {
 
     }
 
