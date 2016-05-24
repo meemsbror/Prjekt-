@@ -23,6 +23,8 @@ public class Vector2D implements Cloneable {
         this.y += other.y;
     }
 
+
+
     //Multiply this vector with a scalar
     public void multiplyVector(float multiplication){
         this.x *= multiplication;
@@ -65,5 +67,24 @@ public class Vector2D implements Cloneable {
     @Override
     public Object clone(){
         return new Vector2D(x,y);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vector2D vector2D = (Vector2D) o;
+
+        if (Float.compare(vector2D.getX(), getX()) != 0) return false;
+        return Float.compare(vector2D.getY(), getY()) == 0;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (getX() != +0.0f ? Float.floatToIntBits(getX()) : 0);
+        result = 31 * result + (getY() != +0.0f ? Float.floatToIntBits(getY()) : 0);
+        return result;
     }
 }
