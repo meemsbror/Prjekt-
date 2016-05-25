@@ -154,12 +154,12 @@ public final class HealthBar implements IEntity{
    }
 
     public void killP1(){
-        setDivider(currentMin);
+        setDivider(getP1Limit());
         setWinner("Player 2");
         isOver();
     }
     public void killP2(){
-        setDivider(currentMax);
+        setDivider(getP2Limit());
         setWinner("Player 1");
         isOver();
     }
