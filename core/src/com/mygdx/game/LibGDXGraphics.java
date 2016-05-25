@@ -112,7 +112,14 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
-    public void addAnimation(AnimationObject animationObject){
+	@Override
+	public void update(Background background) {
+		batch.begin();
+		batch.draw(assetsmanager.getTexture(background.getImgPath()),0,0,1280,720);
+		batch.end();
+	}
+
+	public void addAnimation(AnimationObject animationObject){
         assetsmanager.addAnimation(animationObject);
     }
 

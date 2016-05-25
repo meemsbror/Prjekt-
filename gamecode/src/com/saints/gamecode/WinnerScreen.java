@@ -8,8 +8,7 @@ public class WinnerScreen implements IEntity {
 
 	private int width = 400;
 	private int height = 300;
-
-
+	
 
 	@Override
 	public void setPosition(float x, float y) {

@@ -133,10 +133,14 @@ public class CharacterController {
         if(player.getPos().getY() < -150) {
 	        if (player.equals(player1)){
 		        HPBar.killP1();
+		        gameObjects.clear();
 		        pcs.firePropertyChange(HPBar.getWinner(),null,null);
+		        HPBar.reset();
 	        }if (player.equals(player2)){
 		        HPBar.killP2();
+		        gameObjects.clear();
 		        pcs.firePropertyChange(HPBar.getWinner(),null,null);
+		        HPBar.reset();
 	        }
 	        // do nothing otherwise
         }
