@@ -70,12 +70,19 @@ public class Vector2DTest {
         assert vector1.equals(vector2);
         assert vector2.equals(vector1);
 
-        
+        vector2.setX(random());
+        vector2.setY(random());
 
+        assert !vector1.equals(vector2);
+        assert !vector2.equals(vector1);
+
+        vector2 = (Vector2D)vector1.clone();
+
+        assert vector1.equals(vector2);
+        assert vector2.equals(vector1);
     }
 
     private float random(){
         return (float)Math.random();
     }
-
 }

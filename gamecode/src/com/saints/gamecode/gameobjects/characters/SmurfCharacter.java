@@ -70,7 +70,7 @@ public class SmurfCharacter extends Character {
     }
 
     public void jump(){
-        setDoubleJumped((isAirborne()) ? true : false);
+        setDoubleJumped(isAirborne());
         changeDirection(jumpSpeed);
         straightAttack.changeDirection(jumpSpeed);
         setAirborne(true);
