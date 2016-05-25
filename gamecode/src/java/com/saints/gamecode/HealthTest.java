@@ -46,7 +46,7 @@ public class HealthTest {
 	    int startingWidth = healthBar.getStartingWidth();
 	    int width = healthBar.getWidth();
 	    assertTrue(startingWidth == 0);
-	    assetTrue(width == 0);
+	    assertTrue(width == 0);
 
 
     }
@@ -118,7 +118,7 @@ public class HealthTest {
 		width = healthBar.getWidth();
 	    assertTrue(width == 80);
 	    healthBar.setWidth(50);
-	    assetTrue(width == 50);
+	    assertTrue(width == 50);
 
 
     }

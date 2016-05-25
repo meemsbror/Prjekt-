@@ -19,6 +19,11 @@ public class GraphicsSim implements IGraphics{
     }
 
     @Override
+    public void update(Background background) {
+
+    }
+
+    @Override
     public void addAnimation(AnimationObject animationObject) {
 
     }

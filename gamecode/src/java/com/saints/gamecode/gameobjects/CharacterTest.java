@@ -23,7 +23,8 @@ public class CharacterTest {
         player1.setPosition(0,0);
         player2.setPosition(player1.getPos().getX() + player1.getWidth(),0);
         player1.move(1,0);
-        //player1.moveRight();
+        player1.moveRight();
+        player2.moveLeft();
         player2.move(-1,0);
 
         player1.attack(player2);
