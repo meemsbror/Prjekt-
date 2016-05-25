@@ -85,10 +85,11 @@ public class LibGDXGraphics implements IGraphics{
     }
 
     @Override
-    public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2){
+    public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2, Background background){
         Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
+        batch.draw(assetsmanager.getTexture(background.getImgPath()), 0,0);
 
         for(int i = 0; i < IEntities.length; i++){
             for(int j = 0; j < IEntities[i].length; j++){
@@ -103,6 +104,7 @@ public class LibGDXGraphics implements IGraphics{
 
         batch.draw(assetsmanager.getTexture(p1.getImgPath()), p1Pos.getX(), p1Pos.getY());
         batch.draw(assetsmanager.getTexture(p2.getImgPath()), p2Pos.getX(), p2Pos.getY());
+
 
         batch.end();
     }
@@ -137,7 +139,7 @@ public class LibGDXGraphics implements IGraphics{
         if(!character.isFacingRight()){
             batch.draw(tmpRegion, character.getPos().getX(), character.getPos().getY(), character.getWidth(), character.getHeight());
             if(character.getState() == State.PUNCH) {
-                punch(character, delta, -1);
+                punch(character, delta);
             }
 
 
@@ -148,16 +150,15 @@ public class LibGDXGraphics implements IGraphics{
 
             ///If the character is punching draw the punch aswell.
             if(character.getState() == State.PUNCH){
-                punch(character, delta, 1);
+                punch(character, delta);
             }
         }
     }
 
 
-    public void punch(Character character, float delta, float negative){
+    public void punch(Character character, float delta){
         GameObject attack = character.getStraightAttack();
         if(character.isP1()) {
-            //If the character is punching draw the punch aswell.
             p1AttackTime =+ delta;
             drawPunch(attack, p1AttackTime);
         }else{

@@ -1,9 +1,6 @@
 package com.saints.gamecode.scenes;
 
-import com.saints.gamecode.CharacterFactory;
-import com.saints.gamecode.CharacterPanel;
-import com.saints.gamecode.Direction;
-import com.saints.gamecode.Position;
+import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -19,6 +16,7 @@ public class CharacterSelectController extends Scene{
     private CharacterPanel characterPanels[][];
     private Position p1Pos, p2Pos;
     private CharacterPanel p1Panel, p2Panel;
+    private Background background;
 
 
     public CharacterSelectController(IKeyInput input, IGraphics graphics){
@@ -34,7 +32,7 @@ public class CharacterSelectController extends Scene{
         checkInput();
         setPanelPositions();
         updateActivePanels();
-        graphics.update(delta, characterPanels, p1Panel, p2Panel);
+        graphics.update(delta, characterPanels, p1Panel, p2Panel, background);
     }
 
     //Checks all different input keys and if they are pressed
@@ -173,6 +171,8 @@ public class CharacterSelectController extends Scene{
         p1Panel = new CharacterPanel("assets/pictures/P1Panel.png", "P1");
         p2Panel = new CharacterPanel("assets/pictures/P2Panel.png", "P2");
 
+        background = new Background("assets/pictures/StartScreen.png");
+
         setPanelPositions();
         addTextures();
     }
@@ -180,6 +180,8 @@ public class CharacterSelectController extends Scene{
     public void addTextures(){
         graphics.addTexture(p1Panel.getImgPath());
         graphics.addTexture(p2Panel.getImgPath());
+
+        graphics.addTexture(background.getImgPath());
 
         for(int i = 0; i < characterPanels.length; i++){
             for (int j = 0; j < characterPanels[i].length; j++){
@@ -190,7 +192,7 @@ public class CharacterSelectController extends Scene{
     }
 
     private void setPanelPositions(){
-        int screenHeight = graphics.getScreenHeight();
+        int screenHeight = graphics.getScreenHeight()-200;
         int screenWidth = graphics.getScreenWidth();
         int rows = characterPanels.length;
         int panelsHeight = 225*rows;
