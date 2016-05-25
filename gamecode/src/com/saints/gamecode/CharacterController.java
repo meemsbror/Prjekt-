@@ -295,7 +295,8 @@ public class CharacterController {
         this.HPBar.setStartingMax(HPBarHelper);
         this.HPBar.setP2Limit(HPBarHelper);
         // sets divider correctly for case when Characters have different health-pools
-        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints());
+	    this.HPBar.setWidth(600);
+        this.HPBar.setDivider(HPBarHelper - player2.getHitPoints()); // also sets width
         this.HPBar.setPosition((graphics.getScreenWidth()/2)-(HPBar.getWidth()/2),
                 (graphics.getScreenHeight()-80)); // HPBar appears on top of screen
         this.gameObjects.add(HPBar);

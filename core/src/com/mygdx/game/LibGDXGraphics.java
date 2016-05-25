@@ -71,14 +71,15 @@ public class LibGDXGraphics implements IGraphics{
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame, gameObject.getPosition().getX() - 416, gameObject.getPosition().getY());
+                // fix a position for bottom rectangle      \this/ == HALF SIZE
+                batch.draw(tmpFrame, gameObject.getPosition().getX() - (gameObject.getWidth()/2), gameObject.getPosition().getY(),getScreenWidth()/2,getScreenHeight()/10);
 
 
 
                 TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
 
-	            // fix a position for bottom rectangle      \this/ == HALF SIZE
-	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80, gameObject.getWidth(), gameObject.getHeight());
+
+	           // batch.draw(tmpFrame2, ((getScreenWidth()/2) ), getScreenHeight()-80, gameObject.getWidth(), gameObject.getHeight());
             }
         }
         batch.end();

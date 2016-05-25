@@ -72,7 +72,7 @@ public final class HealthBar implements IEntity{
    public void setDivider(int x){
         this.divider = x;
 	   // whenever the divider is changed, update width of divider. This factorizes a lot of code
-        setWidth(getWidth()*(toPercent(getDivider(),getP1Limit(),getP2Limit())));
+        setWidth(getWidth()*((toPercent(getDivider(),getP1Limit(),getP2Limit())))/100);
    }
     public int getDivider(){
         return divider;
@@ -212,6 +212,7 @@ public final class HealthBar implements IEntity{
                 "\nCurrent Maximum: " + getP2Limit() +
                 "\nPlayer 1 status: " + (getDivider() - getP1Limit()) +
                 "\nPlayer 2 status: " + (getP2Limit()- getDivider()) +
+                "\nCurrent winner: " + getWinner() +
 		        "\nWidth: " + getWidth();
 
     }
