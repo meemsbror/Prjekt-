@@ -3,6 +3,7 @@ package com.saints.gamecode;
 import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.StickCharacter;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.interfaces.IKeyInput;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -10,6 +11,7 @@ import static org.junit.Assert.*;
 public class PhysicsTest {
 
     private Physics physics = Physics.getInstance();
+
     @Test
     public void getInstance() throws Exception {
 
