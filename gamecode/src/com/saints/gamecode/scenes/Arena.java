@@ -12,12 +12,14 @@ import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Arena extends Scene{
+public class Arena extends Scene implements PropertyChangeListener{
 
     private final CharacterController characterController;
     private final IKeyInput input;
@@ -43,6 +45,7 @@ public class Arena extends Scene{
         //TODO - Fix Platform with PlatformFactory
         Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
         this.characterController = new CharacterController(gameObjects, input, platform, graphics);
+	    this.characterController.addPropertyChangeListener(this);
 
     }
 
@@ -118,5 +121,14 @@ public class Arena extends Scene{
 
     public PauseMenu getPauseMenu() {
         return pauseMenu;
+    }
+
+    private void endGame(String winner){
+        firePropertyChange(winner,null,null);
+
+    }
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        endGame(evt.getPropertyName());
     }
 }

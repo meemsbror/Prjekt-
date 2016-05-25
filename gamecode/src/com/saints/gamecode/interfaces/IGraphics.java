@@ -13,6 +13,8 @@ public interface IGraphics {
 
     void update (float delta, IEntity [][] IEntitys, CharacterPanel p1, CharacterPanel p2, Background background);
 
+    void update (Background background);
+
     void addAnimation(AnimationObject animationObject);
 
     void addTexture(String path);

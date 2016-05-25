@@ -1,4 +1,4 @@
-package test.java.testList;
+package com.saints.gamecode;
 
 import com.saints.gamecode.HealthBar;
 import org.junit.Test;
@@ -41,6 +41,12 @@ public class HealthTest {
         // test for getting winner
         String winner = healthBar.getWinner();
         assertTrue(winner.equals("none")); // winner not set yet, this test found in setters
+
+	    // test for width
+	    int startingWidth = healthBar.getStartingWidth();
+	    int width = healthBar.getWidth();
+	    assertTrue(startingWidth == 0);
+	    assetTrue(width == 0);
 
 
     }
@@ -104,6 +110,15 @@ public class HealthTest {
         healthBar.setWinner("Player 2");
         winner = healthBar.getWinner();
         assertTrue(winner.equals("Player 2"));
+
+	    healthBar.setStartingWidth(80);
+	    int startingWidth = healthBar.getStartingWidth();
+	    int width;
+	    assertTrue(startingWidth == 80);
+		width = healthBar.getWidth();
+	    assertTrue(width == 80);
+	    healthBar.setWidth(50);
+	    assetTrue(width == 50);
 
 
     }
