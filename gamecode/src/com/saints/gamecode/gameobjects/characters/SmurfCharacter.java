@@ -31,7 +31,7 @@ public class SmurfCharacter extends Character {
 
     public SmurfCharacter(boolean isPlayer1) {
         //Original width and height 227*386
-        super(169/2, 286/2, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f),200/2, isPlayer1);
+        super(169/2, 286/2, new AnimationObject("assets/pictures/testSpriteSheetv2.png", 6, 4, 1f/6f),200, isPlayer1);
         straightAttack = new StraightAttack(133/2, 87/2, new AnimationObject("assets/pictures/SmurfAttackSprite.png",6,1,1f/6f));
         setState(State.STALL);
         physics = Physics.getInstance();
