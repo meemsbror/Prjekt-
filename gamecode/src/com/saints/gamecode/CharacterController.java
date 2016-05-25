@@ -213,9 +213,11 @@ public class CharacterController {
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
                 HPBar.dealDamage(character.getDamage());
-
-                if (HPBar.getIsGameOver()){
+	            System.out.println(HPBar.toString());
+	            if (HPBar.getIsGameOver()){
+                    gameObjects.clear();
 	                pcs.firePropertyChange(HPBar.getWinner(),null,null);
+                    HPBar.reset();
                 }
             }
             for(int i = gameObjects.size()-1; i >= 0; i--){
