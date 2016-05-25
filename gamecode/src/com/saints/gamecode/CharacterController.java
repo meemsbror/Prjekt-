@@ -236,14 +236,14 @@ public class CharacterController {
         P1_DIRECTIONS.put(Direction.P1RIGHT, Direction.RIGHT);
         P1_DIRECTIONS.put(Direction.P1LEFT, Direction.LEFT);
         P1_DIRECTIONS.put(Direction.P1JUMP, Direction.JUMP);
-        P1_DIRECTIONS.put(Direction.P1DIVE, Direction.JUMP);
+        P1_DIRECTIONS.put(Direction.P1DIVE, Direction.DIVE);
         P1_DIRECTIONS.put(Direction.P1ATTACK, Direction.ATTACK);
         P1_DIRECTIONS.put(Direction.P1STOP, Direction.STOP);
 
         P2_DIRECTIONS.put(Direction.P2RIGHT, Direction.RIGHT);
         P2_DIRECTIONS.put(Direction.P2LEFT, Direction.LEFT);
         P2_DIRECTIONS.put(Direction.P2JUMP, Direction.JUMP);
-        P2_DIRECTIONS.put(Direction.P2DIVE, Direction.JUMP);
+        P2_DIRECTIONS.put(Direction.P2DIVE, Direction.DIVE);
         P2_DIRECTIONS.put(Direction.P2ATTACK, Direction.ATTACK);
         P2_DIRECTIONS.put(Direction.P2STOP, Direction.STOP);
     }

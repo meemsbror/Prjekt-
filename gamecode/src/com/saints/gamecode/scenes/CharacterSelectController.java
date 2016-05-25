@@ -18,6 +18,10 @@ public class CharacterSelectController extends Scene{
     private CharacterPanel p1Panel, p2Panel;
     private Background background;
 
+    //A timer that ensures that you dont accidently select characters after you entered character select.
+    //from pausemenu
+    private float selectTimer, endTime;
+
 
     public CharacterSelectController(IKeyInput input, IGraphics graphics){
         this.input = input;
@@ -29,6 +33,7 @@ public class CharacterSelectController extends Scene{
     }
 
     public void update(float delta) {
+        selectTimer += delta;
         checkInput();
         setPanelPositions();
         updateActivePanels();
@@ -97,7 +102,10 @@ public class CharacterSelectController extends Scene{
                 break;
 
             case SELECT:
-                charactersSelected();
+                if(selectTimer > endTime + 0.3) {
+                    charactersSelected();
+                    endTime = selectTimer;
+                }
                 break;
         }
     }

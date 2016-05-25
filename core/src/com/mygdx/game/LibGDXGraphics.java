@@ -159,9 +159,9 @@ public class LibGDXGraphics implements IGraphics{
     public void punch(Character character, float delta){
         GameObject attack = character.getStraightAttack();
         if(character.isP1()) {
-            p1AttackTime =+ delta;
+            p1AttackTime += delta;
             drawPunch(attack, p1AttackTime);
-        }else{
+        }else if(!character.isP1()){
             p2AttackTime += delta;
             drawPunch(attack, p2AttackTime);
         }
