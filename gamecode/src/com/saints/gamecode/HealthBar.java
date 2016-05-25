@@ -72,7 +72,7 @@ public final class HealthBar implements IEntity{
    public void setDivider(int x){
         this.divider = x;
 	   // whenever the divider is changed, update width of divider. This factorizes a lot of code
-        setWidth(toPercent(getDivider(),getP1Limit(),getP2Limit()));
+        setWidth(getWidth()*(toPercent(getDivider(),getP1Limit(),getP2Limit())));
    }
     public int getDivider(){
         return divider;
@@ -284,7 +284,7 @@ public final class HealthBar implements IEntity{
 
     @Override
     public int getHeight() {
-        return 127;
+        return 80;
     }
     public AnimationObject getAnimationObject1(){
         return animationObject1;
