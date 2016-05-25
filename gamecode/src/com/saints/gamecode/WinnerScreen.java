@@ -4,7 +4,7 @@ import com.saints.gamecode.interfaces.IEntity;
 
 public class WinnerScreen implements IEntity {
 
-	private Position pos;
+	private Position position;
 
 	private int width = 400;
 	private int height = 300;

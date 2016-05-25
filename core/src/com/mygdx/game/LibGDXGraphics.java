@@ -71,14 +71,14 @@ public class LibGDXGraphics implements IGraphics{
             }else if (gameObjects.get(i) instanceof HealthBar){
                 HealthBar gameObject = (HealthBar)gameObjects.get(i);
                 TextureRegion tmpFrame = assetsmanager.getAnimation(gameObject.getAnimationObject1().getPath())[0].getKeyFrame(elapsedTime);
-                batch.draw(tmpFrame, gameObject.getPosition().getX(), gameObject.getPosition().getY());
+                batch.draw(tmpFrame, gameObject.getPosition().getX() - 416, gameObject.getPosition().getY());
 
 
 
                 TextureRegion tmpFrame2 = assetsmanager.getAnimation(gameObject.getAnimationObject2().getPath())[0].getKeyFrame(elapsedTime);
 
-	            // fix a position for bottom rectangle      \this/ == HALF SIZE (should be)
-	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80);
+	            // fix a position for bottom rectangle      \this/ == HALF SIZE
+	            batch.draw(tmpFrame2, ((getScreenWidth()/2) -441), getScreenHeight()-80, gameObject.getWidth(), gameObject.getHeight());
             }
         }
         batch.end();
@@ -172,12 +172,12 @@ public class LibGDXGraphics implements IGraphics{
 
     @Override
     public int getScreenHeight() {
-        return graphics.getHeight();
+        return 720;
     }
 
     @Override
     public int getScreenWidth() {
-        return graphics.getWidth();
+        return 1280;
     }
 
     @Override
