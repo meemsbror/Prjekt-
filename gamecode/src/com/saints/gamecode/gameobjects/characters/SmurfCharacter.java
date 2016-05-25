@@ -52,7 +52,7 @@ public class SmurfCharacter extends Character {
     }
     @Override
     public int getDamage() {
-        return (isPowered) ? DAMAGE : DAMAGE*2;
+        return (!isPowered) ? DAMAGE : DAMAGE*2;
     }
 
     public int getHitPoints() {
