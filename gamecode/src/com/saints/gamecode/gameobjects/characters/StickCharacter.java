@@ -31,7 +31,7 @@ public class StickCharacter extends Character {
 
     public StickCharacter(boolean isPlayer1) {
         //Original width and height 100*256
-        super(100/2, 256/2, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/12f),200, isPlayer1);
+        super(100/2, 256/2, new AnimationObject("assets/pictures/StickManSpriteSheet.png", 6, 4, 1f/12f),220, isPlayer1);
         straightAttack = new StraightAttack(103/2, 72/2, new AnimationObject("assets/pictures/StickManAttack.png",1,1,1f));
         setState(State.STALL);
         physics = Physics.getInstance();
