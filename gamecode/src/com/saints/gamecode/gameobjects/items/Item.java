@@ -7,10 +7,9 @@ import com.saints.gamecode.gameobjects.GameObject;
 public abstract class Item extends GameObject{
 
 
-    public Item (int x, int y, int width, int height, AnimationObject animationObject){
+    public Item (float x, float y, int width, int height, AnimationObject animationObject){
         super(width,height, animationObject);
         setPosition(x,y);
     }
 
-    public abstract float getDuration();
 }

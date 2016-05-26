@@ -7,8 +7,8 @@ import com.saints.gamecode.AnimationObject;
  */
 public class AttackPower extends Item {
     private static final float DURATION = 5;
-    public AttackPower(int x, int y, int width, int height, AnimationObject animationObject){
-        super(x,y,width,height,animationObject);
+    public AttackPower(float x, float y, AnimationObject animationObject){
+        super(x,y,60,60,animationObject);
     }
 
 

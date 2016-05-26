@@ -1,6 +1,7 @@
 package com.saints.gamecode.gameobjects.characters;
 
 import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.HealthBar;
 import com.saints.gamecode.State;
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
@@ -84,6 +85,9 @@ public abstract class Character extends GameObject {
     public void moveLeft(){
         isMoving = true;
         facingRight = false;
+    }
+    public void swapHp(){
+        HealthBar.getInstance().hpSwitch();
     }
 
 

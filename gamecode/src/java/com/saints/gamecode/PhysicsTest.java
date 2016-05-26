@@ -2,11 +2,8 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.StickCharacter;
-import com.saints.gamecode.gameobjects.items.Platform;
-import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.gameobjects.Platform;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class PhysicsTest {
 

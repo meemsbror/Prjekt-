@@ -9,12 +9,17 @@ import java.util.List;
 public class GraphicsSim implements IGraphics{
 
     @Override
-    public void update(float delta, List<IEntity> entities){
+    public void update(float delta, List<IEntity> entities, Background background){
 
     }
 
     @Override
     public void update(float delta, IEntity[][] entities, CharacterPanel p1, CharacterPanel p2, Background background){
+
+    }
+
+    @Override
+    public void update(float delta, IEntity[][] IEntitys, CharacterPanel panel, Background background) {
 
     }
 

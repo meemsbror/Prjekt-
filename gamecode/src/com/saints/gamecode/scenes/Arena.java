@@ -3,10 +3,11 @@ package com.saints.gamecode.scenes;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.maps.Map;
 import com.saints.gamecode.maps.SandboxMap;
 
 import java.beans.PropertyChangeEvent;
@@ -21,29 +22,32 @@ public class Arena extends Scene implements PropertyChangeListener{
     private final CharacterController characterController;
     private final IKeyInput input;
     private final IGraphics graphics;
-    private final Platform platform;
     private PropertyChangeSupport pcs;
-    private float pauseTimer = 0;
+
+    //Time for items to spawn
+    private float timeElapsed;
+    private float itemTimer = (float)(Math.random()*5+2);
+
     private int currentPauseOption = 0;
 
     private final boolean running = true;
+
+    private Map map = new SandboxMap();
 
 
     List<IEntity> gameObjects = new ArrayList<IEntity>();
 
     PauseMenu pauseMenu = new PauseMenu(new AnimationObject("assets/pictures/PauseMenu.png", 1, 3, 1));
 
+
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
         this.input = input;
         this.graphics = graphics;
+
         startMatch();
 
-        //TODO - Fix Platform with PlatformFactory
-        //Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
-        //platform = PlatformFactory.createPlatform("UmpMap");
-        platform = PlatformFactory.createPlatform("SandboxMap");
-        this.characterController = new CharacterController(gameObjects, input, platform, graphics);
+        this.characterController = new CharacterController(gameObjects, input, map.getPlatformList(), graphics);
 	    this.characterController.addPropertyChangeListener(this);
 
     }
@@ -56,7 +60,6 @@ public class Arena extends Scene implements PropertyChangeListener{
     public void startMatch(){
         addMap();
         addAnimations();
-        addItem();
         addHealthBarAnimation();
     }
     public void addHealthBarAnimation(){
@@ -85,12 +88,17 @@ public class Arena extends Scene implements PropertyChangeListener{
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
         if (!pauseMenu.isPaused()) {
+            timeElapsed += delta;
             pauseMenu.setPaused(input.isKeyPressed(Direction.SELECT), delta);
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
             }
-            graphics.update(delta, getGameObjects());
+            graphics.update(delta, getGameObjects(), map.getBackground());
             characterController.update(delta);
+            if(itemTimer <timeElapsed){
+                addItem();
+                itemTimer =(float) (timeElapsed + 5 + 15*Math.random());
+            }
         }else{
             if(pauseMenu.updatePaused(delta, input)) {
                 gameObjects.clear();
@@ -101,7 +109,7 @@ public class Arena extends Scene implements PropertyChangeListener{
                 gameObjects.add(pauseMenu);
             }
             delta = 0;
-            graphics.update(delta, getGameObjects());
+            graphics.update(delta, getGameObjects(), map.getBackground());
         }
     }
 
@@ -117,7 +125,12 @@ public class Arena extends Scene implements PropertyChangeListener{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        gameObjects.add(new AttackPower(50,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        Position randomPos = new Position((float)(Math.random()*(graphics.getScreenWidth()-300) + 100),(float) (Math.random()*(graphics.getScreenHeight()-550) + 200));
+        if(Math.random() < 0.5){
+            gameObjects.add(new AttackPower(randomPos.getX(), randomPos.getY(), new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        }else{
+            gameObjects.add(new SwapHealth(randomPos.getX(), randomPos.getY(), new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        }
     }
 
     public PauseMenu getPauseMenu() {
@@ -131,5 +144,13 @@ public class Arena extends Scene implements PropertyChangeListener{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         endGame(evt.getPropertyName());
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 }

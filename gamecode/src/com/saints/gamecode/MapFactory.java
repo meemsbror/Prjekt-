@@ -1,6 +1,5 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.maps.*;
 import com.saints.gamecode.maps.Map;
 import com.saints.gamecode.maps.JAPrippsMap;
@@ -11,17 +10,13 @@ public class MapFactory {
     public static Map createMap(String map){
         switch (map){
             case "JAPrippsMap" :
-                return new JAPrippsMap("assets/pictures/saints.of.chalmers-sandbox.png",
-                        PlatformFactory.createPlatform(map));
+                return new JAPrippsMap();
             case "SandboxMap" :
-                return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
-                        PlatformFactory.createPlatform(map));
+                return new SandboxMap();
             case "UmpMap" :
-                return new SandboxMap("assets/pictures/RumpMap.png",
-                        PlatformFactory.createPlatform(map));
+                return new UmpMap();
             default:
-                return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
-                        PlatformFactory.createPlatform(map));
+                return new SandboxMap();
         }
     }
 
