@@ -87,7 +87,7 @@ public abstract class Character extends GameObject {
         facingRight = false;
     }
     public void swapHp(){
-        //Todo healthbar shit :D
+        HealthBar.getInstance().hpSwitch();
     }
 
 

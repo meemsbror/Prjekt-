@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -61,9 +62,15 @@ public class LibGDXGraphics implements IGraphics{
                 drawCharacter(character, delta);
 
             }
-            else if(gameObjects.get(i) instanceof Item){
+            else if(gameObjects.get(i) instanceof AttackPower){
                 Item gameObject = (Item)gameObjects.get(i);
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+                int temp;
+                if(gameObject instanceof AttackPower){
+                    temp = 0;
+                }else{
+                    temp = 1;
+                }
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[temp].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
 
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {

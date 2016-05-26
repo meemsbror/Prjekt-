@@ -236,8 +236,11 @@ public class CharacterController {
                         gameObjects.remove(i);
                     }
                 }else if(gameObjects.get(i) instanceof SwapHealth){
-                    character.swapHp();
-                    gameObjects.remove(i);
+                    SwapHealth item = (SwapHealth) gameObjects.get(i);
+                    if(character.attack(item)) {
+                        character.swapHp();
+                        gameObjects.remove(i);
+                    }
                 }
             }
             //Sets the cooldown for next attack, dependant on current time and what sort of character that is attacking.

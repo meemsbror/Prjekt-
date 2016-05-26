@@ -4,6 +4,7 @@ import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -117,7 +118,7 @@ public class Arena extends Scene implements PropertyChangeListener{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        gameObjects.add(new AttackPower(50,150,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        gameObjects.add(new SwapHealth(400,300,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
     }
 
     public PauseMenu getPauseMenu() {
