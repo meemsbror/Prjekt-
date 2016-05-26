@@ -1,12 +1,10 @@
 package com.saints.gamecode;
 
-import com.oracle.webservices.internal.api.message.PropertySet;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 
 import com.saints.gamecode.gameobjects.items.AttackPower;
-import com.saints.gamecode.gameobjects.items.Item;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.Platform;
 import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -60,11 +58,11 @@ public class CharacterController {
 
     //Updates the model
     public void update(float delta){
-            time += delta;
-            updateCharacterDirection(delta);
-            moveCharacters(delta);
-            checkCollision(delta);
-            checkPowerUp(delta);
+        time += delta;
+        updateCharacterDirection(delta);
+        moveCharacters(delta);
+        checkCollision(delta);
+        checkPowerUp(delta);
     }
 
     private void checkPowerUp(float delta) {

@@ -3,13 +3,15 @@ package com.saints.gamecode.maps;
 import com.saints.gamecode.Background;
 import com.saints.gamecode.PlatformFactory;
 import com.saints.gamecode.Position;
-import com.saints.gamecode.gameobjects.items.Platform;
-import com.saints.gamecode.interfaces.IEntity;
+import com.saints.gamecode.gameobjects.Platform;
 
 public class JAPrippsMap extends Map {
-    public JAPrippsMap(String background, Platform platform) {
-        super(new Background("assets/pictures/SandboxMap2.png"));
-        addPlatformList(PlatformFactory.createPlatform("JAPrippsMap"));
+    public JAPrippsMap() {
+        super(new Background("assets/pictures/UmpMap.jpg"));
+        setPlatformList(PlatformFactory.createPlatform("JAPrippsMap"));
+    }
+    public String getString(){
+        return "UmpMap";
     }
 
     @Override

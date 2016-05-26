@@ -10,7 +10,7 @@ public class UmpMap extends Map {
     //Should implement sandbox.png and some kind of platform
     public UmpMap() {
         super(new Background("assets/pictures/UmpMap.jpg"));
-        addPlatformList(PlatformFactory.createPlatform("UmpMap"));
+        setPlatformList(PlatformFactory.createPlatform("UmpMap"));
     }
     public String getString(){
         return "UmpMap";

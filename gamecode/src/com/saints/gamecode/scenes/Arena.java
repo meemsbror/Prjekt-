@@ -3,7 +3,6 @@ package com.saints.gamecode.scenes;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
-import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -24,7 +23,11 @@ public class Arena extends Scene implements PropertyChangeListener{
     private final IKeyInput input;
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
-    private float pauseTimer = 0;
+
+    //Time for items to spawn
+    private float timeElapsed;
+    private float itemTimer = (float)(Math.random()*5+2);
+
     private int currentPauseOption = 0;
 
     private final boolean running = true;
@@ -57,7 +60,6 @@ public class Arena extends Scene implements PropertyChangeListener{
     public void startMatch(){
         addMap();
         addAnimations();
-        addItem();
         addHealthBarAnimation();
     }
     public void addHealthBarAnimation(){
@@ -86,12 +88,17 @@ public class Arena extends Scene implements PropertyChangeListener{
     //Gets called from the game loop when the arena should update
     public void update(float delta) {
         if (!pauseMenu.isPaused()) {
+            timeElapsed += delta;
             pauseMenu.setPaused(input.isKeyPressed(Direction.SELECT), delta);
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
             }
             graphics.update(delta, getGameObjects(), map.getBackground());
             characterController.update(delta);
+            if(itemTimer <timeElapsed){
+                addItem();
+                itemTimer =(float) (timeElapsed + 5 + 15*Math.random());
+            }
         }else{
             if(pauseMenu.updatePaused(delta, input)) {
                 gameObjects.clear();
@@ -118,7 +125,12 @@ public class Arena extends Scene implements PropertyChangeListener{
         characterController.setCharacters(player1, player2);
     }
     public void addItem(){
-        gameObjects.add(new SwapHealth(400,300,50,50,new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        Position randomPos = new Position((float)(Math.random()*(graphics.getScreenWidth()-300) + 100),(float) (Math.random()*(graphics.getScreenHeight()-550) + 200));
+        if(Math.random() < 0.5){
+            gameObjects.add(new AttackPower(randomPos.getX(), randomPos.getY(), new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        }else{
+            gameObjects.add(new SwapHealth(randomPos.getX(), randomPos.getY(), new AnimationObject("assets/pictures/ItemsSprites.png", 4, 2, 1f/12f)));
+        }
     }
 
     public PauseMenu getPauseMenu() {

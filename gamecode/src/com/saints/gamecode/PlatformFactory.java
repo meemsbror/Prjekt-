@@ -1,8 +1,12 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.Platform;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlatformFactory {
+    public static List<Platform> platforms = new ArrayList<Platform>();
 
     public static Platform createPlatform(Integer x, Integer y, Integer width, Integer height){
         return new Platform(x,y,width,height);
@@ -17,16 +21,21 @@ public class PlatformFactory {
 
     }
 
-    public static Platform createPlatform(String name){
+    public static List<Platform> createPlatform(String name){
+        platforms.clear();
         switch (name){
             case "JAPrippsMap" :
-                return new Platform(50,50,1000,50);
+                platforms.add(new Platform(50,50,1000,50));
+                return platforms;
             case "SandboxMap" :
-                return new Platform(270,138,680,10);
+                platforms.add(new Platform(270,138,680,10));
+                return platforms;
             case "UmpMap" :
-                return new Platform(200,138,730,10);
+                platforms.add(new Platform(200,138,730,10));
+                return platforms;
             default:
-                return new Platform(50,50,1000,50);
+                platforms.add(new Platform(50,50,1000,50));
+                return platforms;
         }
     }
 }

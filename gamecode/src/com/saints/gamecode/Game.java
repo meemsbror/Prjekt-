@@ -1,12 +1,8 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
-import com.saints.gamecode.maps.SandboxMap;
-import com.saints.gamecode.maps.UmpMap;
 import com.saints.gamecode.scenes.Arena;
 import com.saints.gamecode.scenes.CharacterSelectController;
 import com.saints.gamecode.scenes.EndGameScene;

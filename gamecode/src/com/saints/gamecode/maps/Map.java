@@ -3,7 +3,7 @@ package com.saints.gamecode.maps;
 
 import com.saints.gamecode.Background;
 import com.saints.gamecode.Position;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
 import java.util.ArrayList;
@@ -28,10 +28,9 @@ public abstract class Map implements IEntity {
         return platformList;
     }
 
-    public void addPlatformList(Platform platform) {
-        platformList.add(platform);
+    public void setPlatformList(List<Platform> platformList) {
+        this.platformList = platformList;
     }
-
 
     public Map(Background background){
         this.background = background;
