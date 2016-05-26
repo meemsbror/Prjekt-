@@ -122,11 +122,11 @@ public final class HealthBar implements IEntity{
         }
 	    // calls for suddenDeath if P2 is losing
 	    else if ((getP1Limit() - delta) >= getDivider()){
-            p2SuddenDeath(delta);
+            p1SuddenDeath(delta);
         }
         // calls for suddenDeath if P1 is losing
         else if (getP2Limit() + delta <= getDivider()){
-            p1SuddenDeath(delta);
+            p2SuddenDeath(delta);
 
 	    }
 
