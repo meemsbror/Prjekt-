@@ -44,16 +44,18 @@ public class Physics implements IPhysics {
         }
     }
 
-    public boolean isOutsidePlatform(GameObject object, Platform platform){
+    public boolean isOutsidePlatform(GameObject object, Platform platform, GameObject gameObject2){
         //When walking outside of platform the character should fall down
          if (       (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
                 ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
-                ||  (object.getPos().getY()-object.getHeight()<platform.getY() // Added to make gravity
+                 && !(hasCollided(object,gameObject2))
+                 || (object.getPos().getY()>720) //if object over screen its probably in air
+                /*||  (object.getPos().getY()-object.getHeight()<platform.getY() // Added to make gravity
                 &&  (object.getPos().getY()-object.getHeight()+5>platform.getY())//work when falling off another character
                  ||  (object.getPos().getY()-object.getHeight()-10>platform.getY()
-                 &&  (object.getPos().getY()-object.getHeight()-5>platform.getY())))
+                 &&  (object.getPos().getY()-object.getHeight()-5>platform.getY())))*/
 
                  ){ //
             return true;

@@ -92,6 +92,9 @@ public class CharacterController {
 	    applyFallDeath(player1);
 	    applyFallDeath(player2);
 
+        applyPlatform(player1, player2);
+        applyPlatform(player2, player1);
+
 
     }
 
@@ -145,7 +148,7 @@ public class CharacterController {
         }
     }
 
-    private void applyPlatform(GameObject gameObject){
+    private void applyPlatform(GameObject gameObject, GameObject gameObject2){
     for(Platform platform : platformList){
         if(physics.isStandingOnPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
@@ -153,13 +156,12 @@ public class CharacterController {
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform, gameObject2));
     }
     }
 
     //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
-        applyPlatform(gameObject);
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
