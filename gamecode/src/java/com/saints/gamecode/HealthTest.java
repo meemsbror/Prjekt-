@@ -2,6 +2,8 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.HealthBar;
 import org.junit.Test;
+
+import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 
 // Class for testing HealthBar.java
@@ -117,9 +119,53 @@ public class HealthTest {
 	    healthBar.setWidth(50);
 	    width = healthBar.getWidth();
 	    assertTrue(width == 50);
+
+	    // Test added after toPercentTest
+	    healthBar.reset();
     }
 
-    // joint tests later after we confirmed that these methods work.
+	@Test
+	public void resetTest(){
+		HealthBar healthBar = HealthBar.getInstance();
+		healthBar.setStartingMax(78);
+		healthBar.setDivider(75);
+		healthBar.setWinner("Player 1");
+		healthBar.setWidth(1000);
+		healthBar.setP1Limit(20);
+		healthBar.setP2Limit(76);
+		healthBar.setIsGameOver(true);
+
+		// proving starting-values have changed
+		assertFalse((healthBar.getStartingMax() != 78));
+		assertFalse((healthBar.getDivider() != 75));
+		assertFalse(!(healthBar.getWinner().equals("Player 1")));
+		assertFalse((healthBar.getWidth() != 1000));
+		assertFalse(healthBar.getP1Limit() != 20);
+		assertFalse(healthBar.getP2Limit() != 76);
+		assertFalse(healthBar.getIsGameOver() != false);
+
+
+		// test begins
+		healthBar.reset();
+
+		int startingMax = healthBar.getStartingMax();
+		assertTrue(startingMax == 100);
+		int startingMin = healthBar.getStartingMin();
+		assertTrue(startingMin == 0);
+		int currentMax = healthBar.getP2Limit();
+		assertTrue(currentMax == 100);
+		int currentMin = healthBar.getP1Limit();
+		assertTrue(currentMin == 0);
+		int divider = healthBar.getDivider();
+		assertTrue(divider == 40);
+		int width = healthBar.getWidth();
+		assertTrue(width == 0);
+		boolean gameOver = healthBar.getIsGameOver();
+		assertTrue(!gameOver);
+		String winner = healthBar.getWinner();
+		assertTrue(winner.equals("none"));
+	}
+
     @Test
     public void dealDamageTest(){
         // player 1 deal dmg
@@ -212,6 +258,35 @@ public class HealthTest {
 
 
     }
+
+	@Test
+	public void toPercentTest(){
+		HealthBar healthBar = HealthBar.getInstance();
+		int currentMax = healthBar.getP2Limit(); // 100
+		int currentMin = healthBar.getP1Limit(); // 0
+		int currentDivider = healthBar.getDivider(); // 40
+
+		// only basic values
+
+		//standard 40 expected
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 40);
+		healthBar.setDivider(60);
+		currentDivider = healthBar.getDivider();
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 60);
+
+		// change game length
+		healthBar.changeGameLength(-25);
+		currentMin = healthBar.getP1Limit();
+		currentMax = healthBar.getP2Limit();
+		healthBar.setDivider(50);
+		currentDivider = healthBar.getDivider();
+		assertTrue(currentMin == 25);
+		assertTrue(currentMax == 75);
+		assertTrue(currentDivider == 50);
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 50);
+
+
+	}
 
     @Test
     public void suddenDeathTest(){

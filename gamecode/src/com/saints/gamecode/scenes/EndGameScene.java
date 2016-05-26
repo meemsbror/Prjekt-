@@ -6,8 +6,8 @@ import com.saints.gamecode.interfaces.IGraphics;
 public class EndGameScene extends Scene {
 	private final IGraphics graphics;
 	float time;
-	private Background player1Win = new Background("assets/pictures/player1Wins");
-	private Background player2Win = new Background("assets/pictures/player2Wins");
+	private Background player1Win = new Background("assets/pictures/player1Wins.png");
+	private Background player2Win = new Background("assets/pictures/player2Wins.png");
 	private Background winnerPicture;
 
 	public EndGameScene(IGraphics graphics){
@@ -30,8 +30,8 @@ public class EndGameScene extends Scene {
 
 	@Override
 	public void update(float delta) {
-		time += delta;
-		if (time > 5){
+		time = time + delta;
+		if (time > 2.5){
 			time = 0;
 			firePropertyChange("new game",null,null);
 		}else {

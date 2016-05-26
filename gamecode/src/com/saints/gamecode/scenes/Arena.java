@@ -23,7 +23,6 @@ public class Arena extends Scene implements PropertyChangeListener{
     private final IKeyInput input;
     private final IGraphics graphics;
     private PropertyChangeSupport pcs;
-
     private float pauseTimer = 0;
     private int currentPauseOption = 0;
 

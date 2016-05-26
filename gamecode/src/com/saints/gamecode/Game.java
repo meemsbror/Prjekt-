@@ -36,10 +36,11 @@ import com.saints.gamecode.scenes.MapSelectController;
             this.input = input;
             this.arena = new Arena(input, graphics);
             this.csc = new CharacterSelectController(input, graphics);
+	        this.endGameScene = new EndGameScene(graphics);
             csc.addPropertyChangeListener(this);
             arena.addPropertyChangeListener(this);
+	        endGameScene.addPropertyChangeListener(this);
             this.currentScene = this.csc;
-            this.endGameScene = new EndGameScene(graphics);
         }
 
         public void update(float delta) {
@@ -57,7 +58,8 @@ import com.saints.gamecode.scenes.MapSelectController;
 	            this.endGameScene.setWinnerPicture(event.getPropertyName());
                 this.currentScene = this.endGameScene;
             }else if (event.getSource() instanceof EndGameScene){
-                this.currentScene = csc;
+	            System.out.println("jaaa");
+	            this.currentScene = csc;
             }
         }
     }
