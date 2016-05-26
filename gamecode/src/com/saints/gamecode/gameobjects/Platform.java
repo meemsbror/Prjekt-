@@ -6,10 +6,10 @@ import com.saints.gamecode.gameobjects.GameObject;
 
 
 public class Platform extends GameObject {
-    private static int x; // Straight line to build platform to stand on.
-    private static int width;  // Have to be arrayList/polygontåg if we want to make a
-    private static int y;      // platform more complex than a line.
-    private static int height;
+    private int x; // Straight line to build platform to stand on.
+    private int width;  // Have to be arrayList/polygontåg if we want to make a
+    private int y;      // platform more complex than a line.
+    private int height;
 
     public Platform (int x, int y, int width, int height){
 
