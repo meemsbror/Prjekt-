@@ -12,5 +12,4 @@ public abstract class Item extends GameObject{
         setPosition(x,y);
     }
 
-    public abstract float getDuration();
 }

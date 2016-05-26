@@ -4,8 +4,10 @@ import com.oracle.webservices.internal.api.message.PropertySet;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 
+import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -226,13 +228,16 @@ public class CharacterController {
                 }
             }
             for(int i = gameObjects.size()-1; i >= 0; i--){
-                if(gameObjects.get(i) instanceof Item) {
-                    Item item = (Item) gameObjects.get(i);
+                if(gameObjects.get(i) instanceof AttackPower) {
+                    AttackPower item = (AttackPower) gameObjects.get(i);
                     if(character.attack(item)){
                         character.setAttackPowerUpTime(time + item.getDuration());
                         character.powerUp(true);
                         gameObjects.remove(i);
                     }
+                }else if(gameObjects.get(i) instanceof SwapHealth){
+                    character.swapHp();
+                    gameObjects.remove(i);
                 }
             }
             //Sets the cooldown for next attack, dependant on current time and what sort of character that is attacking.
