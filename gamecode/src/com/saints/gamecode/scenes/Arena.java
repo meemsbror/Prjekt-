@@ -42,7 +42,8 @@ public class Arena extends Scene implements PropertyChangeListener{
 
         //TODO - Fix Platform with PlatformFactory
         //Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
-        platform = PlatformFactory.createPlatform("UmpMap");
+        //platform = PlatformFactory.createPlatform("UmpMap");
+        platform = PlatformFactory.createPlatform("SandboxMap");
         this.characterController = new CharacterController(gameObjects, input, platform, graphics);
 	    this.characterController.addPropertyChangeListener(this);
 
@@ -67,6 +68,7 @@ public class Arena extends Scene implements PropertyChangeListener{
     private void addMap() {
         graphics.addTexture("assets/pictures/saints.of.chalmers-sandbox.png");
         graphics.addTexture("assets/pictures/UmpMap.jpg");
+        graphics.addTexture("assets/pictures/SandboxMap2.png");
         //graphics.addAnimation(new AnimationObject("assets/pictures/saints.of.chalmers-sandbox.png", 1,1,1));
     }
 
