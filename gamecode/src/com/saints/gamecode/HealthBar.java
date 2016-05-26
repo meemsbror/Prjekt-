@@ -195,6 +195,11 @@ public final class HealthBar implements IEntity{
         }
     }
 
+	// activated by item, needs work for edge cases
+	public void hpSwitch(){
+		setDivider(getStartingMax()-getDivider());
+	}
+
 	// approximates what width the healthbar should have, hence int values
 	public int toPercent(int divider, int minLimit, int maxLimit){
 
