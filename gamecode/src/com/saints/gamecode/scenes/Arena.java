@@ -1,16 +1,13 @@
 package com.saints.gamecode.scenes;
 
-import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.CharacterController;
-import com.saints.gamecode.Direction;
-import com.saints.gamecode.HealthBar;
-import com.saints.gamecode.PauseMenu;
+import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.characters.Character;
 import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.maps.SandboxMap;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -24,6 +21,7 @@ public class Arena extends Scene implements PropertyChangeListener{
     private final CharacterController characterController;
     private final IKeyInput input;
     private final IGraphics graphics;
+    private final Platform platform;
     private PropertyChangeSupport pcs;
 
     private float pauseTimer = 0;
@@ -43,7 +41,8 @@ public class Arena extends Scene implements PropertyChangeListener{
         startMatch();
 
         //TODO - Fix Platform with PlatformFactory
-        Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
+        //Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
+        platform = PlatformFactory.createPlatform("UmpMap");
         this.characterController = new CharacterController(gameObjects, input, platform, graphics);
 	    this.characterController.addPropertyChangeListener(this);
 
@@ -67,6 +66,7 @@ public class Arena extends Scene implements PropertyChangeListener{
 
     private void addMap() {
         graphics.addTexture("assets/pictures/saints.of.chalmers-sandbox.png");
+        graphics.addTexture("assets/pictures/UmpMap.jpg");
         //graphics.addAnimation(new AnimationObject("assets/pictures/saints.of.chalmers-sandbox.png", 1,1,1));
     }
 

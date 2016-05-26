@@ -48,5 +48,9 @@ public class GraphicsSim implements IGraphics{
         return 0;
     }
 
+    @Override
+    public void update(Background background){
+
+    }
 
 }

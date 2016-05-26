@@ -47,8 +47,6 @@ public class HealthTest {
 	    int width = healthBar.getWidth();
 	    assertTrue(startingWidth == 0);
 	    assertTrue(width == 0);
-
-
     }
 
     @Test
@@ -119,8 +117,7 @@ public class HealthTest {
 	    healthBar.setWidth(50);
 	    width = healthBar.getWidth();
 	    assertTrue(width == 50);
-
-
+	    assert width == 50;
     }
 
     // joint tests later after we confirmed that these methods work.
