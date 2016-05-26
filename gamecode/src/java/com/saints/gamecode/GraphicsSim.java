@@ -47,10 +47,4 @@ public class GraphicsSim implements IGraphics{
     public int getScreenHeight(){
         return 0;
     }
-
-    @Override
-    public void update(Background background){
-
-    }
-
 }

@@ -63,14 +63,13 @@ public class Physics implements IPhysics {
         Position pos2 = object2.getPos();
         int object1Width = object1.getWidth();
         int object2Width = object2.getWidth();
-        System.out.println("does it get here?");
         if(object1Width < 0){
             pos1.setX(pos1.getX()+object1Width);
-            Math.abs(object1Width);
+            object1Width = Math.abs(object1Width);
         }
         if(object2Width < 0){
             pos2.setX(pos2.getX()+object2Width);
-            Math.abs(object2Width);
+            object2Width = Math.abs(object2Width);
         }
 
         return(!(pos1.getX()+object1Width<pos2.getX()

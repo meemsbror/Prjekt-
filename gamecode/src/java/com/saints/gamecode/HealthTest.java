@@ -117,7 +117,6 @@ public class HealthTest {
 	    assertTrue(width == 80);
 	    healthBar.setWidth(50);
 	    assertTrue(width == 50);
-	    assert width == 50;
     }
 
     // joint tests later after we confirmed that these methods work.
