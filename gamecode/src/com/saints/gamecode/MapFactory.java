@@ -14,14 +14,11 @@ public class MapFactory {
                 return new JAPrippsMap("assets/pictures/saints.of.chalmers-sandbox.png",
                         PlatformFactory.createPlatform(map));
             case "SandboxMap" :
-                return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
-                        PlatformFactory.createPlatform(map));
+                return new SandboxMap();
             case "UmpMap" :
-                return new SandboxMap("assets/pictures/RumpMap.png",
-                        PlatformFactory.createPlatform(map));
+                return new UmpMap();
             default:
-                return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
-                        PlatformFactory.createPlatform(map));
+                return new SandboxMap();
         }
     }
 

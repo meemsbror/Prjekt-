@@ -1,29 +1,44 @@
 package com.saints.gamecode.maps;
 
 
+import com.saints.gamecode.Background;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Map implements IEntity {
     private final float x = 0;
     private final float y = 0;
-    private String mapPath;
+    Background background;
+    List<Platform> platformList = new ArrayList<Platform>();
 
-    public Map(String background, Platform platform){
-        //addTexture
+    public Background getBackground() {
+        return background;
+    }
+
+    public void setBackground(Background background) {
+        this.background = background;
+    }
+
+    public List<Platform> getPlatformList() {
+
+        return platformList;
+    }
+
+    public void addPlatformList(Platform platform) {
+        platformList.add(platform);
+    }
+
+
+    public Map(Background background){
+        this.background = background;
     }
     @Override
     public String toString() {
         return "Map";
-    }
-
-    public String getMapPath() {
-        return mapPath;
-    }
-
-    public void setMapPath(String mapPath) {
-        this.mapPath = mapPath;
     }
 
     @Override
@@ -31,6 +46,7 @@ public abstract class Map implements IEntity {
 
 
     }
+
 
     @Override
     public Position getPosition() {

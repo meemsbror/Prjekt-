@@ -7,6 +7,7 @@ import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
+import com.saints.gamecode.maps.Map;
 import com.saints.gamecode.maps.SandboxMap;
 
 import java.beans.PropertyChangeEvent;
@@ -21,7 +22,6 @@ public class Arena extends Scene implements PropertyChangeListener{
     private final CharacterController characterController;
     private final IKeyInput input;
     private final IGraphics graphics;
-    private final Platform platform;
     private PropertyChangeSupport pcs;
 
     private float pauseTimer = 0;
@@ -29,22 +29,22 @@ public class Arena extends Scene implements PropertyChangeListener{
 
     private final boolean running = true;
 
+    private Map map = new SandboxMap();
+
 
     List<IEntity> gameObjects = new ArrayList<IEntity>();
 
     PauseMenu pauseMenu = new PauseMenu(new AnimationObject("assets/pictures/PauseMenu.png", 1, 3, 1));
 
+
     public Arena (IKeyInput input, IGraphics graphics){
         pcs = new PropertyChangeSupport(this);
         this.input = input;
         this.graphics = graphics;
+
         startMatch();
 
-        //TODO - Fix Platform with PlatformFactory
-        //Platform platform= new Platform(270,138,680,10); // This is shit right now (Y)
-        //platform = PlatformFactory.createPlatform("UmpMap");
-        platform = PlatformFactory.createPlatform("SandboxMap");
-        this.characterController = new CharacterController(gameObjects, input, platform, graphics);
+        this.characterController = new CharacterController(gameObjects, input, map.getPlatformList(), graphics);
 	    this.characterController.addPropertyChangeListener(this);
 
     }
@@ -90,7 +90,7 @@ public class Arena extends Scene implements PropertyChangeListener{
             if(gameObjects.contains(pauseMenu)){
                gameObjects.remove(pauseMenu);
             }
-            graphics.update(delta, getGameObjects());
+            graphics.update(delta, getGameObjects(), map.getBackground());
             characterController.update(delta);
         }else{
             if(pauseMenu.updatePaused(delta, input)) {
@@ -102,7 +102,7 @@ public class Arena extends Scene implements PropertyChangeListener{
                 gameObjects.add(pauseMenu);
             }
             delta = 0;
-            graphics.update(delta, getGameObjects());
+            graphics.update(delta, getGameObjects(), map.getBackground());
         }
     }
 
@@ -132,5 +132,13 @@ public class Arena extends Scene implements PropertyChangeListener{
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         endGame(evt.getPropertyName());
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 }

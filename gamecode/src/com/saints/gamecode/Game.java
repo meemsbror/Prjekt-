@@ -5,6 +5,8 @@ import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
+import com.saints.gamecode.maps.SandboxMap;
+import com.saints.gamecode.maps.UmpMap;
 import com.saints.gamecode.scenes.Arena;
 import com.saints.gamecode.scenes.CharacterSelectController;
 import com.saints.gamecode.scenes.EndGameScene;
@@ -47,6 +49,8 @@ import com.saints.gamecode.scenes.MapSelectController;
         public void propertyChange(PropertyChangeEvent event){
             //Checks if it the Characters that are selected and switches scene to arena
             if(event.getSource() instanceof CharacterSelectController){
+                //Todo add mapSelecter and send in that map instead of SandBoxMap
+                this.arena.setMap(new UmpMap());
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
                 this.currentScene = this.arena;
             }else if (event.getSource() instanceof Arena){

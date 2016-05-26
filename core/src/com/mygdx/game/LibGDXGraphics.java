@@ -39,7 +39,7 @@ public class LibGDXGraphics implements IGraphics{
     }
 
     @Override
-    public void update(float delta, List<IEntity> gameObjects){
+    public void update(float delta, List<IEntity> gameObjects, Background background){
 
         elapsedTime = elapsedTime + delta;
 
@@ -48,10 +48,10 @@ public class LibGDXGraphics implements IGraphics{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 
-        //TODO Bind platform and map to this via mapSelectController
-        //batch.draw(assetsmanager.getTexture("assets/pictures/saints.of.chalmers-sandbox.png"),0,0);
-        batch.draw(assetsmanager.getTexture("assets/pictures/SandboxMap2.png"),0,0);
-        //batch.draw(assetsmanager.getTexture("assets/pictures/UmpMap.jpg"),0,0);
+        //Background of current map.
+        batch.draw(assetsmanager.getTexture(background.getImgPath()),0, 0 ,1280, 720);
+
+        //Loops through all gameObjects
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Map){
                 Map map = (Map)gameObjects.get(i);

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IGraphics {
 
-    void update (float delta, List<IEntity> gameObjects);
+    void update (float delta, List<IEntity> gameObjects, Background background);
 
     void update (float delta, IEntity [][] IEntitys, CharacterPanel p1, CharacterPanel p2, Background background);
 

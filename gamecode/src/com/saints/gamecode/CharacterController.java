@@ -22,7 +22,7 @@ public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
     private Character player1, player2;
-    private final Platform platform;
+    private List<Platform> platformList;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -37,11 +37,10 @@ public class CharacterController {
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
     private IGraphics graphics;
 
-    public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
+    public CharacterController(List<IEntity> gameObjects, IKeyInput input, List<Platform> platformList, IGraphics graphics){
         this.gameObjects = gameObjects;
         this.input = input;
-        this.platform = platform;
-
+        this.platformList = platformList;
         initiatePlayerDirections();
         this.graphics = graphics;
     }
@@ -147,7 +146,7 @@ public class CharacterController {
     }
 
     private void applyPlatform(GameObject gameObject){
-
+    for(Platform platform : platformList){
         if(physics.isStandingOnPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
             gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
@@ -155,6 +154,7 @@ public class CharacterController {
         }
         //if walking outside platform isAirborne is set to true
         gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
+    }
     }
 
     //Adds a gravity vector the the object if it is in the air
