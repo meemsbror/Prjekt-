@@ -50,7 +50,12 @@ public class Physics implements IPhysics {
                 ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
-                ){ //object.getPos().getY()-object.getHeight()>platform.getY())
+                ||  (object.getPos().getY()-object.getHeight()<platform.getY() // Added to make gravity
+                &&  (object.getPos().getY()-object.getHeight()+5>platform.getY())//work when falling off another character
+                 ||  (object.getPos().getY()-object.getHeight()-10>platform.getY()
+                 &&  (object.getPos().getY()-object.getHeight()-5>platform.getY())))
+
+                 ){ //
             return true;
         } else {
             return false;
