@@ -47,7 +47,7 @@ public class LibGDXGraphics implements IGraphics{
         Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        batch.draw(assetsmanager.getTexture("assets/pictures/saints.of.chalmers-sandbox.png"),0,0);
+        batch.draw(assetsmanager.getTexture("assets/pictures/UmpMap.jpg"),0,0);
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Map){
                 Map map = (Map)gameObjects.get(i);
@@ -93,6 +93,7 @@ public class LibGDXGraphics implements IGraphics{
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
         batch.draw(assetsmanager.getTexture(background.getImgPath()), 0,0);
+
 
         for(int i = 0; i < IEntities.length; i++){
             for(int j = 0; j < IEntities[i].length; j++){
