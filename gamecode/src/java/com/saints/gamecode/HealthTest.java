@@ -111,13 +111,12 @@ public class HealthTest {
 
 	    healthBar.setStartingWidth(80);
 	    int startingWidth = healthBar.getStartingWidth();
-	    int width;
 	    assertTrue(startingWidth == 80);
-		width = healthBar.getWidth();
+		int width = healthBar.getWidth();
 	    assertTrue(width == 80);
 	    healthBar.setWidth(50);
+	    width = healthBar.getWidth();
 	    assertTrue(width == 50);
-	    assert width == 50;
     }
 
     // joint tests later after we confirmed that these methods work.
@@ -145,14 +144,18 @@ public class HealthTest {
 	    int minLimit = healthBar.getStartingMin(); // should be 0
 
 
+	    assertTrue(currentMinHealth == 0);
+	    assertTrue(currentMaxHealth == 100);
+	    assertTrue(maxLimit == 100);
+	    assertTrue(minLimit == 0);
         // reduce both sides max health by 1
         healthBar.changeGameLength(-1); // should become 1 && 99
-	    currentMinHealth += 1;
 	    // player 1 limit
-	    assertTrue((currentMinHealth) == healthBar.getP1Limit()); // should be 1
-	    currentMaxHealth -= 1;
+	    currentMinHealth = healthBar.getP1Limit();
+	    assertTrue(currentMinHealth == 1);
 	    // player 2 limit
-	    assertTrue((currentMaxHealth)  == healthBar.getP2Limit()); // should be 99
+	    currentMaxHealth = healthBar.getP2Limit(); // should be 99
+	    assertTrue(currentMaxHealth  == 99);
 
 
         // increase both sides max health by 5, should surpass set limits and should set to limits
@@ -166,7 +169,7 @@ public class HealthTest {
 	    assertTrue(currentMaxHealth == healthBar.getP2Limit());
 	    assertTrue(currentMinHealth == healthBar.getP1Limit());
 
-	    // making sure these stay same.
+	    // making sure these stayed the same.
 	    assertTrue(maxLimit == 100);
 	    assertTrue(minLimit == 0);
     }
@@ -176,7 +179,7 @@ public class HealthTest {
     @Test
     public void killTest(){
         HealthBar healthbar = HealthBar.getInstance();
-	    int currentDivider = healthbar.getDivider(); // 40
+	    int currentDivider;
 	    int currentP1Limit = healthbar.getP1Limit(); // 0
 	    int currentP2Limit = healthbar.getP2Limit(); // 100
 
@@ -259,9 +262,9 @@ public class HealthTest {
 		currentDivider = healthBar.getDivider();
 		currentMin = healthBar.getP1Limit();
 		currentMax = healthBar.getP2Limit();
-		assertTrue(currentDivider  == 21);
 		assertTrue(currentMin == 20);
 		assertTrue(currentMax == 80);
+		assertTrue(currentDivider  == 21);
 
 		healthBar.dealDamage(-10); // damage surpassing limit, invoking conditional
 		currentDivider = healthBar.getDivider();

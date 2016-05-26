@@ -118,39 +118,40 @@ public final class HealthBar implements IEntity{
     public void changeGameLength(int delta){
         // should never happen in game
         if (delta == 0){
-            return;
+            //do nothing
         }
 	    // calls for suddenDeath if P2 is losing
-	    if ((getP1Limit() - delta) >= getDivider()){
+	    else if ((getP1Limit() - delta) >= getDivider()){
             p2SuddenDeath(delta);
         }
         // calls for suddenDeath if P1 is losing
-        if (getP2Limit() + delta <= getDivider()){
+        else if (getP2Limit() + delta <= getDivider()){
             p1SuddenDeath(delta);
+
 	    }
 
         // set max time if HP Change exceeds maximum.
-        if((getP1Limit() + delta <= getStartingMin())
-                && (getP2Limit() - delta >= getStartingMax())){
+        else if((getP1Limit() - delta <= getStartingMin())
+                && (getP2Limit() + delta >= getStartingMax())){
             setP2Limit(getStartingMax());
             setP1Limit(getStartingMin());
-        }
-        else{
-            setP2Limit(getP2Limit() + delta);
-            setP1Limit(getP1Limit() - delta);
+        }else {
+	        setP1Limit(getP1Limit() - delta);
+	        setP2Limit(getP2Limit() + delta);
         }
     }
 
     // method called for if player 1 has less than x (timeChange) HP
 	// this check is performed when called
    public void p1SuddenDeath(int hpChange){
-        setDivider(getP1Limit() - ((hpChange-1)));
-        changeGameLength(hpChange);
+		   setDivider(getP1Limit() - ((hpChange - 1)));
+		   changeGameLength(hpChange);
     }
+
     // method called for if player 2 has less than x (timeChange) HP
    public void p2SuddenDeath(int hpChange){
-        setDivider(getP2Limit() + (hpChange-1));
-        changeGameLength(hpChange);
+		   setDivider(getP2Limit() + (hpChange - 1));
+		   changeGameLength(hpChange);
    }
 
     public void killP1(){
@@ -185,10 +186,9 @@ public final class HealthBar implements IEntity{
         if (getDivider() + dmg <= getP1Limit()){
             killP1();
         }
-        if (getDivider() + dmg >= getP2Limit()){
+        else if (getDivider() + dmg >= getP2Limit()){
             killP2();
-        }
-        else {
+        }else {
             setDivider(getDivider() + dmg);
 
         }

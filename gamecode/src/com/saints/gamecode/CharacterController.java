@@ -219,7 +219,6 @@ public class CharacterController {
         if(!(character.getState() == State.PUNCH)){
             if(character.attack(opositeCharacter)){
                 HPBar.dealDamage(character.getDamage());
-	            System.out.println(HPBar.toString());
 	            if (HPBar.getIsGameOver()){
                     gameObjects.clear();
 	                pcs.firePropertyChange(HPBar.getWinner(),null,null);

@@ -1,10 +1,8 @@
 package com.saints.gamecode.maps;
 
 
-import com.mygdx.game.LibGDXGraphics;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.items.Platform;
-import com.saints.gamecode.interfaces.IAssetsManager;
 import com.saints.gamecode.interfaces.IEntity;
 
 public abstract class Map implements IEntity {
