@@ -19,6 +19,7 @@ public final class HealthBar implements IEntity{
 
     }
 
+	private double BAR_SIZE_CONSTANT = 6.4;
 
     // where Healthbar will be drawn, dummy values below
     private Position position = new Position(50 , 50);
@@ -75,7 +76,7 @@ public final class HealthBar implements IEntity{
    public void setDivider(int x){
         this.divider = x;
 	   // whenever the divider is changed, update width of top HPBar to indicated state of game.
-        setWidth((int)(6.4*toPercent(x,getP1Limit(),getP2Limit())));
+        setWidth((int)(BAR_SIZE_CONSTANT*toPercent(x,getP1Limit(),getP2Limit())));
    }
     public int getDivider(){
         return divider;
@@ -122,11 +123,11 @@ public final class HealthBar implements IEntity{
         }
 	    // calls for suddenDeath if P2 is losing
 	    else if ((getP1Limit() - delta) >= getDivider()){
-            p2SuddenDeath(delta);
+            p1SuddenDeath(delta);
         }
         // calls for suddenDeath if P1 is losing
         else if (getP2Limit() + delta <= getDivider()){
-            p1SuddenDeath(delta);
+            p2SuddenDeath(delta);
 
 	    }
 
@@ -193,6 +194,12 @@ public final class HealthBar implements IEntity{
 
         }
     }
+
+	// activated by item, needs work for edge cases
+	public void hpSwitch(){
+		int tmp = (getDivider() - getP1Limit());
+		setDivider(getP2Limit() - tmp);
+	}
 
 	// approximates what width the healthbar should have, hence int values
 	public int toPercent(int divider, int minLimit, int maxLimit){

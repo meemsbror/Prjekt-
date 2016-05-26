@@ -1,10 +1,8 @@
 package com.saints.gamecode.gameobjects;
 
 import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.State;
 import com.saints.gamecode.Position;
 import com.saints.gamecode.Vector2D;
-import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
 

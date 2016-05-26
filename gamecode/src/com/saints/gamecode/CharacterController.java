@@ -1,11 +1,11 @@
 package com.saints.gamecode;
 
-import com.oracle.webservices.internal.api.message.PropertySet;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
 
-import com.saints.gamecode.gameobjects.items.Item;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.items.AttackPower;
+import com.saints.gamecode.gameobjects.Platform;
+import com.saints.gamecode.gameobjects.items.SwapHealth;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
@@ -22,7 +22,7 @@ public class CharacterController {
 
     private final HealthBar HPBar = HealthBar.getInstance();
     private Character player1, player2;
-    private final Platform platform;
+    private List<Platform> platformList;
 
 	private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
@@ -37,11 +37,10 @@ public class CharacterController {
     private Map<Direction, Direction> P1_DIRECTIONS, P2_DIRECTIONS;
     private IGraphics graphics;
 
-    public CharacterController(List<IEntity> gameObjects, IKeyInput input, Platform platform, IGraphics graphics){
+    public CharacterController(List<IEntity> gameObjects, IKeyInput input, List<Platform> platformList, IGraphics graphics){
         this.gameObjects = gameObjects;
         this.input = input;
-        this.platform = platform;
-
+        this.platformList = platformList;
         initiatePlayerDirections();
         this.graphics = graphics;
     }
@@ -59,11 +58,11 @@ public class CharacterController {
 
     //Updates the model
     public void update(float delta){
-            time += delta;
-            updateCharacterDirection(delta);
-            moveCharacters(delta);
-            checkCollision(delta);
-            checkPowerUp(delta);
+        time += delta;
+        updateCharacterDirection(delta);
+        moveCharacters(delta);
+        checkCollision(delta);
+        checkPowerUp(delta);
     }
 
     private void checkPowerUp(float delta) {
@@ -92,6 +91,9 @@ public class CharacterController {
 	    // If the player falls below posY(-150) kill that player.
 	    applyFallDeath(player1);
 	    applyFallDeath(player2);
+
+        applyPlatform(player1, player2);
+        applyPlatform(player2, player1);
 
 
     }
@@ -146,20 +148,20 @@ public class CharacterController {
         }
     }
 
-    private void applyPlatform(GameObject gameObject){
-
+    private void applyPlatform(GameObject gameObject, GameObject gameObject2){
+    for(Platform platform : platformList){
         if(physics.isStandingOnPlatform(gameObject, platform)){
             gameObject.resetVerticalSpeed();// set y-vector to 0
             gameObject.setPosition(getPlayerPosition(gameObject).getX(),platform.getY());// set y-pos to platforms y-pos
             gameObject.setAirborne(false);
         }
         //if walking outside platform isAirborne is set to true
-        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform));
+        gameObject.setAirborne(physics.isOutsidePlatform(gameObject, platform, gameObject2));
+    }
     }
 
     //Adds a gravity vector the the object if it is in the air
     private void applyGravity(GameObject gameObject, float delta){
-        applyPlatform(gameObject);
 
         if(gameObject.isAirborne()){
             Vector2D deltaGravity = physics.getGravity(delta);
@@ -226,11 +228,17 @@ public class CharacterController {
                 }
             }
             for(int i = gameObjects.size()-1; i >= 0; i--){
-                if(gameObjects.get(i) instanceof Item) {
-                    Item item = (Item) gameObjects.get(i);
+                if(gameObjects.get(i) instanceof AttackPower) {
+                    AttackPower item = (AttackPower) gameObjects.get(i);
                     if(character.attack(item)){
                         character.setAttackPowerUpTime(time + item.getDuration());
                         character.powerUp(true);
+                        gameObjects.remove(i);
+                    }
+                }else if(gameObjects.get(i) instanceof SwapHealth){
+                    SwapHealth item = (SwapHealth) gameObjects.get(i);
+                    if(character.attack(item)) {
+                        character.swapHp();
                         gameObjects.remove(i);
                     }
                 }

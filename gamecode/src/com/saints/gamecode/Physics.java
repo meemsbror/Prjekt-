@@ -1,7 +1,7 @@
 package com.saints.gamecode;
 
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.Platform;
 import com.saints.gamecode.interfaces.IPhysics;
 
 //Singleton class that does basic Physics calculations
@@ -41,13 +41,15 @@ public class Physics implements IPhysics {
         }
     }
 
-    public boolean isOutsidePlatform(GameObject object, Platform platform){
+    public boolean isOutsidePlatform(GameObject object, Platform platform, GameObject gameObject2){
         //When walking outside of platform the character should fall down
          if (       (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
                 ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
-                ){
+                 && !(hasCollided(object,gameObject2))
+                 || (object.getPos().getY()>720) //if object over screen its probably in air
+                 ){ //
             return true;
         } else {
             return false;

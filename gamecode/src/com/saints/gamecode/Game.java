@@ -1,7 +1,5 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.interfaces.IScene;
@@ -34,10 +32,13 @@ import com.saints.gamecode.scenes.MapSelectController;
             this.input = input;
             this.arena = new Arena(input, graphics);
             this.csc = new CharacterSelectController(input, graphics);
+	        this.endGameScene = new EndGameScene(graphics);
+            this.msc = new MapSelectController(input, graphics);
             csc.addPropertyChangeListener(this);
             arena.addPropertyChangeListener(this);
+            msc.addPropertyChangeListener(this);
+	        endGameScene.addPropertyChangeListener(this);
             this.currentScene = this.csc;
-            this.endGameScene = new EndGameScene(graphics);
         }
 
         public void update(float delta) {
@@ -48,12 +49,15 @@ import com.saints.gamecode.scenes.MapSelectController;
             //Checks if it the Characters that are selected and switches scene to arena
             if(event.getSource() instanceof CharacterSelectController){
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
-                this.currentScene = this.arena;
+                this.currentScene = this.msc;
+            }else if (event.getSource() instanceof MapSelectController) {
+                this.arena.setMap(msc.getMap());
+                this.currentScene = arena;
             }else if (event.getSource() instanceof Arena){
 	            this.endGameScene.setWinnerPicture(event.getPropertyName());
                 this.currentScene = this.endGameScene;
             }else if (event.getSource() instanceof EndGameScene){
-                this.currentScene = csc;
+	            this.currentScene = csc;
             }
         }
     }

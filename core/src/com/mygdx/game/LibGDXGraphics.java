@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.*;
 import com.saints.gamecode.gameobjects.GameObject;
 import com.saints.gamecode.gameobjects.characters.Character;
+import com.saints.gamecode.gameobjects.items.AttackPower;
 import com.saints.gamecode.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
@@ -38,8 +39,10 @@ public class LibGDXGraphics implements IGraphics{
         initiateState();
     }
 
+
+    //Arena update!
     @Override
-    public void update(float delta, List<IEntity> gameObjects){
+    public void update(float delta, List<IEntity> gameObjects, Background background){
 
         elapsedTime = elapsedTime + delta;
 
@@ -47,7 +50,11 @@ public class LibGDXGraphics implements IGraphics{
         Gdx.gl.glClearColor(1, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-        batch.draw(assetsmanager.getTexture("assets/pictures/UmpMap.jpg"),0,0);
+
+        //Background of current map.
+        batch.draw(assetsmanager.getTexture(background.getImgPath()),0, 0 ,1280, 720);
+
+        //Loops through all gameObjects
         for(int i = 0; i<gameObjects.size(); i++){
             if(gameObjects.get(i)instanceof Map){
                 Map map = (Map)gameObjects.get(i);
@@ -59,7 +66,13 @@ public class LibGDXGraphics implements IGraphics{
             }
             else if(gameObjects.get(i) instanceof Item){
                 Item gameObject = (Item)gameObjects.get(i);
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+                int temp;
+               if(gameObject instanceof AttackPower){
+                    temp = 0;
+                }else{
+                    temp = 1;
+                }
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[temp].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
 
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
@@ -87,6 +100,7 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
+    //Characterselect update!
     @Override
     public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2, Background background){
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -103,6 +117,7 @@ public class LibGDXGraphics implements IGraphics{
             }
         }
 
+
         Position p1Pos = p1.getPosition();
         Position p2Pos = p2.getPosition();
 
@@ -113,6 +128,33 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
+    //Map select update!
+    @Override
+    public void update(float delta, IEntity [][] IEntities, CharacterPanel ppanel, Background background){
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(assetsmanager.getTexture(background.getImgPath()), 0,0);
+
+
+        for(int i = 0; i < IEntities.length; i++){
+            for(int j = 0; j < IEntities[i].length; j++){
+                CharacterPanel panel = (CharacterPanel) IEntities[i][j];
+                Position pos = panel.getPosition();
+                batch.draw(assetsmanager.getTexture(panel.getImgPath()), pos.getX(), pos.getY(), 400,200);
+            }
+        }
+
+
+        Position ppanelPos = ppanel.getPosition();
+
+        batch.draw(assetsmanager.getTexture(ppanel.getImgPath()), ppanelPos.getX(), ppanelPos.getY());
+
+
+        batch.end();
+    }
+
+    //Game over screen update!
 	@Override
 	public void update(Background background) {
 		batch.begin();

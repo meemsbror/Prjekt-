@@ -2,7 +2,7 @@ package com.saints.gamecode.interfaces;
 
 import com.saints.gamecode.Vector2D;
 import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.items.Platform;
+import com.saints.gamecode.gameobjects.Platform;
 
 public interface IPhysics {
 
@@ -10,6 +10,6 @@ public interface IPhysics {
 
     boolean hasCollided (GameObject object1, GameObject object2);
     boolean isStandingOnPlatform(GameObject object, Platform platform);
-    boolean isOutsidePlatform(GameObject gameObject, Platform platform);
+    boolean isOutsidePlatform(GameObject gameObject, Platform platform, GameObject gameObject2);
 
 }
