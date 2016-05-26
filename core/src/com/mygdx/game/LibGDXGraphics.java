@@ -62,15 +62,15 @@ public class LibGDXGraphics implements IGraphics{
                 drawCharacter(character, delta);
 
             }
-            else if(gameObjects.get(i) instanceof AttackPower){
+            else if(gameObjects.get(i) instanceof Item){
                 Item gameObject = (Item)gameObjects.get(i);
                 int temp;
-                if(gameObject instanceof AttackPower){
+               if(gameObject instanceof AttackPower){
                     temp = 0;
                 }else{
                     temp = 1;
                 }
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[temp].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
 
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
