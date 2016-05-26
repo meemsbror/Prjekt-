@@ -214,6 +214,35 @@ public class HealthTest {
 
     }
 
+	@Test
+	public void toPercentTest(){
+		HealthBar healthBar = HealthBar.getInstance();
+		int currentMax = healthBar.getP2Limit(); // 100
+		int currentMin = healthBar.getP1Limit(); // 0
+		int currentDivider = healthBar.getDivider(); // 40
+
+		// only basic values
+
+		//standard 40 expected
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 40);
+		healthBar.setDivider(60);
+		currentDivider = healthBar.getDivider();
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 60);
+
+		// change game length
+		healthBar.changeGameLength(-25);
+		currentMin = healthBar.getP1Limit();
+		currentMax = healthBar.getP2Limit();
+		healthBar.setDivider(50);
+		currentDivider = healthBar.getDivider();
+		assertTrue(currentMin == 25);
+		assertTrue(currentMax == 75);
+		assertTrue(currentDivider == 50);
+		assertTrue(healthBar.toPercent(currentDivider,currentMin,currentMax) == 50);
+
+
+	}
+
     @Test
     public void suddenDeathTest(){
         HealthBar healthBar = HealthBar.getInstance();

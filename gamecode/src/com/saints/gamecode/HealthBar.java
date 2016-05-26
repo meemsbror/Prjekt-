@@ -19,6 +19,7 @@ public final class HealthBar implements IEntity{
 
     }
 
+	private double BAR_SIZE_CONSTANT = 6.4;
 
     // where Healthbar will be drawn, dummy values below
     private Position position = new Position(50 , 50);
@@ -75,7 +76,7 @@ public final class HealthBar implements IEntity{
    public void setDivider(int x){
         this.divider = x;
 	   // whenever the divider is changed, update width of top HPBar to indicated state of game.
-        setWidth((int)(6.4*toPercent(x,getP1Limit(),getP2Limit())));
+        setWidth((int)(BAR_SIZE_CONSTANT*toPercent(x,getP1Limit(),getP2Limit())));
    }
     public int getDivider(){
         return divider;
