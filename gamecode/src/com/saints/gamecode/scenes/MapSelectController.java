@@ -38,7 +38,7 @@ public class MapSelectController extends Scene{
         checkInput();
         setPanelPositions();
         updateActivePanels();
-        graphics.update(delta, characterPanels, mapPanel, null, background);
+        graphics.update(delta, characterPanels, mapPanel, background);
     }
 
     //Checks all different input keys and if they are pressed
@@ -81,7 +81,18 @@ public class MapSelectController extends Scene{
             case P1DIVE:
                 moveDown(pos);
                 break;
-
+            case P2JUMP:
+                moveUP(pos);
+                break;
+            case P2LEFT:
+                moveLeft(pos);
+                break;
+            case P2RIGHT:
+                moveRight(pos);
+                break;
+            case P2DIVE:
+                moveDown(pos);
+                break;
             case SELECT:
                 if(selectTimer > endTime + 0.3) {
                     mapSelected();
@@ -121,6 +132,7 @@ public class MapSelectController extends Scene{
     //Sets the characters as selected and tells the listeners that they are ready to be fetched
     private void mapSelected(){
         map = characterPanels[(int)pos.getY()][(int)pos.getX()].getName();
+        System.out.println(map);
         firePropertyChange("Map selected",null,null);
     }
 
@@ -148,12 +160,11 @@ public class MapSelectController extends Scene{
 
     private void initiatePanels(){
         characterPanels = new CharacterPanel[][] {
-                {new CharacterPanel("assets/pictures/SmurfPanel.png","Smurf"), new CharacterPanel("assets/pictures/LuckyPanel.png", "Lucky")}
+                {new CharacterPanel("assets/pictures/SandboxMap2.png","Sandbox"), new CharacterPanel("assets/pictures/UmpMap.jpg", "UmpMap")}
         };
 
         mapPanel = new CharacterPanel("assets/pictures/P1Panel.png", "P1");
 
-        //Todo change
         background = new Background("assets/pictures/StartScreen.png");
 
         setPanelPositions();

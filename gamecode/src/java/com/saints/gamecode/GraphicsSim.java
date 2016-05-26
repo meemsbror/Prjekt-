@@ -19,6 +19,11 @@ public class GraphicsSim implements IGraphics{
     }
 
     @Override
+    public void update(float delta, IEntity[][] IEntitys, CharacterPanel panel, Background background) {
+
+    }
+
+    @Override
     public void update(Background background) {
 
     }

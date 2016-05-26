@@ -37,8 +37,10 @@ import com.saints.gamecode.scenes.MapSelectController;
             this.arena = new Arena(input, graphics);
             this.csc = new CharacterSelectController(input, graphics);
 	        this.endGameScene = new EndGameScene(graphics);
+            this.msc = new MapSelectController(input, graphics);
             csc.addPropertyChangeListener(this);
             arena.addPropertyChangeListener(this);
+            msc.addPropertyChangeListener(this);
 	        endGameScene.addPropertyChangeListener(this);
             this.currentScene = this.csc;
         }
@@ -50,15 +52,15 @@ import com.saints.gamecode.scenes.MapSelectController;
         public void propertyChange(PropertyChangeEvent event){
             //Checks if it the Characters that are selected and switches scene to arena
             if(event.getSource() instanceof CharacterSelectController){
-                //Todo add mapSelecter and send in that map instead of SandBoxMap
-                this.arena.setMap(new UmpMap());
                 this.arena.setCharacters(csc.getPlayer1(), csc.getPlayer2());
-                this.currentScene = this.arena;
+                this.currentScene = this.msc;
+            }else if (event.getSource() instanceof MapSelectController) {
+                this.arena.setMap(msc.getMap());
+                this.currentScene = arena;
             }else if (event.getSource() instanceof Arena){
 	            this.endGameScene.setWinnerPicture(event.getPropertyName());
                 this.currentScene = this.endGameScene;
             }else if (event.getSource() instanceof EndGameScene){
-	            System.out.println("jaaa");
 	            this.currentScene = csc;
             }
         }

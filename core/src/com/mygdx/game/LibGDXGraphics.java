@@ -39,6 +39,8 @@ public class LibGDXGraphics implements IGraphics{
         initiateState();
     }
 
+
+    //Arena update!
     @Override
     public void update(float delta, List<IEntity> gameObjects, Background background){
 
@@ -70,7 +72,7 @@ public class LibGDXGraphics implements IGraphics{
                 }else{
                     temp = 1;
                 }
-                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[0].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
+                batch.draw(assetsmanager.getAnimation(gameObject.getAnimationObject().getPath())[temp].getKeyFrame(elapsedTime, true),gameObject.getPos().getX(),gameObject.getPos().getY(), gameObject.getWidth(),gameObject.getHeight());
 
 
             }else if(gameObjects.get(i) instanceof PauseMenu) {
@@ -98,6 +100,7 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
+    //Characterselect update!
     @Override
     public void update(float delta, IEntity [][] IEntities, CharacterPanel p1, CharacterPanel p2, Background background){
         Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -114,6 +117,7 @@ public class LibGDXGraphics implements IGraphics{
             }
         }
 
+
         Position p1Pos = p1.getPosition();
         Position p2Pos = p2.getPosition();
 
@@ -124,6 +128,33 @@ public class LibGDXGraphics implements IGraphics{
         batch.end();
     }
 
+    //Map select update!
+    @Override
+    public void update(float delta, IEntity [][] IEntities, CharacterPanel ppanel, Background background){
+        Gdx.gl.glClearColor(1, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        batch.begin();
+        batch.draw(assetsmanager.getTexture(background.getImgPath()), 0,0);
+
+
+        for(int i = 0; i < IEntities.length; i++){
+            for(int j = 0; j < IEntities[i].length; j++){
+                CharacterPanel panel = (CharacterPanel) IEntities[i][j];
+                Position pos = panel.getPosition();
+                batch.draw(assetsmanager.getTexture(panel.getImgPath()), pos.getX(), pos.getY(), 400,200);
+            }
+        }
+
+
+        Position ppanelPos = ppanel.getPosition();
+
+        batch.draw(assetsmanager.getTexture(ppanel.getImgPath()), ppanelPos.getX(), ppanelPos.getY());
+
+
+        batch.end();
+    }
+
+    //Game over screen update!
 	@Override
 	public void update(Background background) {
 		batch.begin();
