@@ -48,5 +48,4 @@ public class GraphicsSim implements IGraphics{
         return 0;
     }
 
-
 }
