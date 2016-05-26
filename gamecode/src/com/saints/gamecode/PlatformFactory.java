@@ -12,7 +12,7 @@ public class PlatformFactory {
 
 
     public static Platform createPlatform(){
-        return new Platform(50,50,1000,50);
+        return new Platform(270,138,680,10);
 
 
     }
@@ -23,6 +23,8 @@ public class PlatformFactory {
                 return new Platform(50,50,1000,50);
             case "SandboxMap" :
                 return new Platform(270,138,680,10);
+            case "UmpMap" :
+                return new Platform(200,138,730,10);
             default:
                 return new Platform(50,50,1000,50);
         }

@@ -16,6 +16,9 @@ public class MapFactory {
             case "SandboxMap" :
                 return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
                         PlatformFactory.createPlatform(map));
+            case "UmpMap" :
+                return new SandboxMap("assets/pictures/RumpMap.png",
+                        PlatformFactory.createPlatform(map));
             default:
                 return new SandboxMap("assets/pictures/saints.of.chalmers-sandbox.png",
                         PlatformFactory.createPlatform(map));

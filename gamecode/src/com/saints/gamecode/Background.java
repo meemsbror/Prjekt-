@@ -2,9 +2,7 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.interfaces.IEntity;
 
-/**
- * Created by admin on 2016-05-25.
- */
+
 public class Background implements IEntity {
 
     private String imgPath;

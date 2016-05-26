@@ -37,7 +37,7 @@ public class Physics implements IPhysics {
         if (       (object.getPos().getX()>platform.getX()-object.getWidth()) //o.X>p.X-o.W
                 && (platform.getX()+platform.getWidth()>object.getPos().getX()) // p.X+p.W>o.X
                 && (object.getPos().getY()<platform.getY())
-                && (object.getPos().getY()>platform.getY()-60)) { //marginal is 60
+                && (object.getPos().getY()>platform.getY()-platform.getHeight())) { //marginal is Height
             return true;
         }else{
             return false;
@@ -46,11 +46,11 @@ public class Physics implements IPhysics {
 
     public boolean isOutsidePlatform(GameObject object, Platform platform){
         //When walking outside of platform the character should fall down
-         if (        (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
-                ||(object.getPos().getY()==platform.getY())
+         if (       (object.isAirborne()) //if already airborne, it is still airborne (until it is belowPlatform
+                ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
-                ){
+                ){ //object.getPos().getY()-object.getHeight()>platform.getY())
             return true;
         } else {
             return false;

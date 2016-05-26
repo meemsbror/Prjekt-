@@ -1,34 +1,24 @@
 package com.saints.gamecode.maps;
 
-
 import com.saints.gamecode.Position;
 import com.saints.gamecode.gameobjects.items.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
-public abstract class Map implements IEntity {
-    private final float x = 0;
-    private final float y = 0;
-    private String mapPath;
-
-    public Map(String background, Platform platform){
-        //addTexture
+public class UmpMap extends Map {
+    private float x;
+    private float y;
+    //Should implement sandbox.png and some kind of platform
+    public UmpMap(String background, Platform platform) {
+        super(background, platform);
     }
+
     @Override
     public String toString() {
-        return "Map";
-    }
-
-    public String getMapPath() {
-        return mapPath;
-    }
-
-    public void setMapPath(String mapPath) {
-        this.mapPath = mapPath;
+        return "UmpMap";
     }
 
     @Override
     public void setPosition(float x, float y) {
-
 
     }
 
@@ -39,11 +29,11 @@ public abstract class Map implements IEntity {
 
     @Override
     public int getWidth() {
-        return 1280;
+        return 0;
     }
 
     @Override
     public int getHeight() {
-        return 720;
+        return 0;
     }
 }
