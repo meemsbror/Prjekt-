@@ -31,9 +31,6 @@ public class Physics implements IPhysics {
     }
 
     public boolean isStandingOnPlatform(GameObject object, Platform platform){
-        //if ( ("X for any part of object"=="X for any part of platform")
-        // AND ("Y for bottom of object"=<"Y for top of platform"
-        // AND ("Y for bottom of object"<"Y for bottom of platform") ) {return true}
         if (       (object.getPos().getX()>platform.getX()-object.getWidth()) //o.X>p.X-o.W
                 && (platform.getX()+platform.getWidth()>object.getPos().getX()) // p.X+p.W>o.X
                 && (object.getPos().getY()<platform.getY())
@@ -52,11 +49,6 @@ public class Physics implements IPhysics {
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
                  && !(hasCollided(object,gameObject2)) 
                  || (object.getPos().getY()>720) //if object over screen its probably in air
-                /*||  (object.getPos().getY()-object.getHeight()<platform.getY() // Added to make gravity
-                &&  (object.getPos().getY()-object.getHeight()+5>platform.getY())//work when falling off another character
-                 ||  (object.getPos().getY()-object.getHeight()-10>platform.getY()
-                 &&  (object.getPos().getY()-object.getHeight()-5>platform.getY())))*/
-
                  ){ //
             return true;
         } else {
