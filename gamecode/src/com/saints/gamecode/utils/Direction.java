@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 //Enum for translating a Character's direction
 public enum Direction {

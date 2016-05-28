@@ -1,6 +1,6 @@
 package com.saints.gamecode.Entities.gameobjects.items;
 
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 import com.saints.gamecode.Entities.gameobjects.GameObject;
 
 public abstract class Item extends GameObject{

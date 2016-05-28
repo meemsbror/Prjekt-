@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 public class AnimationObject {
 

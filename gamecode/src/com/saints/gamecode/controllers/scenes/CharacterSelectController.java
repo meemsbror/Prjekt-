@@ -2,8 +2,10 @@ package com.saints.gamecode.controllers.scenes;
 
 import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.Entities.CharacterPanel;
-import com.saints.gamecode.*;
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.CharacterFactory;
+import com.saints.gamecode.utils.Direction;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 //import javafx.geometry.Pos;
@@ -13,7 +15,7 @@ public class CharacterSelectController extends Scene{
 
     private final IKeyInput input;
     private final IGraphics graphics;
-    private Direction [] directions;
+    private Direction[] directions;
     private String char1, char2;
     private CharacterPanel characterPanels[][];
     private Position p1Pos, p2Pos;

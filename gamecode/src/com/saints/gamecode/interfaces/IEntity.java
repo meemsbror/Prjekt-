@@ -1,6 +1,6 @@
 package com.saints.gamecode.interfaces;
 
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.Position;
 
 public interface IEntity {
 

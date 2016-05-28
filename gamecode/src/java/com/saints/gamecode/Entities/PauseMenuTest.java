@@ -1,6 +1,6 @@
 package com.saints.gamecode.Entities;
 
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 import org.junit.Test;
 
 /**

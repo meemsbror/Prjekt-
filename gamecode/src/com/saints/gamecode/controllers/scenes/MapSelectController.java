@@ -2,7 +2,9 @@ package com.saints.gamecode.controllers.scenes;
 
 import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.Entities.CharacterPanel;
-import com.saints.gamecode.*;
+import com.saints.gamecode.Entities.maps.MapFactory;
+import com.saints.gamecode.utils.Direction;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 import com.saints.gamecode.Entities.maps.Map;
@@ -13,7 +15,7 @@ public class MapSelectController extends Scene{
 
     private final IKeyInput input;
     private final IGraphics graphics;
-    private Direction [] directions;
+    private Direction[] directions;
     private String map;
     private CharacterPanel characterPanels[][];
     private Position pos;

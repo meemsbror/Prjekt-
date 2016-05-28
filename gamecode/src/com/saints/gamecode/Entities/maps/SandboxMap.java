@@ -1,7 +1,7 @@
 package com.saints.gamecode.Entities.maps;
 
 import com.saints.gamecode.Entities.Background;
-import com.saints.gamecode.PlatformFactory;
+import com.saints.gamecode.utils.PlatformFactory;
 
 public class SandboxMap extends Map {
     private float x;

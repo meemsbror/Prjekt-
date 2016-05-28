@@ -1,6 +1,6 @@
 package com.saints.gamecode.Entities.gameobjects;
 
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import org.junit.Test;
 

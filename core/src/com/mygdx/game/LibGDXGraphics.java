@@ -8,13 +8,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.saints.gamecode.*;
 import com.saints.gamecode.Entities.gameobjects.GameObject;
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
 import com.saints.gamecode.Entities.gameobjects.items.AttackPower;
 import com.saints.gamecode.Entities.gameobjects.items.Item;
+import com.saints.gamecode.utils.AnimationObject;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
+import com.saints.gamecode.utils.State;
 
 import java.util.HashMap;
 import java.util.Map;

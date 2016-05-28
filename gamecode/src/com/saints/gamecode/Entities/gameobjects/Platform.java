@@ -1,6 +1,6 @@
 package com.saints.gamecode.Entities.gameobjects;
 
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 
 
 public class Platform extends GameObject {

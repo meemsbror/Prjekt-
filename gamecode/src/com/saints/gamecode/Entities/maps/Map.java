@@ -2,7 +2,7 @@ package com.saints.gamecode.Entities.maps;
 
 
 import com.saints.gamecode.Entities.Background;
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.Entities.gameobjects.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 

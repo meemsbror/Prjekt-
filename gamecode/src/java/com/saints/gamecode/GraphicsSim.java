@@ -2,6 +2,7 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.Entities.CharacterPanel;
+import com.saints.gamecode.utils.AnimationObject;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 //2DVector for handling directions of gameobjects
 public class Vector2D implements Cloneable {

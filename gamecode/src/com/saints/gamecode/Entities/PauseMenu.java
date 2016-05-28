@@ -1,8 +1,8 @@
 package com.saints.gamecode.Entities;
 
-import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.Direction;
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.AnimationObject;
+import com.saints.gamecode.utils.Direction;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IKeyInput;
 

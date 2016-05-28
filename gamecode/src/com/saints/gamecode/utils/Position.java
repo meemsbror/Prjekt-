@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 //Class that has the position of an object
 public class Position implements Cloneable {

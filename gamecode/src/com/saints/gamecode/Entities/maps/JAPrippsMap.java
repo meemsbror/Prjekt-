@@ -1,8 +1,8 @@
 package com.saints.gamecode.Entities.maps;
 
 import com.saints.gamecode.Entities.Background;
-import com.saints.gamecode.PlatformFactory;
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.PlatformFactory;
+import com.saints.gamecode.utils.Position;
 
 public class JAPrippsMap extends Map {
     public JAPrippsMap() {

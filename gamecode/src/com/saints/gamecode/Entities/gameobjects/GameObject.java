@@ -1,8 +1,8 @@
 package com.saints.gamecode.Entities.gameobjects;
 
-import com.saints.gamecode.AnimationObject;
-import com.saints.gamecode.Position;
-import com.saints.gamecode.Vector2D;
+import com.saints.gamecode.utils.AnimationObject;
+import com.saints.gamecode.utils.Position;
+import com.saints.gamecode.utils.Vector2D;
 import com.saints.gamecode.interfaces.IEntity;
 
 

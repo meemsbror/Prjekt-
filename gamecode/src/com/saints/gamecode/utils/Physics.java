@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 import com.saints.gamecode.Entities.gameobjects.GameObject;
 import com.saints.gamecode.Entities.gameobjects.Platform;

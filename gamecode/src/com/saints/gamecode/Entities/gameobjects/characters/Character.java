@@ -1,9 +1,9 @@
 package com.saints.gamecode.Entities.gameobjects.characters;
 
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 import com.saints.gamecode.Entities.HealthBar;
-import com.saints.gamecode.State;
-import com.saints.gamecode.Vector2D;
+import com.saints.gamecode.utils.State;
+import com.saints.gamecode.utils.Vector2D;
 import com.saints.gamecode.Entities.gameobjects.GameObject;
 
 public abstract class Character extends GameObject {

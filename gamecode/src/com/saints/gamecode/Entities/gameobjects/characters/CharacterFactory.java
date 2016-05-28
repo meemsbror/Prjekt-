@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.Entities.gameobjects.characters;
 
 import com.saints.gamecode.Entities.gameobjects.characters.*;
 import com.saints.gamecode.Entities.gameobjects.characters.Character;

@@ -2,6 +2,7 @@ package com.saints.gamecode;
 
 import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.Entities.gameobjects.characters.StickCharacter;
+import com.saints.gamecode.utils.Physics;
 import org.junit.Test;
 
 public class PhysicsTest {

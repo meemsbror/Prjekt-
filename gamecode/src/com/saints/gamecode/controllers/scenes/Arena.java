@@ -2,10 +2,12 @@ package com.saints.gamecode.controllers.scenes;
 
 import com.saints.gamecode.Entities.HealthBar;
 import com.saints.gamecode.Entities.PauseMenu;
-import com.saints.gamecode.*;
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
 import com.saints.gamecode.Entities.gameobjects.items.AttackPower;
 import com.saints.gamecode.Entities.gameobjects.items.SwapHealth;
+import com.saints.gamecode.utils.AnimationObject;
+import com.saints.gamecode.utils.Direction;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.controllers.CharacterController;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;

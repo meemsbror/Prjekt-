@@ -1,11 +1,10 @@
 package com.saints.gamecode;
 
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.CharacterFactory;
 import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.Entities.gameobjects.characters.StickCharacter;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CharacterFactoryTest {
     @Test

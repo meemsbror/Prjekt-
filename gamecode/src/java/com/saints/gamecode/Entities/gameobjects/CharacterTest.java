@@ -1,7 +1,7 @@
 package com.saints.gamecode.Entities.gameobjects;
 
 import com.saints.gamecode.Entities.HealthBar;
-import com.saints.gamecode.Physics;
+import com.saints.gamecode.utils.Physics;
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
 import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.Entities.gameobjects.characters.StickCharacter;

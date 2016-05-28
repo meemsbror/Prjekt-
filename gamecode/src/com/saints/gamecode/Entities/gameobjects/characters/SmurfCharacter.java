@@ -1,8 +1,11 @@
 package com.saints.gamecode.Entities.gameobjects.characters;
 
-import com.saints.gamecode.*;
 import com.saints.gamecode.Entities.gameobjects.characters.attacks.StraightAttack;
 import com.saints.gamecode.Entities.gameobjects.GameObject;
+import com.saints.gamecode.utils.AnimationObject;
+import com.saints.gamecode.utils.Physics;
+import com.saints.gamecode.utils.State;
+import com.saints.gamecode.utils.Vector2D;
 
 
 public class SmurfCharacter extends Character {

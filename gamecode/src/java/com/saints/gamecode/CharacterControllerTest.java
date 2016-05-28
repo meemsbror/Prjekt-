@@ -1,15 +1,15 @@
 package com.saints.gamecode;
 
 import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.CharacterFactory;
+import com.saints.gamecode.utils.Direction;
+import com.saints.gamecode.utils.Position;
 import com.saints.gamecode.controllers.CharacterController;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
-import com.saints.gamecode.interfaces.IKeyInput;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 
 public class CharacterControllerTest {

@@ -1,8 +1,6 @@
 package com.saints.gamecode.interfaces;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 
 public interface IAssetsManager {
 

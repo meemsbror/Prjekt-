@@ -1,4 +1,4 @@
-package com.saints.gamecode;
+package com.saints.gamecode.utils;
 
 //Enum for deciding which image or animation a game object is supposed to use.
 //Simply what action the character is doing at the moment.
