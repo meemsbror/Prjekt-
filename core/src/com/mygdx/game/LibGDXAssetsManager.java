@@ -43,7 +43,6 @@ public class LibGDXAssetsManager implements IAssetsManager{
 
     @Override
     public void addTexture(String filename){
-        System.out.println(filename);
         assets.load(filename, Texture.class);
     }
 
