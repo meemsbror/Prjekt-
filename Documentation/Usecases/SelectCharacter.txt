@@ -1,0 +1,68 @@
+Use case: Select Character
+
+Summary: Both users choose a character they want to play by using the movekeys.
+
+Priority: Normal
+
+Extends: -
+
+Includes: Navigate Menu.
+
+Participants: Both players
+
+Normal flow of events
+
+Both players chooses a character
+
+1. Actor
+    
+    The player navigates to a character
+
+2. System 
+    
+    Highlight the character navigated to
+
+3. Actor
+    
+    Presses the choose key.
+
+4. System
+
+    Locks the current character shows it visually 
+
+5. System
+    
+    Enable Next Button
+
+6. Actor
+    
+    Presses Next Button
+
+7. System
+
+    Goes to Map-select
+
+
+Alternative Flow
+
+Flow 6.1 user deselects Character
+
+6.1.1 Actor
+
+    Presses Deselect key
+
+6.1.2 System
+    
+    No longer locks the character only highligts current character (se point 2) 
+
+
+
+Exceptional Flow
+
+    No exceptional flow.
+
+
+
+
+
+

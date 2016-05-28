@@ -1,0 +1,23 @@
+Summary: Closes the already open menu, and does the action choosen by the players.
+Priority: Low
+Extends: Open menu
+Includes: Mouse or move buttons, resume the game
+Participators: Players
+Normal flow of events
+1. Actor
+Press close/resume button
+2. System
+Read user input
+3. System
+Closes menu and resumes the game
+Alternative Flow
+3. System
+Exits the game
+Exceptional Flow
+    No exceptional Flow
+Actor:
+    Player one or two press buttons
+System:
+    Read user input
+    Exit/resume and closes menu window
+    Updates view

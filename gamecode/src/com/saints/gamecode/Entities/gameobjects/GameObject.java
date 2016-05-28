@@ -35,7 +35,7 @@ public abstract class GameObject implements IEntity {
 
     //Returns the x-coordinate
     public Position getPosition(){
-        return pos;
+        return (Position)pos.clone();
     }
 
     //Moves the object a set amount both along the y and x-axis
