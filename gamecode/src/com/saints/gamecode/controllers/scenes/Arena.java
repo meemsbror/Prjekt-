@@ -106,7 +106,7 @@ public class Arena extends Scene implements PropertyChangeListener{
             if(pauseMenu.updatePaused(delta, input)) {
                 gameObjects.clear();
                 pauseMenu.forcePaused(false);
-                firePropertyChange("", null, null);
+                firePropertyChange("Paused", null, null);
             }
             if(!(gameObjects.contains(pauseMenu))){
                 gameObjects.add(pauseMenu);

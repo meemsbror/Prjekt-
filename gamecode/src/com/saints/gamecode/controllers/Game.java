@@ -54,9 +54,16 @@ import com.saints.gamecode.controllers.scenes.MapSelectController;
                 this.arena.setMap(msc.getMap());
                 this.currentScene = arena;
             }else if (event.getSource() instanceof Arena){
-	            this.endGameScene.setWinnerPicture(event.getPropertyName());
-                this.currentScene = this.endGameScene;
-            }else if (event.getSource() instanceof EndGameScene){
+
+                if(event.getPropertyName().equals("Paused")){
+                    this.currentScene = csc;
+                }else{
+                    this.endGameScene.setWinnerPicture(event.getPropertyName());
+                    this.currentScene = this.endGameScene;
+                }
+
+            }
+            else if (event.getSource() instanceof EndGameScene){
 	            this.currentScene = csc;
             }
         }
