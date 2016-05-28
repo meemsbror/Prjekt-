@@ -7,9 +7,6 @@ import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
 import com.saints.gamecode.gameobjects.characters.StickCharacter;
 import org.junit.Test;
 
-/**
- * Created by admin on 2016-05-25.
- */
 public class CharacterTest {
     private Physics physics = Physics.getInstance();
 
