@@ -1,6 +1,6 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.HealthBar;
+import com.saints.gamecode.Entities.HealthBar;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
@@ -13,6 +13,7 @@ public class HealthTest {
     public void getterTest(){
         // basic values set in Healthbar class, divider to 40 and maxHealth to 100 for testing.
         HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 
         // test for divider, should be 40
         int currentDivider;
@@ -55,6 +56,7 @@ public class HealthTest {
     public void setterTest(){
         // basic set values input
         HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 
         // test for setting divider
         healthBar.setDivider(80);
@@ -127,6 +129,7 @@ public class HealthTest {
 	@Test
 	public void resetTest(){
 		HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 		healthBar.setStartingMax(78);
 		healthBar.setDivider(75);
 		healthBar.setWinner("Player 1");
@@ -142,7 +145,7 @@ public class HealthTest {
 		assertFalse((healthBar.getWidth() != 1000));
 		assertFalse(healthBar.getP1Limit() != 20);
 		assertFalse(healthBar.getP2Limit() != 76);
-		assertFalse(healthBar.getIsGameOver() != false);
+		assertTrue(healthBar.getIsGameOver());
 
 
 		// test begins
@@ -183,6 +186,7 @@ public class HealthTest {
     @Test
     public void changeGameLengthTest(){
         HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 	    // these initial values translate exactly to the unset limits (default)
         int currentMinHealth = healthBar.getP1Limit(); //should be 0
 	    int currentMaxHealth = healthBar.getP2Limit(); //should be 100
@@ -262,6 +266,7 @@ public class HealthTest {
 	@Test
 	public void toPercentTest(){
 		HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 		int currentMax = healthBar.getP2Limit(); // 100
 		int currentMin = healthBar.getP1Limit(); // 0
 		int currentDivider = healthBar.getDivider(); // 40
@@ -291,6 +296,7 @@ public class HealthTest {
     @Test
     public void suddenDeathTest(){
         HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
         int currentMax = healthBar.getP2Limit(); // 100
         int currentMin = healthBar.getP1Limit(); // 0
         int maxLimit = healthBar.getStartingMax(); // 100
@@ -321,6 +327,7 @@ public class HealthTest {
 	@Test
 	public void conditionalTest(){
 		HealthBar healthBar = HealthBar.getInstance();
+		healthBar.reset();
 		// initiation of everything, a clean HealthBar
 		int currentMax = healthBar.getP2Limit(); // 100
 		int currentMin = healthBar.getP1Limit(); // 0

@@ -1,0 +1,9 @@
+Summary: The characters selceted in the  'character select' use case will be loaded into an arena where they will fight
+Priority: high
+Extends:
+Includes: Waiting and keeping a good state of mind
+Participators: -
+
+1. System
+    Selected characters are placed into arena
+

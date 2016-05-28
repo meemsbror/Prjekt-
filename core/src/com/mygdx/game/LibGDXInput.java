@@ -1,7 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Input;
-import com.saints.gamecode.Direction;
+import com.saints.gamecode.utils.Direction;
 import com.saints.gamecode.interfaces.IKeyInput;
 
 import java.util.HashMap;

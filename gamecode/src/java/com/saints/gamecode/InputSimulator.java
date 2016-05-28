@@ -1,6 +1,6 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.Direction;
+import com.saints.gamecode.utils.Direction;
 import com.saints.gamecode.interfaces.IKeyInput;
 
 class InputSimulator implements IKeyInput {

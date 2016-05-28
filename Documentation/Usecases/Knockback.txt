@@ -1,0 +1,10 @@
+UseCase: Knockback
+Summary: The player changes position when attacked
+Priority: low
+Extends: TakeDmg
+Includes: Move
+Participators: Player
+Actor:
+    1. Player take damage
+System:
+    1. Apply a movement force according to the amount of damage taken.

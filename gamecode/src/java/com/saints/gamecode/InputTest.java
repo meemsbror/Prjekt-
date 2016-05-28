@@ -3,8 +3,6 @@ package com.saints.gamecode;
 
 import static org.junit.Assert.assertTrue;
 
-import com.saints.gamecode.*;
-import com.saints.gamecode.gameobjects.characters.Character;
 import org.junit.Test;
 public class InputTest {
 

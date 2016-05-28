@@ -1,8 +1,8 @@
 package com.saints.gamecode;
 
+import com.saints.gamecode.Entities.CharacterPanel;
+import com.saints.gamecode.utils.Position;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class CharacterPanelTest {
 

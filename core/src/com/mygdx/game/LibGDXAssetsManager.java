@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import java.util.Map;
 import java.util.HashMap;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.saints.gamecode.AnimationObject;
+import com.saints.gamecode.utils.AnimationObject;
 import com.saints.gamecode.interfaces.IAssetsManager;
 
 //Handels all assets

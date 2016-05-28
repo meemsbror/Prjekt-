@@ -1,0 +1,42 @@
+Use case: Drop Item
+
+Summary: 
+
+    Drops the currently equipped item.
+
+Priority:
+
+    Low
+
+Extends:
+
+Includes:
+
+Participants:
+
+    Character Item
+
+Normal flow of events
+
+1. Actor
+
+    Presses dropItem key
+
+2. System
+    
+    Item appears on the board by the character that dropped it.
+    Character no longer show that they have the item.
+     
+Alternative Flow
+
+    No alternative Flow
+
+Exceptional Flow
+
+    No exceptional Flow
+
+
+
+
+
+

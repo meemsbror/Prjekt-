@@ -1,0 +1,18 @@
+Summary: To pause each player can open up a menu with game settings and other options.
+Priority: Low
+Extends: -
+Includes: Pressing one button to open the menu, pausing the game
+Participators: Players
+Normal flow of events
+1. Actor
+One player press the menu button
+2. System
+Read user input
+3. System
+Open menu
+4. System 
+Update view
+Alternative Flow
+    No alternative Flow
+Exceptional Flow
+    No exceptional Flow

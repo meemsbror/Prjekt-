@@ -1,0 +1,41 @@
+Use case: Pickup Item
+
+Summary: 
+
+    A character picks up an item
+
+Priority:
+    
+    Low
+
+Extends:
+
+Includes:
+
+Participants:
+
+    Item, One player
+
+Normal flow of events
+
+1. Actor
+
+    Moves ontop of the item
+    Press attack key.
+
+2. System
+
+    Remove the item from board
+    Show that the item has been picked up by the character.
+
+Alternative Flow
+
+The player already has an item.
+2.2 System
+   Nothing happens. 
+
+
+Exceptional Flow
+
+    No exceptional Flow
+

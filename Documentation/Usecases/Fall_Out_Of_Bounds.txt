@@ -1,0 +1,8 @@
+eCase: Fall Out Of Bounds
+Summary: The player moves out of the stages bounds.
+Priority: Normal
+Extends: Move
+Includes: Take Damage
+Participators: Player
+System:
+    1.Set character health to zero or below to initiate death.

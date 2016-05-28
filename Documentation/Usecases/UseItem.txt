@@ -1,0 +1,26 @@
+Use case: 
+
+Summary: 
+
+Priority:
+
+Extends:
+
+Includes:
+
+Participants:
+
+Normal flow of events
+
+
+Alternative Flow
+
+
+Exceptional Flow
+
+
+
+
+
+
+

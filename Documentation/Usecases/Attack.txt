@@ -1,0 +1,12 @@
+Summary: The players are able attack and inflict damage to the opposing player
+Priority: normal
+Extends: Fight!
+Includes: Pressing buttons, system reading positions of characters (incuding the swing) and inflicting damage to other player.
+Participators: Players
+Actor:
+    1.Player one or two press an attack-oriented button
+System:
+    1. Read user input
+    2. Read charater positions and 'swing area' of the attack
+    3.boolean hit(); -> deal damage or miss. 
+    4.update the health bar
