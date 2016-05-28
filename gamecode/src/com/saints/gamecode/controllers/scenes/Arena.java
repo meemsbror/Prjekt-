@@ -1,17 +1,17 @@
 package com.saints.gamecode.controllers.scenes;
 
-import Entities.HealthBar;
-import Entities.PauseMenu;
+import com.saints.gamecode.Entities.HealthBar;
+import com.saints.gamecode.Entities.PauseMenu;
 import com.saints.gamecode.*;
-import Entities.gameobjects.characters.Character;
-import Entities.gameobjects.items.AttackPower;
-import Entities.gameobjects.items.SwapHealth;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.items.AttackPower;
+import com.saints.gamecode.Entities.gameobjects.items.SwapHealth;
 import com.saints.gamecode.controllers.CharacterController;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import Entities.maps.Map;
-import Entities.maps.SandboxMap;
+import com.saints.gamecode.Entities.maps.Map;
+import com.saints.gamecode.Entities.maps.SandboxMap;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;

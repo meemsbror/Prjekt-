@@ -1,9 +1,9 @@
 package com.saints.gamecode.controllers.scenes;
 
-import Entities.Background;
-import Entities.CharacterPanel;
+import com.saints.gamecode.Entities.Background;
+import com.saints.gamecode.Entities.CharacterPanel;
 import com.saints.gamecode.*;
-import Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
 //import javafx.geometry.Pos;
@@ -187,7 +187,7 @@ public class CharacterSelectController extends Scene{
         addTextures();
     }
 
-    public void addTextures(){
+    private void addTextures(){
         graphics.addTexture(p1Panel.getImgPath());
         graphics.addTexture(p2Panel.getImgPath());
 

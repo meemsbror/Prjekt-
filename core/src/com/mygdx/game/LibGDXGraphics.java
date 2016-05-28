@@ -1,18 +1,18 @@
 package com.mygdx.game;
 
-import Entities.Background;
-import Entities.CharacterPanel;
-import Entities.HealthBar;
-import Entities.PauseMenu;
+import com.saints.gamecode.Entities.Background;
+import com.saints.gamecode.Entities.CharacterPanel;
+import com.saints.gamecode.Entities.HealthBar;
+import com.saints.gamecode.Entities.PauseMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.saints.gamecode.*;
-import Entities.gameobjects.GameObject;
-import Entities.gameobjects.characters.Character;
-import Entities.gameobjects.items.AttackPower;
-import Entities.gameobjects.items.Item;
+import com.saints.gamecode.Entities.gameobjects.GameObject;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.items.AttackPower;
+import com.saints.gamecode.Entities.gameobjects.items.Item;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;
 

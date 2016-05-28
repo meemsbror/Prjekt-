@@ -1,6 +1,6 @@
-package Entities.maps;
+package com.saints.gamecode.Entities.maps;
 
-import Entities.Background;
+import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.PlatformFactory;
 import com.saints.gamecode.Position;
 

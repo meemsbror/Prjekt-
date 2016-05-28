@@ -1,7 +1,7 @@
 package com.saints.gamecode;
 
-import Entities.gameobjects.characters.Character;
-import Entities.gameobjects.characters.SmurfCharacter;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import org.junit.Test;
 import com.saints.gamecode.controllers.scenes.Arena;
 

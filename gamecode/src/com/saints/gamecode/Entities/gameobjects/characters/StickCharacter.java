@@ -1,8 +1,8 @@
-package Entities.gameobjects.characters;
+package com.saints.gamecode.Entities.gameobjects.characters;
 
 import com.saints.gamecode.*;
-import Entities.gameobjects.characters.attacks.StraightAttack;
-import Entities.gameobjects.GameObject;
+import com.saints.gamecode.Entities.gameobjects.characters.attacks.StraightAttack;
+import com.saints.gamecode.Entities.gameobjects.GameObject;
 
 
 public class StickCharacter extends Character {

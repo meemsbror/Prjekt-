@@ -1,7 +1,7 @@
-package Entities.gameobjects.characters.attacks;
+package com.saints.gamecode.Entities.gameobjects.characters.attacks;
 
 import com.saints.gamecode.AnimationObject;
-import Entities.gameobjects.GameObject;
+import com.saints.gamecode.Entities.gameobjects.GameObject;
 
 public class StraightAttack extends GameObject {
 

@@ -1,8 +1,8 @@
 package com.saints.gamecode.interfaces;
 
 import com.saints.gamecode.Vector2D;
-import Entities.gameobjects.GameObject;
-import Entities.gameobjects.Platform;
+import com.saints.gamecode.Entities.gameobjects.GameObject;
+import com.saints.gamecode.Entities.gameobjects.Platform;
 
 public interface IPhysics {
 

@@ -1,12 +1,12 @@
 package com.saints.gamecode.controllers;
 
-import Entities.HealthBar;
-import Entities.gameobjects.GameObject;
-import Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.HealthBar;
+import com.saints.gamecode.Entities.gameobjects.GameObject;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
 
-import Entities.gameobjects.items.AttackPower;
-import Entities.gameobjects.Platform;
-import Entities.gameobjects.items.SwapHealth;
+import com.saints.gamecode.Entities.gameobjects.items.AttackPower;
+import com.saints.gamecode.Entities.gameobjects.Platform;
+import com.saints.gamecode.Entities.gameobjects.items.SwapHealth;
 import com.saints.gamecode.*;
 import com.saints.gamecode.interfaces.IEntity;
 import com.saints.gamecode.interfaces.IGraphics;

@@ -1,4 +1,4 @@
-package Entities.gameobjects;
+package com.saints.gamecode.Entities.gameobjects;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.Position;

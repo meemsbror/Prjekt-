@@ -1,6 +1,6 @@
 package com.saints.gamecode;
 
-import Entities.CharacterPanel;
+import com.saints.gamecode.Entities.CharacterPanel;
 import org.junit.Test;
 
 public class CharacterPanelTest {

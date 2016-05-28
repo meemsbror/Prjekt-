@@ -1,9 +1,9 @@
 package com.saints.gamecode;
 
-import Entities.maps.*;
-import Entities.maps.Map;
-import Entities.maps.JAPrippsMap;
-import Entities.maps.SandboxMap;
+import com.saints.gamecode.Entities.maps.*;
+import com.saints.gamecode.Entities.maps.Map;
+import com.saints.gamecode.Entities.maps.JAPrippsMap;
+import com.saints.gamecode.Entities.maps.SandboxMap;
 
 public class MapFactory {
 
@@ -22,6 +22,6 @@ public class MapFactory {
 
 
     public static String [] getMaps(){
-        return new String [] {"JAPripps", "Sandbox"};
+        return new String [] {"JAPrippsMap", "SandboxMap","UmpMap"};
     }
 }

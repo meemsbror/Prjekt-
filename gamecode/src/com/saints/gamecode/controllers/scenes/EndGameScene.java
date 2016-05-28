@@ -1,6 +1,6 @@
 package com.saints.gamecode.controllers.scenes;
 
-import Entities.Background;
+import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.interfaces.IGraphics;
 
 public class EndGameScene extends Scene {

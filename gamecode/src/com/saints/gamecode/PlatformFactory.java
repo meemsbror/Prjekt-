@@ -1,6 +1,6 @@
 package com.saints.gamecode;
 
-import Entities.gameobjects.Platform;
+import com.saints.gamecode.Entities.gameobjects.Platform;
 
 import java.util.ArrayList;
 import java.util.List;

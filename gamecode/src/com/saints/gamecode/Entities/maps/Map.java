@@ -1,9 +1,9 @@
-package Entities.maps;
+package com.saints.gamecode.Entities.maps;
 
 
-import Entities.Background;
+import com.saints.gamecode.Entities.Background;
 import com.saints.gamecode.Position;
-import Entities.gameobjects.Platform;
+import com.saints.gamecode.Entities.gameobjects.Platform;
 import com.saints.gamecode.interfaces.IEntity;
 
 import java.util.ArrayList;

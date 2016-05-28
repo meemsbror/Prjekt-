@@ -1,4 +1,4 @@
-package Entities.gameobjects.items;
+package com.saints.gamecode.Entities.gameobjects.items;
 
 import com.saints.gamecode.AnimationObject;
 

@@ -1,7 +1,7 @@
-package Entities.gameobjects;
+package com.saints.gamecode.Entities.gameobjects;
 
 import com.saints.gamecode.Position;
-import Entities.gameobjects.characters.SmurfCharacter;
+import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
 import org.junit.Test;
 
 public class GameObjectTest {

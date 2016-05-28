@@ -1,4 +1,4 @@
-package Entities;
+package com.saints.gamecode.Entities;
 
 import com.saints.gamecode.AnimationObject;
 import com.saints.gamecode.Direction;
@@ -52,7 +52,7 @@ public class PauseMenu implements IEntity {
         return currentPauseOption;
     }
 
-    public boolean updatePaused(float delta, IKeyInput input){
+    public boolean updatePaused(float delta,IKeyInput input){
         pauseTimer += delta;
         if(pauseTimer > 0.3){
             if(input.isKeyPressed(Direction.SELECT)) {
@@ -90,7 +90,7 @@ public class PauseMenu implements IEntity {
 
     public void setPaused(boolean paused, float delta) {
         pauseTimer += delta;
-        if(pauseTimer > 0.3 && paused) {
+        if(pauseTimer > 0.3) {
             this.paused = paused;
             pauseTimer = 0;
         }

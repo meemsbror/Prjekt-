@@ -1,4 +1,4 @@
-package Entities;
+package com.saints.gamecode.Entities;
 
 import com.saints.gamecode.Position;
 import com.saints.gamecode.interfaces.IEntity;

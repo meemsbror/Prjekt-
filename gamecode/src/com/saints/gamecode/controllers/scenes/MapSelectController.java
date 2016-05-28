@@ -1,11 +1,11 @@
 package com.saints.gamecode.controllers.scenes;
 
-import Entities.Background;
-import Entities.CharacterPanel;
+import com.saints.gamecode.Entities.Background;
+import com.saints.gamecode.Entities.CharacterPanel;
 import com.saints.gamecode.*;
 import com.saints.gamecode.interfaces.IGraphics;
 import com.saints.gamecode.interfaces.IKeyInput;
-import Entities.maps.Map;
+import com.saints.gamecode.Entities.maps.Map;
 //import javafx.geometry.Pos;
 
 

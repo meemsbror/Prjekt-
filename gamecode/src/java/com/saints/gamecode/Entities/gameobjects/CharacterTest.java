@@ -1,10 +1,10 @@
-package Entities.gameobjects;
+package com.saints.gamecode.Entities.gameobjects;
 
-import Entities.HealthBar;
+import com.saints.gamecode.Entities.HealthBar;
 import com.saints.gamecode.Physics;
-import Entities.gameobjects.characters.Character;
-import Entities.gameobjects.characters.SmurfCharacter;
-import Entities.gameobjects.characters.StickCharacter;
+import com.saints.gamecode.Entities.gameobjects.characters.Character;
+import com.saints.gamecode.Entities.gameobjects.characters.SmurfCharacter;
+import com.saints.gamecode.Entities.gameobjects.characters.StickCharacter;
 import org.junit.Test;
 
 public class CharacterTest {
@@ -15,6 +15,7 @@ public class CharacterTest {
         Character player1 = new SmurfCharacter(true);
         Character player2 = new StickCharacter(false);
         HealthBar healthBar = HealthBar.getInstance();
+        healthBar.reset();
         int startHealth, currentHealth;
         startHealth = healthBar.getDivider();
         player1.setPosition(0,0);
@@ -26,8 +27,9 @@ public class CharacterTest {
 
         player1.attack(player2);
 
-        currentHealth = healthBar.getDivider();
+        healthBar.dealDamage(player1.getDamage());
 
-        assert(startHealth > currentHealth);
+        currentHealth = healthBar.getDivider();
+        assert(startHealth < currentHealth);
     }
 }
