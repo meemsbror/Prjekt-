@@ -1,7 +1,7 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.GameObject;
-import com.saints.gamecode.gameobjects.Platform;
+import Entities.gameobjects.GameObject;
+import Entities.gameobjects.Platform;
 import com.saints.gamecode.interfaces.IPhysics;
 
 //Singleton class that does basic Physics calculations

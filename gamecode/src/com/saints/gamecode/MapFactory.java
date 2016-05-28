@@ -1,9 +1,9 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.maps.*;
-import com.saints.gamecode.maps.Map;
-import com.saints.gamecode.maps.JAPrippsMap;
-import com.saints.gamecode.maps.SandboxMap;
+import Entities.maps.*;
+import Entities.maps.Map;
+import Entities.maps.JAPrippsMap;
+import Entities.maps.SandboxMap;
 
 public class MapFactory {
 

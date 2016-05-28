@@ -1,9 +1,9 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.characters.Character;
-import com.saints.gamecode.gameobjects.characters.SmurfCharacter;
+import Entities.gameobjects.characters.Character;
+import Entities.gameobjects.characters.SmurfCharacter;
 import org.junit.Test;
-import com.saints.gamecode.scenes.Arena;
+import com.saints.gamecode.controllers.scenes.Arena;
 
 public class ArenaTest {
 

@@ -1,7 +1,7 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.gameobjects.characters.*;
-import com.saints.gamecode.gameobjects.characters.Character;
+import Entities.gameobjects.characters.*;
+import Entities.gameobjects.characters.Character;
 
 public class CharacterFactory {
 

@@ -1,6 +1,6 @@
 package com.saints.gamecode;
 
-import com.saints.gamecode.HealthBar;
+import Entities.HealthBar;
 import org.junit.Test;
 
 import static junit.framework.TestCase.assertFalse;
