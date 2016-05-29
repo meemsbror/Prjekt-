@@ -47,7 +47,7 @@ public class Physics implements IPhysics {
                 ||  (object.getPos().getY()==platform.getY())
                 &&  ((object.getPos().getX()<platform.getX()-object.getWidth()) //Outside to the left
                 ||  (platform.getX()+platform.getWidth()<object.getPos().getX())) //Outside te the right
-                 && !(hasCollided(object,gameObject2))
+                 && !(hasCollided(object,gameObject2)) 
                  || (object.getPos().getY()>720) //if object over screen its probably in air
                  ){ //
             return true;

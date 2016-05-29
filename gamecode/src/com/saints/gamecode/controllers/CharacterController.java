@@ -294,7 +294,6 @@ public class CharacterController {
 
     //Not sure if necessary
     private void keyReleased(int key){
-        //TODO
     }
 
     public void setCharacters(Character player1, Character player2){
