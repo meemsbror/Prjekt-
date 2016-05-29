@@ -1,0 +1,41 @@
+Use case: Start Application
+
+Summary: 
+
+    Start the application and go to the character screen.
+
+Priority:
+    
+    High
+
+Extends:
+    
+    -  
+
+Includes:
+
+    Character Select
+
+Participants:
+
+    Actual Player
+
+Normal flow of events
+
+1. Actor
+    
+    Doubletap the .jar file.
+
+2. System
+
+    Loads assets.
+    Shows Characterselect.
+
+Alternative Flow
+
+    No alternative Flow
+
+Exceptional Flow
+
+    No exceptional Flow
+

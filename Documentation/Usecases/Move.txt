@@ -1,0 +1,11 @@
+Summary: The players are able to move their characters inside the arena, this includes moving right, left, juming, ducking and probably more to come
+Priority: high
+Extends: -
+Includes: Pressing buttons.
+Participators: Players
+Actor:
+    1. Player one or two press a move-oriented button
+System:
+    1. Read user input
+    2. Moves object accordingly
+    3. Updates view

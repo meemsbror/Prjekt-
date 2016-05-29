@@ -1,0 +1,46 @@
+Use case: Game Ends
+
+Summary: 
+
+    The Game ends and one player is victorious.
+
+Priority:
+
+    Normal
+
+Extends:
+
+    -
+
+Includes:
+
+    -
+
+Participants:
+    
+    Both Players
+
+Normal flow of events
+
+1. System
+    
+    Declares a winner visually.
+    
+    Shows an exit button.
+
+2. Actor
+    
+   Clicks exit button.
+
+3. System
+    
+   Exits the current arena and map, goes back to CharacterSelect.
+
+Alternative Flow
+
+    No alternative flow
+
+Exceptional Flow
+
+    No exceptional flow.
+

@@ -1,0 +1,30 @@
+Use case: Death
+
+Summary: A character dies and the game ends 
+
+Priority: Normal
+
+Extends: -
+
+Includes: Game Ends
+
+Participants:  
+
+Normal flow of events
+
+1. System
+    
+  Visually shows the character dead.
+
+2. System
+    
+    Game ends (see game ends).
+
+Alternative Flow
+
+    No alternative Flow
+
+Exceptional Flow
+
+    No exceptional Flow
+

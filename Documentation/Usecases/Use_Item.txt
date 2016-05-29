@@ -1,0 +1,9 @@
+UseCase: UseItem
+Summary: The player uses an item he or she picked up.
+Priority: low
+Extends:
+Participators: Player, item
+Actor:
+    1. Press a button allocated to useing items
+System:
+    1. The item disapeares giving the player some sort of alternation in properties such as gravity, strength, etc.

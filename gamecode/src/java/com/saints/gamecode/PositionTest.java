@@ -2,8 +2,7 @@ package com.saints.gamecode;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-import com.saints.gamecode.Position;
+import com.saints.gamecode.utils.Position;
 
 public class PositionTest {
 

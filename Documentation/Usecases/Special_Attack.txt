@@ -1,0 +1,13 @@
+UseCase: Special attack
+Summary: The players can use a special attack unique to their character
+Priority: low
+Extends: Attack
+Includes:
+Participators: Players
+Actor:
+    1. Player one or two press an specialattack-oriented button
+System:
+    1. Read user input
+    2. Read players positions and character
+    3. boolean hit(); -> deal damage or miss.
+    4. update the health bar
