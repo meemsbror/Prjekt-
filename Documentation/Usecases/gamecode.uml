@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.saints.gamecode</OriginalElement>
+  <nodes>
+    <node x="-60.0" y="64.0">com.saints.gamecode.controllers</node>
+    <node x="112.5" y="-98.0">com.saints.gamecode.interfaces</node>
+    <node x="235.0" y="75.0">com.saints.gamecode.utils</node>
+    <node x="91.0" y="195.0">com.saints.gamecode.Entities</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.saints.gamecode.Entities" target="com.saints.gamecode.utils">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.controllers" target="com.saints.gamecode.Entities">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.controllers" target="com.saints.gamecode.interfaces">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.utils" target="com.saints.gamecode.interfaces">
+      <point x="0.0" y="-15.5" />
+      <point x="263.5" y="16.0" />
+      <point x="249.5" y="-3.0" />
+      <point x="35.0" y="15.5" />
+    </edge>
+    <edge source="com.saints.gamecode.Entities" target="com.saints.gamecode.Entities">
+      <point x="0.0" y="0.0" />
+      <point x="153.5" y="169.5" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.controllers" target="com.saints.gamecode.utils">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.utils" target="com.saints.gamecode.utils">
+      <point x="0.0" y="0.0" />
+      <point x="288.5" y="49.5" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="com.saints.gamecode.Entities" target="com.saints.gamecode.interfaces">
+      <point x="0.0" y="-15.5" />
+      <point x="146.5" y="74.0" />
+      <point x="146.5" y="38.0" />
+      <point x="-35.0" y="15.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="257.0" y="246.0" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

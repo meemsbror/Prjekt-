@@ -1,6 +1,5 @@
-package com.saints.gamecode;
+package com.mygdx.game.desktop;
 
-import com.mygdx.game.desktop.DesktopLauncher;
 
 public class Main {
     public static void main(String [] arsgs){
