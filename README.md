@@ -16,4 +16,6 @@ Movement for player 1 is arrowkeys and 'm' to attack.
 
 Movement for player 2 is wasd and 'z' to attack.
 
-To select and paus the game press 'enter'
+For pausmenu press 'enter'.
+
+For selecting map and characters press 'enter'.
